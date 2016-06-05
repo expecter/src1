@@ -76,17 +76,13 @@ local M_index = 1
 --protoName   -- 缓存数据的protoName
 --protoName_Update  -- 缓存数据的更新数据的 protoName
 --protoName_Key   -- 缓存数据的删除Key的protoName
-function M:ctor(protoName, protoName_Update, protoName_Key )
-    self.proto = net.Proto.getProto(protoName)
-    self.proto_Update = net.Proto.getProto(protoName_Update)
-    self.proto_Key = net.Proto.getProto(protoName_Key)
-
+function M:ctor(tmCmdX)
     -- dump(self.proto)
     -- dump(self.proto_Update)
     -- assert(self.proto~=nil and self.proto_Update~=nil)
 
     --缓存数据
-    self.tmCmdX = {}
+    self.tmCmdX = tmCmdX or {}
 
     --通过bindOne绑定在次GameCache上的View
     self.tmView_bindOne = {}
@@ -97,6 +93,7 @@ function M:ctor(protoName, protoName_Update, protoName_Key )
     --唯一名字
     self.uniqueName = protoName..tostring(M_index)
     M_index = M_index+1
+    self:updateByProto(self.tmCmdX)
 end
 
 --是否有主键
@@ -620,73 +617,6 @@ end
 function M:getCallback_bindOne(view, hash)
     local tmCallback = self:getTmCallback_bindOne(view)
     return tmCallback[hash]
-end
-
-
---单元测试
-function M.test()
-
-    --local GameCache = import(".GameCache")
-
-    local cache = GameCache.new("CmdPlayer", "CmdPlayer_Update", "CmdPlayer_Key")
-
-   --[[
-    cache:bind(handle, {
-
-        onUpdate = function(...)
-            print("onUpdate")
-            dump(...)
-        end,
-
-        onAdd = function(...)
-            print("onAdd")
-            dump(...)
-        end,
-
-        onDelete = function(...)
-            print("onDelete")
-            dump(...)
-        end,
-
-    })
-
-    ]]
-
-    print("updateOne 1")
-    cache:updateOne{
-        playerId = 1,
-        playerLevel = 2,
-        playerName = 3,
-        gold = 4,
-    }
-
-
-
-    print("=================")
-    local cmdPlayer = cache:get{
-        playerId = 1
-    }
-
-    local view = {}
-
-    cache:bindOne(view, cmdPlayer, function(cmdPlayer, tmFi)
-        dump(tmFi)
-    end)
-
-
-    print("updateOne 1")
-    cache:updateOne{
-        playerId = 1,
-        playerLevel = 2,
-        playerName = 3,
-        gold = 5,
-    }
-
-    print("deleteOne 2")
-    cache:deleteOne{
-        playerId = 1
-    }
-
 end
 
 

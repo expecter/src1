@@ -1,7 +1,12 @@
-local ModelName = ...
-
 local M = {}
+M.className = "MsgPlayer"
 
-ModuleUtil.extend(M, ModelName)
+function M.request( data )
+	static_Listener:dispatchEvent{
+        name = "CmdAppend",
+        data = data,
+        className = M.className,
+    }
+end
 
 return M

@@ -18,7 +18,7 @@ Object = require("game.gameScenes.object.Object")
 component = require("game.component.component")
 ComponentFactory = require("game.component.componentFactory")
 GameObj = require("game.gameObjects.GameObj")
-CacheData = require("gameCaches.CacheData")
+GameCacheMgr = require("gameCaches.GameCacheMgr")
 ref = require("game.ref.ref")
 GameStateManager = require("utils.GameStateManager").new()
 --场景管理器
