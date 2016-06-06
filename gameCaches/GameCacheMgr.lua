@@ -9,8 +9,9 @@ local tmGameCache = {}
 
 for _,name in pairs(CmdCommon.CacheName) do
 	tmGameCache[name] = GameCache.new(CmdCommon[name])
+	dump(CmdCommon[name])
 end
-M.LoadLocalData()
+-- M.LoadLocalData()
 static_Listener:addEventListener("CmdAppend",function ( event )
 	local data = event.data
 	tmGameCache[event.className]:updateByProto(data)

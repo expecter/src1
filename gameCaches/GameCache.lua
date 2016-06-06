@@ -1,5 +1,5 @@
 local M = class(...)
-
+local CmdCommon = require("gameCaches.caches.CmdCommon")
 
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 
@@ -91,11 +91,31 @@ function M:ctor(tmCmdX)
     self.tmView_bind = {}
 
     --唯一名字
-    self.uniqueName = protoName..tostring(M_index)
+    -- self.uniqueName = protoName..tostring(M_index)
     M_index = M_index+1
-    self:updateByProto(self.tmCmdX)
+    M.appendCmdX(self.tmCmdX)
+    -- self:updateByProto(self.tmCmdX)
 end
-
+function M.appendCmdX( cmdX )
+    if cmdX and cmdX.class and cmdX.class~="" then
+        local superCmdX = CmdCommon[cmdX.class]
+        for k,v in pairs(superCmdX) do
+            if not cmdX[k] then
+                cmdX[k] = v
+            end
+        end
+        for k,v in pairs(cmdX) do
+            if type(v) == "table" and v.class and v.class~="" then
+                M.appendCmdX(v)
+            end
+        end
+        cmdX.class = superCmdX.class
+        if cmdX.class~="" then
+            M.appendCmdX(cmdX)
+        end
+    end
+    return cmdX
+end
 --是否有主键
 function M:hasCmdX_Key()
     return self.proto_Key ~= nil

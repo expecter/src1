@@ -5,29 +5,38 @@ local M = {
 		"CmdHero",
 	},
 	CmdCommon = {
-		id = 1,
-		super = ""
+		id = {
+			type = 'int32',
+			default = 1,
+		},
+		class = "",
 	},
 	CmdPlayer = {
-		level = 0,
-		name = "",
-		super = "CmdCommon",
+		level = {
+			type = 'int32',
+			default = 1,
+		},
+		name = {
+			type = 'string',
+			default = "",
+		},
+		key = "id",
+		class = "CmdCommon",
 	},
 	CmdItem = {
-		super = "CmdCommon",
-
+		class = "CmdCommon",
 		isRepeated = true,
 	},
 	CmdHero = {
 		skill = {
 			isRepeated = true,
-			super = "CmdSkill",
+			class = "CmdSkill",
 		},
-		super = "Common",
+		class = "CmdCommon",
 		isRepeated = true,
 	},
 	CmdSkill = {
-		super = "Common",
+		class = "CmdCommon",
 		desc = "test",
 	},
 }
