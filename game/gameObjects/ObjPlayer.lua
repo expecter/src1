@@ -2,7 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-05-24 23:40:37
 --
-local M = class(...,require("game.gameObjects.GameObj"))
+local M = class(...,require("game.gameObjects.ObjBase"))
 M.class = "CmdPlayer"
 function M.createNewObject(  )
 	M.request()

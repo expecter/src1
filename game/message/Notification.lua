@@ -24,6 +24,13 @@ function M.postNotification( name,params )
 		end
 	end
 end
+function M.cleanUsedView(  )
+    for k,v in pairs(M.observers) do
+        if type(v.target) == "userdata" and tolua.isnull(v.target) then
+            M.observers[k] = nil
+        end
+    end
+end
 function M.removeObserverByTarget( target )
     for k,v in pairs(M.observers) do
         if target == v.target then

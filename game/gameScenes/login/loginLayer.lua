@@ -9,8 +9,9 @@ function M:ctor()
     -- object1:bindComponent("schedule")
     -- object:addObject(object1)
     -- GameStateManager:save({name = "tmPlayerInfo",data = {player = "jean"}})
-    GameObj.ObjPlayer.createNewObject()
-    CacheData.saveLocalData()
+    -- GameObj.ObjPlayer.createNewObject()
+    GameObj.ObjHero.createNewObject()
+    -- CacheData.saveLocalData()
 end
 
 return M

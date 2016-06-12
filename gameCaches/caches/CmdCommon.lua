@@ -1,8 +1,8 @@
 local M = {
 	CacheName = {
 		"CmdPlayer",
-		"CmdItem",
-		"CmdHero",
+		"CmdItems",
+		"CmdHeros",
 	},
 	CmdCommon = {
 		id = {
@@ -10,6 +10,7 @@ local M = {
 			default = 1,
 		},
 		class = "",
+		type = "message",
 	},
 	CmdPlayer = {
 		level = {
@@ -20,20 +21,22 @@ local M = {
 			type = 'string',
 			default = "",
 		},
-		key = "id",
 		class = "CmdCommon",
+	},
+	CmdItems = {
+		children = "CmdItem",		
 	},
 	CmdItem = {
 		class = "CmdCommon",
-		isRepeated = true,
+	},
+	CmdHeros = {
+		children = "CmdHero",
 	},
 	CmdHero = {
 		skill = {
-			isRepeated = true,
-			class = "CmdSkill",
+			children ="CmdSkill"
 		},
 		class = "CmdCommon",
-		isRepeated = true,
 	},
 	CmdSkill = {
 		class = "CmdCommon",
