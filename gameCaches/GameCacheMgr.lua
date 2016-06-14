@@ -8,10 +8,13 @@ local CmdCommon = require("gameCaches.caches.CmdCommon")
 local tmGameCache = {}
 
 for _,name in pairs(CmdCommon.CacheName) do
-	tmGameCache[name] = GameCache.new(CmdCommon[name])
+	tmGameCache[name] = GameCache.new({})
 	-- dump(tmGameCache[name]:getCmdX())
 end
--- M.LoadLocalData()
+for _,name in pairs(CmdCommon.CacheName) do
+	tmGameCache[name]:updateByCmdX(GameStateManager:getDataByName(name) or {})
+	dump(GameStateManager:getDataByName(name))
+end
 static_Listener:addEventListener("CmdAppend",function ( event )
 	local data = event.data
 	dump(data)
@@ -20,14 +23,10 @@ end)
 function M.getGameCacheByName(enumCacheName)
 	return tmGameCache[enumCacheName]
 end
-function M.LoadLocalData(  )	
-	for _,name in pairs(CmdCommon.CacheName) do
-		tmGameCache[k]:updateByProto(GameStateManager:getDataByName(name))
-	end
-end
+
 function M.saveLocalData(  )
 	for k,v in pairs(tmGameCache) do
-		GameStateManager:save({name = k,data = v})
+		GameStateManager:save({name = k,data = v:getAll()})
 	end
 end
 return M

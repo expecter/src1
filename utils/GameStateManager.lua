@@ -29,7 +29,7 @@ function M:ctor()
             local encode = result.encode
             return self:onSaveInfo(values,encode)
         end
-    end, "ginfo","hzpf@e$n!g#l&tx")
+    end, "ginfo")
 end
 
 function M:load()

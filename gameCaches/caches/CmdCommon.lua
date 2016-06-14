@@ -24,13 +24,13 @@ local M = {
 		class = "CmdCommon",
 	},
 	CmdItems = {
-		children = "CmdItem",		
+		--children = "CmdItem",		
 	},
 	CmdItem = {
 		class = "CmdCommon",
 	},
 	CmdHeros = {
-		children = "CmdHero",
+		--children = "CmdHero",
 	},
 	CmdHero = {
 		skill = {

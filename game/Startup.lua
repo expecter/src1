@@ -20,9 +20,10 @@ ComponentFactory = require("game.component.componentFactory")
 GameObj = require("game.gameObjects.GameObj")
 CmdData = require("gameCaches.CmdData")
 CmdCommon = require("gameCaches.caches.CmdCommon")
+GameStateManager = require("utils.GameStateManager").new()
 GameCacheMgr = require("gameCaches.GameCacheMgr")
 ref = require("game.ref.ref")
-GameStateManager = require("utils.GameStateManager").new()
+
 --场景管理器
 GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()
 display.replaceScene(GameSceneMgr)

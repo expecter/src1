@@ -1,11 +1,11 @@
 local M = {}
 M.className = "MsgPlayer"
 
-function M.request( data )
+function M.request( className,data )
 	static_Listener:dispatchEvent{
         name = "CmdAppend",
         data = data,
-        className = M.className,
+        className = className,
     }
 end
 

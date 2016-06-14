@@ -96,14 +96,6 @@ function M:ctor(tmCmdX)
     -- M:createCmdX(tmCmdX)
     -- self:updateByProto(self.tmCmdX)
 end
-function M:getCmdX(  )
-    return self.tmCmdX
-end
-function M:createCmdX( cmdX )
-    self.tmCmdX = {}
-    if not cmdX then return end
-    self.tmCmdX = CmdData.appendCmdX(clone(cmdX))
-end
 --是否有主键
 function M:hasCmdX_Key()
     return self.proto_Key ~= nil
@@ -120,7 +112,10 @@ function M:clean()
     --通过bind绑定在次GameCache上的View
     self.tmView_bind = {}
 end
-
+function M:updateByCmdX( cmdX )
+    
+    table.insert(self.tmCmdX,cmdX)
+end
 --利用proto_Key去hash数据
 function M:hash(cmdX)
 

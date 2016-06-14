@@ -11,7 +11,7 @@ function M:ctor()
     -- GameStateManager:save({name = "tmPlayerInfo",data = {player = "jean"}})
     -- GameObj.ObjPlayer.createNewObject()
     GameObj.ObjHero.createNewObject()
-    -- CacheData.saveLocalData()
+    GameCacheMgr.saveLocalData()
 end
 
 return M

@@ -17,6 +17,7 @@ function M.addObserver( target,selector,name )
     M.observers[#M.observers+1] = {target = target,selector = selector,name = name}
 end
 function M.postNotification( name,params )
+    M.cleanUsedView()
 	for k,v in pairs(M.observers) do
 		if v.name == name then
 			v.selector(v.target,params)
