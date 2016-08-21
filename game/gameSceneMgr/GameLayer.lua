@@ -6,15 +6,18 @@
 --------------------------------------------------------------------------------------------
 
 
-local M = class(...,function()
-    return display.newLayer()
-end)
+local M = class(...,GameNode)
 
 ---构建函数
 function M:ctor(params)
-    self:setNodeEventEnabled(true)
-    self:addTouchEventListener(handler(self, self.onTouch), false, true)
-    self:setTouchEnabled(true)
+    if not params then
+        params = {}
+    end
+    params.ClickComponent = {isSwallow = true}
+    self:setContentSize(display.width, display.height)
+    M.super.ctor(self,params)
+    
+    -- self:setClickedEvent(handler(self,self.onTouch))
 end
 
 -------------------------------------------------------------------------------------  
@@ -47,6 +50,7 @@ end
 
 --- 子类调用setTouchEnabled(true) 并重写onTouch方法实现触摸事件分发
 function M:onTouch(event, x, y)
+    print("AAAAA")
     if event == "began" then
         return true
     end

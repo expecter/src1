@@ -1,6 +1,4 @@
 
-require("config")
-require("framework.init")
 require("game.Startup")
 -- define global module
 game = {}
@@ -14,3 +12,4 @@ end
 function game.exit()
     os.exit()
 end
+return game

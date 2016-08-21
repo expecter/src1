@@ -112,8 +112,10 @@ function M:clean()
     --通过bind绑定在次GameCache上的View
     self.tmView_bind = {}
 end
-function M:updateByCmdX( cmdX )
-    
+function M:setCmdX( cmdX )
+    self.tmCmdX = tmCmdX or {}
+end
+function M:updateByCmdX( cmdX )    
     table.insert(self.tmCmdX,cmdX)
 end
 --利用proto_Key去hash数据
@@ -148,7 +150,14 @@ function M:get(cmdX_Key)
     local hash = self:hash(cmdX_Key)
     return self.tmCmdX[hash]
 end
-
+function M:getTlByKey( tmKey )
+    for k,v in pairs(tmKey) do
+        print(k,v)
+    end
+    for k,v in pairs(self.tmCmdX) do
+        print(k,v)
+    end
+end
 --获取全部项
 function M:getAll()
     return self.tmCmdX

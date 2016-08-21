@@ -1,10 +1,3 @@
------------------------------------------------------------------------------------------------  
--- @description ref的一些辅助函数 
--- @author  ny
--- @coryright  蜂鸟工作室
--- @release  2015/11/12
---------------------------------------------------------------------------------------------
-
 local M = {}
 
 local function getHashKeyAndHashValue(tmKey)
@@ -86,5 +79,7 @@ function M.extend(RefX, tlRefX, __index, fWalk)
         return cacheline or {}
     end
 end
-
+function M.extendCache( gameCache )
+	
+end
 return M

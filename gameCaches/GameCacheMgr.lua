@@ -8,12 +8,11 @@ local CmdCommon = require("gameCaches.caches.CmdCommon")
 local tmGameCache = {}
 
 for _,name in pairs(CmdCommon.CacheName) do
-	tmGameCache[name] = GameCache.new({})
-	-- dump(tmGameCache[name]:getCmdX())
-end
-for _,name in pairs(CmdCommon.CacheName) do
-	tmGameCache[name]:updateByCmdX(GameStateManager:getDataByName(name) or {})
-	dump(GameStateManager:getDataByName(name))
+	if GameStateManager:getDataByName(name) then
+		tmGameCache[name] = GameCache.new(GameStateManager:getDataByName(name))
+	else
+		tmGameCache[name] = GameCache.new({})
+	end
 end
 static_Listener:addEventListener("CmdAppend",function ( event )
 	local data = event.data

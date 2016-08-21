@@ -68,5 +68,4 @@ function ObjectBase:bindMethod( component, methodName, method )
     chain[3] = newMethod
     table.insert(self.bindingMethods_[methodName], chain)
 end
-
 return ObjectBase

@@ -1,14 +1,19 @@
 --
 -- Author: Your Name
--- Date: 2016-05-17 21:48:20
+-- Date: 2016-08-19 23:17:12
 --
-local componentFactory = {}
-function componentFactory.createcomponent(componentName,data)
+local component = require("game.component.component")
+local M = {}
+
+function M.createComponent(componentName,target,params)
     local class = component[componentName]
-    if class == nil then
-    	print(string.format("componentFactory.createcomponent() - Invalid component name \"%s\"", tostring(componentName)))
-    	return nil
-    end
-    return class.new(data)
+    assert(class ~= nil, string.format("ComponentFactory.createComponent() - Invalid behavior name \"%s\"", tostring(componentName)))
+    return class.new(target,params)
 end
-return componentFactory
+function M.hasComponent( componentName )
+	if component[componentName] then
+		return true
+	end
+	return false
+end
+return M

@@ -1,26 +1,28 @@
 --
 -- Author: Your Name
--- Date: 2015-08-08 18:36:36
+-- Date: 2016-08-19 23:58:16
 --
-local componentBase = class("componentBase")
+local M = class(...)
 
-function componentBase:ctor( params)
-	self.name_         = params.componentName or "name"
-    self.depends_      = checktable(params.depends)
-    self.priority_     = checkint(params.priority) -- 行为集合初始化时的优先级，越大越先初始化
-    self.object_       = params.object
+function M:ctor( target )
+	self.target = target
 end
 
-function componentBase:getName()
-    return self.name_ or ""
+function M:binding(  )
+	
 end
 
-function componentBase:getDepends()
-    return self.depends_ or {}
+function M:setData( params )
+	--
 end
 
-function componentBase:getPriority()
-    return self.priority_ or 0
+function M:initView(  )
+	
 end
 
-return componentBase
+function M:updateView(  )
+	
+end
+
+
+return M

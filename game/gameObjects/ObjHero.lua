@@ -13,7 +13,7 @@ function M.newHero(  )
 end
 function M.createNewObject(  )
 	local index = #M.getHeroCaches()+1
-	M.request(M.className,{[index] = M.newHero()})
+	M.request(M.className,M.newHero())
 end
 function M.requestChangeName( name )
 	M.request({name = name})
