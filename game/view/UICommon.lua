@@ -28,12 +28,24 @@ function M.createViewTable( parent,dir,unit,unitLength,unitUpdateEvent,unitClick
 		dir = dir,
 		unit = unit,
 		unitLength = unitLength,
-		unitUpdateEvent = unitUpdateEvent,
-		unitClickedEvent = unitClickedEvent,	
+		unitUpdateEvent = function ( viewTableUnit, unitData, unitIndex )
+			if unitUpdateEvent then
+				unitUpdateEvent(viewTableUnit, unitData, unitIndex)
+			end			
+		end,
+		unitClickedEvent = function ( viewTableUnit, unitData, unitIndex, x, y )
+		if unitClickedEvent then
+			unitClickedEvent(viewTableUnit, unitData, unitIndex, x, y)
+		end
+			
+		end,	
 	}
 	lstv:setAnchorPoint(cc.p(0,0))
 	parent:addChild(lstv)
 	return lstv
+end
+function M:createSwitchTable( viewTable )
+	
 end
 function M.createSwitchList( tlNode,defaultIndex,callback )
 	local defaultIndex = 1

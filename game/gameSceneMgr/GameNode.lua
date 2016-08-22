@@ -44,7 +44,9 @@ end
 function M:updateData( params )
 	self:setData(params)
 	for componentName,var in pairs(params) do
-		self.components[componentName]:setData(var)
+		if self.components[componentName] then
+			self.components[componentName]:setData(var)
+		end		
 	end
 end
 --inLineFunc:initView updateView

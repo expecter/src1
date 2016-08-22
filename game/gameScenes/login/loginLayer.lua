@@ -25,10 +25,47 @@ function M:initView( params )
         table.insert(tlNode,GameNode)
     end
     
-    local videwList = UICommon.createViewList(self, true, "h",10)
-    -- videwList:setPosition(cc.p(100,10))
-    UICommon.createSwitchList(tlNode)
-    videwList:setTlCcNode(tlNode)
+    -- local videwList = UICommon.createViewList(self, true, "h",10)
+    -- -- videwList:setPosition(cc.p(100,10))
+    -- UICommon.createSwitchList(tlNode)
+    -- videwList:setTlCcNode(tlNode)
+    -- -- dump(ref.hero.getTlRef({}))
+    local node = GameNode.new({DrawComponent = {}})
+    node:setContentSize(500, 280)
+    node:setAnchorPoint(cc.p(0.5,0.5))
+    node:setPosition(cc.p(display.cx,display.cy))
+    node:updateView()
+    self:addChild(node,2)
+    local orgNode = nil
+    local orgCmdX = nil
+    local viewtable = UICommon.createViewTable(node,"v",3,70,function ( viewTableUnit, unitData, unitIndex )
+        if not viewTableUnit.ccNode then
+            viewTableUnit.ccNode = GameCell.new(unitData)
+            viewTableUnit:addChild(viewTableUnit.ccNode)
+            if not orgNode then
+                viewTableUnit.ccNode:hightlight()
+                orgNode = viewTableUnit.ccNode
+                orgCmdX = unitData
+            end
+        end
+        if orgCmdX~=unitData then
+            viewTableUnit.ccNode:normal()
+        else    
+            viewTableUnit.ccNode:hightlight()
+        end
+        viewTableUnit.ccNode:updateData(unitData)
+        viewTableUnit.ccNode:updateView()
+    end,function ( viewTableUnit, unitData, unitIndex, x, y )
+        if orgNode== viewTableUnit.ccNode then
+            return
+        end
+        orgNode:normal()
+        orgNode = viewTableUnit.ccNode
+        orgCmdX = unitData
+        viewTableUnit.ccNode:hightlight()
+    end)
+    viewtable:setTlUnitData(ref.hero.getTlRef({}))
+
 end
 -- function M:testView(  )
 --     print("AAAAAAAA")

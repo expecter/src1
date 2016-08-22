@@ -145,7 +145,7 @@ function M:_tableCellTouched(table,viewTableCell)
                 local unitIndex = cellIndex * self.unit + unitIndex_local
                 local unitData = self.tlUnitData[unitIndex]
                 if unitData then
-					AudioUtil.playMusic("audio/sound/sound_click.mp3")
+					-- AudioUtil.playMusic("audio/sound/sound_click.mp3")
                     self.unitClickedEvent(viewTableUnit, unitData, unitIndex, self._curPos.x, self._curPos.y)
                     break
                 end

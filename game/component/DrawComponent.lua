@@ -24,6 +24,10 @@ function M:initPoints(  )
 	local width = self.target:getContentSize().width
 	local height = self.target:getContentSize().height
 	local x,y = self.target:getPosition()
+	local anX = self.target:getAnchorPoint().x
+	local anY = self.target:getAnchorPoint().y
+	x = x-anX*width
+	y = y-anY*height
 	return {
         {x,y},
         {x + width, y},

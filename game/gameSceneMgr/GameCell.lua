@@ -19,10 +19,19 @@ function M:ctor(params)
     M.super.ctor(self,params)    
     self:setClickedEvent(handler(self,self.onTouch))
 end
+function M:setData( params )
+	self.name = params.name or ""
+end
 function M:initView(  )
 	self.viewSprite = display.newSprite("img_btn_gray_2_s.png")
 	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
 	self:addChild(self.viewSprite)
+	self.label = display.newTTFLabel{text=self.name,size=30}
+    self:addChild(self.label,1)
+    self.label:setPosition(self:getCenterPosition())
+end
+function M:updateView(  )
+	self.label:setString(self.name)
 end
 function M:hightlight(  )
 	self.viewSprite:setSpriteFrame(display.newSpriteFrame("img_btn_brown_2_n.png"))

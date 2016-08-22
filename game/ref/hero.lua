@@ -1,7 +1,25 @@
 local M = {
 	{id = 1,name = "死亡骑士",imgId = "",desc = "死亡骑士",li = 10,zhi = 5,hp = 100,mp = 50},
 	{id = 2,name = "圣骑士",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
-	{id = 3,name = "大法师",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 3,name = "大法师1",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 4,name = "大法师2",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 5,name = "大法师3",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 6,name = "大法师4",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 7,name = "大法师5",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 8,name = "大法师6",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 9,name = "大法师7",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 10,name = "大法师8",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 11,name = "大法师9",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 12,name = "大法师10",imgId = "",desc = "大法师",li = 5,zhi = 10,hp = 50,mp = 50},
+	{id = 13,name = "英雄1",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
+	{id = 14,name = "英雄2",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
+	{id = 15,name = "英雄3",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
+	{id = 16,name = "英雄4",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
+	{id = 17,name = "英雄5",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
+	{id = 18,name = "英雄6",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
+	{id = 19,name = "英雄7",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
+	{id = 20,name = "英雄8",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
+	{id = 21,name = "英雄9",imgId = "",desc = "圣骑士",li = 10,zhi = 5,hp = 100,mp = 50},
 }
 
 return M

@@ -4,6 +4,10 @@
 --
 local component = require("game.component.component")
 local M = {}
+local compList = {
+	ClickComponent=1,
+	DrawComponent=2,
+}
 
 function M.createComponent(componentName,target,params)
     local class = component[componentName]
@@ -11,7 +15,7 @@ function M.createComponent(componentName,target,params)
     return class.new(target,params)
 end
 function M.hasComponent( componentName )
-	if component[componentName] then
+	if compList[componentName] then
 		return true
 	end
 	return false
