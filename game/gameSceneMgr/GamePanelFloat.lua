@@ -8,50 +8,51 @@
 local GamePanel = import(".GamePanel")
 local M = class(..., GamePanel)
 
-function M:ctor(params) 
+function M:ctor(params)
    M.super.ctor(self,params)
 end
 
 function M:getFloatNode() end
 
 function M:onTouch(event, x, y)
+    dump("AAAAfff")
     if event == "began" then   
         
         -- if not self:isready() then
         --     return true
         -- end 
+        return self:isTouch(event,x,y)
+    end
+    
+    if event == "ended" then
+        
+    end
 
-        if self.__closing then
-            return true
-        end
-
-        local ccFloatNode = self:getFloatNode()
-        if ccFloatNode ==  nil then
-            echoInfo(string.format("FloatGamePanel子类%s没有重写getFloatNode方法, 使用其默认行为", self.__cname))
+end
+function M:isTouch( event,x,y )
+    if self.__closing then
+        return true
+    end
+    local ccFloatNode = self:getFloatNode()
+    if ccFloatNode ==  nil then
+        echoInfo(string.format("FloatGamePanel子类%s没有重写getFloatNode方法, 使用其默认行为", self.__cname))
+        self.__closing = true
+        self:performWithDelay(function()
+            self:closePanel()
+        end, 0)
+    else
+        local ccpoint = ccFloatNode:convertToNodeSpace(cc.p(x,y))
+        local ccBox = ccFloatNode:getBoundingBox()
+        local ccRect = cc.rect(0,0, ccBox.width, ccBox.height)
+        if not cc.rectContainsPoint(ccRect,ccpoint) then
             self.__closing = true
             self:performWithDelay(function()
                 self:closePanel()
             end, 0)
-        else
-            local ccpoint = ccFloatNode:convertToNodeSpace(cc.p(x,y))
-            local ccBox = ccFloatNode:getBoundingBox()
-            local ccRect = cc.rect(0,0, ccBox.width, ccBox.height)
-            if not cc.rectContainsPoint(ccRect,ccpoint) then
-                self.__closing = true
-                self:performWithDelay(function()
-                    self:closePanel()
-                end, 0)
-            end 
-        end     
+        end 
+    end     
 
-	    return true
-	end
-	
-	if event == "ended" then
-	    
-	end
-
+    return true
 end
-
 
 return M

@@ -13,7 +13,7 @@ function M:ctor(params)
     if not params then
         params = {}
     end
-    params.ClickComponent = {isSwallow = true}
+    params.ClickComponent = {isSwallow = true,touch_ = handler(self,self.onTouch)}
     self:setContentSize(display.width, display.height)
     M.super.ctor(self,params)
     
@@ -50,7 +50,6 @@ end
 
 --- 子类调用setTouchEnabled(true) 并重写onTouch方法实现触摸事件分发
 function M:onTouch(event, x, y)
-    print("AAAAA")
     if event == "began" then
         return true
     end
