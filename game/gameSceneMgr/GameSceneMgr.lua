@@ -5,7 +5,6 @@
 -- @release  2015/4/4
 --------------------------------------------------------------------------------------------
 local GamePanelMgr = import(".GamePanelMgr")
-
 local M = class(..., function()
     return display.newScene()
 end)
@@ -42,6 +41,9 @@ local instance = nil
 
 --屏蔽
 M.MaskZOrdr = 1
+
+--引导层ZOrder
+M.GuideZOrder = 2
 
 --重连
 M.GameLoading = 5
@@ -136,9 +138,10 @@ function M.coroutineCreate(f)
 
     end)()
 end
-
+local index=1
 --replace Layer
 function M.replaceLayer(clsGameLayer, userdata, fCallback)
+    
     local function helper()
         --清除全部layer
         M.clearLayer()
@@ -179,7 +182,6 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
             fCallback(gameLayer)
         end
     end
-
     M.coroutineCreate(helper)
 end
 
@@ -268,7 +270,7 @@ function M.popLayer(fcallback)
         M:dispatchEvent{
             name = "prepare",
             data = {
-                gameLayer = gameLayer,
+                --gameLayer = gameLayer,存在bug
                 action = "pop",
             },
         }
@@ -281,7 +283,7 @@ function M.popLayer(fcallback)
         M:dispatchEvent{
             name = "ready",
             data = {
-                gameLayer = gameLayer,
+                --gameLayer = gameLayer,存在bug
                 action = "pop",
             },
         }
@@ -398,12 +400,57 @@ function M.mask(ismask)
     else
         maskCounts=maskCounts-1
     end
-
+    print("maskCounts:"..tostring(maskCounts))
     if maskCounts==1 then 
         M.instance.maskLayer:removeFromParent()
         M.instance.maskLayer = nil    
     end 
 end
+function M:removeMaskLayer()
+    if M.instance.maskLayer then
+        maskCounts=1
+        M.instance.maskLayer:removeFromParent()
+        M.instance.maskLayer = nil 
+    end
+end
 
+
+function M.viewGoto(view,nId)
+    local class = require(GameGlobalConfig[view])
+    if type(class.showPanel) == "function" then
+        local ccPanel = class.new()
+        ccPanel:showPanel()
+        if ccPanel.gotoTab then
+            ccPanel:gotoTab(nId or 1)
+        end
+    else
+        M.replaceLayer(GameGlobalConfig[view])
+    end
+end
+
+-- 跳到野外地图行列坐标(r,c)
+function M.moveToWorldPos(r,c)
+    local cur_layer = M.getRunningGameLayer()
+    
+    local function helper()
+        cur_layer = M.getRunningGameLayer()
+        cur_layer:moveToCenterByRC(r,c)
+
+        local gamePanelMgr = M.getRunningGamePanelMgr()
+        gamePanelMgr:removeAllPanels()
+    end 
+
+    if cur_layer.__cname ~= "game.gameScenes.world.LayerWorld" then 
+        M.replaceLayer("game.gameScenes.world.LayerWorld")
+        
+        GameSceneMgr:addEventListener("ready",function(event) 
+            if event.data.gameLayer.__cname == "game.gameScenes.world.LayerWorld" and event.data.action == "replace" then
+                helper()
+            end
+        end)
+    else
+        helper()
+    end
+end
 
 return M

@@ -11,6 +11,7 @@ local ccfile = cc.FileUtils:getInstance()
 
 --添加res搜索路径
 ccfile:addSearchPath("res/")
+ccfile:addSearchPath("res/uires/public/")
 
 function __G__TRACKBACK__(errorMessage)
     print("----------------------------------------")

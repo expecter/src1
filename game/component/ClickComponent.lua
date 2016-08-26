@@ -13,6 +13,7 @@ end
 function M:setData(params )
 	self.isSwallow = params.isSwallow==true
     self.isScale_ = params.isScale==true
+    self.onTouch_ = params.touch_ or handler(self, self.onTouch)
 end
 
 function M:binding(  )
@@ -22,7 +23,7 @@ end
 function M:initView( target,params )
 	--点击层
     local layer = display.newLayer() 
-    layer:addTouchEventListener( handler(self, self.onTouch), false, self.isSwallow)
+    layer:addTouchEventListener( self.onTouch_, false, self.isSwallow)
     layer:setTouchEnabled(true)
     layer:setVisible(false)
     target:addChild(layer,M.CLickOrder)

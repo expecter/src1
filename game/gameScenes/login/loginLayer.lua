@@ -13,32 +13,15 @@ function M:setData( params )
 end
 
 function M:initView( params )
-    self.label = display.newTTFLabel{text="哈哈",size=30}
-    self:addChild(self.label,1)
-    self.label:setPosition(cc.p(display.cx,display.cy))
-    self.label:enableShadow(cc.c4b(0,100,0,255),cc.size(2,2))
-    self.label:enableOutline(cc.c4b(0,100,0,255),5)
-    local tlNode = {}
-    for i=1,5 do
-        local GameNode = GameCell.new({})
-        GameNode:updateView()
-        table.insert(tlNode,GameNode)
-    end
-    
-    -- local videwList = UICommon.createViewList(self, true, "h",10)
-    -- -- videwList:setPosition(cc.p(100,10))
-    -- UICommon.createSwitchList(tlNode)
-    -- videwList:setTlCcNode(tlNode)
-    -- -- dump(ref.hero.getTlRef({}))
     local node = GameNode.new({DrawComponent = {}})
-    node:setContentSize(500, 280)
+    node:setContentSize(320, 280)
     node:setAnchorPoint(cc.p(0.5,0.5))
-    node:setPosition(cc.p(display.cx,display.cy))
+    node:setPosition(cc.p(160,display.cy))
     node:updateView()
     self:addChild(node,2)
     local orgNode = nil
     local orgCmdX = nil
-    local viewtable = UICommon.createViewTable(node,"v",3,70,function ( viewTableUnit, unitData, unitIndex )
+    local viewtable = UICommon.createViewTable(node,"v",2,70,function ( viewTableUnit, unitData, unitIndex )
         if not viewTableUnit.ccNode then
             viewTableUnit.ccNode = GameCell.new(unitData)
             viewTableUnit:addChild(viewTableUnit.ccNode)
@@ -46,6 +29,7 @@ function M:initView( params )
                 viewTableUnit.ccNode:hightlight()
                 orgNode = viewTableUnit.ccNode
                 orgCmdX = unitData
+                self:updateView(unitData)
             end
         end
         if orgCmdX~=unitData then
@@ -63,9 +47,17 @@ function M:initView( params )
         orgNode = viewTableUnit.ccNode
         orgCmdX = unitData
         viewTableUnit.ccNode:hightlight()
+        self:updateView(unitData)
+        local panel = require("game.panel.ViewfloatPanel").new()
+        panel:showPanel()
     end)
     viewtable:setTlUnitData(ref.hero.getTlRef({}))
-
+    self.ViewNode = GameNode.new({DrawComponent = {}})
+    self.ViewNode:setContentSize(500, 280)
+    self.ViewNode:setAnchorPoint(cc.p(0.5,0.5))
+    self.ViewNode:setPosition(cc.p(500,display.cy))
+    self.ViewNode:updateView()
+    self:addChild(self.ViewNode,2)
 end
 -- function M:testView(  )
 --     print("AAAAAAAA")
@@ -75,6 +67,9 @@ end
 -- end
 function M:updateView( params )
     -- self:setData(params)
+    -- dump(params)
+    -- local panel = require("game.panel.ViewfloatPanel").new()
+    -- panel:showPanel()
 end
 
 return M
