@@ -44,6 +44,63 @@ function M.createViewTable( parent,dir,unit,unitLength,unitUpdateEvent,unitClick
 	parent:addChild(lstv)
 	return lstv
 end
+function M.initTableTabMenu( parent,dir,unitLength,unit,unitClickedEvent ,unitUpdateEvent,isSelect,SelectFilter,orgindex)
+    isSelect = isSelect == true
+    orgindex = orgindex or 1
+    SelectFilter = SelectFilter or function( ) return true end
+    local orgNode = nil
+    local lstv = view.ViewTable.new{
+        size = parent:getContentSize(),
+        dir = dir,
+        unit = unit,
+        unitLength = unitLength,
+        unitUpdateEvent = function ( viewTableUnit, unitData, unitIndex )
+            if unitUpdateEvent then
+                if not viewTableUnit.ccNode then
+                    viewTableUnit.ccNode = unitUpdateEvent(unitData)
+                    viewTableUnit:addChild(viewTableUnit.ccNode)
+                    if unitIndex == orgindex then
+                        orgNode = viewTableUnit.ccNode
+                    end
+                end
+                viewTableUnit.ccNode:updateView(unitData)
+                if isSelect and SelectFilter(unitData) then
+                    if unitIndex == orgindex then
+                        if viewTableUnit.ccNode.hightlight then
+                            viewTableUnit.ccNode:hightlight(unitData)
+                        end                        
+                    else
+                        if viewTableUnit.ccNode.normal then
+                            viewTableUnit.ccNode:normal(unitData)
+                        end
+                    end
+                end
+            end
+
+        end,
+        unitClickedEvent = function ( viewTableUnit, unitData, unitIndex, x, y )
+            if unitClickedEvent then
+                if unitIndex == orgindex then
+                    return
+                end
+                unitClickedEvent(viewTableUnit, unitData, unitIndex, x, y)
+                if isSelect and SelectFilter(unitData) then
+                     if orgNode and orgNode.normal then
+                        orgNode:normal(unitData)
+                    end                
+                    orgindex = unitIndex
+                    orgNode = viewTableUnit.ccNode
+                    if orgNode.hightlight then
+                        orgNode:hightlight(unitData)
+                    end
+                end               
+            end            
+        end,    
+    }
+    lstv:setAnchorPoint(cc.p(0,0))
+    parent:addChild(lstv)
+    return lstv
+end
 function M:createSwitchTable( viewTable )
 	
 end
