@@ -10,14 +10,19 @@ local compList = {
 }
 
 function M.createComponent(componentName,target,params)
-    local class = component[componentName]
+    local ok,class = pcall(function (  )
+    	return component[componentName]
+    end)
+    if not ok then
+    	return nil
+    end
     assert(class ~= nil, string.format("ComponentFactory.createComponent() - Invalid behavior name \"%s\"", tostring(componentName)))
     return class.new(target,params)
 end
 function M.hasComponent( componentName )
-	if compList[componentName] then
-		return true
-	end
-	return false
+	local ok = pcall(function (  )
+    	return component[componentName]
+    end)
+	return ok
 end
 return M

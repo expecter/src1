@@ -14,12 +14,14 @@ function M:setData( params )
 end
 
 function M:initView( params )
-    local node = GameNode.new({DrawComponent = {}})
+    local node = GameNode.new({1,DrawComponent = {},ObserveComponent = {}})
     node:setContentSize(320, 280)
     node:setAnchorPoint(cc.p(0.5,0.5))
     node:setPosition(cc.p(160,display.cy))
     node:updateView()
     self:addChild(node,2)
+    dump("AAAAA")
+    node:dispatch("haha")
     -- local orgNode = nil
     -- local orgCmdX = nil
     -- local viewtable = UICommon.createViewTable(node,"v",2,70,function ( viewTableUnit, unitData, unitIndex )

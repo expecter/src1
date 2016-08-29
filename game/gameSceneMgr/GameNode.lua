@@ -34,7 +34,9 @@ end
 function M:addComponent( componentName,params )
 	if not self.components[componentName] then
 		self.components[componentName] = ComponentFactory.createComponent(componentName,self)
-		self.components[componentName]:setData(params)
+		if self.components[componentName].setData then
+			self.components[componentName]:setData(params)
+		end		
 		self:addInFunc(self.components[componentName])	
 		if self.components[componentName].bindFunc then
 			self.components[componentName]:bindFunc(self)
@@ -44,7 +46,7 @@ end
 function M:updateData( params )
 	self:setData(params)
 	for componentName,var in pairs(params) do
-		if self.components[componentName] then
+		if self.components[componentName] and self.components[componentName].setData then
 			self.components[componentName]:setData(var)
 		end		
 	end
@@ -80,8 +82,8 @@ function M:bindOnceMethod( component,methodName )
 		dump("Object has Method "..methodName)
 		return
 	end
-	self[methodName] = function ( target,params )
-		return component[methodName](component,params)
+	self[methodName] = function ( target,... )
+		return component[methodName](component,...)
 	end
 end
 return M

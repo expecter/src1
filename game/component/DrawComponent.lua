@@ -6,6 +6,13 @@ local M = class(...)
 
 function M:ctor( target )
 	self.target = target
+	-- dump(target.addObserver)
+	if target.addObserver then
+		target:addObserver(self,"haha",function (  )
+			print("AAAAAA")
+		end)
+	end
+	
 end
 
 function M:setData( params )
