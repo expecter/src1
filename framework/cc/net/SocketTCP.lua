@@ -103,7 +103,16 @@ function SocketTCP:connect(__host, __port, __retryConnectWhenFailure)
 		self.connectTimeTickScheduler = scheduler.scheduleGlobal(__connectTimeTick, SOCKET_TICK_TIME)
 	end
 end
-
+function SocketTCP.bind( host, port )
+    local sock, err = socket.tcp()
+    if not sock then return nil, err end
+    sock:setoption("reuseaddr", true)
+    local res, err = sock:bind(host, port)
+    if not res then return nil, err end
+    res, err = sock:listen(backlog)
+    if not res then return nil, err end
+    return sock
+end
 function SocketTCP:send(__data)
 	assert(self.isConnected, self.name .. " is not connected.")
 	self.tcp:send(__data)

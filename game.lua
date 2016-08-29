@@ -5,7 +5,7 @@ game = {}
 
 function game.startup()
     cc.FileUtils:getInstance():addSearchPath("res/")
-    GameSceneMgr.replaceLayer("game.gameScenes.login.loginLayer")
+    GameSceneMgr.replaceLayer("game.gameScenes.login.loginLayer")    
     -- game.enterMainScene()
 end
 

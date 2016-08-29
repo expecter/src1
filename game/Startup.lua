@@ -35,7 +35,8 @@ Helper = require("utils.Helper")
 AlertTips = require("utils.AlertTips")
 view = require("game.view.view")
 UICommon = require("game.view.UICommon")
-
+net = {}
+net.Socket = require("net.SocketTCP")
 --场景管理器
 GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()
 display.replaceScene(GameSceneMgr)
