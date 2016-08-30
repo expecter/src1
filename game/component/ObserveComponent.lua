@@ -25,7 +25,7 @@ function M:dispatch(name,data )
 	if type(self.target) == "userdata" and tolua.isnull(self.target) then
 		return
 	end
-	print("dispatch",name,data)
+	-- print("dispatch",name,data)
 	for component,v in pairs(self.listeners_) do
 		local listener = v[name]
 		listener(component,data)

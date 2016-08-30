@@ -5,9 +5,10 @@
 local M = class("ClickComponent")
 M.CLickOrder = 0
 --baseFunc
-function M:ctor( target )
+function M:ctor( target ,params)
 	self.target = target
 	self.fClickeEvent = nil
+    self:setData(params)
 end
 
 function M:setData(params )
@@ -89,6 +90,8 @@ function M:getClickedEvent(  )
     return self.fClickeEvent
 end
 function M:bindFunc( target )
+    target:bindMethod(self,"initView")
+    -- target:bindOnceMethod(self,"setClickedEvent")
 	target:bindOnceMethod(self,"setClickedEvent")
     target:bindOnceMethod(self,"getClickedEvent")
     

@@ -7,18 +7,22 @@ local init = {
 	scheduler = {},
 
 }
+local InitComponent = {
+	ObserveComponent = {},
+}
 local M = class(...,function (  )
 	return display.newNode()
 end)
 
 function M:ctor( params )
 	self.components = {}
-	for componentName,var in pairs(params) do
+	table.merge(InitComponent,params)
+	for componentName,var in pairs(InitComponent) do
 		if ComponentFactory.hasComponent(componentName) then
 			self:addComponent(componentName,var)
 		end
 	end
-	self:updateData(params)
+	self:setData(params and params.owner or {})
 	self:initView()
 end
 --componentFunc
@@ -30,36 +34,41 @@ function M:initView(  )
 end
 function M:updateView( params )
 end
-
+function M:enterView(  )
+	
+end
+function M:exitView(  )
+	
+end
 function M:addComponent( componentName,params )
 	if not self.components[componentName] then
-		self.components[componentName] = ComponentFactory.createComponent(componentName,self)
-		if self.components[componentName].setData then
-			self.components[componentName]:setData(params)
-		end		
-		self:addInFunc(self.components[componentName])	
+		self.components[componentName] = ComponentFactory.createComponent(componentName,self,params)
+		-- if self.components[componentName].setData then
+		-- 	self.components[componentName]:setData(params)
+		-- end		
+		-- self:addInFunc(self.components[componentName])	
 		if self.components[componentName].bindFunc then
 			self.components[componentName]:bindFunc(self)
 		end
 	end
 end
-function M:updateData( params )
-	self:setData(params)
-	for componentName,var in pairs(params) do
-		if self.components[componentName] and self.components[componentName].setData then
-			self.components[componentName]:setData(var)
-		end		
-	end
-end
+-- function M:updateData( params )
+-- 	self:setData(params)
+-- 	for componentName,var in pairs(params) do
+-- 		if self.components[componentName] and self.components[componentName].setData then
+-- 			self.components[componentName]:setData(var)
+-- 		end		
+-- 	end
+-- end
 --inLineFunc:initView updateView
-function M:addInFunc( component )
-	local func = {"initView","updateView"}
-	for _,name in ipairs(func) do
-		if component[name] then
-			self:bindMethod(component,name)
-		end
-	end
-end
+-- function M:addInFunc( component )
+-- 	local func = {"initView","updateView"}
+-- 	for _,name in ipairs(func) do
+-- 		if component[name] then
+-- 			self:bindMethod(component,name)
+-- 		end
+-- 	end
+-- end
 function M:bindMethod( component,methodName )
 	local originMethod = self[methodName]
     if not originMethod then

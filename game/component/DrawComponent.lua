@@ -4,7 +4,7 @@
 --
 local M = class(...)
 
-function M:ctor( target )
+function M:ctor( target ,params)
 	self.target = target
 	-- dump(target.addObserver)
 	if target.addObserver then
@@ -12,7 +12,7 @@ function M:ctor( target )
 			print("AAAAAA")
 		end)
 	end
-	
+	self:setData(params)
 end
 
 function M:setData( params )
@@ -42,5 +42,9 @@ function M:initPoints(  )
         {x, y + height}
     }
 end
-
+function M:bindFunc( target )
+    target:bindMethod(self,"initView")
+    target:bindMethod(self,"updateView")
+    
+end
 return M
