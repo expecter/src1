@@ -16,3 +16,5 @@ tl表示列表 tm表示table
 gamenode添加消息传递的方法
 获取参数node的参数改为target，代码美观些
 提供参数格式化得方法
+添加界面编辑工具（后面），把界面数据格式化，默认节点为gamenode和gamelayer，使用按钮事件和回调事件配置文件更新界面
+enterview时再执行界面绑定事件和回调事件，exitview时取消事件

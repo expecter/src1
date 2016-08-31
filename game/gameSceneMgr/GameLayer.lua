@@ -7,13 +7,13 @@
 
 
 local M = class(...,GameNode)
-
+local InitComponent = {
+    ClickComponent = {isSwallow = true,touch_ = handler(self,self.onTouch)}
+}
 ---构建函数
 function M:ctor(params)
-    if not params then
-        params = {}
-    end
-    params.ClickComponent = {isSwallow = true,touch_ = handler(self,self.onTouch)}
+    if not params then params = {} end
+    table.merge(InitComponent,params)
     self:setContentSize(display.width, display.height)
     M.super.ctor(self,params)
     

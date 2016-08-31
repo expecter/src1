@@ -40,5 +40,6 @@ net.Socket = require("net.SocketTCP")
 --场景管理器
 GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()
 display.replaceScene(GameSceneMgr)
-
+DEFAULT_TRUE = function ( a ) return a~= false end
+DEFAULT_FALSE = function ( a ) return a == true end
 return M

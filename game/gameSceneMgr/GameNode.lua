@@ -2,18 +2,15 @@
 -- Author: Your Name
 -- Date: 2016-08-19 21:21:36
 --
-local init = {
-	clicked = {},
-	scheduler = {},
 
-}
 local InitComponent = {
 	ObserveComponent = {},
 }
 local M = class(...,function (  )
 	return display.newNode()
 end)
-
+M.NODE_SETDATA = "nodesetdata"
+M.NODE_CLICK = "nodeclick"
 function M:ctor( params )
 	self.components = {}
 	table.merge(InitComponent,params)
@@ -24,6 +21,21 @@ function M:ctor( params )
 	end
 	self:setData(params and params.owner or {})
 	self:initView()
+	--自动回调更新参数
+	self:addObserver(self,M.NODE_SETDATA,function ( params )
+		if params then
+			if params.owner then
+				self:setData(params.owner)
+				self:updateView()
+			end			
+			for componentName,var in pairs(params) do			
+				if self.components[componentName] then
+					self.components[componentName]:setData(var)
+					self.components[componentName]:updateView()
+				end
+			end
+		end
+	end)
 end
 --componentFunc
 function M:setData( params )
@@ -77,9 +89,9 @@ function M:bindMethod( component,methodName )
         end
         return
     end
-    local newMethod = function ( ... )
-    	component[methodName](component,...)
+    local newMethod = function ( ... )    	
     	originMethod(...)
+    	return component[methodName](component,...)
     end
     self[methodName] = newMethod
 end
@@ -91,8 +103,9 @@ function M:bindOnceMethod( component,methodName )
 		dump("Object has Method "..methodName)
 		return
 	end
-	self[methodName] = function ( target,... )
-		return component[methodName](component,...)
-	end
+	-- self[methodName] = function ( target,... )
+	-- 	return component[methodName](component,...)
+	-- end
+	self:bindMethod(component,methodName)
 end
 return M
