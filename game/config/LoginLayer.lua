@@ -6,9 +6,11 @@ local M = class("eventComponent")
 function M:ctor( target )
 	self.target = target
 end
---exportFunc
 function M:initView( target )
+	target.events.onClicked = function (  )
 		
+	end
+	
 end
 function M:bindFunc( target )    
 end
