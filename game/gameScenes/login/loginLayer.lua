@@ -1,4 +1,5 @@
 local M = class(..., require("game.gameSceneMgr.GameLayer"))
+local map = require("game.config.Login")
 local socket = require "socket"
 function M:ctor()
     
@@ -14,14 +15,15 @@ function M:setData( params )
 end
 
 function M:initView( params )
-    local node = GameNode.new({DrawComponent = {}})
-    node:setContentSize(320, 280)
-    node:setAnchorPoint(cc.p(0.5,0.5))
-    node:setPosition(cc.p(160,display.cy))
-    node:updateView()
-    self:addChild(node,2)
-    -- dump("AAAAA")
-    node:dispatch("haha")
+    -- local node = GameNode.new({DrawComponent = {}})
+    -- node:setContentSize(320, 280)
+    -- node:setAnchorPoint(cc.p(0.5,0.5))
+    -- node:setPosition(cc.p(160,display.cy))
+    -- node:updateView()
+    -- self:addChild(node,2)
+    dump(map)
+    self:createLayer(map,self)
+    -- node:dispatch("haha")
     -- local orgNode = nil
     -- local orgCmdX = nil
     -- local viewtable = UICommon.createViewTable(node,"v",2,70,function ( viewTableUnit, unitData, unitIndex )
@@ -61,6 +63,14 @@ function M:initView( params )
     -- self.ViewNode:setPosition(cc.p(500,display.cy))
     -- self.ViewNode:updateView()
     -- self:addChild(self.ViewNode,2)
+end
+function M:createLayer( config,parent )
+    local node = GameNode.new({DrawComponent = {}})
+    node:setContentSize(config.cc.contentsize)
+    node:setAnchorPoint(config.cc.AnchPos)
+    node:setPosition(config.cc.pos.x,config.cc.pos.y)
+    node:updateView()
+    self:addChild(node,2)
 end
 function M:connect(  )
     self.tcp = socket.tcp()

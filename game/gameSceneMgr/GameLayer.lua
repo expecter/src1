@@ -8,7 +8,7 @@
 
 local M = class(...,GameNode)
 local InitComponent = {
-    ClickComponent = {isSwallow = true,touch_ = handler(self,self.onTouch)}
+    ClickComponent = {isSwallow = true}
 }
 ---构建函数
 function M:ctor(params)
