@@ -65,19 +65,45 @@ function M:initView( params )
     -- self:addChild(self.ViewNode,2)
 end
 function M:createLayer( config,parent )
-    local node = GameNode.new({DrawComponent = {}})
-    node:setContentSize(config.cc.contentsize)
-    node:setAnchorPoint(config.cc.AnchPos)
-    node:setPosition(config.cc.pos.x,config.cc.pos.y)
-    node:updateView()
-    self:addChild(node,2)
+    local owner = M.createNode(config.component)
+    parent:addChild(owner)
+    for i,con in ipairs(config.children) do
+        local node = M.createNode(con.component)
+        owner:addChild(node)
+    end
+
 end
-function M:connect(  )
-    self.tcp = socket.tcp()
-    self.tcp:settimeout(10)
-    local __succ, __status = self.tcp:connect("127.0.0.1",12701,"127.0.0.1",12701)
-    print(__succ,__status)
+function M.createNode( config )
+    if config == "sprite" then
+        local node = display.newSprite()
+        return node
+    end
+    if config == "label" then
+        local node =display.TTFLabel() 
+        return node
+    end
+    local ok,class = pcall(function (  )
+        return gameNode[config.ctor]
+    end)
+    if not ok then
+        return nil
+    end
+    local node = class.new(config.component)
+    M.extentCcNode(node,config.cc)
+    -- M.extentConfig()
+    return node
 end
+function M.extentCcNode( node,config )
+    node:setContentSize(config.contentsize)
+    node:setAnchorPoint(config.AnchPos)
+    node:setPosition(cc.p(config.pos))
+end
+-- function M:connect(  )
+--     self.tcp = socket.tcp()
+--     self.tcp:settimeout(10)
+--     local __succ, __status = self.tcp:connect("127.0.0.1",12701,"127.0.0.1",12701)
+--     print(__succ,__status)
+-- end
 -- function M:testView(  )
 --     print("AAAAAAAA")
 --     local node = display.newRect(cc.rect(100, 100, 40, 40),

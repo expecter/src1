@@ -8,9 +8,9 @@ function M:ctor( target )
 end
 function M:initView( target )
 	target.events.onClicked = function (  )
-		
+		GameSceneMgr.replaceLayer("AAAA")
 	end
-	
+	-- target.owner.node:setString(XXX)
 end
 function M:bindFunc( target )    
 end

@@ -31,7 +31,9 @@ function M:ctor( params )
 			for componentName,var in pairs(params) do			
 				if self.components[componentName] then
 					self.components[componentName]:setData(var)
-					self.components[componentName]:updateView()
+					if DEFAULT_TRUE(var.isUpdate) then
+						self.components[componentName]:updateView()
+					end					
 				end
 			end
 		end
