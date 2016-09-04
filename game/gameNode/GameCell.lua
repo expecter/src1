@@ -7,16 +7,17 @@
 
 
 local M = class(...,GameNode)
-local InitComponent = {
-	ClickComponent = {isScale = true}
-}
+
 ---构建函数
 function M:ctor(params)
     if not params then params = {} end
     -- params.DrawComponent = {}
+    local InitComponent = {
+		ClickComponent = {isScale = true}
+	}
     table.merge(InitComponent,params)
     self:setContentSize(154, 56)
-    M.super.ctor(self,params)    
+    M.super.ctor(self,InitComponent)    
     self:setClickedEvent(handler(self,self.onTouch))
 end
 function M:setData( params )

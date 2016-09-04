@@ -3,16 +3,18 @@
 -- Date: 2016-08-19 21:21:36
 --
 
-local InitComponent = {
-	ObserveComponent = {},
-}
+
 local M = class(...,function (  )
 	return display.newNode()
 end)
 M.NODE_SETDATA = "nodesetdata"
 M.NODE_CLICK = "nodeclick"
 function M:ctor( params )
+	local InitComponent = {
+		ObserveComponent = {},
+	}
 	self.components = {}
+
 	table.merge(InitComponent,params)
 	for componentName,var in pairs(InitComponent) do
 		if ComponentFactory.hasComponent(componentName) then

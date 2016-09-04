@@ -101,31 +101,25 @@ function M.initTableTabMenu( parent,dir,unitLength,unit,unitClickedEvent ,unitUp
     parent:addChild(lstv)
     return lstv
 end
-function M:createSwitchTable( viewTable )
-	
-end
-function M.createSwitchList( tlNode,defaultIndex,callback )
-	local defaultIndex = 1
-	local orgNode = nil
-	local function switchEvent( index )
-		if orgNode and orgNode.normal then
-			orgNode:normal()
-		end
-		orgNode = tlNode[index]
-		if orgNode and orgNode.hightlight then
-			orgNode:hightlight()
-		end
-		if callback then
-			callback(index)
-		end		
-	end
-	for i,node in ipairs(tlNode) do
-		local orgEvent =node:getClickedEvent()
-		node:setClickedEvent(function ( node,x,y)
-			switchEvent(i)
-			orgEvent(node,x,y)
-		end)
-	end
-	switchEvent(defaultIndex)
+function M.createSwitchList( viewList,callback ,defaultIndex)
+    local defaultIndex = 1
+    local orgNode = nil
+    local tlNode = viewList:getTlCcNode()
+    local function switchEvent( index )
+        if orgNode and orgNode.normal then
+            orgNode:normal()
+        end
+        orgNode = tlNode[index]
+        if orgNode and orgNode.hightlight then
+            orgNode:hightlight()
+        end
+        if callback then
+            callback(index)
+        end     
+    end
+    viewList:setClickedEvent(function ( node,index,x,y )
+        switchEvent(index)
+    end)
+    switchEvent(defaultIndex)
 end
 return M

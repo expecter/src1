@@ -4,6 +4,11 @@ require("game.Startup")
 game = {}
 
 function game.startup()
+	--30帧
+    cc.Director:getInstance():setAnimationInterval(1/30)
+
+    --2d投影
+    cc.Director:getInstance():setProjection(0)
     cc.FileUtils:getInstance():addSearchPath("res/")
     GameSceneMgr.replaceLayer("game.gameScenes.login.loginLayer")    
     -- game.enterMainScene()

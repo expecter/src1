@@ -9,6 +9,12 @@ function M:ctor( target ,params)
 	self.target = target
 	self.fClickeEvent = nil
     self:setData(params)
+    --点击层
+    self.touchlayer = display.newLayer() 
+    self.touchlayer:addTouchEventListener( self.onTouch_, false, self.isSwallow)
+    self.touchlayer:setTouchEnabled(true)
+    self.touchlayer:setVisible(false)
+    target:addChild(self.touchlayer,M.CLickOrder)
 end
 
 function M:setData(params )
@@ -22,23 +28,18 @@ function M:binding(  )
 end
 
 function M:initView( target,params )
-	--点击层
-    local layer = display.newLayer() 
-    layer:addTouchEventListener( self.onTouch_, false, self.isSwallow)
-    layer:setTouchEnabled(true)
-    layer:setVisible(false)
-    target:addChild(layer,M.CLickOrder)
+	
 end
 
-function M:updateView(  )
-	
+function M:updateView( target )
+	self.touchlayer:setContentSize(target:getContentSize())
 end
 --localFunc
 function M:onTouch( event, x, y )
 	local visiblehelper
     visiblehelper = function(node)
         if node == nil then return true end
-        if not node:isVisible() then return false end
+        if not node:isVisible() then print("node is not visible") return false end
         local parent = node:getParent()
         return visiblehelper(parent)
     end
@@ -66,7 +67,6 @@ function M:setScaleEffect( offset )
 end
 function M:onClick(x,y)
     local fClickeEvent = self.fClickeEvent
-
     if not fClickeEvent then return end
     local pos = self.target:convertToNodeSpace(cc.p(x,y))
     local size = self.target:getContentSize()
@@ -83,14 +83,14 @@ function M:isInRect( x,y )
     end
 end
 --exportFunc
-function M:setClickedEvent( fClickedEvent )
+function M:setClickedEvent(target, fClickedEvent )
 	self.fClickeEvent = fClickedEvent
 end
 function M:getClickedEvent(  )
     return self.fClickeEvent
 end
 function M:bindFunc( target )
-    target:bindMethod(self,"initView")
+    target:bindMethod(self,"updateView")
     -- target:bindOnceMethod(self,"setClickedEvent")
 	target:bindOnceMethod(self,"setClickedEvent")
     target:bindOnceMethod(self,"getClickedEvent")

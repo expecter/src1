@@ -4,10 +4,6 @@
 --
 local component = require("game.component.component")
 local M = {}
-local compList = {
-	ClickComponent=1,
-	DrawComponent=2,
-}
 
 function M.createComponent(componentName,target,params)
     local ok,class = pcall(function (  )
