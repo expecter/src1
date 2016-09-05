@@ -3,25 +3,7 @@
 -- Date: 2016-08-17 23:05:29
 --
 local M = {}
--- 创建线性列表或滚动列表
-function M.createViewList(parent, isMovable, dir, padding, unit, unitPadding, align)
-    isMovable = isMovable~=false --默认true
-    local cls = view.ViewList
-    
-    local size = parent:getContentSize()
-    local lstv = cls.new{
-        size = size,
-        dir = dir,
-        padding = padding,
-        unit = unit,
-        unitPadding = unitPadding,
-        align = align,
-    }
-    lstv:setAnchorPoint(cc.p(0,0))
-    lstv.ccScrollView:setMovable(isMovable)
-    parent:addChild(lstv)
-    return lstv
-end
+
 function M.createViewTable( parent,dir,unit,unitLength,unitUpdateEvent,unitClickedEvent )
 	local lstv = view.ViewTable.new{
 		size = parent:getContentSize(),
@@ -121,5 +103,24 @@ function M.createSwitchList( viewList,callback ,defaultIndex)
         switchEvent(index)
     end)
     switchEvent(defaultIndex)
+end
+-- 创建线性列表或滚动列表
+function M.createViewList(parent, isMovable, dir, padding, unit, unitPadding, align)
+    isMovable = isMovable~=false --默认true
+    local cls = view.ViewList
+    
+    local size = parent:getContentSize()
+    local lstv = cls.new{
+        size = size,
+        dir = dir,
+        padding = padding,
+        unit = unit,
+        unitPadding = unitPadding,
+        align = align,
+    }
+    lstv:setAnchorPoint(cc.p(0,0))
+    lstv.ccScrollView:setMovable(isMovable)
+    parent:addChild(lstv)
+    return lstv
 end
 return M

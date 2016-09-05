@@ -21,6 +21,7 @@ local M = {
 			component = {
 				owner = {},
 				-- clickevent = {ontouch = "onClick"},
+				viewList = {},
 			},
 			cc = {
 				contentsize = {width = 320,height = 280},
