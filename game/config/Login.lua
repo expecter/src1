@@ -7,26 +7,29 @@ local M = {
 	ctor = "GameNode",
 	component = {
 		owner = {},
-		ClickComponent = {},
+		-- ClickComponent = {},
 		DrawComponent = {},
 	},
 	cc = {
-		contentsize = {width = 320,height = 280},
-		AnchPos = {x = 0.5,y = 0.5},
-		pos = {x =460,y = 320},
+		contentsize = {width = 1136,height = 960},
+		AnchPos = {x = 0,y = 0},
+		pos = {x =0,y = 0},
 	},
 	children = {
 		{
 			ctor = "GameNode",
+			name = "child1",
 			component = {
 				owner = {},
 				-- clickevent = {ontouch = "onClick"},
-				viewList = {},
+				
+				ViewListComponent = {tlData = {{name = "步兵",tag = 10001},{name = "弓兵",tag = 10101},{name = "骑兵",tag = 10201},{name = "器械",tag = 10302}}},
+				-- DrawComponent = {},
 			},
 			cc = {
-				contentsize = {width = 320,height = 280},
-				AnchPos = {x = 0.5,y = 0.5},
-				pos = {x =460,y = 320},
+				contentsize = {width = 600,height = 100},
+				AnchPos = {x = 0,y = 0},
+				pos = {x =360,y = 320},
 			}
 		},
 		-- {
@@ -42,24 +45,24 @@ local M = {
 		-- 		pos = {x =160,y = 320},
 		-- 	}
 		-- },
-		{
-			ctor = "sprite",
-			name = "sprite1",
-			cc = {
-				contentsize = {width = 120,height = 280},
-				AnchPos = {x = 0.5,y = 0.5},
-				pos = {x =230,y = 320},
-			},
-		},
-		{
-			ctor = "label",
-			name = "label1",
-			cc = {
-				contentsize = {width = 120,height = 280},
-				AnchPos = {x = 0.5,y = 0.5},
-				pos = {x =260,y = 320},
-			},
-		},
+		-- {
+		-- 	ctor = "sprite",
+		-- 	name = "sprite1",
+		-- 	cc = {
+		-- 		contentsize = {width = 120,height = 280},
+		-- 		AnchPos = {x = 0.5,y = 0.5},
+		-- 		pos = {x =230,y = 320},
+		-- 	},
+		-- },
+		-- {
+		-- 	ctor = "label",
+		-- 	name = "label1",
+		-- 	cc = {
+		-- 		contentsize = {width = 120,height = 280},
+		-- 		AnchPos = {x = 0.5,y = 0.5},
+		-- 		pos = {x =260,y = 320},
+		-- 	},
+		-- },
 	},
 }
 return M
