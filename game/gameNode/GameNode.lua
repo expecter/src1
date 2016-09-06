@@ -24,24 +24,44 @@ function M:ctor( params )
 		end
 	end
 	
-	self:initView()
+	-- self:initView()
 	--自动回调更新参数
-	self:addObserver(self,M.NODE_SETDATA,function ( params )
-		if params then
-			if params.owner then
-				self:setData(params.owner)
-				self:updateView()
-			end			
-			for componentName,var in pairs(params) do			
-				if self.components[componentName] then
-					self.components[componentName]:setData(var)
-					if DEFAULT_TRUE(var.isUpdate) then
-						self.components[componentName]:updateView()
-					end					
+	
+end
+function M:getTlInitView(  )
+	return {
+		function (  )
+			self:initView()
+		end,
+	}
+end
+function M:getTlOnEnter(  )
+	return {
+		function (  )
+			self:addObserver(self,M.NODE_SETDATA,function ( params )
+				if params then
+					if params.owner then
+						self:setData(params.owner)
+						self:updateView()
+					end			
+					for componentName,var in pairs(params) do			
+						if self.components[componentName] then
+							self.components[componentName]:setData(var)
+							if DEFAULT_TRUE(var.isUpdate) then
+								self.components[componentName]:updateView()
+							end					
+						end
+					end
 				end
-			end
+			end)
 		end
-	end)
+	}
+end
+function M:getTlOnExit(  )
+	
+end
+function M:getTlReleaseView(  )
+	
 end
 --componentFunc
 function M:setData( params )
@@ -60,11 +80,7 @@ function M:exitView(  )
 end
 function M:addComponent( componentName,params )
 	if not self.components[componentName] then
-		self.components[componentName] = ComponentFactory.createComponent(componentName,self,params)
-		-- if self.components[componentName].setData then
-		-- 	self.components[componentName]:setData(params)
-		-- end		
-		-- self:addInFunc(self.components[componentName])	
+		self.components[componentName] = ComponentFactory.createComponent(componentName,self,params)	
 		if self.components[componentName].bindFunc then
 			self.components[componentName]:bindFunc(self)
 		end

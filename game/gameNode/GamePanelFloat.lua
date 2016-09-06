@@ -15,7 +15,6 @@ end
 function M:getFloatNode() end
 
 function M:onTouch(event, x, y)
-    dump("AAAAfff")
     if event == "began" then   
         
         -- if not self:isready() then

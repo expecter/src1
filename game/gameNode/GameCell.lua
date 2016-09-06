@@ -19,6 +19,12 @@ function M:ctor(params)
     self:setContentSize(154, 56)
     M.super.ctor(self,InitComponent)    
     self:setClickedEvent(handler(self,self.onTouch))
+    self.viewSprite = display.newSprite("img_btn_gray_2_s.png")
+	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
+	self:addChild(self.viewSprite)
+	self.label = display.newTTFLabel{text=self.name,size=30}
+    self:addChild(self.label,1)
+    self.label:setPosition(self:getCenterPosition())
 end
 function M:setData( params )
 	self.name = params.name or ""

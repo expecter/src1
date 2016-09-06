@@ -29,24 +29,24 @@ end
 --     --function(self, fCallback) end,
 --     --function(self, fCallback) end,
 -- }
-function M:getTlInitView()
-    return {}
-end
+-- function M:getTlInitView()
+--     return {}
+-- end
 
---销毁函数队列
-function M:getTlReleaseView()
-    return {}
-end
+-- --销毁函数队列
+-- function M:getTlReleaseView()
+--     return {}
+-- end
 
--- -- onEnter函数队列
-function M:getTlOnEnter()
-    return {}
-end
+-- -- -- onEnter函数队列
+-- function M:getTlOnEnter()
+--     return {}
+-- end
 
--- -- onExit函数队列
-function M:getTlOnExit()
-    return {}
-end
+-- -- -- onExit函数队列
+-- function M:getTlOnExit()
+--     return {}
+-- end
 
 --- 子类调用setTouchEnabled(true) 并重写onTouch方法实现触摸事件分发
 function M:onTouch(event, x, y)
