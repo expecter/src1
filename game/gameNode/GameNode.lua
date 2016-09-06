@@ -16,12 +16,14 @@ function M:ctor( params )
 	self.components = {}
 
 	table.merge(InitComponent,params)
+	self:setData(params and params.owner or {})
+	params.owner = nil
 	for componentName,var in pairs(InitComponent) do
 		if ComponentFactory.hasComponent(componentName) then
 			self:addComponent(componentName,var)
 		end
 	end
-	self:setData(params and params.owner or {})
+	
 	self:initView()
 	--自动回调更新参数
 	self:addObserver(self,M.NODE_SETDATA,function ( params )

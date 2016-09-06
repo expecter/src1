@@ -96,18 +96,18 @@ function M:createModelList(  )
     local viewlist = UICommon.createViewList(self)
     viewlist:setTlCcNode(tlNode)
     viewlist:setPosition(60,550)
-    -- UICommon.createSwitchList(viewlist,function ( index )
-    --     self.armyData_ = ref.army.getRef{refId=tlData[index].tag}
-    --     FightMgr.initFightNpcPlist(self.armyData_.ani)        
-    --     if not self.soldiersSprite then
-    --         local fileName=FightAnimationMgr.getSoldiersSpriteFile(self.armyData_.ani,ANI_TYPE.stanby)
-    --         self.soldiersSprite=display.newSprite("#"..fileName)
-    --         self.soldiersSprite:setAnchorPoint(cc.p(0.5,0))
-    --         self.soldiersSprite:setPosition(display.cx,200)
-    --         self:addChild(self.soldiersSprite)
-    --     end
-    --     self:playStandbAnimate()
-    -- end,1)
+    UICommon.createSwitchList(viewlist,function ( index )
+        self.armyData_ = ref.army.getRef{refId=tlData[index].tag}
+        FightMgr.initFightNpcPlist(self.armyData_.ani)        
+        if not self.soldiersSprite then
+            local fileName=FightAnimationMgr.getSoldiersSpriteFile(self.armyData_.ani,ANI_TYPE.stanby)
+            self.soldiersSprite=display.newSprite("#"..fileName)
+            self.soldiersSprite:setAnchorPoint(cc.p(0.5,0))
+            self.soldiersSprite:setPosition(display.cx,200)
+            self:addChild(self.soldiersSprite)
+        end
+        self:playStandbAnimate()
+    end,1)
 end
 function M:createActionList(  )    
     local tlData = {{name = "站立",tag = "playStandbAnimate"},{name = "跑动",tag = "playRunAnimate"},{name = "攻击",tag = "playAttAnimate"},{name = "受伤",tag = "playHitAnimate"}}

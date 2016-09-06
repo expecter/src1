@@ -20,13 +20,13 @@ function M:setData( params )
 end
 
 function M:initView(target )
-	self.drawNode = display.newPolygon(self:initPoints(), {fillColor = cc.c4f(0,0,0,1), borderColor = self.borderColor, borderWidth = 0.5})
+	self.drawNode = display.newPolygon(self:initPoints(), {fillColor = cc.c4f(0,0,0,0), borderColor = self.borderColor, borderWidth = 0.5})
     self.target:addChild(self.drawNode)
 end
 
 function M:updateView( target )
 	self.drawNode:clear()
-	display.newPolygon(self:initPoints(), {fillColor = cc.c4f(0,0,0,1), borderColor = self.borderColor, borderWidth = 0.5},self.drawNode)
+	display.newPolygon(self:initPoints(), {fillColor = cc.c4f(0,0,0,0), borderColor = self.borderColor, borderWidth = 0.5},self.drawNode)
 end
 function M:initPoints(  )
 	local width = self.target:getContentSize().width
