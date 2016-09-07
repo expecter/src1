@@ -27,7 +27,7 @@ function AlertTips.showTips(tipsText, showTime,color,startPoint,moveToPoint)
             owner:removeFromParent()
         end,0.5)
     end,1)
-    owner:setPosition(display.cx, display.cy)
+    -- owner:setPosition(display.cx, display.cy)
     owner.ccLabelTip:setString(tipsText)
     local textSize=owner.ccLabelTip:getContentSize()
 

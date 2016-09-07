@@ -21,71 +21,30 @@ function M:setData( params )
         self.cmdData = params
     end
 end
-
-function M:initView( params )
-    -- local node = GameNode.new({DrawComponent = {}})
-    -- node:setContentSize(320, 280)
-    -- node:setAnchorPoint(cc.p(0.5,0.5))
-    -- node:setPosition(cc.p(160,display.cy))
-    -- node:updateView()
-    -- self:addChild(node,2)
+function M:getTlInitView(  )
+    return {
+    function (  )
+        self:initLayerView()
+    end,
+}
+end
+function M:getTlOnEnter(  )
     
-    -- UICommon.createSwitchList(self,tlNode)
-    -- self:createModelList()
+end
+function M:initLayerView( params )
     self.owner = {}
     self:createLayer(map,self)
     self.owner.child1:setViewCallback(function ( data )
         -- dump(data)
-
+        -- AlertTips.showTips(data.name)
+        -- local panel = loginfloat.new()
+        -- panel:showPanel()
+        self.owner.login:switchTo(data.node)
     end)
-    -- viewlist:setPosition(60,550)
-    -- self.owner.login:setClickedEvent(function ( node,x,y )
-    --     print("AAAA",x,y)
-    -- end)
-    -- self.owner.label1:setString("hahahah")
-    -- self.owner = CCBReader.load("ccbi_world_castle")
-    -- self:addChild(self.owner)
 
-    -- node:dispatch("haha")
-    -- local orgNode = nil
-    -- local orgCmdX = nil
-    -- local viewtable = UICommon.createViewTable(node,"v",2,70,function ( viewTableUnit, unitData, unitIndex )
-    --     if not viewTableUnit.ccNode then
-    --         viewTableUnit.ccNode = GameCell.new(unitData)
-    --         viewTableUnit:addChild(viewTableUnit.ccNode)
-    --         if not orgNode then
-    --             viewTableUnit.ccNode:hightlight()
-    --             orgNode = viewTableUnit.ccNode
-    --             orgCmdX = unitData
-    --             self:updateView(unitData)
-    --         end
-    --     end
-    --     if orgCmdX~=unitData then
-    --         viewTableUnit.ccNode:normal()
-    --     else    
-    --         viewTableUnit.ccNode:hightlight()
-    --     end
-    --     viewTableUnit.ccNode:updateData(unitData)
-    --     viewTableUnit.ccNode:updateView()
-    -- end,function ( viewTableUnit, unitData, unitIndex, x, y )
-    --     if orgNode== viewTableUnit.ccNode then
-    --         return
-    --     end
-    --     orgNode:normal()
-    --     orgNode = viewTableUnit.ccNode
-    --     orgCmdX = unitData
-    --     viewTableUnit.ccNode:hightlight()
-    --     self:updateView(unitData)
-    --     local panel = require("game.panel.ViewfloatPanel").new()
-    --     panel:showPanel()
+    -- self.owner.login:setScheduleCallback(function ( time )
+    --     AlertTips.showTips(time)
     -- end)
-    -- viewtable:setTlUnitData(ref.hero.getTlRef({}))
-    -- self.ViewNode = GameNode.new({DrawComponent = {}})
-    -- self.ViewNode:setContentSize(500, 280)
-    -- self.ViewNode:setAnchorPoint(cc.p(0.5,0.5))
-    -- self.ViewNode:setPosition(cc.p(500,display.cy))
-    -- self.ViewNode:updateView()
-    -- self:addChild(self.ViewNode,2)
     -- self:createModelList()
     -- self:createActionList()
 end
@@ -163,8 +122,7 @@ function M:onTouch( event,x,y )
     -- return false
     -- self.owner.login:setPosition(x,y)
     -- self.owner.login:updateView()
-    local panel = loginfloat.new()
-        panel:showPanel()
+    
     return true
 end
 function M:createLayer( config,parent )
@@ -199,8 +157,8 @@ function M.createNode( config )
         return nil
     end
     local node = class.new(config.component)
-    local tlCmd = {"getTlInitView", "getTlOnEnter"}
-    M.loadingGameLayer(node,tlCmd)
+    -- local tlCmd = {"getTlInitView", "getTlOnEnter"}
+    -- M.loadingGameLayer(node,tlCmd)
     M.extentCcNode(node,config.cc)
     -- M.extentConfig()
     node:updateView()

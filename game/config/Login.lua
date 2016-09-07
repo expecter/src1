@@ -8,10 +8,12 @@ local M = {
 	component = {
 		owner = {},
 		-- ClickComponent = {},
+		ScheduleComponent = {},
 		DrawComponent = {},
+		ViewSwitchComponent = {tlData = {"game.gameScenes.login.TabNode1","game.gameScenes.login.TabNode2"}},
 	},
 	cc = {
-		contentsize = {width = 1136,height = 960},
+		contentsize = {width = 1136,height = 640},
 		AnchPos = {x = 0,y = 0},
 		pos = {x =0,y = 0},
 	},
@@ -23,13 +25,18 @@ local M = {
 				owner = {},
 				-- clickevent = {ontouch = "onClick"},
 				
-				ViewListComponent = {tlData = {{name = "步兵",tag = 10001},{name = "弓兵",tag = 10101},{name = "骑兵",tag = 10201},{name = "器械",tag = 10302}}},
+				ViewListComponent = {tlData = {
+				{name = "步兵",tag = 10001,node = 1},
+				{name = "弓兵",tag = 10101,node = 1},
+				{name = "骑兵",tag = 10201,node = 2},
+				{name = "器械",tag = 10302,node = 2}
+				}},
 				-- DrawComponent = {},
 			},
 			cc = {
 				contentsize = {width = 600,height = 100},
 				AnchPos = {x = 0,y = 0},
-				pos = {x =360,y = 320},
+				pos = {x =10,y = 580},
 			}
 		},
 		-- {

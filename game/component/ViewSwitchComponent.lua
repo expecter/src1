@@ -9,18 +9,22 @@ function M:ctor( target ,params)
 	self:setData(params)
 	self.lastView = nil
 	self.tlIndex = {}
+	self.tlView = {}
 end
 function M:setData(params )
-	self.tlData = params.tlData
-	self.tlView = params.tlView or {}
+	self.tlData = params.tlData or {}
 end
 function M:initView( target )
-	for i,view in ipairs(self.tlView) do
-		self:addChild(view)
+	for i,path in ipairs(self.tlData) do
+		local view = require(path).new({})
+		-- view:setAnchorPoint(cc.p(0,0))
+		view:setVisible(false)
+		table.insert(self.tlView,view)
+		target:addChild(view)
 	end	
 end
 function M:updateView( target )
-	if self.lastView.updateView then
+	if self.lastView and self.lastView.updateView then
 		self.lastView:updateView()
 	end
 end
@@ -62,5 +66,6 @@ end
 function M:bindFunc( target )
 	target:bindMethod(self,"updateView")
 	target:bindMethod(self,"initView")
+	target:bindOnceMethod(self, "switchTo")
 end
 return M
