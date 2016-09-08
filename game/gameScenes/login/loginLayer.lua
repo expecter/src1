@@ -157,24 +157,9 @@ function M.createNode( config )
         return nil
     end
     local node = class.new(config.component)
-    -- local tlCmd = {"getTlInitView", "getTlOnEnter"}
-    -- M.loadingGameLayer(node,tlCmd)
-    node:initView()
     M.extentCcNode(node,config.cc)
-    -- M.extentConfig()
-    node:updateView()
+    GameSceneMgr.loadGameNode(node)
     return node
-end
-function M.loadingGameLayer( gameLayer,tlCmd )
-    local tlFunc = {}
-    for _, cmd in ipairs(tlCmd) do
-        local tlFunc_temp = gameLayer[cmd](gameLayer)
-        if tlFunc_temp then
-            for _, func in ipairs(tlFunc_temp) do
-                func()
-            end
-        end
-    end
 end
 function M.extentCcNode( node,config )
     node:setContentSize(config.contentsize)

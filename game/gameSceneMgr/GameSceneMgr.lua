@@ -112,16 +112,20 @@ function M.loadingGameLayer(gameLayer,tlCmd)
     end
     
     if #tlFunc > 0 then
-        local GameLoading = require("game.gameSceneMgr.GameLoading")
-        GameLoading.start()
+        -- local GameLoading = require("game.gameSceneMgr.GameLoading")
+        -- GameLoading.start()
         for index, func in ipairs(tlFunc) do
             func()
-            GameLoading:setPercentage(index, #tlFunc)
+            -- GameLoading:setPercentage(index, #tlFunc)
         end
-        GameLoading.stop()
+        -- GameLoading.stop()
     end
 end
-
+function M.loadGameNode( gameNode )
+    gameNode:initView()
+    gameNode:enterView()
+    gameNode:updateView()
+end
 function M.coroutineCreate(f)
     coroutine.wrap(function()
 

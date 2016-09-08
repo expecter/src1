@@ -25,11 +25,13 @@ function M:ctor(params)
 	self.label = display.newTTFLabel{text=self.name,size=30}
     self:addChild(self.label,1)
     self.label:setPosition(self:getCenterPosition())
+    self:initView()
 end
 function M:setData( params )
 	self.name = params.name or ""
 end
 function M:initView(  )
+	-- dump("AAAAAAAAAA")
 	self.viewSprite = display.newSprite("img_btn_gray_2_s.png")
 	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
 	self:addChild(self.viewSprite)

@@ -13,8 +13,9 @@ end
 
 function M:initView(  )
 	self.viewSprite = display.newSprite("back_5.png")
-	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
 	self:setContentSize(self.viewSprite:getContentSize())
+	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
+	
 	self:addChild(self.viewSprite)
 end
 
