@@ -24,14 +24,14 @@ end
 function M:getTlInitView(  )
     return {
     function (  )
-        self:initLayerView()
+        self:initView()
     end,
 }
 end
 function M:getTlOnEnter(  )
     
 end
-function M:initLayerView( params )
+function M:initView( params )
     self.owner = {}
     self:createLayer(map,self)
     self.owner.child1:setViewCallback(function ( data )
@@ -159,6 +159,7 @@ function M.createNode( config )
     local node = class.new(config.component)
     -- local tlCmd = {"getTlInitView", "getTlOnEnter"}
     -- M.loadingGameLayer(node,tlCmd)
+    node:initView()
     M.extentCcNode(node,config.cc)
     -- M.extentConfig()
     node:updateView()

@@ -15,8 +15,8 @@ function M:setData(params )
 	self.tlData = params.tlData or {}
 end
 function M:initView( target )
-	for i,path in ipairs(self.tlData) do
-		local view = require(path).new({})
+	for i,cmdX in ipairs(self.tlData) do
+		local view = require(cmdX.path).new(cmdX.params)
 		-- view:setAnchorPoint(cc.p(0,0))
 		view:setVisible(false)
 		table.insert(self.tlView,view)

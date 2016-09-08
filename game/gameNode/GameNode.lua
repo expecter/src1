@@ -24,24 +24,40 @@ function M:ctor( params )
 		end
 	end
 	
-	self:initView()
+	-- self:initView()
 	--自动回调更新参数
-	self:addObserver(self,M.NODE_SETDATA,function ( params )
-		if params then
-			if params.owner then
-				self:setData(params.owner)
-				self:updateView()
-			end			
-			for componentName,var in pairs(params) do			
-				if self.components[componentName] then
-					self.components[componentName]:setData(var)
-					if DEFAULT_TRUE(var.isUpdate) then
-						self.components[componentName]:updateView()
-					end					
-				end
+	-- self:addObserver(self,M.NODE_SETDATA,function ( params )
+	-- 	if params then
+	-- 		if params.owner then
+	-- 			self:setData(params.owner)
+	-- 			self:updateView()
+	-- 		end			
+	-- 		for componentName,var in pairs(params) do			
+	-- 			if self.components[componentName] then
+	-- 				self.components[componentName]:setData(var)
+	-- 				if DEFAULT_TRUE(var.isUpdate) then
+	-- 					self.components[componentName]:updateView()
+	-- 				end					
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end)
+end
+function M:updateData( params )
+	if params then
+		if params.owner then
+			self:setData(params.owner)
+			self:updateView()
+		end			
+		for componentName,var in pairs(params) do			
+			if self.components[componentName] then
+				self.components[componentName]:setData(var)
+				if DEFAULT_TRUE(var.isUpdate) then
+					self.components[componentName]:updateView()
+				end					
 			end
 		end
-	end)
+	end
 end
 -- function M:getTlInitView(  )
 -- 	return {

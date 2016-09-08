@@ -4,8 +4,14 @@
 --
 local M = {}
 
-function M.extendObserver( node )
-	
+function M.extend( object,tbComp )
+	local metaTable = {}
+
+    function metaTable:__index(key)
+        self[key] = tbComp[key]
+        -- return v
+    end
+	setmetatable(object, metaTable)
 end
 
 return M

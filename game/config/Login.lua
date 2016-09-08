@@ -10,7 +10,10 @@ local M = {
 		-- ClickComponent = {},
 		ScheduleComponent = {},
 		DrawComponent = {},
-		ViewSwitchComponent = {tlData = {"game.gameScenes.login.TabNode1","game.gameScenes.login.TabNode2"}},
+		ViewSwitchComponent = {tlData = {
+		{path = ClassName.TabNode1,params = {}},
+		{path = ClassName.TabNode2,params = {}},
+		}},
 	},
 	cc = {
 		contentsize = {width = 1136,height = 640},
