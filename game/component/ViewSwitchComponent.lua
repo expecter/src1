@@ -2,6 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-08-29 23:32:42
 --
+--运用于可切换的页面和节点
 local M = class("eventComponent")
 function M:ctor( target ,params)
 	self.target = target
@@ -18,7 +19,7 @@ function M:initView( target )
 	for i,cmdX in ipairs(self.tlData) do
 		local view = require(cmdX.path).new(cmdX.params)
 		-- view:setAnchorPoint(cc.p(0,0))
-		view:setVisible(false)
+		-- view:setVisible(false)
 		table.insert(self.tlView,view)
 		target:addChild(view)
 	end	

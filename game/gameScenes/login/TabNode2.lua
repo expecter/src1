@@ -16,7 +16,9 @@ function M:initView(  )
 	self:setContentSize(self.viewSprite:getContentSize())
 	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
 	
-	self:addChild(self.viewSprite)
+	-- self:addChild(self.viewSprite)
+	self.ccScrollView = cc.ScrollView:create(cc.size(300,300),self.viewSprite)
+	self:addChild(self.ccScrollView,1)
 end
 
 return M

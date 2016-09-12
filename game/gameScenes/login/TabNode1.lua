@@ -5,18 +5,18 @@
 local M = class(..., GameNode)
 
 function M:ctor(  )
-	M.super.ctor(self,{})
+	self.viewSprite = display.newSprite("back_1.png")
+	self.viewSprite:setAnchorPoint(cc.p(0,0))
+	self:setContentSize(self.viewSprite:getContentSize())
+	dump(self.viewSprite:getContentSize())
+	-- self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
+	M.super.ctor(self,{ScrollViewComponent = {viewsize = self.viewSprite:getContentSize(),viewNode = self.viewSprite}})
 end
 function M:setData(  )
 	
 end
 
 function M:initView(  )
-	self.viewSprite = display.newSprite("back_1.png")
-	self:setContentSize(self.viewSprite:getContentSize())
-	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
-	
-	self:addChild(self.viewSprite)
 end
 
 return M
