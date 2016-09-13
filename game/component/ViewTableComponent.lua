@@ -30,6 +30,7 @@ function M:updateView( target )
     viewtable:setTlUnitData(self.tlData)
 end
 function M:createViewNode( params )
+	
 	return GameCell.new(params)
 end
 function M:onClick( node,cmdX )

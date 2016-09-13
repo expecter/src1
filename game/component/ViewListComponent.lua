@@ -29,7 +29,9 @@ function M:updateView( target )
 	end	
 	local tlNode = {}
 	for k,v in ipairs(self.tlData) do
-        table.insert(tlNode,self.cellMode({owner = v}))
+		local node = self.cellMode({owner = v})
+		node:initView()
+        table.insert(tlNode,node)
     end
 	self.viewlist:setTlCcNode(tlNode)
 	if self.isTapMenu then

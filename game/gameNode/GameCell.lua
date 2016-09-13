@@ -25,7 +25,7 @@ function M:ctor(params)
 	self.label = display.newTTFLabel{text=self.name,size=30}
     self:addChild(self.label,1)
     self.label:setPosition(self:getCenterPosition())
-    self:initView()
+    -- self:initView()
 end
 function M:setData( params )
 	self.name = params.name or ""

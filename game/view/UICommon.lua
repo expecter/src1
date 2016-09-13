@@ -40,6 +40,9 @@ function M.initTableTabMenu( parent,dir,unitLength,unit,unitClickedEvent ,unitUp
             if unitUpdateEvent then
                 if not viewTableUnit.ccNode then
                     viewTableUnit.ccNode = unitUpdateEvent(unitData)
+                    if viewTableUnit.ccNode.initView then
+                        viewTableUnit.ccNode:initView()
+                    end
                     viewTableUnit:addChild(viewTableUnit.ccNode)
                     if unitIndex == orgindex then
                         orgNode = viewTableUnit.ccNode

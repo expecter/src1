@@ -5,12 +5,10 @@
 local M = class(..., GameNode)
 
 function M:ctor(  )
-	self.viewSprite = display.newSprite("back_1.png")
-	self.viewSprite:setAnchorPoint(cc.p(0,0))
-	self:setContentSize(self.viewSprite:getContentSize())
-	dump(self.viewSprite:getContentSize())
+	self.owner = CCBReader.load("ccbi_capital.ccbi")
+	-- self:setContentSize(self.viewSprite:getContentSize())
 	-- self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
-	M.super.ctor(self,{ScrollViewComponent = {viewsize = self.viewSprite:getContentSize(),viewNode = self.viewSprite}})
+	M.super.ctor(self,{ScrollViewComponent = {viewsize = cc.size(display.width,display.height),viewNode = self.owner}})
 end
 function M:setData(  )
 	

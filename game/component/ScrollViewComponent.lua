@@ -26,7 +26,7 @@ function M:initView( target )
     -- self.ccScrollView:setMinScale(0.7)
     -- self.ccScrollView:setZoomScaleInDuration(0.7,0.5)
     -- -- 设置弹回false
-    -- self.ccScrollView:setBounceable(true)
+    self.ccScrollView:setBounceable(false)
     -- self.ccScrollView:setDelegate()
     -- -- self.ccScrollView:setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)
     -- -- 监听滚动事件
