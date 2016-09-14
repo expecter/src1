@@ -34,7 +34,7 @@ function M:getTlView()
 	return self.tlView
 end
 
-function M:switchTo( target,index )
+function M:switchTo( target,index,params )
 	local isInit = false
 	for _,_index in ipairs(self.tlIndex) do
 		if _index == index then 
@@ -55,12 +55,12 @@ function M:switchTo( target,index )
 		--隐藏上一标签页显示
 		self.lastView:setVisible(false)
 		if self.lastView.exitView then
-        	self.lastView:exitView()
+        	self.lastView:exitView(params)
     	end
 	end
 	self.lastView = self.tlView[index]
 	if self.tlView[index].enterView then
-        self.tlView[index]:enterView()
+        self.tlView[index]:enterView(params)
     end
     self.lastView:setVisible(true)
 end

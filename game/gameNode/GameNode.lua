@@ -99,14 +99,17 @@ function M:setData( params )
 end
 function M:binding(  )
 end
-function M:initView(  )
+function M:initView(  ) 
 end
-function M:updateView( params )
+function M:updateView( params ) 
 end
-function M:enterView(  )
+function M:enterView(  ) --对应onenter
 	
 end
-function M:exitView(  )
+function M:exitView(  ) --对应onexit
+	
+end
+function M:releaseView(  )
 	
 end
 function M:addComponent( componentName,params )

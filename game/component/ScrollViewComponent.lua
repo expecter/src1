@@ -27,14 +27,14 @@ function M:initView( target )
     -- self.ccScrollView:setZoomScaleInDuration(0.7,0.5)
     -- -- 设置弹回false
     self.ccScrollView:setBounceable(false)
-    -- self.ccScrollView:setDelegate()
+    self.ccScrollView:setDelegate()
     -- -- self.ccScrollView:setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)
     -- -- 监听滚动事件
-    -- self.ccScrollView:registerScriptHandler(
-    --     function(view)
-    --         self:onScroll(view)
-    --     end
-    --     , cc.SCROLLVIEW_SCRIPT_SCROLL)
+    self.ccScrollView:registerScriptHandler(
+        function(view)
+            self:onScroll(view)
+        end
+        , cc.SCROLLVIEW_SCRIPT_SCROLL)
     
     -- ScriptHandlerMgr:getInstance():registerScriptHandler(self.ccScrollView,
     --     function() 
@@ -53,6 +53,9 @@ function M:updateView( target )
 	--     self.ccScrollView:setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)
 	--     target:addChild(self.ccScrollView)
 	-- end	
+end
+function M:moveToPoints( x,y )
+    self.ccScrollView:setContentOffset(cc.p(-x,-y))
 end
 function M:setViewCallback( target,callback )
 	self.callback_ = callback

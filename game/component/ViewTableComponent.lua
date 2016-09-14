@@ -26,7 +26,7 @@ function M:updateView( target )
 	if not self.viewlist then
 		self.viewlist = UICommon.createViewList(target,self.isMovable)
 	end	
-	self.viewtable = UICommon.initTableTabMenu(target,"h",2,70,handler(self,self.onClick),handler(self,self.createViewNode),true)
+	self.viewtable = UICommon.initTableTabMenu(target,"h",2,70,handler(self,self.onClick),self.cellMode,true)
     viewtable:setTlUnitData(self.tlData)
 end
 function M:createViewNode( params )
