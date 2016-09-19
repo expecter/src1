@@ -142,6 +142,42 @@ function M.coroutineCreate(f)
 
     end)()
 end
+
+function M.createGameLayer( config,parent )
+    local owner = M.createNode(config)
+    for i,con in ipairs(config.children or {}) do        
+        owner:addChild(M.createGameLayer(con))
+    end
+    return owner
+end
+function M.createGameNode( config )
+    if config.ctor == "sprite" then
+        local node = display.newSprite("star.png")
+        M.extentCcNode(node,config.cc)
+        return node
+    end
+    if config.ctor == "label" then
+        local node =display.newTTFLabel({text = "loading...",
+            size = 30,})
+        M.extentCcNode(node,config.cc)
+        return node
+    end
+    local ok,class = pcall(function (  )
+        return node[config.ctor]
+    end)
+    if not ok then
+        return nil
+    end
+    local node = class.new(config.component)
+    M.extentCcNode(node,config.cc)
+    M.loadGameNode(node)
+    return node
+end
+function M.extentCcNode( node,config )
+    node:setContentSize(config.contentsize)
+    node:setAnchorPoint(config.AnchPos)
+    node:setPosition(cc.p(config.pos))
+end
 local index=1
 --replace Layer
 function M.replaceLayer(clsGameLayer, userdata, fCallback)
@@ -151,7 +187,8 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         M.clearLayer()
 
         --创建新的
-        local gameLayer = require(clsGameLayer).new(userdata)
+        -- local gameLayer = require(clsGameLayer).new(userdata)
+        local gameLayer = M.createGameLayer()
         local gameLayerWrap = createGameLayerWrap(gameLayer)
         
         --缓存
