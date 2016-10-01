@@ -144,7 +144,7 @@ function M.coroutineCreate(f)
 end
 
 function M.createGameLayer( config,parent )
-    local owner = M.createNode(config)
+    local owner = M.createGameNode(config)
     for i,con in ipairs(config.children or {}) do        
         owner:addChild(M.createGameLayer(con))
     end
@@ -187,8 +187,8 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         M.clearLayer()
 
         --创建新的
-        -- local gameLayer = require(clsGameLayer).new(userdata)
-        local gameLayer = M.createGameLayer()
+        local gameLayer = require(clsGameLayer).new(userdata)
+        -- local gameLayer = M.createGameLayer()
         local gameLayerWrap = createGameLayerWrap(gameLayer)
         
         --缓存

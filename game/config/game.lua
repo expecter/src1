@@ -28,23 +28,23 @@ local M = {
 		__id__ = 2,
 		_parent = {__id__ = 1},
 	},
+	-- {
+	-- 	__type__ = "cc_Component",
+	-- 	_name = "",
+	-- 	__id__ = 3,
+	-- 	_object = {__id__ = 1},
+	-- 	text = "1111111",
+	-- 	label = {__id__ = 4},
+	-- },
 	{
-		__type__ = "cc_Component",
+		__type__ = "cc_node",
 		_name = "",
 		__id__ = 3,
-		_object = {__id__ = 1},
-		text = "1111111",
-		label = {__id__ = 4},
 	},
 	{
 		__type__ = "cc_node",
 		_name = "",
 		__id__ = 4,
-	},
-	{
-		__type__ = "cc_node",
-		_name = "",
-		__id__ = 2,
 		_parent = {__id__ = 1},
 		_components = {
 			{
@@ -52,11 +52,11 @@ local M = {
 			}
 		},
 	},
-	{
-		__type__ = "cc.Sprite",
-		__id__ = 2,
-		_spriteFrame = "path",
-	},
+	-- {
+	-- 	__type__ = "cc.Sprite",
+	-- 	__id__ = 2,
+	-- 	_spriteFrame = "path",
+	-- },
 }
 
 return M
