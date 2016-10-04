@@ -9,7 +9,8 @@ function M.createNode( params )
 	local _color = params._color or cc.c3b(255,255,255)
 	local node = display.newNode()
 	function node:updateView(  )
-		self:setOpacity(opacity)
+		
+		self:setOpacity(_opacity)
 	end
 	node:updateView()
 	return node

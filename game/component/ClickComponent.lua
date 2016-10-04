@@ -14,7 +14,7 @@ function M:ctor( target ,params)
     self.touchlayer:addTouchEventListener( self.onTouch_, false, self.isSwallow)
     self.touchlayer:setTouchEnabled(true)
     self.touchlayer:setVisible(false)
-    target:addChild(self.touchlayer,M.CLickOrder)
+    target:addChild(self.touchlayer)
 end
 
 function M:setData(params )

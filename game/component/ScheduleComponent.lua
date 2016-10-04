@@ -23,8 +23,6 @@ function M:setScheduleCallback( target,callback )
 	self.callback = callback
 end
 function M:bindFunc( target )
-	target:bindMethod(self,"updateView")
-	target:bindMethod(self,"initView")
 	target:bindOnceMethod(self, "setScheduleCallback")
 end
 return M

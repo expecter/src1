@@ -11,8 +11,10 @@ local M = {
 		ScheduleComponent = {},
 		DrawComponent = {},
 		ViewSwitchComponent = {tlData = {
-		{path = ClassName.TabNode1,params = {}},
-		{path = ClassName.TabNode2,params = {}},
+		{path = "game.config.TabNode1",params = {}},
+		{path = "game.config.TabNode1",params = {}},
+		{path = "game.config.TabNode1",params = {}},
+		{path = "game.config.TabNode1",params = {}},
 		}},
 	},
 	cc = {
@@ -31,8 +33,8 @@ local M = {
 				ViewListComponent = {tlData = {
 				{name = "步兵",tag = 10001,node = 1},
 				{name = "弓兵",tag = 10101,node = 1},
-				{name = "骑兵",tag = 10201,node = 2},
-				{name = "器械",tag = 10302,node = 2}
+				-- {name = "骑兵",tag = 10201,node = 2},
+				-- {name = "器械",tag = 10302,node = 2}
 				}},
 				-- DrawComponent = {},
 			},

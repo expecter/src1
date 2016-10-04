@@ -14,15 +14,18 @@ function M:ctor( target ,params)
 end
 function M:setData(params )
 	self.tlData = params.tlData or {}
+	self.defaultIndex = params.defaultIndex or 1
 end
 function M:initView( target )
 	for i,cmdX in ipairs(self.tlData) do
-		local view = require(cmdX.path).new(cmdX.params)
+		local view = GameSceneMgr.createGameNode(clone(require(cmdX.path)),false)
 		-- view:setAnchorPoint(cc.p(0,0))
-		-- view:setVisible(false)
+		view:setVisible(false)
 		table.insert(self.tlView,view)
 		target:addChild(view)
-	end	
+	end
+	print("switchTo")
+	target:switchTo(self.defaultIndex)
 end
 function M:updateView( target )
 	if self.lastView and self.lastView.updateView then
@@ -65,8 +68,6 @@ function M:switchTo( target,index,params )
     self.lastView:setVisible(true)
 end
 function M:bindFunc( target )
-	target:bindMethod(self,"updateView")
-	target:bindMethod(self,"initView")
 	target:bindOnceMethod(self, "switchTo")
 end
 return M

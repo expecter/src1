@@ -1,5 +1,5 @@
 local M = class(..., GameLayer)
-local map = require("game.config.Login")
+local map = require("game.config.modelNode")
 local socket = require "socket"
 FightMgr = require("game.gameScenes.fight.FightMgr")
 FightAnimationMgr = require("game.gameScenes.fight.FightAnimationMgr")
@@ -37,8 +37,10 @@ function M:initView( params )
     -- self.owner.child1:setViewCallback(function ( data )
     --     self.owner.login:switchTo(data.node)
     -- end)
-    self:createGameNode()
+    
+    self:createGameNode(map)
 end
+
 -- function M:createGameNode( config )
 --     local nodeOwner = {}
 --     local comOwner = {}

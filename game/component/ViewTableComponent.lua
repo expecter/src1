@@ -41,8 +41,6 @@ function M:setViewCallback( target,callback )
 	self.callback_(self.tlData[self.defaultIndex],self.defaultIndex)
 end
 function M:bindFunc( target )
-	target:bindMethod(self,"updateView")
-	target:bindMethod(self,"initView")
 	target:bindOnceMethod(self,"setViewCallback")
 end
 return M

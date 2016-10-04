@@ -33,7 +33,5 @@ end
 function M:updateView( target )
 end
 function M:bindFunc( target )
-	target:bindMethod(self,"updateView")
-	target:bindMethod(self,"initView")
 end
 return M

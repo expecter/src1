@@ -6,7 +6,11 @@ local M = class("eventComponent")
 function M:ctor( target ,params)
 	self.target = target
 	self.cellMode = params.cellMode or function ( params )
-		return GameCell.new(params)
+		local config = GameSceneMgr.updateConfig("game.config.gameCell",{
+			_type = "cc_label",
+			text = params.name
+		})
+		return GameSceneMgr.createGameNode(config)
 	end
 	self.isMovable = params.isMovable
 	self.isTapMenu = DEFAULT_TRUE(params.isTapMenu)
@@ -26,11 +30,11 @@ end
 function M:updateView( target )
 	if not self.viewlist then
 		self.viewlist = UICommon.createViewList(target,self.isMovable)
-	end	
+	end
 	local tlNode = {}
 	for k,v in ipairs(self.tlData) do
-		local node = self.cellMode({owner = v})
-		node:initView()
+		local node = self.cellMode(v)
+		-- node:setText(v.name)
         table.insert(tlNode,node)
     end
 	self.viewlist:setTlCcNode(tlNode)
@@ -59,8 +63,6 @@ function M:setViewCallback( target,callback )
 	self.callback_(self.tlData[self.defaultIndex],self.defaultIndex)
 end
 function M:bindFunc( target )
-	target:bindMethod(self,"updateView")
-	target:bindMethod(self,"initView")
 	target:bindOnceMethod(self,"setViewCallback")
 end
 return M

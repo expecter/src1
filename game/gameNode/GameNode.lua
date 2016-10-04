@@ -10,115 +10,92 @@ end)
 M.NODE_SETDATA = "nodesetdata"
 M.NODE_CLICK = "nodeclick"
 function M:ctor( params )
-	local InitComponent = {
-		ObserveComponent = {},
-	}
 	self.components = {}
-
-	table.merge(InitComponent,params)
-	self:setData(params and params.owner or {})
-	params.owner = nil
-	for componentName,var in pairs(InitComponent) do
-		if ComponentFactory.hasComponent(componentName) then
-			self:addComponent(componentName,var)
-		end
-	end
-	
-	-- self:initView()
-	--自动回调更新参数
-	-- self:addObserver(self,M.NODE_SETDATA,function ( params )
-	-- 	if params then
-	-- 		if params.owner then
-	-- 			self:setData(params.owner)
-	-- 			self:updateView()
-	-- 		end			
-	-- 		for componentName,var in pairs(params) do			
-	-- 			if self.components[componentName] then
-	-- 				self.components[componentName]:setData(var)
-	-- 				if DEFAULT_TRUE(var.isUpdate) then
-	-- 					self.components[componentName]:updateView()
-	-- 				end					
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end)
-end
-function M:updateData( params )
-	if params then
-		if params.owner then
-			self:setData(params.owner)
-			self:updateView()
-		end			
-		for componentName,var in pairs(params) do			
-			if self.components[componentName] then
-				self.components[componentName]:setData(var)
-				if DEFAULT_TRUE(var.isUpdate) then
-					self.components[componentName]:updateView()
-				end					
+	self.TlComName = {}
+	self._name = params._name or ""
+	if params and params._component then
+		for i,comp in ipairs(params._component) do
+			if ComponentFactory.hasComponent(comp._type) then
+				self:addComponent(comp)
 			end
 		end
 	end
-end
--- function M:getTlInitView(  )
--- 	return {
--- 		function (  )
--- 			self:initView()
--- 		end,
--- 	}
--- end
--- function M:getTlOnEnter(  )
--- 	return {
--- 		function (  )
--- 			self:addObserver(self,M.NODE_SETDATA,function ( params )
--- 				if params then
--- 					if params.owner then
--- 						self:setData(params.owner)
--- 						self:updateView()
--- 					end			
--- 					for componentName,var in pairs(params) do			
--- 						if self.components[componentName] then
--- 							self.components[componentName]:setData(var)
--- 							if DEFAULT_TRUE(var.isUpdate) then
--- 								self.components[componentName]:updateView()
--- 							end					
--- 						end
--- 					end
--- 				end
--- 			end)
--- 		end
--- 	}
--- end
--- function M:getTlOnExit(  )
-	
--- end
--- function M:getTlReleaseView(  )
-	
--- end
---componentFunc
-function M:setData( params )
-end
-function M:binding(  )
-end
-function M:initView(  ) 
-end
-function M:updateView( params ) 
-end
-function M:enterView(  ) --对应onenter
 	
 end
-function M:exitView(  ) --对应onexit
-	
+function M:getName(  )
+	return self._name
 end
-function M:releaseView(  )
-	
+
+function M:getTlInitView(  )
+	return {
+		function (  )
+			self:initView()
+		end	
+	}
 end
-function M:addComponent( componentName,params )
-	if not self.components[componentName] then
-		self.components[componentName] = ComponentFactory.createComponent(componentName,self,params)	
-		if self.components[componentName].bindFunc then
-			self.components[componentName]:bindFunc(self)
+function M:getTlOnEnter(  )
+	return {
+		function (  )
+			self:enterView()
+		end	
+	}
+end
+function M:getTlOnExit(  )
+	return {
+		function (  )
+			self:exitView()
+		end	
+	}
+end
+function M:tlReleaseView(  )
+	return {
+		function (  )
+			self:releaseView()
+		end	
+	}
+end
+
+function M:initView(  )
+	for k,com in ipairs(self.components) do
+		if com.initView then
+			com:initView(self)
 		end
 	end
+end
+function M:updateView( )
+	for k,com in ipairs(self.components) do
+		if com.updateView then
+			com:updateView(self)
+		end		
+	end
+end
+function M:enterView(  ) --对应onenter
+	for k,com in ipairs(self.components) do
+		if com.enterView then
+			com:enterView(self)
+		end		
+	end
+end
+function M:exitView(  ) --对应onexit
+	for k,com in ipairs(self.components) do
+		if com.exitView then
+			com:exitView(self)
+		end
+		
+	end
+end
+function M:releaseView(  )
+	for k,com in ipairs(self.components) do
+		if com.releaseView then
+			com:releaseView(self)
+		end
+	end
+end
+function M:addComponent( component )
+	local comName = component._type or ""
+	table.insert(self.components,ComponentFactory.createComponent(comName,self,component))
+	self.TlComName[comName] = self.components[#self.components]
+	self.TlComName[comName]:bindFunc(self)
 end
 -- function M:updateData( params )
 -- 	self:setData(params)
@@ -137,6 +114,35 @@ end
 -- 		end
 -- 	end
 -- end
+
+function M:getComponent( componentName )
+	return self.TlComName[componentName]
+end
+function M:getAllComponent(  )
+	return self.TlComName
+end
+function M:setAllGameNode( tlNode )
+	self.AllgameObject = tlNode
+end
+--根据name获取gamenode
+function M:getGameNode( name )
+	for i,node in ipairs(self.AllgameObject) do
+		if name == node:getName() then
+			return node
+		end
+	end
+	return nil
+end
+function M:bindOnceMethod( component,methodName )
+	if self[methodName] then
+		dump("Object has Method "..methodName)
+		return
+	end
+	-- self[methodName] = function ( target,... )
+	-- 	return component[methodName](component,...)
+	-- end
+	self:bindMethod(component,methodName)
+end
 function M:bindMethod( component,methodName )
 	local originMethod = self[methodName]
     if not originMethod then
@@ -150,18 +156,5 @@ function M:bindMethod( component,methodName )
     	return component[methodName](component,...)
     end
     self[methodName] = newMethod
-end
-function M:getComponent( componentName )
-	return self.components[componentName]
-end
-function M:bindOnceMethod( component,methodName )
-	if self[methodName] then
-		dump("Object has Method "..methodName)
-		return
-	end
-	-- self[methodName] = function ( target,... )
-	-- 	return component[methodName](component,...)
-	-- end
-	self:bindMethod(component,methodName)
 end
 return M

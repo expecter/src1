@@ -2,7 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("eventComponent")
+local M = class("ScrollViewComponent")
 function M:ctor( target ,params)
 	self.target = target
 	self:setData(params)
@@ -16,9 +16,9 @@ end
 -- end
 --exportFunc
 function M:initView( target )
-	-- self.viewlist = UICommon.createViewList(target,self.isMovable)
-	self.ccScrollView = cc.ScrollView:create(self.viewsize,self.viewNode)
-	target:addChild(self.ccScrollView,1)
+    local node = GameSceneMgr.createGameNode(self.viewNode)
+	self.ccScrollView = cc.ScrollView:create(self.viewsize,node)
+	target:addChild(self.ccScrollView)
     -- self.ccScrollView:setAnchorPoint(cc.p(0.5, 0.5))
     -- self.ccScrollView:setPosition(cc.p(target:getCenterPosition()))
     -- self.ccScrollView:setScale(1)
@@ -61,8 +61,6 @@ function M:setViewCallback( target,callback )
 	self.callback_ = callback
 end
 function M:bindFunc( target )
-	target:bindMethod(self,"updateView")
-	target:bindMethod(self,"initView")
 	target:bindOnceMethod(self,"setViewCallback")
 end
 return M

@@ -12,26 +12,20 @@ local M = class(...,GameNode)
 function M:ctor(params)
     if not params then params = {} end
     -- params.DrawComponent = {}
-    local InitComponent = {
-		ClickComponent = {isScale = true}
-	}
-    table.merge(InitComponent,params)
-    self:setContentSize(154, 56)
-    M.super.ctor(self,InitComponent)    
-    self:setClickedEvent(handler(self,self.onTouch))
-    self.viewSprite = display.newSprite("img_btn_gray_2_s.png")
-	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
-	self:addChild(self.viewSprite)
-	self.label = display.newTTFLabel{text=self.name,size=30}
-    self:addChild(self.label,1)
-    self.label:setPosition(self:getCenterPosition())
+    params._component = {}
+	table.insert(params._component,{_type = "ClickComponent",isScale = true})
+    M.super.ctor(self,params)    
+    -- self:setClickedEvent(handler(self,self.onTouch))
     -- self:initView()
+    self:setData(params)
 end
 function M:setData( params )
 	self.name = params.name or ""
 end
 function M:initView(  )
-	-- dump("AAAAAAAAAA")
+	M.super.initView(self)
+	self:getComponent("ClickComponent"):setClickedEvent(handler(self,self.onTouch))
+	self:setContentSize(154, 56)
 	self.viewSprite = display.newSprite("img_btn_gray_2_s.png")
 	self.viewSprite:setPosition(cc.p(self:getCenterPosition()))
 	self:addChild(self.viewSprite)
@@ -40,6 +34,7 @@ function M:initView(  )
     self.label:setPosition(self:getCenterPosition())
 end
 function M:updateView(  )
+	M.super.updateView(self)
 	self.label:setString(self.name)
 end
 function M:hightlight(  )

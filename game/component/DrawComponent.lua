@@ -44,8 +44,6 @@ function M:initPoints(  )
     }
 end
 function M:bindFunc( target )
-    target:bindMethod(self,"initView")
-    target:bindMethod(self,"updateView")
     
 end
 return M
