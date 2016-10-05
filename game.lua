@@ -10,7 +10,7 @@ function game.startup()
     --2d投影
     cc.Director:getInstance():setProjection(0)
     cc.FileUtils:getInstance():addSearchPath("res/")
-    GameSceneMgr.replaceLayer(require("game.config.modelNode"))
+    GameSceneMgr.replaceLayer(require("game.config.Plane"))
     -- game.enterMainScene()
 end
 

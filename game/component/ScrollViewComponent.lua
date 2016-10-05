@@ -9,15 +9,16 @@ function M:ctor( target ,params)
 end
 function M:setData(params )
 	self.viewsize = params.viewsize
-	self.viewNode = params.viewNode
+	self.viewConfig = params.viewNode
+    self.movable = DEFAULT_TRUE(params.movable)
 end
 -- function M:cellMode( cmdX )
 	
 -- end
 --exportFunc
 function M:initView( target )
-    local node = GameSceneMgr.createGameNode(self.viewNode)
-	self.ccScrollView = cc.ScrollView:create(self.viewsize,node)
+    self.viewNode = GameSceneMgr.createGameNode(self.viewConfig)
+	self.ccScrollView = cc.ScrollView:create(self.viewsize,self.viewNode)
 	target:addChild(self.ccScrollView)
     -- self.ccScrollView:setAnchorPoint(cc.p(0.5, 0.5))
     -- self.ccScrollView:setPosition(cc.p(target:getCenterPosition()))
@@ -42,25 +43,46 @@ function M:initView( target )
     --     end,
     --     cc.Handler.CALLFUNC)
     -- self:onScroll(self.ccScrollView)
+    self.ccScrollView:setMovable(self.movable)
 end
 function M:onScroll(  )
 	local point = self.ccScrollView:getContentOffset()
 end
-function M:updateView( target )
-	-- if not self.viewlist and self.childNode then
-	-- 	self.ccScrollView = cc.ScrollView:create(target:getContentSize(),self.childNode)	
-	-- 	self.ccScrollView:setAnchorPoint(cc.p(0.5, 0.5))
-	--     self.ccScrollView:setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)
-	--     target:addChild(self.ccScrollView)
-	-- end	
+function M:updateView( target )	
 end
 function M:moveToPoints( x,y )
     self.ccScrollView:setContentOffset(cc.p(-x,-y))
+end
+function M:movebyPoints( target,x,y )
+    local pos = self.ccScrollView:getContentOffset()
+    self.ccScrollView:setContentOffset(cc.p(pos.x-x,pos.y-y))
+end
+function M:getContentOffset( target )
+    return self.ccScrollView:getContentOffset()
+end
+function M:getViewNode(  )
+    return self.viewNode
+end
+function M:getViewSize(  )
+    return self.viewsize
+end
+function M:setScrollMovable( target,movable )
+    self.ccScrollView:setMovable(movable)
+end
+function M:setScrollOffsetInDuration( target,pos,time )
+    self.ccScrollView:setContentOffsetInDuration(pos, time)
 end
 function M:setViewCallback( target,callback )
 	self.callback_ = callback
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setViewCallback")
+    target:bindOnceMethod(self,"setScrollMovable")
+    target:bindOnceMethod(self,"setScrollOffsetInDuration")
+    target:bindOnceMethod(self,"getViewNode")
+    target:bindOnceMethod(self,"getViewSize")
+    target:bindOnceMethod(self, "moveToPoints")
+    target:bindOnceMethod(self, "movebyPoints")
+    target:bindOnceMethod(self, "getContentOffset")
 end
 return M

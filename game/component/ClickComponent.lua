@@ -8,13 +8,7 @@ M.CLickOrder = 0
 function M:ctor( target ,params)
 	self.target = target
 	self.fClickeEvent = nil
-    self:setData(params)
-    --点击层
-    self.touchlayer = display.newLayer() 
-    self.touchlayer:addTouchEventListener( self.onTouch_, false, self.isSwallow)
-    self.touchlayer:setTouchEnabled(true)
-    self.touchlayer:setVisible(false)
-    target:addChild(self.touchlayer)
+    self:setData(params)    
 end
 
 function M:setData(params )
@@ -28,7 +22,12 @@ function M:binding(  )
 end
 
 function M:initView( target,params )
-	
+	--点击层
+    self.touchlayer = display.newLayer() 
+    self.touchlayer:addTouchEventListener( self.onTouch_, false, self.isSwallow)
+    self.touchlayer:setTouchEnabled(true)
+    self.touchlayer:setVisible(false)
+    target:addChild(self.touchlayer)
 end
 
 function M:updateView( target )
@@ -36,6 +35,10 @@ function M:updateView( target )
 end
 --localFunc
 function M:onTouch( event, x, y )
+    if self.touchEvent then
+        self.touchEvent(event, x, y)
+        return true
+    end
 	local visiblehelper
     visiblehelper = function(node)
         if node == nil then return true end
@@ -89,11 +92,12 @@ end
 function M:getClickedEvent(  )
     return self.fClickeEvent
 end
+function M:setTouchEvent( target,event )
+    self.touchEvent = event
+end
 function M:bindFunc( target )
-    target:bindMethod(self,"updateView")
-    -- target:bindOnceMethod(self,"setClickedEvent")
 	target:bindOnceMethod(self,"setClickedEvent")
     target:bindOnceMethod(self,"getClickedEvent")
-    
+    target:bindOnceMethod(self,"setTouchEvent")
 end
 return M

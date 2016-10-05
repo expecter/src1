@@ -212,8 +212,8 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         }
 
         -- 处理加载
-        local tlCmd = {"getTlInitView", "getTlOnEnter"}
-        M.loadingGameLayer(gameLayer, tlCmd)
+        -- local tlCmd = {"getTlInitView", "getTlOnEnter"}
+        -- M.loadingGameLayer(gameLayer, tlCmd)
 
         --分发事件
         M:dispatchEvent{

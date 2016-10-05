@@ -28,6 +28,10 @@ local M = {
 			},
 			viewsize = {width = 1136,height = 640},	
 		},
+		{
+			_type = "AutoScrollComponent",
+			
+		},
 	},
 	_children = {
 
