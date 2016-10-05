@@ -23,6 +23,7 @@ local M = {
 					{
 						_type = "cc_sprite",
 						spriteName = "back_5",
+						isEnough = true,
 					},
 				},			
 			},

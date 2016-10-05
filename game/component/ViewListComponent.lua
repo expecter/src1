@@ -25,12 +25,10 @@ end
 -- end
 --exportFunc
 function M:initView( target )
-	-- self.viewlist = UICommon.createViewList(target,self.isMovable)	
+	self.viewlist = UICommon.createViewList(target,self.isMovable)
+	self:updateView()
 end
 function M:updateView( target )
-	if not self.viewlist then
-		self.viewlist = UICommon.createViewList(target,self.isMovable)
-	end
 	local tlNode = {}
 	for k,v in ipairs(self.tlData) do
 		local node = self.cellMode(v)
@@ -56,6 +54,10 @@ function M:updateView( target )
 	        switchEvent(index)
 	    end)
 	    switchEvent(self.defaultIndex)
+	else
+		self.viewlist:setClickedEvent(function ( node,index,x,y )
+	        
+	    end)
 	end
 end
 function M:setViewCallback( target,callback )
