@@ -47,7 +47,7 @@ function M:secondsCall( time )
 				},
 			},
 		}
-		map:addChild(GameSceneMgr.createGameNode(config))
+		local panel = GameSceneMgr.createGameNode(config)
 	end
 end
 function M:updateView( target )

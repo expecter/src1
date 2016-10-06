@@ -2,7 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("eventComponent")
+local M = class("ct_viewList")
 function M:ctor( target ,params)
 	self.target = target
 	self.cellMode = params.cellMode or function ( params )

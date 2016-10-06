@@ -2,16 +2,16 @@
 -- Author: Your Name
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("ClickComponent")
+local M = class("cc_observer")
 function M:ctor( target )
 	self.target = target
 	self.isTargetVisible = true
 	self.listeners_ = {}
 end
 --exportFunc
-function M:addObserver(component,eventName,listener )
-	for comp,v in pairs(self.listeners_) do
-        if comp == component and v[eventName] then
+function M:addObserver(target,component,eventName,listener )
+	for com,v in pairs(self.listeners_) do
+        if com == component and v[eventName] then
         	dump("has add listener")
             return
         end
@@ -22,8 +22,8 @@ function M:addObserver(component,eventName,listener )
     
 	self.listeners_[component]= {[eventName]=listener}
 end
-function M:dispatch(name,data )
-	if type(self.target) == "userdata" and tolua.isnull(self.target) then
+function M:dispatch(target,name,data )
+	if type(target) == "userdata" and tolua.isnull(target) then
 		return
 	end
 	if not self.isTargetVisible then
@@ -32,7 +32,7 @@ function M:dispatch(name,data )
 	-- print("dispatch",name,data)
 	for component,v in pairs(self.listeners_) do
 		local listener = v[name]
-		listener(component,data)
+		listener(data)
 	end
 end
 function M:exitView(  )

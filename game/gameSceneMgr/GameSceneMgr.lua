@@ -164,7 +164,7 @@ function M.createGameNode( config ,isLoad)
         end
     end
     
-    return gameNode
+    return gameNode,tlNode
 end
 function M.createObject( config,tlNode)
     local node = GameNode.new(config)
@@ -194,7 +194,7 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
 
         --创建新的
         -- local gameLayer = require(clsGameLayer).new(userdata)
-        local gameLayer = M.createGameNode(clsGameLayer)
+        local gameLayer,tlNode = M.createGameNode(clsGameLayer,false)
         local gameLayerWrap = createGameLayerWrap(gameLayer)
         
         --缓存
@@ -214,7 +214,9 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         -- 处理加载
         -- local tlCmd = {"getTlInitView", "getTlOnEnter"}
         -- M.loadingGameLayer(gameLayer, tlCmd)
-
+        for i,node in ipairs(tlNode) do
+            GameSceneMgr.loadGameNode(node)
+        end
         --分发事件
         M:dispatchEvent{
             name = "ready",

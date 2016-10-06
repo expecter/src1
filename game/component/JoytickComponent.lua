@@ -3,7 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class("JoytickComponent")
-
+M.joytickScheduler = "joytickScheduler"
 function M:ctor( target ,params)
 	self.target = target
 	self.vec = cc.p(0,0)
@@ -19,7 +19,6 @@ function M:getDepends(  )
 	}
 end
 function M:initView( target )
-	local sprite = target:getSprite()
 	self.ditectSpr = display.newSprite("Direction_bt.png")
 	self.ditectSpr:setPosition(target:getCenterPosition())
 	target:addChild(self.ditectSpr)
@@ -74,9 +73,10 @@ function M:startJoytick(  )
 	self.target:startScheduler(handler(self,self.cbScheduler))
 end
 function M:cbScheduler( dt )
-	if self.callback then
-		self.callback(self.vec)
-	end
+	-- if self.callback then
+	-- 	self.callback(self.vec)
+	-- end
+	self.target:dispatch(M.joytickScheduler,self.vec)
 end
 function M:endJoytick(  )
 	self.target:setVisible(false)

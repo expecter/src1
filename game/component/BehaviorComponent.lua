@@ -61,8 +61,6 @@ function M:playHit( target )
     return 0.01
 end
 function M:bindFunc( target )
-	target:bindMethod(self,"updateView")
-	target:bindMethod(self,"initView")
 	target:bindOnceMethod(self,"playstandby")
 	target:bindOnceMethod(self,"playAttack")
 	target:bindOnceMethod(self,"playRun")

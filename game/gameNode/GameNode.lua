@@ -13,6 +13,8 @@ function M:ctor( params )
 	self.components = {}
 	self.TlComName = {}
 	self._name = params._name or ""
+	--自带响应回调
+	self:addComponent({_type = "cc_observer"})
 	if params and params._component then
 		for i,comp in ipairs(params._component) do
 			if ComponentFactory.hasComponent(comp._type) then
@@ -47,7 +49,7 @@ function M:getTlOnExit(  )
 		end	
 	}
 end
-function M:tlReleaseView(  )
+function M:getTlReleaseView(  )
 	return {
 		function (  )
 			self:releaseView()

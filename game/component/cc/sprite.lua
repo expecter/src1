@@ -28,14 +28,14 @@ function M:initView( target )
 	end
 end
 function M:updateView( target )
-	-- self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
+	
 end
 function M:getSprite(  )
 	return self.viewSprite
 end
 function M:updateSpriteName( target,spriteName )
 	self.spriteName=spriteName
-	self:updateView()
+	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
 end
 --对应onenter
 function M:enterView(  )

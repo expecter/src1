@@ -17,14 +17,14 @@ function M:initView( target )
 	local pos = cc.p(map:getPosition())
 	local size =map:getContentSize()
 	local mapRect = cc.rect(pos.x,pos.y,size.width,size.height)
-	local Joytick = target:getGameNode("Joytick")
-	Joytick:setCbJoytick(function ( vec )
+	target:getGameNode("Joytick"):addObserver(self,"joytickScheduler",function ( vec )
 		local heroPos = cc.p(hero:getPosition())
 		hero:setPosition(heroPos.x+vec.x*self.velotiy,heroPos.y+vec.y*self.velotiy)
 		if cc.rectContainsPoint(mapRect,heroPos) then
 			--todo
 		end
 	end)
+	-- local panel =GameSceneMgr.createGameNode(require("game.config.gamePanel")):showPanel()
 end
 function M:updateView( target )
 end

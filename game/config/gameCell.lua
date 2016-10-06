@@ -12,16 +12,16 @@ local M = {
 		pos = {x =0,y = 0},
 		},
 		{
-			_type = "cc_sprite",
+			_type = "cc_sprite",spriteName = "img_btn_gray_2_n"
 		},
 		{
 			_type = "cc_label",
 		},
 		{
-			_type = "hightlightComponent",
+			_type = "ex_hightlightComponent",
 		},
 		{
-			_type = "ClickComponent",isScale = true
+			_type = "cc_ClickComponent",isScale = true
 		},
 	},
 	_children = {

@@ -11,7 +11,7 @@ function M:setData(params )
 end
 function M:initView( target )
 	target:setViewCallback(function ( params,index )
-		target:getGameNode("switchNode"):switchTo(index)
+		-- target:getGameNode("switchNode"):switchTo(index)
 	end)
 end
 function M:updateView( target )
