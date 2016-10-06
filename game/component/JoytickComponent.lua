@@ -8,6 +8,16 @@ function M:ctor( target ,params)
 	self.target = target
 	self.vec = cc.p(0,0)
 end
+function M:getDepends(  )
+	return {
+		{
+			_type = "cc_ClickComponent",
+		},
+		{
+			_type = "cc_ScheduleComponent",
+		},
+	}
+end
 function M:initView( target )
 	local sprite = target:getSprite()
 	self.ditectSpr = display.newSprite("Direction_bt.png")

@@ -32,26 +32,12 @@ local M = {
 			_component = {
 				{
 					_type = "cc_node",
-					contentsize = {width = 1136,height = 640},
-					AnchPos = {x = 0,y = 0},
-					pos = {x =0,y = 0},
+					contentsize = {width = 480,height = 640},
+					AnchPos = {x = 0.5,y = 0},
+					pos = {x =568,y = 0},
 				},
 				{
-					_type = "ScrollViewComponent",
-					viewNode = {
-						_type = "GameNode",
-						_component = {
-							{
-								_type = "cc_node",
-							},
-							{
-								_type = "CCbComponent",
-								ccbName = "ccbi_capital",
-							},
-						},			
-					},
-					viewsize = {width = 1136,height = 640},
-					movable = false,	
+					_type = "ct_rollComponent"
 				},
 			},
 		},
@@ -86,12 +72,7 @@ local M = {
 					spriteFrameName = "Direction_bc",
 					isEnough = true,
 				},
-				{
-					_type = "ClickComponent",
-				},
-				{
-					_type = "ScheduleComponent",
-				},
+				
 				{
 					_type = "JoytickComponent"
 				},
@@ -100,7 +81,13 @@ local M = {
 		{
 			_type = "GameNode",
 			_component = {
-				{_type = "planeComponent"}
+				{_type = "plane_planeComponent"}
+			},
+		},
+		{
+			_type = "GameNode",
+			_component = {
+				{_type = "plane_enemyComponent"}
 			},
 		},
 	},

@@ -91,9 +91,17 @@ function M:releaseView(  )
 		end
 	end
 end
-function M:addComponent( component )
-	local comName = component._type or ""
-	table.insert(self.components,ComponentFactory.createComponent(comName,self,component))
+function M:addComponent( params )
+	local comName = params._type or ""
+	local component = ComponentFactory.createComponent(comName,self,params)
+	if component.getDepends then
+		for i,depends in ipairs(component:getDepends()) do
+			if not self:getComponent() then
+				self:addComponent(depends)
+			end			
+		end
+	end
+	table.insert(self.components,component)
 	self.TlComName[comName] = self.components[#self.components]
 	self.TlComName[comName]:bindFunc(self)
 end

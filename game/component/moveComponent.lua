@@ -16,13 +16,13 @@ function M:initView( target )
 	local map = target:getGameNode("map")
 	local Joytick = target:getGameNode("Joytick")
 	Joytick:setCbJoytick(function ( vec )
-		if vec.x ==0 and vec.y == 0 then
-	    	hero:setRotation(0)
-	    	return
-	    end
-		local radians = math.atan2(0-vec.y,0-vec.x)
-	    local rotate=-1 * radians*57.29577951-90
-	    hero:setRotation(rotate)
+		-- if vec.x ==0 and vec.y == 0 then
+	 --    	hero:setRotation(0)
+	 --    	return
+	 --    end
+		-- local radians = math.atan2(0-vec.y,0-vec.x)
+	 --    local rotate=-1 * radians*57.29577951-90
+	 --    hero:setRotation(rotate)
 	    -- local heroPos = cc.p(hero:getPosition())
 	    -- local heroSize = hero:getContentSize()
 	    -- local centerRect = cc.rect(display.cx-heroSize.width/2,display.cy-heroSize.height/2,heroSize.width,heroSize.height)
@@ -33,7 +33,7 @@ function M:initView( target )
 	    -- if heroPos<0 then
 	    -- 	--todo
 	    -- end
-	    map:movebyPoints(vec.x*self.velotiy,vec.y*self.velotiy)
+	    -- map:movebyPoints(vec.x*self.velotiy,vec.y*self.velotiy)
 	    -- local pos = map:getContentOffset()
 	    -- local viewNodeSize = map:getViewNode():getContentSize()
 	    -- if pos.x>=0 or -pos.x>=viewNodeSize.width-display.width then
