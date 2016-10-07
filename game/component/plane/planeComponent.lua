@@ -2,7 +2,7 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("planeComponent")
+local M = class("plane_planeComponent")
 function M:ctor( target ,params)
 	self.target = target
 	self.velotiy = 10
@@ -17,7 +17,7 @@ function M:initView( target )
 	local pos = cc.p(map:getPosition())
 	local size =map:getContentSize()
 	local mapRect = cc.rect(pos.x,pos.y,size.width,size.height)
-	target:getGameNode("Joytick"):addObserver("planeComponent",target,"joytickScheduler",function ( vec )
+	target:getGameNode("Joytick"):addObserver("plane_planeComponent",target,"joytickScheduler",function ( vec )
 		local heroPos = cc.p(hero:getPosition())
 		hero:setPosition(heroPos.x+vec.x*self.velotiy,heroPos.y+vec.y*self.velotiy)
 		if cc.rectContainsPoint(mapRect,heroPos) then

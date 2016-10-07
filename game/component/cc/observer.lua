@@ -34,7 +34,8 @@ function M:dispatch(target,eventName,data )
 	end
 	for comName,tlTarget in pairs(self.listeners_) do
 		for target,v in pairs(tlTarget) do
-			if type(target) == "userdata" and not tolua.isnull(target) then
+			local com = target:getComponent(comName)
+			if com and type(target) == "userdata" and not tolua.isnull(target) then
 				local listener = v[eventName]
 				listener(data)
 			end			
