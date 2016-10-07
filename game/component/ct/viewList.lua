@@ -18,7 +18,7 @@ function M:ctor( target ,params)
 	self:setData(params)
 end
 function M:setData(params )
-	self.tlData = params.tlData
+	self.tlData = ref.getRef(params.tlData)
 end
 -- function M:cellMode( cmdX )
 	

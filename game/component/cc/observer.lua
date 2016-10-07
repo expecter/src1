@@ -9,30 +9,36 @@ function M:ctor( target )
 	self.listeners_ = {}
 end
 --exportFunc
-function M:addObserver(target,component,eventName,listener )
-	for com,v in pairs(self.listeners_) do
-        if com == component and v[eventName] then
-        	dump("has add listener")
-            return
-        end
-    end
-    if not self.listeners_[component] then
-    	self.listeners_[component] = {}
+function M:addObserver(target,comName,target,eventName,listener )
+	-- for com,v in pairs(self.listeners_) do
+ --        if com == component and v[eventName] then
+ --        	dump("has add listener")
+ --            return
+ --        end
+ --    end
+    if not self.listeners_[comName] then
+    	self.listeners_[comName] = {}
     end
     
-	self.listeners_[component]= {[eventName]=listener}
+    if not self.listeners_[comName][target] then
+    	self.listeners_[comName][target] = {}
+    end
+    self.listeners_[comName][target][eventName] = listener
 end
-function M:dispatch(target,name,data )
+function M:dispatch(target,eventName,data )
 	if type(target) == "userdata" and tolua.isnull(target) then
 		return
 	end
 	if not self.isTargetVisible then
 		return
 	end
-	-- print("dispatch",name,data)
-	for component,v in pairs(self.listeners_) do
-		local listener = v[name]
-		listener(data)
+	for comName,tlTarget in pairs(self.listeners_) do
+		for target,v in pairs(tlTarget) do
+			if type(target) == "userdata" and not tolua.isnull(target) then
+				local listener = v[eventName]
+				listener(data)
+			end			
+		end
 	end
 end
 function M:exitView(  )

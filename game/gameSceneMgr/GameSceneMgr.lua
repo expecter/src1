@@ -124,7 +124,7 @@ end
 function M.loadGameNode( gameNode )
     gameNode:initView()
     gameNode:enterView()
-    gameNode:updateView()
+    -- gameNode:updateView()
 end
 function M.coroutineCreate(f)
     coroutine.wrap(function()
@@ -199,6 +199,7 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         
         --缓存
         M.instance.tlGameLayerWrap:push(gameLayerWrap)
+        print("replaceLayer")
         --加入
         M.instance:addChild(gameLayerWrap)
 

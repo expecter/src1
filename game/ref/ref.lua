@@ -34,4 +34,16 @@ function extend(object, modelFullname)
     
 end
 extend(M,...)
+function M.getRef( params )
+    if params.refName then
+        local refData = M[params.refName]
+        local tmKey = params.tmKey or {}
+        if params.Once then
+            return refData.getRef(tmKey)
+        else
+            return refData.getTlRef(tmKey)
+        end
+    end
+    return params   
+end
 return M

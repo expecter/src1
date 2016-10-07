@@ -27,7 +27,11 @@ end
 function M:getName(  )
 	return self._name
 end
-
+function M:onExit(  )
+	for k,com in ipairs(self.components) do
+		com = nil
+	end
+end
 function M:getTlInitView(  )
 	return {
 		function (  )
