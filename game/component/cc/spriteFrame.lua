@@ -6,6 +6,7 @@ local M = class("spriteFrame")
 function M:ctor( target ,params)
 	self.target = target
 	self.tlFrame = params.tlFrame or {}
+	self.isCcz = DEFAULT_FALSE(params.isCcz)
 end
 function M:setData(params )
 end
@@ -15,7 +16,12 @@ function M:initView( target )
 	end
 end
 function M:addSpriteFrame( target,frameName )
-	display.addSpriteFrames(string.format("%s.plist",frameName), string.format("%s.png",frameName))
+	if self.isCcz then
+		display.addSpriteFrames(string.format("%s.plist",frameName), string.format("%s.pvr.ccz",frameName))
+	else
+		display.addSpriteFrames(string.format("%s.plist",frameName), string.format("%s.png",frameName))
+	end
+	
 end
 function M:updateView( target )
 end

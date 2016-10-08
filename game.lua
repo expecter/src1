@@ -10,7 +10,7 @@ function game.startup()
     --2d投影
     cc.Director:getInstance():setProjection(0)
     cc.FileUtils:getInstance():addSearchPath("res/")
-    GameSceneMgr.replaceLayer(require("game.config.parkour"))
+    GameSceneMgr.replaceLayer(require("game.config.rpg"))
     -- game.enterMainScene()
 end
 
