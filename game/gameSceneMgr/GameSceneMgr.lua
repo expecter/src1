@@ -155,6 +155,16 @@ function M.updateConfig( path,component )
     
     return config
 end
+function M.removeObject( target )
+    target:removeFromParent(true)
+    M:dispatchEvent{
+        name = "remove",
+        data = {
+            object = target._name,
+            action = "remove",
+        },
+    }
+end
 function M.createGameNode( config ,isLoad)
     local tlNode = {}
     local gameNode = M.createObject(config,tlNode)
