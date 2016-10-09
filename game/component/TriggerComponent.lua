@@ -10,12 +10,8 @@ end
 function M:setData(params )
 end
 function M:initView( target )
-end
-function M:onTrigger( target,other )
-	
-end
-function M:getTriggerRect(  )
-	return self.target:getRect()
+	local map = self.target:getGameNode("map")
+	map:addObject(target)
 end
 function M:updateView( target )
 end
@@ -32,6 +28,6 @@ function M:releaseView(  )
 	
 end
 function M:bindFunc( target )
-	target:bindOnceMethod(self,"onTrigger")
+	target:bindOnceMethod(self,"hurt")
 end
 return M

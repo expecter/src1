@@ -45,7 +45,7 @@ function M:onRectTrigger( objA,objB )
 	if objB==nil or tolua.isnull(objB) then
 		return false
 	end
-	if cc.rectIntersectsRect(objA:getRect(),objB:getRect()) then
+	if cc.rectIntersectsRect(objA:getBoundingBox(),objB:getBoundingBox()) then
 		return true
 	end
 	return false

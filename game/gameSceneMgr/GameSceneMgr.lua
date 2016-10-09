@@ -156,7 +156,9 @@ function M.updateConfig( path,component )
     return config
 end
 function M.removeObject( target )
+    target:exitView()
     target:removeFromParent(true)
+
     M:dispatchEvent{
         name = "remove",
         data = {

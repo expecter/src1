@@ -2,7 +2,7 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("enemyComponent")
+local M = class("componentBase")
 function M:ctor( target ,params)
 	self.target = target
 	self.relayTime = 1
@@ -12,27 +12,28 @@ function M:ctor( target ,params)
 end
 function M:getDepends(  )
 	return {
-		{_type = "cc_ScheduleComponent",}
+		{
+			_type = "cc_ScheduleComponent",
+		},
 	}
 end
 function M:setData(params )
 end
 function M:initView( target )
-	target:startScheduler(function ( dt )
-		self.time_ = self.time_ + dt
-		local secondsDelta =  self.time_ - self.lastSecond_
-		if secondsDelta>=1 then
-			self.lastSecond_ = self.lastSecond_ + secondsDelta
-			if self.lastSecond_>10 then
-				target:endScheduler()
-			end
-			-- self:secondsCall(self.lastSecond_)
-		end
-	end)
+	self.target:startScheduler(handler(self,self.update))
+	-- self:secondsCall(self.lastSecond_)
+end
+function M:update( dt )
+	self.time_ = self.time_ + dt
+	local secondsDelta =  self.time_ - self.lastSecond_
+	if secondsDelta>=1 then
+		self.lastSecond_ = self.lastSecond_ + secondsDelta
+		self:secondsCall(self.lastSecond_)
+	end
 end
 function M:secondsCall( time )
 	if time>= self.relayTime then
-		self.relayTime = self.relayTime+10
+		self.relayTime = self.relayTime+1
 		local map = self.target:getGameNode("map")
 		local config = {
 			_type = "GameNode",
@@ -40,17 +41,22 @@ function M:secondsCall( time )
 				{
 					_type = "cc_node",
 					contentsize = {width = 60,height = 60},
-					pos = {x =360,y = 360},
+					pos = {x =568,y = 50},
 					AnchPos = {x = 0,y = 0},
 				},
 				{
 					_type = "cc_sprite",
-					spriteFrameName = "enemy1_down1",
+					spriteFrameName = "bullet1",
 					isEnough = true,
+				},
+				{
+					_type = "plane_move",
 				},
 			},
 		}
-		local panel = GameSceneMgr.createGameNode(config)
+		local node = GameSceneMgr.createGameNode(config)
+		map:addChild(node)
+		map:addObject(node)
 	end
 end
 function M:updateView( target )
