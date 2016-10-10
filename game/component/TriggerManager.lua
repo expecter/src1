@@ -18,9 +18,9 @@ end
 function M:setData(params )
 end
 function M:initView( target )
-	self.target:startScheduler(handler(self,self.update))
+	target:addObserver("TriggerManager",target,"scheduler_update",handler(self,self.update))
 end
-function M:addObject( target,object )
+function M:addObject( target,object )	
 	table.insert(self.tlObject,object)
 end
 function M:update(  )

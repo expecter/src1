@@ -28,6 +28,6 @@ function M:releaseView(  )
 	
 end
 function M:bindFunc( target )
-	target:bindOnceMethod(self,"hurt")
+	
 end
 return M

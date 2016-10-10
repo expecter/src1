@@ -9,7 +9,7 @@ function M:ctor( target )
 	self.listeners_ = {}
 end
 --exportFunc
-function M:addObserver(target,comName,target,eventName,listener )
+function M:addObserver(target1,comName,target,eventName,listener )
 	-- for com,v in pairs(self.listeners_) do
  --        if com == component and v[eventName] then
  --        	dump("has add listener")
@@ -33,11 +33,12 @@ function M:dispatch(target,eventName,data )
 		return
 	end
 	for comName,tlTarget in pairs(self.listeners_) do
-		for target,v in pairs(tlTarget) do
-			local com = target:getComponent(comName)
-			if com and type(target) == "userdata" and not tolua.isnull(target) then
-				local listener = v[eventName]
-				listener(data)
+		for target1,v in pairs(tlTarget) do
+			local com = target1:getComponent(comName)
+			if com and type(target1) == "userdata" and not tolua.isnull(target1) then
+				if v[eventName] then
+					v[eventName](data)
+				end
 			end			
 		end
 	end

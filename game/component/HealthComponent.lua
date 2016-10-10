@@ -19,7 +19,8 @@ function M:initView( target )
     ccProgressTimer:setBarChangeRate(cc.p(1,0))
     ccProgressTimer:setPercentage(0)
     ccProgressTimer:setAnchorPoint(cc.p(0,0))
-
+    target:getContentSize()
+    ccProgressTimer:setPosition(cc.p(0,target:getContentSize().height))
     target:addChild(ccProgressTimer)
     ccProgressTimer:setPercentage(self.health)
     self.ccProgressTimer = ccProgressTimer

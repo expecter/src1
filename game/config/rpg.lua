@@ -43,10 +43,13 @@ local M = {
 					spriteFrameName = "hero1",
 					isEnough = true,
 				},
-				{
-					_type = "plane_shoot",
-				},
-				{_type = "TriggerComponent"}
+				-- {
+				-- 	_type = "plane_shoot",
+				-- },
+				-- {
+				-- 	_type = "TriggerComponent",
+				-- },
+				{ _type = "plane_rangeComponent"},
 			},
 		},
 		{
@@ -55,18 +58,21 @@ local M = {
 			_component = {
 				{
 					_type = "cc_node",
-					pos = {x =568,y = 500},
+					pos = {x =568,y = 250},
 					AnchPos = {x = 0,y = 0},
+				},
+				
+				{
+					_type = "cc_sprite",
+					spriteFrameName = "enemy2",
+					isEnough = true,
 				},
 				{
 					_type = "HealthComponent",
 				},
 				{
-					_type = "cc_sprite",
-					spriteFrameName = "enemy2",
-					isEnough = true,
-				},				
-				{_type = "TriggerComponent"}
+					_type = "TriggerComponent",
+				},		
 			},
 		},
 	},

@@ -7,26 +7,13 @@ function M:ctor( target ,params)
 	self.target = target
 	self:setData(params)
 end
-function M:getDepends(  )
-	return {
-		{_type = "cc_ScheduleComponent",}
-	}
-end
 function M:setData(params )
 end
 function M:initView( target )
-	target:addObserver("plane_move",target,"scheduler_update",function ( dt )
-		local orgPos = cc.p(self.target:getPosition())
-		self.target:setPosition(orgPos.x,orgPos.y+5)
-	end)
 end
 function M:onTrigger( target,other )
 	if other:getName() == "hero1" then
-		-- print("attack hero1")
-		-- target:removeFromParent()
-		other:hurt()
-		GameSceneMgr.removeObject(target)
-		target = nil
+		self.target:dispatch("inRange",other)
 	end
 end
 function M:updateView( target )

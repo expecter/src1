@@ -11,18 +11,17 @@ end
 function M:setData(params )
 end
 function M:initView( target )
-end
-function M:startScheduler( target,callback )	
 	self.scheduler = scheduler.scheduleUpdateGlobal(function ( dt )
 		if self.target == nil or tolua.isnull(self.target) then
 			scheduler.unscheduleGlobal(self.scheduler)
 			return
 		end
-		if callback then
-			callback(dt)
-		end
+		self.target:dispatch("scheduler_update",dt)
 	end)
 end
+-- function M:startScheduler( target,callback )	
+	
+-- end
 function M:endScheduler( target )
 	scheduler.unscheduleGlobal(self.scheduler)
 end
