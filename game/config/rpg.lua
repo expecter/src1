@@ -32,6 +32,7 @@ local M = {
 		{
 			_type = "GameNode",
 			_name = "hero",
+			_attr = "object",
 			_component = {
 				{
 					_type = "cc_node",
@@ -46,15 +47,16 @@ local M = {
 				-- {
 				-- 	_type = "plane_shoot",
 				-- },
-				-- {
-				-- 	_type = "TriggerComponent",
-				-- },
+				{
+					_type = "TriggerComponent",
+				},
 				{ _type = "plane_rangeComponent"},
 			},
 		},
 		{
 			_type = "GameNode",
 			_name = "hero1",
+			_attr = "object",
 			_component = {
 				{
 					_type = "cc_node",

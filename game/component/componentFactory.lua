@@ -13,7 +13,10 @@ function M.createComponent(componentName,target,params)
     	return nil
     end
     assert(class ~= nil, string.format("ComponentFactory.createComponent() - Invalid behavior name \"%s\"", tostring(componentName)))
-    return class.new(target,params)
+    local com = class.new(target,params)
+    com.target = target
+    com.name = componentName
+    return com
 end
 function M.hasComponent( componentName )
 	local ok = pcall(function (  )

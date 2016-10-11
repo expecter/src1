@@ -67,6 +67,16 @@ function M:initView(  )
 			com:initView(self)
 		end
 	end
+	GameSceneMgr:addEventListener("update", function(event)
+		self:update(event.data)
+	end)
+end
+function M:update( dt )
+	for k,com in ipairs(self.components) do
+		if com.update then
+			com:update(dt)
+		end		
+	end
 end
 function M:updateView( )
 	for k,com in ipairs(self.components) do

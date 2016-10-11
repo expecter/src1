@@ -9,18 +9,9 @@ function M:ctor( target ,params)
 	self.lastSecond_ = 0
 	self:setData(params)
 end
-function M:getDepends(  )
-	return {
-		{
-			_type = "cc_ScheduleComponent",
-		},
-	}
-end
 function M:setData(params )
 end
 function M:initView( target )
-	target:addObserver("plane_shoot",target,"scheduler_update",handler(self,self.update))
-	-- self:secondsCall(self.lastSecond_)
 end
 function M:update( dt )
 	self.time_ = self.time_ + dt

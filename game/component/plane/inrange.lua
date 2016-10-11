@@ -12,9 +12,9 @@ end
 function M:initView( target )
 end
 function M:onTrigger( target,other )
-	if other:getName() == "hero1" then
+	-- if other:getName() == "hero1" then
 		self.target:dispatch("inRange",other)
-	end
+	-- end
 end
 function M:updateView( target )
 end
@@ -24,7 +24,6 @@ function M:enterView(  )
 end
 --对应onexit
 function M:exitView(  )
-	self.target:endScheduler()
 end
 --对应release
 function M:releaseView(  )

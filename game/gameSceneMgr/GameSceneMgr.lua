@@ -92,6 +92,12 @@ function M:ctor()
     local topPanelMgr = GamePanelMgr.new()
     M.instance:addChild(topPanelMgr, M.TopZOrder)
     M.instance.topPanelMgr = topPanelMgr
+    M.scheduler = require('framework.scheduler').scheduleUpdateGlobal(function ( dt )
+        M:dispatchEvent{
+            name = "update",
+            data = dt,
+        }
+    end)
 end
 
 function M.getScene()
@@ -178,6 +184,7 @@ function M.createGameNode( config ,isLoad)
     
     return gameNode,tlNode
 end
+local nodeIndex = 0
 function M.createObject( config,tlNode)
     local node = GameNode.new(config)
     -- if config._component then
@@ -188,6 +195,8 @@ function M.createObject( config,tlNode)
     -- GameSceneMgr.loadGameNode(node)
     table.insert(tlNode,node)
     node:setAllGameNode(tlNode)
+    nodeIndex = nodeIndex+1
+    node.index = nodeIndex
     if config._children then
         for k,child in pairs(config._children) do
             

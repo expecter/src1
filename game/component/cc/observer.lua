@@ -4,26 +4,15 @@
 --
 local M = class("cc_observer")
 function M:ctor( target )
-	self.target = target
 	self.isTargetVisible = true
 	self.listeners_ = {}
 end
 --exportFunc
-function M:addObserver(target1,comName,target,eventName,listener )
-	-- for com,v in pairs(self.listeners_) do
- --        if com == component and v[eventName] then
- --        	dump("has add listener")
- --            return
- --        end
- --    end
-    if not self.listeners_[comName] then
-    	self.listeners_[comName] = {}
+function M:addObserver(target,com,eventName,listener )
+    if not self.listeners_[com.name] then
+    	self.listeners_[com.name] = {}
     end
-    
-    if not self.listeners_[comName][target] then
-    	self.listeners_[comName][target] = {}
-    end
-    self.listeners_[comName][target][eventName] = listener
+    table.insert(self.listeners_[com.name],{target = com.target,listener = listener})
 end
 function M:dispatch(target,eventName,data )
 	if type(target) == "userdata" and tolua.isnull(target) then
@@ -33,12 +22,13 @@ function M:dispatch(target,eventName,data )
 		return
 	end
 	for comName,tlTarget in pairs(self.listeners_) do
-		for target1,v in pairs(tlTarget) do
-			local com = target1:getComponent(comName)
-			if com and type(target1) == "userdata" and not tolua.isnull(target1) then
-				if v[eventName] then
-					v[eventName](data)
-				end
+		for i,v in ipairs(tlTarget) do
+			local com = v.target:getComponent(comName)
+			if not com then
+				print("not listener",eventName,comName)
+			end
+			if com and type(v.target) == "userdata" and not tolua.isnull(v.target) then
+				v.listener(data)
 			end			
 		end
 	end

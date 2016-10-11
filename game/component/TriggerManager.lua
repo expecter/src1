@@ -8,22 +8,14 @@ function M:ctor( target ,params)
 	self.tlObject = {}
 	self:setData(params)
 end
-function M:getDepends(  )
-	return {
-		{
-			_type = "cc_ScheduleComponent",
-		},
-	}
-end
 function M:setData(params )
 end
 function M:initView( target )
-	target:addObserver("TriggerManager",target,"scheduler_update",handler(self,self.update))
 end
 function M:addObject( target,object )	
 	table.insert(self.tlObject,object)
 end
-function M:update(  )
+function M:update( dt )
 	for i=1,#self.tlObject do
 		for j=i+1,#self.tlObject do
 			if self:onRectTrigger(self.tlObject[i],self.tlObject[j]) then
@@ -45,7 +37,12 @@ function M:onRectTrigger( objA,objB )
 	if objB==nil or tolua.isnull(objB) then
 		return false
 	end
-	if cc.rectIntersectsRect(objA:getBoundingBox(),objB:getBoundingBox()) then
+	local function getRect( obj )
+		local pos = obj:convertToWorldSpace(cc.p(0,0))
+		local size = obj:getContentSize()
+		return cc.rect(pos.x,pos.y,size.width,size.height)
+	end
+	if cc.rectIntersectsRect(getRect(objA),getRect(objB)) then
 		return true
 	end
 	return false

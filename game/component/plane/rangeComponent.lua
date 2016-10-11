@@ -4,14 +4,12 @@
 --
 local M = class("componentBase")
 function M:ctor( target ,params)
-	self.target = target
 	self.width = 300
 	self:setData(params)
 end
 function M:setData(params )
 end
 function M:initView( target )
-	target:addObserver("plane_rangeComponent",target,"scheduler_update",handler(self,self.update))
 	local map = self.target:getGameNode("map")
 	local config = {
 		_type = "GameNode",
@@ -19,7 +17,7 @@ function M:initView( target )
 			{
 				_type = "cc_node",
 				contentsize = {width = 600,height = 600},
-				pos = {x =50,y = 50},
+				pos = {x =-300,y = -300},
 				AnchPos = {x = 0,y = 0},
 			},
 			{
@@ -29,10 +27,10 @@ function M:initView( target )
 		},
 	}
 	local node = GameSceneMgr.createGameNode(config)
-	node:addObserver("plane_rangeComponent",target,"inRange",function ( other )
-		print(other:getName(),"in range")
+	node:addObserver(self,"inRange",function ( other )
+		print(other:getName(),"in range of",target:getName())
 	end)
-	map:addChild(node)
+	target:addChild(node)
 	map:addObject(node)
 end
 function M:update( dt )
