@@ -50,8 +50,22 @@ local M = {
 				{
 					_type = "TriggerComponent",
 				},
-				{ _type = "plane_rangeComponent"},
+				{ _type = "plane_attRange"},
 			},
+		},
+		{
+			_type = "GameNode",
+			_name = "planeLabel",
+			_component = {
+				{
+					_type = "cc_node",
+					pos = {x =30,y = 600},
+					AnchPos = {x = 0,y = 0},
+				},
+				{
+					_type = "cc_label",
+				},
+			}
 		},
 		{
 			_type = "GameNode",
@@ -60,7 +74,7 @@ local M = {
 			_component = {
 				{
 					_type = "cc_node",
-					pos = {x =568,y = 250},
+					pos = {x =0,y = 300},
 					AnchPos = {x = 0,y = 0},
 				},
 				
@@ -69,11 +83,17 @@ local M = {
 					spriteFrameName = "enemy2",
 					isEnough = true,
 				},
+				{					
+					_type = "plane_move",
+				},
 				{
 					_type = "HealthComponent",
 				},
 				{
 					_type = "TriggerComponent",
+				},
+				{
+					_type = "plane_heroRange",
 				},		
 			},
 		},

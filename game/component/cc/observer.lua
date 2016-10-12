@@ -12,7 +12,7 @@ function M:addObserver(target,com,eventName,listener )
     if not self.listeners_[com.name] then
     	self.listeners_[com.name] = {}
     end
-    table.insert(self.listeners_[com.name],{target = com.target,listener = listener})
+    table.insert(self.listeners_[com.name],{target = com.target,[eventName] = listener})
 end
 function M:dispatch(target,eventName,data )
 	if type(target) == "userdata" and tolua.isnull(target) then
@@ -28,7 +28,9 @@ function M:dispatch(target,eventName,data )
 				print("not listener",eventName,comName)
 			end
 			if com and type(v.target) == "userdata" and not tolua.isnull(v.target) then
-				v.listener(data)
+				if v[eventName] then
+					v[eventName](data)
+				end				
 			end			
 		end
 	end

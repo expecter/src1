@@ -13,6 +13,7 @@ function M:initView( target )
 	local map = self.target:getGameNode("map")
 	local config = {
 		_type = "GameNode",
+		_name = "range",
 		_component = {
 			{
 				_type = "cc_node",
@@ -22,16 +23,18 @@ function M:initView( target )
 			},
 			{
 				_type = "cc_DrawComponent",
-			},
-			{_type = "plane_inrange"}
+			}
 		},
 	}
 	local node = GameSceneMgr.createGameNode(config)
-	node:addObserver(self,"inRange",function ( other )
-		print(other:getName(),"in range of",target:getName())
-	end)
 	target:addChild(node)
 	map:addObject(node)
+	-- map:addObserver(self,"EVENT_COLLISION_BEGAN",function ( data )
+	-- 	print(data.objA:getName(),"start collision",data.objB:getName())
+	-- end)
+	-- map:addObserver(self,"EVENT_COLLISION_ENDED",function ( data )
+	-- 	print(data.objA:getName(),"ended collision",data.objB:getName())
+	-- end)
 end
 function M:update( dt )
 end
@@ -50,6 +53,5 @@ function M:releaseView(  )
 	
 end
 function M:bindFunc( target )
-	
 end
 return M

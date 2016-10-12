@@ -4,48 +4,39 @@
 --
 local M = class("componentBase")
 function M:ctor( target ,params)
-	self.target = target
-	self.time_ = 0
-	self.lastSecond_ = 0
+	self.width = 300
 	self:setData(params)
 end
 function M:setData(params )
 end
 function M:initView( target )
-end
-function M:update( dt )
-	self.time_ = self.time_ + dt
-	local secondsDelta =  self.time_ - self.lastSecond_
-	if secondsDelta>=1 then
-		self.lastSecond_ = self.lastSecond_ + secondsDelta
-		self:secondsCall(self.lastSecond_)
-	end
-end
-function M:secondsCall( time )
 	local map = self.target:getGameNode("map")
 	local config = {
 		_type = "GameNode",
-		_name = "bullet",
+		_name = "range",
 		_component = {
 			{
 				_type = "cc_node",
-				contentsize = {width = 60,height = 60},
-				pos = {x =578,y = 50},
+				contentsize = {width = 600,height = 600},
+				pos = {x =-300,y = -300},
 				AnchPos = {x = 0,y = 0},
 			},
 			{
-				_type = "cc_sprite",
-				spriteFrameName = "bullet1",
-				isEnough = true,
-			},
-			{
-				_type = "plane_move",dir = "down",
-			},
+				_type = "cc_DrawComponent",
+			}
 		},
 	}
 	local node = GameSceneMgr.createGameNode(config)
-	map:addChild(node)
+	target:addChild(node)
 	map:addObject(node)
+	-- map:addObserver(self,"EVENT_COLLISION_BEGAN",function ( data )
+	-- 	print(data.objA:getName(),"start collision",data.objB:getName())
+	-- end)
+	-- map:addObserver(self,"EVENT_COLLISION_ENDED",function ( data )
+	-- 	print(data.objA:getName(),"ended collision",data.objB:getName())
+	-- end)
+end
+function M:update( dt )
 end
 function M:updateView( target )
 end

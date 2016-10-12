@@ -6,6 +6,7 @@ local M = class("componentBase")
 function M:ctor( target ,params)
 	self.target = target
 	self.tlObject = {}
+	self.Tlcolls = {}
 	self:setData(params)
 end
 function M:setData(params )
@@ -16,15 +17,48 @@ function M:addObject( target,object )
 	table.insert(self.tlObject,object)
 end
 function M:update( dt )
-	for i=1,#self.tlObject do
-		for j=i+1,#self.tlObject do
-			if self:onRectTrigger(self.tlObject[i],self.tlObject[j]) then
-				self.target:dispatch("trigger",{objA = self.tlObject[i],objB = self.tlObject[j]})
-				if self.tlObject[i].onTrigger then
-					self.tlObject[i]:onTrigger(self.tlObject[j])
+	-- for i=1,#self.tlObject do
+	-- 	for j=i+1,#self.tlObject do
+	-- 		if self:onRectTrigger(self.tlObject[i],self.tlObject[j]) then
+	-- 			self.target:dispatch("trigger",{objA = self.tlObject[i],objB = self.tlObject[j]})
+	-- 			if self.tlObject[i].onTrigger then
+	-- 				self.tlObject[i]:onTrigger(self.tlObject[j])
+	-- 			end
+	-- 			if self.tlObject[j].onTrigger then
+	-- 				self.tlObject[j]:onTrigger(self.tlObject[i])
+	-- 			end
+	-- 			if not self.Tlcolls[self.tlObject[i]] then
+	-- 				--todo
+	-- 			end
+	-- 		else
+
+	-- 		end
+	-- 	end
+	-- end
+	for idxA,objA in ipairs(self.tlObject) do
+		for idxB,objB in ipairs(self.tlObject) do
+			if idxA~=idxB then
+				if not self.Tlcolls[objA] then
+					self.Tlcolls[objA] = {}
 				end
-				if self.tlObject[j].onTrigger then
-					self.tlObject[j]:onTrigger(self.tlObject[i])
+				local objBCollisionWithObj1 = self.Tlcolls[objA][objB]
+				if self:onRectTrigger(objA,objB) then
+					self.target:dispatch("trigger",{objA = objA,objB = objB})
+					if objA.onTrigger then
+						objA:onTrigger(objB)
+					end
+					if objB.onTrigger then
+						objB:onTrigger(objA)
+					end
+					if not objBCollisionWithObj1 then
+						self.target:dispatch("EVENT_COLLISION_BEGAN",{objA = objA,objB = objB})
+					end
+					self.Tlcolls[objA][objB] = true
+				else
+					if objBCollisionWithObj1 then
+						self.target:dispatch("EVENT_COLLISION_ENDED",{objA = objA,objB = objB})
+					end
+					self.Tlcolls[objA][objB] = nil
 				end
 			end
 		end
