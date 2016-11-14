@@ -128,6 +128,7 @@ function M.loadingGameLayer(gameLayer,tlCmd)
     end
 end
 function M.loadGameNode( gameNode )
+    
     gameNode:initView()
     gameNode:enterView()
     -- gameNode:updateView()
@@ -173,6 +174,7 @@ function M.removeObject( target )
         },
     }
 end
+--创建最开始的节点
 function M.createGameNode( config ,isLoad)
     local tlNode = {}
     local gameNode = M.createObject(config,tlNode)
@@ -184,22 +186,12 @@ function M.createGameNode( config ,isLoad)
     
     return gameNode,tlNode
 end
-local nodeIndex = 0
 function M.createObject( config,tlNode)
     local node = GameNode.new(config)
-    -- if config._component then
-    --     for i,comp in ipairs(config._component) do
-    --         node:addComponent(comp)
-    --     end
-    -- end
-    -- GameSceneMgr.loadGameNode(node)
     table.insert(tlNode,node)
     node:setAllGameNode(tlNode)
-    nodeIndex = nodeIndex+1
-    node.index = nodeIndex
     if config._children then
-        for k,child in pairs(config._children) do
-            
+        for i,child in ipairs(config._children) do            
             node:addChild(M.createObject(child,tlNode))
         end
     end        

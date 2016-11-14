@@ -9,12 +9,9 @@ function M:ctor( target ,params)
 end
 function M:setData(params )
 end
-function M:initView( target )
-	target:setViewCallback(function ( params,index )
-		-- target:getGameNode("switchNode"):switchTo(index)
-	end)
+function M:initView(  )
 end
-function M:updateView( target )
+function M:updateView(  )
 end
 --对应onenter
 function M:enterView(  )

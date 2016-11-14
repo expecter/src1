@@ -8,16 +8,18 @@ function M:ctor( target ,params)
 	self.contentSize = params.contentsize or cc.size(0,0)
 	self.anchPos = params.AnchPos or cc.p(0,0)
 	self.pos = params.pos or cc.p(0,0)
+	self.visible = params.visible~=false
 	self:setData(params)
 end
 function M:setData(params )
 end
-function M:initView( target )
+function M:initView(  )
 	self.target:setContentSize(self.contentSize)
 	self.target:setAnchorPoint(self.anchPos)
 	self.target:setPosition(self.pos)
+	self.target:setVisible(self.visible)
 end
-function M:updateView( target )
+function M:updateView(  )
 end
 --对应onenter
 function M:enterView(  )

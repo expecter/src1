@@ -7,14 +7,12 @@
 local M = class(...,function (  )
 	return display.newNode()
 end)
-M.NODE_SETDATA = "nodesetdata"
-M.NODE_CLICK = "nodeclick"
 function M:ctor( params )
 	self.components = {}
 	self.TlComName = {}
 	self._name = params._name or ""
 	--自带响应回调
-	self:addComponent({_type = "cc_observer"})
+	-- self:addComponent({_type = "cc_observer"})
 	if params and params._component then
 		for i,comp in ipairs(params._component) do
 			if ComponentFactory.hasComponent(comp._type) then
@@ -33,39 +31,45 @@ function M:onExit(  )
 	end
 end
 function M:getTlInitView(  )
-	return {
-		function (  )
-			self:initView()
-		end	
-	}
+	local tlFunc = {}
+	for k,com in ipairs(self.components) do
+		if com.initView then
+			table.insert(tlFunc,handler(com,com.initView))
+		end
+	end
+	return tlFunc
 end
 function M:getTlOnEnter(  )
-	return {
-		function (  )
-			self:enterView()
-		end	
-	}
+	local tlFunc = {}
+	for k,com in ipairs(self.components) do
+		if com.enterView then
+			table.insert(tlFunc,handler(com,com.enterView))
+		end
+	end
+	return tlFunc
 end
 function M:getTlOnExit(  )
-	return {
-		function (  )
-			self:exitView()
-		end	
-	}
+	local tlFunc = {}
+	for k,com in ipairs(self.components) do
+		if com.exitView then
+			table.insert(tlFunc,handler(com,com.exitView))
+		end
+	end
+	return tlFunc
 end
 function M:getTlReleaseView(  )
-	return {
-		function (  )
-			self:releaseView()
-		end	
-	}
+	local tlFunc = {}
+	for k,com in ipairs(self.components) do
+		if com.releaseView then
+			table.insert(tlFunc,handler(com,com.releaseView))
+		end
+	end
+	return tlFunc
 end
 
 function M:initView(  )
-	for k,com in ipairs(self.components) do
-		if com.initView then
-			com:initView(self)
-		end
+	for index,func in ipairs(self:getTlInitView()) do
+		func()
 	end
 	GameSceneMgr:addEventListener("update", function(event)
 		self:update(event.data)
@@ -86,25 +90,18 @@ function M:updateView( )
 	end
 end
 function M:enterView(  ) --对应onenter
-	for k,com in ipairs(self.components) do
-		if com.enterView then
-			com:enterView(self)
-		end		
+	for index,func in ipairs(self:getTlOnEnter()) do
+		func()
 	end
 end
 function M:exitView(  ) --对应onexit
-	for k,com in ipairs(self.components) do
-		if com.exitView then
-			com:exitView(self)
-		end
-		
+	for index,func in ipairs(self:getTlOnExit()) do
+		func()
 	end
 end
 function M:releaseView(  )
-	for k,com in ipairs(self.components) do
-		if com.releaseView then
-			com:releaseView(self)
-		end
+	for index,func in ipairs(self:getTlReleaseView()) do
+		func()
 	end
 end
 function M:addComponent( params )
@@ -121,24 +118,6 @@ function M:addComponent( params )
 	self.TlComName[comName] = self.components[#self.components]
 	self.TlComName[comName]:bindFunc(self)
 end
--- function M:updateData( params )
--- 	self:setData(params)
--- 	for componentName,var in pairs(params) do
--- 		if self.components[componentName] and self.components[componentName].setData then
--- 			self.components[componentName]:setData(var)
--- 		end		
--- 	end
--- end
---inLineFunc:initView updateView
--- function M:addInFunc( component )
--- 	local func = {"initView","updateView"}
--- 	for _,name in ipairs(func) do
--- 		if component[name] then
--- 			self:bindMethod(component,name)
--- 		end
--- 	end
--- end
-
 function M:getComponent( componentName )
 	return self.TlComName[componentName]
 end

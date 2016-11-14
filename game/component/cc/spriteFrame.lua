@@ -12,7 +12,7 @@ function M:setData(params )
 end
 function M:initView( target )
 	for i,frameName in ipairs(self.tlFrame) do
-		target:addSpriteFrame(frameName)
+		self.target:addSpriteFrame(frameName)
 	end
 end
 function M:addSpriteFrame( target,frameName )

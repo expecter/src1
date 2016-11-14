@@ -12,15 +12,15 @@ function M:setData(params )
 end
 function M:initView( target )
 	self.label = display.newTTFLabel{text=self.text,size=30}
-    target:addChild(self.label)
-    self.label:setPosition(target:getCenterPosition())
+    self.target:addChild(self.label)
+    self.label:setPosition(self.target:getCenterPosition())
     self.label:setAnchorPoint(cc.p(0,0))
 end
 function M:setText( target,text )
 	self.text = text
 	self:updateView()
 end
-function M:updateView( target )
+function M:updateView( )
 	self.label:setString(self.text)
 end
 --对应onenter

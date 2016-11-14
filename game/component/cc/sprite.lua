@@ -21,11 +21,11 @@ function M:initView( target )
 		self.viewSprite = display.newSprite(string.format("#%s.png",self.spriteFrameName))
 	end	
 	if self.isEnough then
-		target:setContentSize(self.viewSprite:getContentSize())
+		self.target:setContentSize(self.viewSprite:getContentSize())
 	end
-	self.viewSprite:setPosition(cc.p(target:getCenterPosition()))
+	self.viewSprite:setPosition(cc.p(self.target:getCenterPosition()))
 	-- self.viewSprite:setAnchorPoint(cc.p(0,0))
-	target:addChild(self.viewSprite)
+	self.target:addChild(self.viewSprite)
 end
 function M:updateView( target )
 	
