@@ -16,13 +16,13 @@ function M:setData(params )
     self.isScale_ = params.isScale==true
     self.onTouch_ = params.touch_ or handler(self, self.onTouch)
 end
-function M:initView( target )
+function M:initView(  )
 	--点击层
     self.touchlayer = display.newLayer() 
     self.touchlayer:addTouchEventListener( self.onTouch_, false, self.isSwallow)
     self.touchlayer:setTouchEnabled(true)
     self.touchlayer:setVisible(false)
-    target:addChild(self.touchlayer)
+    self.target:addChild(self.touchlayer)
 end
 
 function M:enterView(  )

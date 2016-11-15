@@ -92,12 +92,12 @@ function M:ctor()
     local topPanelMgr = GamePanelMgr.new()
     M.instance:addChild(topPanelMgr, M.TopZOrder)
     M.instance.topPanelMgr = topPanelMgr
-    M.scheduler = require('framework.scheduler').scheduleUpdateGlobal(function ( dt )
-        M:dispatchEvent{
-            name = "update",
-            data = dt,
-        }
-    end)
+    -- M.scheduler = require('framework.scheduler').scheduleUpdateGlobal(function ( dt )
+    --     M:dispatchEvent{
+    --         name = "update",
+    --         data = dt,
+    --     }
+    -- end)
 end
 
 function M.getScene()

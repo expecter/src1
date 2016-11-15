@@ -14,7 +14,7 @@ function M:initView( target )
 	self.label = display.newTTFLabel{text=self.text,size=30}
     self.target:addChild(self.label)
     self.label:setPosition(self.target:getCenterPosition())
-    self.label:setAnchorPoint(cc.p(0,0))
+    -- self.label:setAnchorPoint(cc.p(0,0))
 end
 function M:setText( target,text )
 	self.text = text

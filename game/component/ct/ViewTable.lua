@@ -4,34 +4,29 @@
 --
 local M = class("eventComponent")
 function M:ctor( target ,params)
+	dump("eventComponent")
 	self.target = target
 	self.cellMode = params.cellMode or function ( params )
-		return GameCell.new(params)
+		return GameSceneMgr.createGameNode(require("game.config.gameCell"))
 	end
 	self.isTapMenu = DEFAULT_TRUE(params.isTapMenu)
 	self.defaultIndex = params.defaultIndex or 1
 	self:setData(params)
 end
 function M:setData(params )
-	self.tlData = params.tlData
+	self.tlData = ref.getRef(params.tlData)
 end
 -- function M:cellMode( cmdX )
 	
 -- end
 --exportFunc
 function M:initView( target )
-	-- self.viewlist = UICommon.createViewList(target,self.isMovable)	
+	self.viewtable = UICommon.initTableTabMenu(self.target,"h",160,1,handler(self,self.onClick),self.cellMode,true)
+	self:updateView()	
 end
 function M:updateView( target )
-	if not self.viewlist then
-		self.viewlist = UICommon.createViewList(target,self.isMovable)
-	end	
-	self.viewtable = UICommon.initTableTabMenu(target,"h",2,70,handler(self,self.onClick),self.cellMode,true)
-    viewtable:setTlUnitData(self.tlData)
-end
-function M:createViewNode( params )
-	
-	return GameCell.new(params)
+	-- dump(self.tlData)
+    self.viewtable:setTlUnitData(self.tlData)
 end
 function M:onClick( node,cmdX )
 	self.callback_(cmdX)

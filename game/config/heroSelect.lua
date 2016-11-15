@@ -52,6 +52,25 @@ local M = {
 				},
 			}
 		},
+		{
+			_type = "GameNode",
+			_name = "child1",
+			_component = {
+				{
+				_type = "cc_node",
+				contentsize = {width = 600,height = 100},
+				AnchPos = {x = 0,y = 0},
+				pos = {x =10,y = 580},
+				},
+				{
+					_type = "ct_ViewTable", 
+					tlData = {
+						_type = "ref",refName = "refarmy",tmKey = {}
+					}
+				},
+				{_type = "modelComponent"}
+			},
+		},
 	},
 }
 

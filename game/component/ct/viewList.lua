@@ -6,11 +6,11 @@ local M = class("ct_viewList")
 function M:ctor( target ,params)
 	self.target = target
 	self.cellMode = params.cellMode or function ( params )
-		local config = GameSceneMgr.updateConfig("game.config.gameCell",{
-			_type = "cc_label",
-			text = params.name
-		})
-		return GameSceneMgr.createGameNode(config)
+		-- local config = GameSceneMgr.updateConfig("game.config.gameCell",{
+		-- 	_type = "cc_label",
+		-- 	text = params.name
+		-- })
+		return GameSceneMgr.createGameNode(require("game.config.gameCell"))
 	end
 	self.isMovable = params.isMovable
 	self.isTapMenu = DEFAULT_TRUE(params.isTapMenu)
@@ -24,8 +24,8 @@ end
 	
 -- end
 --exportFunc
-function M:initView( target )
-	self.viewlist = UICommon.createViewList(target,self.isMovable)
+function M:initView(  )
+	self.viewlist = UICommon.createViewList(self.target,self.isMovable)
 	self:updateView()
 end
 function M:updateView( target )
@@ -39,6 +39,10 @@ function M:updateView( target )
 	if self.isTapMenu then
 		local orgNode = nil
 		local function switchEvent( index )
+			GameSceneMgr:dispatchEvent{
+	            name = "switch",
+	            data = index,
+	        }
 	        if orgNode and orgNode.normal then
 	            orgNode:normal()
 	        end
@@ -56,7 +60,10 @@ function M:updateView( target )
 	    switchEvent(self.defaultIndex)
 	else
 		self.viewlist:setClickedEvent(function ( node,index,x,y )
-	        
+	        GameSceneMgr:dispatchEvent{
+	            name = "click",
+	            data = index,
+	        }
 	    end)
 	end
 end
