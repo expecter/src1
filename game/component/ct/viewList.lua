@@ -10,15 +10,27 @@ function M:ctor( target ,params)
 		-- 	_type = "cc_label",
 		-- 	text = params.name
 		-- })
-		return GameSceneMgr.createGameNode(require("game.config.gameCell"))
+		local config = clone(require("game.config.gameCell"))
+		config._data = params
+		return GameSceneMgr.createGameNode(config)
 	end
 	self.isMovable = params.isMovable
 	self.isTapMenu = DEFAULT_TRUE(params.isTapMenu)
 	self.defaultIndex = params.defaultIndex or 1
 	self:setData(params)
 end
-function M:setData(params )
-	self.tlData = ref.getRef(params.tlData)
+function M:setData( params )
+	local mtype = params.tlData._type
+	if not mtype then
+		self.tlData = params
+		return
+	end
+	if mtype == "ref" then
+		self.tlData = ref.getRef(params.tlData)
+	end
+	if mtype == "cache" then
+		self.tlData = GameObj.ObjArmy.getCacheData()
+	end
 end
 -- function M:cellMode( cmdX )
 	
@@ -27,19 +39,26 @@ end
 function M:initView(  )
 	self.viewlist = UICommon.createViewList(self.target,self.isMovable)
 	self:updateView()
+	GameSceneMgr:addEventListener("time",function (  )
+		self:updateSecView()
+	end)
+end
+function M:updateSecView( )
+	for i,node in ipairs(self.viewlist:getTlCcNode()) do
+		node:updateView()
+	end
 end
 function M:updateView( target )
 	local tlNode = {}
 	for k,v in ipairs(self.tlData) do
 		local node = self.cellMode(v)
-		-- node:setText(v.name)
         table.insert(tlNode,node)
     end
 	self.viewlist:setTlCcNode(tlNode)
 	if self.isTapMenu then
 		local orgNode = nil
 		local function switchEvent( index )
-			GameSceneMgr:dispatchEvent{
+			ObjMessage:dispatchEvent{
 	            name = "switch",
 	            data = index,
 	        }
@@ -60,8 +79,8 @@ function M:updateView( target )
 	    switchEvent(self.defaultIndex)
 	else
 		self.viewlist:setClickedEvent(function ( node,index,x,y )
-	        GameSceneMgr:dispatchEvent{
-	            name = "click",
+	        ObjMessage:dispatchEvent{
+	            name = ObjMessage.clickEvent.switch,
 	            data = index,
 	        }
 	    end)

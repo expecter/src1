@@ -54,7 +54,6 @@ M.TipZOrder = 8
 --上层管理框的ZOrder
 M.TopZOrder = 9
 
-
 function M:ctor()
     M.instance = self
     
@@ -92,12 +91,19 @@ function M:ctor()
     local topPanelMgr = GamePanelMgr.new()
     M.instance:addChild(topPanelMgr, M.TopZOrder)
     M.instance.topPanelMgr = topPanelMgr
-    -- M.scheduler = require('framework.scheduler').scheduleUpdateGlobal(function ( dt )
-    --     M:dispatchEvent{
-    --         name = "update",
-    --         data = dt,
-    --     }
-    -- end)
+    M.scheduler = require('framework.scheduler').scheduleUpdateGlobal(function ( dt )
+        M:dispatchEvent{
+            name = "update",
+            data = dt,
+        }
+    end)
+    M.Timescheduler = require('framework.scheduler').scheduleGlobal(function ( dt )
+        M:dispatchEvent{
+            name = "time",
+            data = dt,
+        }
+    end,1)
+    
 end
 
 function M.getScene()

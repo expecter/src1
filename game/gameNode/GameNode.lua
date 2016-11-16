@@ -11,6 +11,9 @@ function M:ctor( params )
 	self.components = {}
 	self.TlComName = {}
 	self._name = params._name or ""
+	if params._data then
+		self:setData(params._data)
+	end
 	--自带响应回调
 	-- self:addComponent({_type = "cc_observer"})
 	if params and params._component then
@@ -19,8 +22,14 @@ function M:ctor( params )
 				self:addComponent(comp)
 			end
 		end
-	end
-	
+	end	
+end
+--设置节点携带的可变更数据
+function M:setData( data )
+	self._data = data
+end
+function M:getData(  )
+	return self._data
 end
 function M:getName(  )
 	return self._name

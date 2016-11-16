@@ -23,9 +23,9 @@ local M = {
 		{
 			_type = "cc_ClickComponent",isScale = true
 		},
-	},
-	_children = {
-
+		{
+			_type = "temp_cell"
+		},
 	},
 }
 return M

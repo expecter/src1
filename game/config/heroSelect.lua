@@ -63,9 +63,9 @@ local M = {
 				pos = {x =10,y = 580},
 				},
 				{
-					_type = "ct_ViewTable", 
+					_type = "ct_viewList", 
 					tlData = {
-						_type = "ref",refName = "refarmy",tmKey = {}
+						_type = "cache",refName = "refarmy",tmKey = {}
 					}
 				},
 				{_type = "modelComponent"}

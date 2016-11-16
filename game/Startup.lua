@@ -26,9 +26,14 @@ GameObj = require("game.gameObjects.GameObj")
 CmdData = require("gameCaches.CmdData")
 CmdCommon = require("gameCaches.caches.CmdCommon")
 GameStateManager = require("utils.GameStateManager").new()
+GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()
 GameCacheMgr = require("gameCaches.GameCacheMgr")
 GameNode = require("game.gameNode.GameNode")
 component = require("game.component.component")
+ObjMessage = require("game.gameObjects.ObjMessage")
+--游戏管理器
+GameMgr = require("game.GameMgr")
+require("game.gameObjects.ObjArmy")
 ref = require("game.ref.ref")
 require("game.GameGlobalConfig")
 Helper = require("utils.Helper")
@@ -38,7 +43,7 @@ UICommon = require("game.view.UICommon")
 net = {}
 net.Socket = require("net.SocketTCP")
 --场景管理器
-GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()
+
 display.replaceScene(GameSceneMgr)
 DEFAULT_TRUE = function ( a ) return a~= false end
 DEFAULT_FALSE = function ( a ) return a == true end
