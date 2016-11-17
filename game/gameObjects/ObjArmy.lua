@@ -3,21 +3,29 @@
 -- Date: 2016-11-16 21:47:08
 --
 local M = {}
-M.cache = {}
-GameMgr:addEventListener("enterGame",function()
-    for i,v in ipairs(ref.getRef{refName = "refarmy"}) do
-    	local cache = clone(v)
-    	cache.health = 100
-    	M.cache[i] = cache
-    end
-end)
+-- GameMgr:addEventListener("enterGame",function()
+-- end)
 
-GameSceneMgr:addEventListener("time",function (  )
-	for i,v in ipairs(M.cache) do
-		v.health = v.health-1
-	end
-end)
+-- GameMgr:addEventListener("exitGame",function()
+-- end)
+--数据筛选层
 function M.getCacheData(  )
 	return M.cache
+end
+--界面数据请求层
+
+function M.newHero(  )	
+	return CmdData.appendCmdX(clone(CmdCommon["CmdHero"]))
+end
+function M.createNewObject(  )
+	local index = #M.getHeroCaches()+1
+	M.request(M.className,M.newHero())
+end
+function M.request( className,data )
+	static_Listener:dispatchEvent{
+        name = "CmdAppend",
+        data = data,
+        className = className,
+    }
 end
 return M
