@@ -24,9 +24,13 @@ function M:initView( target )
 		table.insert(self.tlView,view)
 		target:addChild(view)
 	end
-	print("switchTo")
 	target:switchTo(self.defaultIndex)
 end
+
+function M:onUpdate( cmdX )
+	self.lastView:updateView()
+end
+
 function M:updateView( target )
 	if self.lastView and self.lastView.updateView then
 		self.lastView:updateView()
