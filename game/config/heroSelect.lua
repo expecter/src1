@@ -67,7 +67,17 @@ local M = {
 					tlData = {
 						_type = "cache",refName = "refarmy",tmKey = {}
 					}
-				}
+				},
+				-- {
+				-- 	_type = "cacheComponent",
+				-- 	caches = {
+				-- 		{
+				-- 			name = "",							
+				-- 			node = "",
+				-- 			component = "",
+				-- 		},
+				-- 	},
+				-- }
 			},
 		},
 	},
