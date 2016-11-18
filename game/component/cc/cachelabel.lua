@@ -5,7 +5,8 @@
 local M = class("componentBase")
 function M:ctor( target ,params)
 	self.target = target
-	self.text = params.text or "text"
+	self.tlData = GameObj.ObjArmy.getCacheData()
+	self.index = params.index
 	self:setData(params)
 end
 function M:setData(params )
@@ -15,16 +16,13 @@ function M:initView( target )
     self.target:addChild(self.label)
     self.label:setPosition(self.target:getCenterPosition())
     -- self.label:setAnchorPoint(cc.p(0,0))
-end
-function M:setText( target,text )
-	self.text = text
-	self:updateView()
+    self:updateView()
 end
 function M:updateView( )
-	self.label:setString(self.text)
+	self.label:setString(self.tlData[self.index].health)
 end
 function M:onUpdate( cmdX )
-	
+	self:updateView()
 end
 --对应onenter
 function M:enterView(  )
@@ -39,6 +37,5 @@ function M:releaseView(  )
 	
 end
 function M:bindFunc( target )
-	target:bindOnceMethod(self,"setText")
 end
 return M

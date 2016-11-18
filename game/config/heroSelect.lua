@@ -13,20 +13,7 @@ local M = {
 		}
 	},
 	_children = {
-		{
-			_type = "GameNode",
-			_component = {
-				{
-					_type = "cc_node",
-					contentsize = {width = 1130,height = 240},
-					AnchPos = {x = 0,y = 0},
-					pos = {x =3,y = 400},
-				},
-				{
-					_type = "cc_DrawComponent",
-				},
-			}
-		},
+		
 		{
 			_type = "GameNode",
 			_component = {
@@ -67,18 +54,41 @@ local M = {
 					tlData = {
 						_type = "cache",refName = "refarmy",tmKey = {}
 					}
+				},				
+				{
+					_type = "cacheComponent",
+					caches = {
+						{
+							component = "ct_viewList",
+						},
+					},
 				},
-				-- {
-				-- 	_type = "cacheComponent",
-				-- 	caches = {
-				-- 		{
-				-- 			name = "",							
-				-- 			node = "",
-				-- 			component = "",
-				-- 		},
-				-- 	},
-				-- }
+				{
+					_type = "event", 
+				},
 			},
+		},
+		{
+			_type = "GameNode",
+			_component = {
+				{
+					_type = "cc_node",
+					contentsize = {width = 1130,height = 240},
+					AnchPos = {x = 0,y = 0},
+					pos = {x =3,y = 400},
+				},
+				{
+					_type = "cc_cachelabel",index = 2,
+				},
+				{
+					_type = "cacheComponent",
+					caches = {
+						{
+							component = "cc_cachelabel",
+						},
+					},
+				},
+			}
 		},
 	},
 }

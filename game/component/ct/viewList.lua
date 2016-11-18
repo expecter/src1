@@ -39,9 +39,9 @@ end
 function M:initView(  )
 	self.viewlist = UICommon.createViewList(self.target,self.isMovable)
 	self:updateView()
-	GameSceneMgr:addEventListener("time",function (  )
-		self:updateSecView()
-	end)
+	-- GameSceneMgr:addEventListener("time",function (  )
+	-- 	self:updateSecView()
+	-- end)
 end
 function M:updateSecView( )
 	for i,node in ipairs(self.viewlist:getTlCcNode()) do

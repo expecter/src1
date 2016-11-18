@@ -3,6 +3,9 @@
 -- Date: 2016-05-12 09:45:06
 --
 local M = {}
+--debugging
+------------------
+require("game.debugging.debugging")
 ModuleUtil = require("utils.ModuleUtil")
 --view模块初始化, 一些公共视图, view.ViewTable 可以访问到相应的模块
 -------------------

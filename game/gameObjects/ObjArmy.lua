@@ -8,7 +8,11 @@ M.tmView_bindOne = {}
 M.tmView_bind = {}
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 GameMgr:addEventListener("enterGame",function()
-	M.cache = GameCache.new(GameStateManager:getDataByName("ObjArmy"))
+	M.cache = GameStateManager:getDataByName("ObjArmy")
+    dump(M.cache)
+    if not M.cache then
+        M.cache = ref.getRef({refName = "refarmy"})
+    end
 end)
 
 GameMgr:addEventListener("exitGame",function()
@@ -98,24 +102,32 @@ function M.getCacheData(  )
 	return M.cache
 end
 
-function M.getIndex(  )
-	
+function M.getIndex( data,cmdX )
+	for i,v in ipairs(data) do
+        if v == cmdX then
+            return i
+        end
+    end
+    return nil
 end
 
 --界面数据请求层
-
-function M.newHero(  )	
-	return CmdData.appendCmdX(clone(CmdCommon["CmdHero"]))
+function M.updateNum( index )
+    M.cache[index].health = M.cache[index].health-1
+    M.dispatchUpdateEvent(M.cache[index])
 end
-function M.createNewObject(  )
-	local index = #M.getHeroCaches()+1
-	M.request(M.className,M.newHero())
-end
-function M.request( className,data )
-	static_Listener:dispatchEvent{
-        name = "CmdAppend",
-        data = data,
-        className = className,
-    }
-end
+-- function M.newHero(  )	
+-- 	return CmdData.appendCmdX(clone(CmdCommon["CmdHero"]))
+-- end
+-- function M.createNewObject(  )
+-- 	local index = #M.getHeroCaches()+1
+-- 	M.request(M.className,M.newHero())
+-- end
+-- function M.request( className,data )
+-- 	static_Listener:dispatchEvent{
+--         name = "CmdAppend",
+--         data = data,
+--         className = className,
+--     }
+-- end
 return M

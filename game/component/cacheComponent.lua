@@ -18,7 +18,7 @@ end
 --对应onenter
 function M:enterView(  )
 	for i,cache in ipairs(self.caches) do
-		local gameCache = GameCacheMgr.getGameCacheByName(cache.name)
+		local gameCache = GameObj.ObjArmy.getCacheData()
 		local node = nil
 		if cache.component then
 			node = self.target:getComponent(cache.component)
@@ -33,7 +33,7 @@ function M:enterView(  )
 		-- 		end
 		-- 	end)
 		-- else
-			gameCache:bind(self.target,{
+			GameObj.ObjArmy.bind(self.target,{
 				onAdd = function ( cmdX )
 					if node.onAdd then
 						node:onAdd(cmdX)
