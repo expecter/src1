@@ -77,17 +77,24 @@ local M = {
 					AnchPos = {x = 0,y = 0},
 					pos = {x =3,y = 400},
 				},
+				-- {
+				-- 	_type = "cc_label",text = "aaaa"
+				-- },
 				{
-					_type = "cc_cachelabel",index = 2,
-				},
-				{
-					_type = "cacheComponent",
-					caches = {
-						{
-							component = "cc_cachelabel",
-						},
+					_type = "cache_cachelabel",object = {
+						name = "ObjArmy",
+						key = 2,
+						field = "health",
 					},
 				},
+				-- {
+				-- 	_type = "cacheComponent",
+				-- 	caches = {
+				-- 		{
+				-- 			component = "cache_cachelabel",
+				-- 		},
+				-- 	},
+				-- },
 			}
 		},
 	},

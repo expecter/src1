@@ -80,9 +80,11 @@ function M:initView(  )
 	for index,func in ipairs(self:getTlInitView()) do
 		func()
 	end
-	GameSceneMgr:addEventListener("update", function(event)
-		self:update(event.data)
-	end)
+	-- GameSceneMgr:addEventListener("update", function(event)
+	-- 	if self then
+	-- 		self:update(event.data)
+	-- 	end		
+	-- end)
 end
 function M:update( dt )
 	for k,com in ipairs(self.components) do
@@ -118,7 +120,7 @@ function M:addComponent( params )
 	local component = ComponentFactory.createComponent(comName,self,params)
 	if component.getDepends then
 		for i,depends in ipairs(component:getDepends()) do
-			if not self:getComponent() then
+			if not self:getComponent(depends._type) then
 				self:addComponent(depends)
 			end			
 		end
