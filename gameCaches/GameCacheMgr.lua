@@ -16,7 +16,6 @@ for _,name in pairs(CmdCommon.CacheName) do
 end
 static_Listener:addEventListener("CmdAppend",function ( event )
 	local data = event.data
-	dump(data)
 	tmGameCache[event.className]:updateByCmdX(data)
 end)
 function M.getGameCacheByName(enumCacheName)
