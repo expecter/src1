@@ -28,6 +28,23 @@ function M:updateView( target )
 	-- dump(self.tlData)
     self.viewtable:setTlUnitData(self.tlData)
 end
+
+--缓存使用方法
+function M:onAdd( cmdX )
+	-- local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
+	self.viewtable:setTlUnitData(self.tlData)
+end
+
+function M:onUpdate( cmdX )
+	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
+	self.viewtable:updateUnitData(index,self.tlData)
+end
+
+function M:onDelete( cmdX )
+	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
+	self.viewtable:removelUnitData(index)
+end
+
 function M:onClick( node,cmdX )
 	self.callback_(cmdX)
 end

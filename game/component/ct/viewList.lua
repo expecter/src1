@@ -86,6 +86,24 @@ function M:updateView( target )
 	    end)
 	end
 end
+--缓存使用方法
+function M:onAdd( cmdX )
+	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
+	self.viewlist:insertCcNode(self.cellMode(cmdX),index)
+end
+
+function M:onUpdate( cmdX )
+	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
+	self.viewlist:getTlCcNode()[index]:updateView()
+end
+
+function M:onDelete( cmdX )
+	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
+	self.viewlist:removeNode(function(viewHospitalItem, i)
+			return i == index
+		end)
+end
+
 function M:setViewCallback( target,callback )
 	self.callback_ = callback
 	self.callback_(self.tlData[self.defaultIndex],self.defaultIndex)
