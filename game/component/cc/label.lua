@@ -23,12 +23,9 @@ end
 function M:updateView( )
 	self.label:setString(self.text)
 end
-function M:onUpdate( cmdX )
-	
-end
 --对应onenter
 function M:enterView(  )
-	
+	self:updateView()
 end
 --对应onexit
 function M:exitView(  )

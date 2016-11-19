@@ -44,22 +44,22 @@ local M = {
 			_name = "child1",
 			_component = {
 				{
-				_type = "cc_node",
-				contentsize = {width = 600,height = 100},
-				AnchPos = {x = 0,y = 0},
-				pos = {x =10,y = 580},
+					_type = "cc_node",
+					contentsize = {width = 600,height = 100},
+					AnchPos = {x = 0,y = 0},
+					pos = {x =10,y = 580},
 				},
 				{
-					_type = "ct_viewList", 
+					_type = "cache_viewList", 
 					tlData = {
 						_type = "cache",refName = "refarmy",tmKey = {}
 					}
 				},				
 				{
-					_type = "cacheComponent",
+					_type = "cache_bind",
 					caches = {
 						{
-							component = "ct_viewList",
+							component = "cache_viewList",
 						},
 					},
 				},
@@ -81,7 +81,7 @@ local M = {
 				-- 	_type = "cc_label",text = "aaaa"
 				-- },
 				{
-					_type = "cache_cachelabel",object = {
+					_type = "cache_label",object = {
 						name = "ObjArmy",
 						key = 2,
 						field = "health",

@@ -2,26 +2,21 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("componentBase")
+local M = class("cache_label")
 function M:ctor( target ,params)
 	self.target = target
 	self.object = params.object
-	self.time = 1
+	self.cacheName = ""
 	self:setData(params)
 end
 function M:getDepends(  )
 	return {
 		{
-			_type = "cacheComponent",
-			caches = {
-				{
-					component = "cache_cachelabel",
-				},
-			},
+			_type = "cc_label",
 		},
 		{
-			_type = "cc_label",
-		},	
+			_type = "cache_bind",
+		},			
 	}
 end
 function M:setData(params )
@@ -40,7 +35,8 @@ function M:onUpdate( cmdX )
 end
 --对应onenter
 function M:enterView(  )
-	self.target:setText(self:getCacheText())
+	-- self.target:setText(self:getCacheText())
+	self.target:bind(self,self.cacheName)
 end
 --对应onexit
 function M:exitView(  )

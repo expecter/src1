@@ -127,7 +127,10 @@ function M:addComponent( params )
 	end
 	table.insert(self.components,component)
 	self.TlComName[comName] = self.components[#self.components]
-	self.TlComName[comName]:bindFunc(self)
+	if self.TlComName[comName].bindFunc then
+		self.TlComName[comName]:bindFunc(self)
+	end
+	
 end
 function M:getComponent( componentName )
 	return self.TlComName[componentName]

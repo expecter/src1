@@ -6,6 +6,9 @@ local M = {}
 M.cache = {}
 M.tmView_bindOne = {}
 M.tmView_bind = {}
+M.eventName = {
+    updateNum = "updateNum",
+}
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 GameMgr:addEventListener("enterGame",function()
 	M.cache = GameStateManager:getDataByName("ObjArmy")
@@ -19,7 +22,6 @@ GameMgr:addEventListener("exitGame",function()
 	GameStateManager:save({name = "ObjArmy",data = M.cache})
 	M.cache = {}
 end)
-
 function M.dispatchAddEvent( cmdX )
 	--清除已经过期的view
     M.cleanUsedView()
@@ -112,6 +114,11 @@ function M.getIndex( data,cmdX )
 end
 
 --界面数据请求层
+for k,eventName in pairs(M.eventName) do
+    M:addEventListener(eventName,function ( cmdX )
+        M[eventName](cmdX.data)
+    end)
+end
 function M.updateNum( index )
     M.cache[index].health = M.cache[index].health-1
     M.dispatchUpdateEvent(M.cache[index])

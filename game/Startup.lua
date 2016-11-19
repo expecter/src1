@@ -42,6 +42,7 @@ require("game.GameGlobalConfig")
 Helper = require("utils.Helper")
 AlertTips = require("utils.AlertTips")
 view = require("game.view.view")
+dataUtil = require("utils.dataUtil")
 UICommon = require("game.view.UICommon")
 net = {}
 net.Socket = require("net.SocketTCP")

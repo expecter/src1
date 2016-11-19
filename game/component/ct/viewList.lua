@@ -6,10 +6,6 @@ local M = class("ct_viewList")
 function M:ctor( target ,params)
 	self.target = target
 	self.cellMode = params.cellMode or function ( params )
-		-- local config = GameSceneMgr.updateConfig("game.config.gameCell",{
-		-- 	_type = "cc_label",
-		-- 	text = params.name
-		-- })
 		local config = clone(require("game.config.gameCell"))
 		config._data = params
 		return GameSceneMgr.createGameNode(config)
@@ -20,33 +16,12 @@ function M:ctor( target ,params)
 	self:setData(params)
 end
 function M:setData( params )
-	local mtype = params.tlData._type
-	if not mtype then
-		self.tlData = params
-		return
-	end
-	if mtype == "ref" then
-		self.tlData = ref.getRef(params.tlData)
-	end
-	if mtype == "cache" then
-		self.tlData = GameObj.ObjArmy.getCacheData()
-	end
+	self.tlData = params.tlData
 end
--- function M:cellMode( cmdX )
-	
--- end
 --exportFunc
 function M:initView(  )
 	self.viewlist = UICommon.createViewList(self.target,self.isMovable)
 	self:updateView()
-	-- GameSceneMgr:addEventListener("time",function (  )
-	-- 	self:updateSecView()
-	-- end)
-end
-function M:updateSecView( )
-	for i,node in ipairs(self.viewlist:getTlCcNode()) do
-		node:updateView()
-	end
 end
 function M:updateView( target )
 	local tlNode = {}
@@ -86,29 +61,15 @@ function M:updateView( target )
 	    end)
 	end
 end
---缓存使用方法
-function M:onAdd( cmdX )
-	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
-	self.viewlist:insertCcNode(self.cellMode(cmdX),index)
+function M:getViewList(  )
+	return self.viewlist
 end
-
-function M:onUpdate( cmdX )
-	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
-	self.viewlist:getTlCcNode()[index]:updateView()
-end
-
-function M:onDelete( cmdX )
-	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
-	self.viewlist:removeNode(function(viewHospitalItem, i)
-			return i == index
-		end)
-end
-
 function M:setViewCallback( target,callback )
 	self.callback_ = callback
 	self.callback_(self.tlData[self.defaultIndex],self.defaultIndex)
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setViewCallback")
+	target:bindOnceMethod(self,"getViewList")
 end
 return M
