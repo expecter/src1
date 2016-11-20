@@ -14,18 +14,18 @@ local M = {
 		{
 			_type = "cc_sprite",spriteName = "img_btn_gray_2_n"
 		},
-		{
-			_type = "cc_label",
-		},
+		-- {
+		-- 	_type = "cc_label",
+		-- },
 		{
 			_type = "ex_hightlightComponent",
 		},
 		{
 			_type = "cc_ClickComponent",isScale = true
 		},
-		{
-			_type = "temp_cell"
-		},
+		-- {
+		-- 	_type = "temp_cell"
+		-- },
 	},
 }
 return M

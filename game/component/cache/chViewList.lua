@@ -2,7 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-11-19 17:50:12
 --
-local M = class("cache_viewList")
+local M = class("cache_chViewList")
 function M:ctor( target,params )
 	self.target = target
 	self.cacheName = ""
@@ -16,9 +16,16 @@ function M:getDepends(  )
 		{
 			_type = "ct_viewList",
 			tlData = self.tlData,
-			cellMode = function ( params )
+			cellMode = function ( params ,index)
 				local config = clone(require("game.config.gameCell"))
-				config._data = params
+				-- config._data = params
+				table.insert(config._component,{
+							_type = "cache_chLabel",object = {
+								name = "ObjArmy",
+								key = index,
+								field = "health",
+							},
+						})
 				return GameSceneMgr.createGameNode(config)
 			end
 		},
@@ -46,5 +53,8 @@ function M:onDelete( cmdX )
 end
 function M:enterView(  )
 	self.target:bind(self,self.cacheName)
+	self.target:setViewCallback(function ( cmdX,index )
+		print("AAAA",index)
+	end)
 end
 return M

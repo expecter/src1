@@ -50,7 +50,7 @@ local M = {
 					pos = {x =10,y = 580},
 				},
 				{
-					_type = "cache_viewList", 
+					_type = "cache_chViewList", 
 					tlData = {
 						_type = "cache",refName = "refarmy",tmKey = {}
 					}
@@ -59,7 +59,7 @@ local M = {
 					_type = "cache_bind",
 					caches = {
 						{
-							component = "cache_viewList",
+							component = "cache_chViewList",
 						},
 					},
 				},
@@ -80,12 +80,15 @@ local M = {
 				-- {
 				-- 	_type = "cc_label",text = "aaaa"
 				-- },
+				-- {
+				-- 	_type = "cache_chLabel",object = {
+				-- 		name = "ObjArmy",
+				-- 		key = 2,
+				-- 		field = "health",
+				-- 	},
+				-- },
 				{
-					_type = "cache_label",object = {
-						name = "ObjArmy",
-						key = 2,
-						field = "health",
-					},
+					_type = "dispatch_dpLabel"
 				},
 				-- {
 				-- 	_type = "cacheComponent",

@@ -6,8 +6,10 @@ local M = {}
 M.cache = {}
 M.tmView_bindOne = {}
 M.tmView_bind = {}
+--给每个缓存增加个更新次数index，方便界面判断数据有无更新，需不需要重载数据
 M.eventName = {
-    updateNum = "updateNum",
+    --函数名和参数列表只做参考
+    updateNum = {name = "updateNum",data = {}},
 }
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 GameMgr:addEventListener("enterGame",function()
@@ -114,8 +116,8 @@ function M.getIndex( data,cmdX )
 end
 
 --界面数据请求层
-for k,eventName in pairs(M.eventName) do
-    M:addEventListener(eventName,function ( cmdX )
+for k,event in pairs(M.eventName) do
+    M:addEventListener(event.name,function ( cmdX )
         M[eventName](cmdX.data)
     end)
 end

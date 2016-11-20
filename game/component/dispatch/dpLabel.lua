@@ -2,7 +2,7 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("cache_label")
+local M = class("cache_chLabel")
 function M:ctor( target ,params)
 	self.target = target
 	self.object = params.object
@@ -15,20 +15,16 @@ function M:getDepends(  )
 			_type = "cc_label",
 		},
 		{
-			_type = "cache_bind",
+			_type = "dispatch_listener",
 		},			
 	}
 end
 function M:setData(params )
 end
-function M:getCacheText( )
-	if not self.object then return nil end
-	return GameObj.ObjArmy.getCacheData()[self.object.key][self.object.field]
-end
 function M:initView( target )
 end
 function M:updateView( )
-	-- self.label:setString(self:getCacheText())
+	self.target:setText(self:getCacheText())
 end
 function M:onUpdate( cmdX )
 	self.target:setText(self:getCacheText())
@@ -36,7 +32,9 @@ end
 --对应onenter
 function M:enterView(  )
 	-- self.target:setText(self:getCacheText())
-	self.target:bind(self,self.cacheName)
+	self.target:bind("switch",function ( cmdX )
+		self.target:setText(cmdX.data)
+	end)
 end
 --对应onexit
 function M:exitView(  )

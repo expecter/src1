@@ -5,9 +5,16 @@
 local M = class("ct_viewList")
 function M:ctor( target ,params)
 	self.target = target
-	self.cellMode = params.cellMode or function ( params )
+	self.cellMode = params.cellMode or function ( params ,index)
 		local config = clone(require("game.config.gameCell"))
-		config._data = params
+		-- config._data = params
+		table.insert(config._component,{
+					_type = "cache_label",object = {
+						name = "ObjArmy",
+						key = index,
+						field = "health",
+					},
+				})
 		return GameSceneMgr.createGameNode(config)
 	end
 	self.isMovable = params.isMovable
@@ -26,7 +33,7 @@ end
 function M:updateView( target )
 	local tlNode = {}
 	for k,v in ipairs(self.tlData) do
-		local node = self.cellMode(v)
+		local node = self.cellMode(v,k)
         table.insert(tlNode,node)
     end
 	self.viewlist:setTlCcNode(tlNode)
