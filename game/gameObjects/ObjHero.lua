@@ -3,20 +3,32 @@
 -- Date: 2016-05-24 23:40:37
 --
 local M = class(...,require("game.gameObjects.ObjBase"))
-M.className = "CmdHeros"
-function M.getHeroCaches(  )
-	return GameCacheMgr.getGameCacheByName(M.className):getAll()
-end
-function M.newHero(  )
+local dataModel = {
+	heroId = 0,
+	level = 1,
+	exp = 2,
+}
+function M:ctor(  )
+	local params = {
+		cacheName = "ObjArmy"
+	}
+	M.super.ctor(self,params)
 	
-	return CmdData.appendCmdX(clone(CmdCommon["CmdHero"]))
 end
-function M.createNewObject(  )
-	local index = #M.getHeroCaches()+1
-	M.request(M.className,M.newHero())
+function M:init( cmdX )
+	if not cmdX then
+		self.cache = ref.getRef({refName = "refarmy"})
+		self:initCmdX(self.cache)
+	end
+	self.cache = cmdX
 end
-function M.requestChangeName( name )
-	M.request({name = name})
+function M:cleanup(  )
+	self.cache = {}
 end
-
+--请求命令
+function M:updateNum( params )
+	local data = params
+	
+	self:updateByProto()
+end
 return M

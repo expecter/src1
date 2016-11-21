@@ -40,10 +40,6 @@ function M:updateView( target )
 	if self.isTapMenu then
 		local orgNode = nil
 		local function switchEvent( index )
-			ObjMessage:dispatchEvent{
-	            name = "switch",
-	            data = index,
-	        }
 	        if orgNode and orgNode.normal then
 	            orgNode:normal()
 	        end
@@ -61,10 +57,6 @@ function M:updateView( target )
 	    switchEvent(self.defaultIndex)
 	else
 		self.viewlist:setClickedEvent(function ( node,index,x,y )
-	        ObjMessage:dispatchEvent{
-	            name = ObjMessage.clickEvent.switch,
-	            data = index,
-	        }
 	    end)
 	end
 end
