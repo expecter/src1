@@ -6,8 +6,7 @@ local M = {
 	CmdPlayer = {
 		tmField = {
 			playerId = {
-				type = 'int32',
-				prefix = 'required',
+				type = 'int',
 				name = 'playerId'
 			},
 			name = {

@@ -45,13 +45,8 @@ function M:getAll()
     return self.tmCmdX
 end
 
---数据更新项
-function M:initCmdX( cmdX )
-	self.tmCmdX = cmdX
-end
-
 function M:updateByProto( cmdX_Update )
-	-- body
+	
 end
 function M:update(  )
 	
