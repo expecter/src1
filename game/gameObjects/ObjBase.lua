@@ -15,12 +15,10 @@ function M:ctor( params )
     --通过bind绑定在次GameCache上的View
     self.tmView_bind = {}
     GameMgr:addEventListener("enterGame",function()
-		self.tmCmdX = GameStateManager:getDataByName(self.cacheName)
-        if self.isRepeat then
-            self.id = self.tmCmdX[#self.tmCmdX].id
-        else
-            self.id = self.tmCmdX.id
+        for i,v in ipairs(GameStateManager:getDataByName(self.cacheName)) do
+            self.tmCmdX[v.id] = v
         end
+        self.id = self.tmCmdX[#self.tmCmdX].id
 	    self:init(cmdX)
 	end)
 

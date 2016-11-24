@@ -9,10 +9,6 @@ local dataModel = {
 	level = 1,
 	exp = 2,
 }
-local ObjHero_Update = {
-	hero = {},
-	key = {}
-}
 function M:ctor(  )
 	local params = {
 		cacheName = "ObjHero",
