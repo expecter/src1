@@ -4,13 +4,20 @@
 --
 local M = class(...,require("game.gameObjects.ObjBase"))
 local dataModel = {
+	id = 0,
 	heroId = 0,
 	level = 1,
 	exp = 2,
 }
+local ObjHero_Update = {
+	hero = {},
+	key = {}
+}
 function M:ctor(  )
 	local params = {
-		cacheName = "ObjArmy"
+		cacheName = "ObjHero",
+		isRepeat = true,
+		dataModel = dataModel,
 	}
 	M.super.ctor(self,params)
 	
@@ -18,7 +25,7 @@ end
 function M:init( cmdX )
 	if not cmdX then
 		self.cache = ref.getRef({refName = "refarmy"})
-		self:initCmdX(self.cache)
+		self:updateByProto(self.cache)
 	end
 	self.cache = cmdX
 end
@@ -29,6 +36,9 @@ end
 function M:updateNum( params )
 	local data = params
 	
+	self:updateByProto()
+end
+function M:deleteOne( params )
 	self:updateByProto()
 end
 return M
