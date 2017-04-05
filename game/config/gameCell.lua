@@ -4,7 +4,7 @@
 --
 local M = {
 	name = "cell",
-	_type = "GameNode",
+	_super = "GameNode",
 	_component = {
 		{_name = "",_type = "cc_node",
 		contentsize = {width = 154,height = 56},

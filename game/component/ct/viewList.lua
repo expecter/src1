@@ -34,6 +34,8 @@ function M:updateView( target )
 	local tlNode = {}
 	for k,v in ipairs(self.tlData) do
 		local node = self.cellMode(v,k)
+		node:initView()
+		node:updateView()
         table.insert(tlNode,node)
     end
 	self.viewlist:setTlCcNode(tlNode)

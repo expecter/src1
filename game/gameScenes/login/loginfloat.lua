@@ -2,7 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-09-06 23:51:18
 --
-local M = class(...,require("game.gameNode.GamePanelFloat"))
+local M = class(...,require("game.gameScenes.login.GamePanelFloat"))
 function M:ctor(  )
 	M.super.ctor(self)
 end

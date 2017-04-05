@@ -1,9 +1,4 @@
 local M = class(..., GameLayer)
-local map = require("game.config.modelNode")
-local socket = require "socket"
-FightMgr = require("game.gameScenes.fight.FightMgr")
-FightAnimationMgr = require("game.gameScenes.fight.FightAnimationMgr")
-local loginfloat = import(".loginfloat")
 local ANI_TYPE={
     att="att",
     run="run",
@@ -12,8 +7,8 @@ local ANI_TYPE={
 }
 function M:ctor()
     
-    local tbview = {}
-    self:setData(tbview)
+    -- local tbview = {}
+    -- self:setData(tbview)
     M.super.ctor(self)
 end
 function M:setData( params )
@@ -38,7 +33,14 @@ function M:initView( params )
     --     self.owner.login:switchTo(data.node)
     -- end)
     
-    self:createGameNode(map)
+    -- self:createGameNode(map)
+    local label = display.newTTFLabel{
+            text = "loading...",
+            size = 30,
+        }
+        print("initView")
+    label:setPosition(display.cx,display.cy)
+    self:addChild(label)
 end
 
 -- function M:createGameNode( config )

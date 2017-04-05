@@ -116,13 +116,13 @@ function M.loadingGameLayer(gameLayer,tlCmd)
 
     for _, cmd in ipairs(tlCmd) do
         local tlFunc_temp = gameLayer[cmd](gameLayer)
+        print("tlFunc_temp",tlFunc_temp,cmd)
         if tlFunc_temp then
             for _, func in ipairs(tlFunc_temp) do
                 tlFunc[#tlFunc+1] = func
             end
         end
     end
-    
     if #tlFunc > 0 then
         -- local GameLoading = require("game.gameSceneMgr.GameLoading")
         -- GameLoading.start()
@@ -137,7 +137,7 @@ function M.loadGameNode( gameNode )
     
     gameNode:initView()
     gameNode:enterView()
-    -- gameNode:updateView()
+    gameNode:updateView()
 end
 function M.coroutineCreate(f)
     coroutine.wrap(function()
@@ -181,28 +181,59 @@ function M.removeObject( target )
     }
 end
 --创建最开始的节点
-function M.createGameNode( config ,isLoad)
-    local tlNode = {}
-    local gameNode = M.createObject(config,tlNode)
-    if DEFAULT_TRUE(isLoad) then
-        for i,node in ipairs(tlNode) do
-            GameSceneMgr.loadGameNode(node)
-        end
-    end
+-- function M.createGameNode( config ,isLoad)
+--     local tlNode = {}
+--     local gameNode = M.createObject(config,tlNode)
+--     if DEFAULT_TRUE(isLoad) then
+--         for i,node in ipairs(tlNode) do
+--             GameSceneMgr.loadGameNode(node)
+--         end
+--     end
     
-    return gameNode,tlNode
+--     return gameNode,tlNode
+-- end
+-- function M.createObject( config )
+--     local node = GameNode.new(config)
+--     if config._children then
+--         for i,child in ipairs(config._children) do            
+--             node:addChild(M.createObject(child))
+--         end
+--     end        
+--     return node
+-- end
+
+--gameNode配置
+function M.getViewConfigByPath( path )
+    return clone(require("game.refnode."..path)) --读取配置里面的
 end
-function M.createObject( config,tlNode)
-    local node = GameNode.new(config)
-    table.insert(tlNode,node)
-    node:setAllGameNode(tlNode)
-    if config._children then
-        for i,child in ipairs(config._children) do            
-            node:addChild(M.createObject(child,tlNode))
-        end
-    end        
-    return node
+function M.createGameNode( config )
+    local localNode = { --预置基础节点
+        GameNode = 0,
+        GameLayer = 1,
+        GamePanel = 2,
+        GamePanelFloat = 3,
+    }
+    if localNode[config._super] then
+        local node = require("game.gameSceneMgr."..config._super).new(config)
+        node:addAllComponents(config._component)
+        -- if config._children then
+        --     for i,child in ipairs(config._children) do            
+        --         node:addChild(M.createGameNode(child))
+        --     end
+        -- end        
+        return node
+    -- else
+    --     local data = M.getViewConfigByPath(config._super)
+    --     for k,v in pairs(config) do
+    --         if k~="_super" then
+    --             data[k] = v[k]
+    --         end
+    --     end
+    --     return M.createGameNode(data)
+    end
+    return nil
 end
+
 local index=1
 --replace Layer
 function M.replaceLayer(clsGameLayer, userdata, fCallback)
@@ -210,10 +241,11 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
     local function helper()
         --清除全部layer
         M.clearLayer()
-
         --创建新的
         -- local gameLayer = require(clsGameLayer).new(userdata)
-        local gameLayer,tlNode = M.createGameNode(clsGameLayer,false)
+        -- dump(clsGameLayer)
+        local gameLayer = M.createGameNode(clsGameLayer)
+
         local gameLayerWrap = createGameLayerWrap(gameLayer)
         
         --缓存
@@ -232,11 +264,11 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         }
 
         -- 处理加载
-        -- local tlCmd = {"getTlInitView", "getTlOnEnter"}
-        -- M.loadingGameLayer(gameLayer, tlCmd)
-        for i,node in ipairs(tlNode) do
-            GameSceneMgr.loadGameNode(node)
-        end
+        local tlCmd = {"getTlInitView", "getTlOnEnter"}
+        M.loadingGameLayer(gameLayer, tlCmd)
+        -- for i,node in ipairs(tlNode) do
+        --     GameSceneMgr.loadGameNode(node)
+        -- end
         --分发事件
         M:dispatchEvent{
             name = "ready",
@@ -253,7 +285,50 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
     end
     M.coroutineCreate(helper)
 end
+function M.replaceNormalLayer( clsGameLayer, userdata, fCallback )
+   local function helper()
+        --清除全部layer
+        M.clearLayer()
 
+        --创建新的
+        local gameLayer = require(clsGameLayer).new(userdata)
+        -- local gameLayer,tlNode = M.createGameNode(clsGameLayer,false)
+        local gameLayerWrap = createGameLayerWrap(gameLayer)
+        
+        --缓存
+        M.instance.tlGameLayerWrap:push(gameLayerWrap)
+        print("replaceLayer")
+        --加入
+        M.instance:addChild(gameLayerWrap)
+
+        --分发事件
+        M:dispatchEvent{
+            name = "prepare",
+            data = {
+                gameLayer = gameLayer,
+                action = "replace",
+            },
+        }
+
+        -- 处理加载
+        local tlCmd = {"getTlInitView", "getTlOnEnter"}
+        M.loadingGameLayer(gameLayer, tlCmd)
+        --分发事件
+        M:dispatchEvent{
+            name = "ready",
+            data = {
+                gameLayer = gameLayer,
+                action = "replace",
+            },
+        }
+
+        --回调
+        if fCallback then
+            fCallback(gameLayer)
+        end
+    end
+    M.coroutineCreate(helper) 
+end
 --push Layer
 function M.pushLayer(clsGameLayer, userdata, fCallback)
 

@@ -13,7 +13,6 @@ end
 function M:setData(params )
 end
 function M:initView( target )
-	
 	if self.spriteName then
 		self.viewSprite = display.newSprite(string.format("%s.png",self.spriteName))
 	end

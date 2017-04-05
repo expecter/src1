@@ -34,6 +34,11 @@ function M:getDepends(  )
 		},		
 	}
 end
+
+-- function M:initView(  )
+	
+-- end
+
 --缓存使用方法
 function M:onAdd( cmdX )
 	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
@@ -52,6 +57,7 @@ function M:onDelete( cmdX )
 		end)
 end
 function M:enterView(  )
+	print("enterViewenterViewenterView")
 	self.target:bind(self,self.cacheName)
 	self.target:setViewCallback(function ( cmdX,index )
 		print("AAAA",index)

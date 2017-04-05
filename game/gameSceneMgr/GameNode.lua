@@ -10,27 +10,22 @@ end)
 function M:ctor( params )
 	self.components = {}
 	self.TlComName = {}
+	self.TlChildren = {}
 	self._name = params._name or ""
 	if params._data then
 		self:setData(params._data)
 	end
-	--自带响应回调
-	-- self:addComponent({_type = "cc_observer"})
-	if params and params._component then
-		for i,comp in ipairs(params._component) do
-			if ComponentFactory.hasComponent(comp._type) then
-				self:addComponent(comp)
-			end
-		end
-	end	
+	if params._children then
+		self:createChildren(params._children)
+	end		
 end
 --设置节点携带的可变更数据
-function M:setData( data )
-	self._data = data
-end
-function M:getData(  )
-	return self._data
-end
+-- function M:setData( data )
+-- 	self._data = data
+-- end
+-- function M:getData(  )
+-- 	return self._data
+-- end
 function M:getName(  )
 	return self._name
 end
@@ -39,82 +34,59 @@ function M:onExit(  )
 		com = nil
 	end
 end
-function M:getTlInitView(  )
-	local tlFunc = {}
-	for k,com in ipairs(self.components) do
-		if com.initView then
-			table.insert(tlFunc,handler(com,com.initView))
-		end
-	end
-	return tlFunc
-end
-function M:getTlOnEnter(  )
-	local tlFunc = {}
-	for k,com in ipairs(self.components) do
-		if com.enterView then
-			table.insert(tlFunc,handler(com,com.enterView))
-		end
-	end
-	return tlFunc
-end
-function M:getTlOnExit(  )
-	local tlFunc = {}
-	for k,com in ipairs(self.components) do
-		if com.exitView then
-			table.insert(tlFunc,handler(com,com.exitView))
-		end
-	end
-	return tlFunc
-end
-function M:getTlReleaseView(  )
-	local tlFunc = {}
-	for k,com in ipairs(self.components) do
-		if com.releaseView then
-			table.insert(tlFunc,handler(com,com.releaseView))
-		end
-	end
-	return tlFunc
-end
-
-function M:initView(  )
-	for index,func in ipairs(self:getTlInitView()) do
-		func()
-	end
-	-- GameSceneMgr:addEventListener("update", function(event)
-	-- 	if self then
-	-- 		self:update(event.data)
-	-- 	end		
-	-- end)
-end
 function M:update( dt )
 	for k,com in ipairs(self.components) do
 		if com.update then
 			com:update(dt)
 		end		
 	end
+	for i,v in ipairs(self.TlChildren) do
+		v:update()
+	end
 end
-function M:updateView( )
+function M:initView(  )
+	-- self:getFuncByCmdX("initView")
 	for k,com in ipairs(self.components) do
-		if com.updateView then
-			com:updateView(self)
+		if com.initView then
+			com:initView()
 		end		
 	end
+	for i,v in ipairs(self.TlChildren) do
+		v:initView()
+	end
+end
+function M:updateView( )
+	self:getFuncByCmdX("updateView")
 end
 function M:enterView(  ) --对应onenter
-	for index,func in ipairs(self:getTlOnEnter()) do
-		func()
-	end
+	self:getFuncByCmdX("enterView")
 end
 function M:exitView(  ) --对应onexit
-	for index,func in ipairs(self:getTlOnExit()) do
-		func()
-	end
+	self:getFuncByCmdX("exitView")
 end
 function M:releaseView(  )
-	for index,func in ipairs(self:getTlReleaseView()) do
-		func()
+	self:getFuncByCmdX("releaseView")
+end
+function M:getFuncByCmdX( cmd )
+	for k,com in ipairs(self.components) do
+		if com[cmd] then
+			com[cmd](com)
+		end		
+	end
+	for i,v in ipairs(self.TlChildren) do
+		v[cmd](v)
 	end
 end
+function M:addAllComponents( _components )
+	if _components then
+		for i,comp in ipairs(_components) do
+			if ComponentFactory.hasComponent(comp._type) then
+				self:addComponent(comp)
+			end
+		end
+	end
+end
+
 function M:addComponent( params )
 	local comName = params._type or ""
 	local component = ComponentFactory.createComponent(comName,self,params)
@@ -126,30 +98,44 @@ function M:addComponent( params )
 		end
 	end
 	table.insert(self.components,component)
-	self.TlComName[comName] = component
+	self.TlComName[comName] = self.components[#self.components]
 	if self.TlComName[comName].bindFunc then
 		self.TlComName[comName]:bindFunc(self)
-	end
-	
+	end	
 end
-function M:getComponent( componentName )
+function M:getAllChildren(  )
+	return self.TlChildren
+end
+
+function M:createChildren( _children )
+	for k,child in pairs(_children) do
+		local node = GameSceneMgr.createGameNode(child)
+		self:addChild(node)
+		table.insert(self.TlChildren,node)
+	end
+end
+
+function M:getComponentByName( componentName )
 	return self.TlComName[componentName]
 end
-function M:getAllComponent(  )
+function M:getAllComponentByName(  )
 	return self.TlComName
 end
-function M:setAllGameNode( tlNode )
-	self.AllgameObject = tlNode
+function M:getAllComponent(  )
+	return self.components
 end
+-- function M:setAllGameNode( tlNode )
+-- 	self.AllgameObject = tlNode
+-- end
 --根据name获取gamenode
-function M:getGameNode( name )
-	for i,node in ipairs(self.AllgameObject) do
-		if name == node:getName() then
-			return node
-		end
-	end
-	return nil
-end
+-- function M:getGameNode( name )
+-- 	for i,node in ipairs(self.AllgameObject) do
+-- 		if name == node:getName() then
+-- 			return node
+-- 		end
+-- 	end
+-- 	return nil
+-- end
 function M:bindOnceMethod( component,methodName )
 	if self[methodName] then
 		dump("Object has Method "..methodName)

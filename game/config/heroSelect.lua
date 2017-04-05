@@ -3,7 +3,7 @@
 -- Date: 2016-11-13 19:14:21
 --
 local M = {
-	_type = "GameNode",
+	_super = "GameLayer",
 	_component = {
 		{
 			_type = "cc_node",
@@ -15,7 +15,7 @@ local M = {
 	_children = {
 		
 		{
-			_type = "GameNode",
+			_super = "GameNode",
 			_component = {
 				{
 					_type = "cc_node",
@@ -40,7 +40,7 @@ local M = {
 			}
 		},
 		{
-			_type = "GameNode",
+			_super = "GameNode",
 			_name = "child1",
 			_component = {
 				{
@@ -69,7 +69,7 @@ local M = {
 			},
 		},
 		{
-			_type = "GameNode",
+			_super = "GameNode",
 			_component = {
 				{
 					_type = "cc_node",
