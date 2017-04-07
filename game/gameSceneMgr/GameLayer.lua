@@ -13,7 +13,8 @@ function M:ctor(params)
     if not params then params = {} end
     local InitComponent = {
         ClickComponent = {isSwallow = true,touch_ = handler(self,self.onTouch)},
-        viewComponent = {}
+        viewComponent = {},
+        loadComponent = {},
     }
     table.merge(InitComponent,params)
     self:setContentSize(display.width, display.height)
@@ -29,52 +30,52 @@ end
 --     --function(self, fCallback) end,
 --     --function(self, fCallback) end,
 -- }
-function M:getTlInitView()
-    local tlFunc = {}
-    self:getFuncByCmd(tlFunc,"initView")
-    return tlFunc
-end
+-- function M:getTlInitView()
+--     local tlFunc = {}
+--     self:getFuncByCmd(tlFunc,"initView")
+--     return tlFunc
+-- end
 
---销毁函数队列
-function M:getTlReleaseView()
-    local tlFunc = {}
-    self:getFuncByCmd(tlFunc,"releaseView")
+-- --销毁函数队列
+-- function M:getTlReleaseView()
+--     local tlFunc = {}
+--     self:getFuncByCmd(tlFunc,"releaseView")
     
-    return tlFunc
-end
+--     return tlFunc
+-- end
 
--- -- onEnter函数队列
-function M:getTlOnEnter()
-    local tlFunc = {}
-    self:getFuncByCmd(tlFunc,"enterView")
-    return tlFunc
-end
+-- -- -- onEnter函数队列
+-- function M:getTlOnEnter()
+--     local tlFunc = {}
+--     self:getFuncByCmd(tlFunc,"enterView")
+--     return tlFunc
+-- end
 
--- -- onExit函数队列
-function M:getTlOnExit()
-    local tlFunc = {}
-    self:getFuncByCmd(tlFunc,"exitView")
-    return tlFunc
-end
-function M:getFuncByCmd( tlFunc,cmd )
-    for k,com in pairs(self:getAllComponent()) do
-        if com[cmd] then
-            table.insert(tlFunc,handler(com,com[cmd]))
-        end
-    end
-    self:getChildFunc(tlFunc,self,cmd)
-    -- return tlFunc
-end
-function M:getChildFunc( tlFunc,node,cmd )
-    for _,child in ipairs(node:getAllChildren()) do
-        for k,com in pairs(child:getAllComponent()) do
-            if com[cmd] then
-                table.insert(tlFunc,handler(com,com[cmd]))
-            end
-        end
-        self:getChildFunc(tlFunc,child,cmd)        
-    end
-end
+-- -- -- onExit函数队列
+-- function M:getTlOnExit()
+--     local tlFunc = {}
+--     self:getFuncByCmd(tlFunc,"exitView")
+--     return tlFunc
+-- end
+-- function M:getFuncByCmd( tlFunc,cmd )
+--     for k,com in pairs(self:getAllComponent()) do
+--         if com[cmd] then
+--             table.insert(tlFunc,handler(com,com[cmd]))
+--         end
+--     end
+--     self:getChildFunc(tlFunc,self,cmd)
+--     -- return tlFunc
+-- end
+-- function M:getChildFunc( tlFunc,node,cmd )
+--     for _,child in ipairs(node:getAllChildren()) do
+--         for k,com in pairs(child:getAllComponent()) do
+--             if com[cmd] then
+--                 table.insert(tlFunc,handler(com,com[cmd]))
+--             end
+--         end
+--         self:getChildFunc(tlFunc,child,cmd)        
+--     end
+-- end
 --在gamelayermgr里面对当前层的所有节点进行控制和获取
 function M:setAllGameNode(  )
     

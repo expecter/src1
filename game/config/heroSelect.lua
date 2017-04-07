@@ -87,9 +87,9 @@ local M = {
 				-- 		field = "health",
 				-- 	},
 				-- },
-				{
-					_type = "dispatch_dpLabel"
-				},
+				-- {
+				-- 	_type = "dispatch_dpLabel"
+				-- },
 				-- {
 				-- 	_type = "cacheComponent",
 				-- 	caches = {
