@@ -24,9 +24,9 @@ function M:setData(params )
         self.soldiersSprite=display.newSprite("#"..fileName)
         self.soldiersSprite:setAnchorPoint(cc.p(0.5,0))
         self.soldiersSprite:setPosition(display.cx,200)
-        self:addChild(self.soldiersSprite)
+        self.target:addChild(self.soldiersSprite)
     end
-    target:playstandby()
+    self.target:playstandby()
 end
 function M:initView( target )	
 end

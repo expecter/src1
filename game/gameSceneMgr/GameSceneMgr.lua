@@ -111,12 +111,12 @@ function M.getScene()
 end
 
 -- loading加载条
+--仅gamelayer会使用
 function M.loadingGameLayer(gameLayer,tlCmd)
     local tlFunc = {}
 
     for _, cmd in ipairs(tlCmd) do
         local tlFunc_temp = gameLayer[cmd](gameLayer)
-        print("tlFunc_temp",tlFunc_temp,cmd)
         if tlFunc_temp then
             for _, func in ipairs(tlFunc_temp) do
                 tlFunc[#tlFunc+1] = func
@@ -132,12 +132,6 @@ function M.loadingGameLayer(gameLayer,tlCmd)
         end
         -- GameLoading.stop()
     end
-end
-function M.loadGameNode( gameNode )
-    
-    gameNode:initView()
-    gameNode:enterView()
-    gameNode:updateView()
 end
 function M.coroutineCreate(f)
     coroutine.wrap(function()
@@ -168,39 +162,6 @@ function M.updateConfig( path,component )
     
     return config
 end
-function M.removeObject( target )
-    target:exitView()
-    target:removeFromParent(true)
-
-    M:dispatchEvent{
-        name = "remove",
-        data = {
-            object = target._name,
-            action = "remove",
-        },
-    }
-end
---创建最开始的节点
--- function M.createGameNode( config ,isLoad)
---     local tlNode = {}
---     local gameNode = M.createObject(config,tlNode)
---     if DEFAULT_TRUE(isLoad) then
---         for i,node in ipairs(tlNode) do
---             GameSceneMgr.loadGameNode(node)
---         end
---     end
-    
---     return gameNode,tlNode
--- end
--- function M.createObject( config )
---     local node = GameNode.new(config)
---     if config._children then
---         for i,child in ipairs(config._children) do            
---             node:addChild(M.createObject(child))
---         end
---     end        
---     return node
--- end
 
 --gameNode配置
 function M.getViewConfigByPath( path )
@@ -215,21 +176,16 @@ function M.createGameNode( config )
     }
     if localNode[config._super] then
         local node = require("game.gameSceneMgr."..config._super).new(config)
-        node:addAllComponents(config._component)
-        -- if config._children then
-        --     for i,child in ipairs(config._children) do            
-        --         node:addChild(M.createGameNode(child))
-        --     end
-        -- end        
+        node:addAllComponents(config._component)        
         return node
-    -- else
-    --     local data = M.getViewConfigByPath(config._super)
-    --     for k,v in pairs(config) do
-    --         if k~="_super" then
-    --             data[k] = v[k]
-    --         end
-    --     end
-    --     return M.createGameNode(data)
+    else
+        local data = M.getViewConfigByPath(config._super)
+        for k,v in pairs(config) do
+            if k~="_super" then
+                data[k] = v[k]
+            end
+        end
+        return M.createGameNode(data)
     end
     return nil
 end
