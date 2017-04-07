@@ -28,18 +28,22 @@ end
 --exportFunc
 function M:initView(  )
 	self.viewlist = UICommon.createViewList(self.target,self.isMovable)
+	-- self:updateView()
+end
+
+function M:enterView(  )
 	self:updateView()
 end
+
 function M:updateView( target )
 	local tlNode = {}
 	for k,v in ipairs(self.tlData) do
 		local node = self.cellMode(v,k)
 		node:initView()
-		node:updateView()
         table.insert(tlNode,node)
     end
 	self.viewlist:setTlCcNode(tlNode)
-	if self.isTapMenu then
+	if self.isTapMenu then --切换标签，有高亮和正常显示
 		local orgNode = nil
 		local function switchEvent( index )
 	        if orgNode and orgNode.normal then
@@ -51,7 +55,8 @@ function M:updateView( target )
 	        end
 	        if self.callback_ then
 	            self.callback_(self.tlData[index],index)
-	        end     
+	        end
+	        orgNode:updateView()
 	    end
 	    self.viewlist:setClickedEvent(function ( node,index,x,y )
 	        switchEvent(index)
@@ -65,9 +70,12 @@ end
 function M:getViewList(  )
 	return self.viewlist
 end
-function M:setViewCallback( target,callback )
+--isFirst表示是否第一次回调
+function M:setViewCallback( target,callback,isFirst )
 	self.callback_ = callback
-	self.callback_(self.tlData[self.defaultIndex],self.defaultIndex)
+	if isFirst then
+		self.callback_(self.tlData[self.defaultIndex],self.defaultIndex)
+	end	
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setViewCallback")

@@ -124,26 +124,11 @@ end
 function M:getAllComponent(  )
 	return self.components
 end
--- function M:setAllGameNode( tlNode )
--- 	self.AllgameObject = tlNode
--- end
---根据name获取gamenode
--- function M:getGameNode( name )
--- 	for i,node in ipairs(self.AllgameObject) do
--- 		if name == node:getName() then
--- 			return node
--- 		end
--- 	end
--- 	return nil
--- end
 function M:bindOnceMethod( component,methodName )
 	if self[methodName] then
 		dump("Object has Method "..methodName)
 		return
 	end
-	-- self[methodName] = function ( target,... )
-	-- 	return component[methodName](component,...)
-	-- end
 	self:bindMethod(component,methodName)
 end
 function M:bindMethod( component,methodName )

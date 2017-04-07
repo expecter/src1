@@ -57,10 +57,9 @@ function M:onDelete( cmdX )
 		end)
 end
 function M:enterView(  )
-	print("enterViewenterViewenterView")
-	self.target:bind(self,self.cacheName)
+	self.target:bind(self,"ObjArmy")
 	self.target:setViewCallback(function ( cmdX,index )
-		print("AAAA",index)
+		-- print("AAAA",index)
 	end)
 end
 return M
