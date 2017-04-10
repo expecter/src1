@@ -1,9 +1,9 @@
 --
 -- Author: Your Name
--- Date: 2016-11-21 19:58:34
+-- Date: 2017-04-10 20:00:00
 --
 local M = {
-	{level = 1,health = 100},
+	
 }
 
 return M
