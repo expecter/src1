@@ -5,6 +5,10 @@ local M = {
     Msg_SupportAttacker = "Msg_SupportAttacker",
     Msg_GoHome = "Msg_GoHome",
     Msg_Wait = "Msg_Wait",
+    switch = "switch", --切换标签页
+    enterGame = "enterGame",
+    exitGame = "exitGame",
+    saveGame = "saveGame",
 }
 
 return M
