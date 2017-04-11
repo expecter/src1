@@ -32,4 +32,9 @@ function M:updateNum( params )
 	
 	self:updateByProto()
 end
+
+function M:levelup(  )
+	
+end
+
 return M

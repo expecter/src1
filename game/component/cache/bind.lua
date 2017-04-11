@@ -8,7 +8,7 @@ function M:ctor( target ,params)
 	self:setData(params)
 end
 function M:setData(params )
-
+	self.cacheName = params.cacheName or ""
 end
 
 function M:bindOne(  )
