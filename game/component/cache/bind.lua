@@ -9,6 +9,7 @@ function M:ctor( target ,params)
 end
 function M:setData(params )
 	self.cacheName = params.cacheName or ""
+	self.tlCacheName = params.tlCacheName --同时监听多个
 end
 
 function M:bindOne(  )

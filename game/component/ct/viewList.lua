@@ -17,6 +17,11 @@ function M:ctor( target ,params)
 				})
 		return GameSceneMgr.createGameNode(config)
 	end
+	if type(params.cellMode) == "table" then
+		self.cellMode = function (  )
+			return GameSceneMgr.createGameNode(params.cellMode)
+		end
+	end
 	self.isMovable = params.isMovable
 	self.isTapMenu = DEFAULT_TRUE(params.isTapMenu)
 	self.defaultIndex = params.defaultIndex or 1

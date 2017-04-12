@@ -29,12 +29,12 @@ end
 --请求命令
 function M:updateNum( params )
 	local data = params
-	
-	self:updateByProto()
+	--TODO
+	self:updateByProto(data)
 end
 
 function M:levelup(  )
-	
+	self:updateByProto()
 end
 
 return M
