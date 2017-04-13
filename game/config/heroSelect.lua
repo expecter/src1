@@ -36,6 +36,7 @@ local M = {
 				{
 					_type = "cc_animation",
 					spriteFrameName = "img_npc_1_stanby1_01",
+					contidion = {"contidion1","contidion2"},
 				},
 			}
 		},

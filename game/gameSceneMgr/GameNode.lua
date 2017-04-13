@@ -88,6 +88,10 @@ end
 
 function M:addComponent( params )
 	local comName = params._type or ""
+	local contidion = DEFAULT_TRUE(params.contidion)
+	if not contidion then --不满足添加条件则不添加该组件
+		return
+	end
 	local component = ComponentFactory.createComponent(comName,self,params)
 	if component.getDepends then
 		for i,depends in ipairs(component:getDepends()) do
@@ -102,6 +106,11 @@ function M:addComponent( params )
 		self.TlComName[comName]:bindFunc(self)
 	end	
 end
+--添加判断条件，方便组件复用
+function M:addContidion(  )
+	
+end
+
 function M:getAllChildren(  )
 	return self.TlChildren
 end

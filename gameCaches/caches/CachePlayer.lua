@@ -30,6 +30,7 @@ end
 function M:updateNum( params )
 	local data = params
 	--TODO
+	local num = self.caches.num
 	self:updateByProto(data)
 end
 
