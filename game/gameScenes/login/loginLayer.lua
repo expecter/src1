@@ -24,7 +24,10 @@ function M:getTlInitView(  )
 }
 end
 function M:getTlOnEnter(  )
-    
+    return {
+        function (  )
+        end,
+    }
 end
 function M:initView( params )
     self.owner = {}
