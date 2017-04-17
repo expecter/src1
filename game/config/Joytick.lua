@@ -19,6 +19,9 @@ local M = {
 		},
 		{
 			_type = "ClickComponent",
+			func = {action = "replace",name = "login",params = {}},
+			func1 = {action = "push",name = "panel",params = {}},
+			func2 = {action = "",name = "",},
 		},
 		{
 			_type = "ScheduleComponent",

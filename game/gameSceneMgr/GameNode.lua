@@ -45,14 +45,7 @@ function M:update( dt )
 	end
 end
 function M:initView(  )
-	for k,com in ipairs(self.components) do
-		if com.initView then
-			com:initView()
-		end		
-	end
-	for i,v in ipairs(self.TlChildren) do
-		v:initView()
-	end
+	self:getFuncByCmdX("initView")
 end
 function M:updateView( )
 	self:getFuncByCmdX("updateView")
