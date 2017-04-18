@@ -15,5 +15,8 @@ function M.createNode( params )
 	node:updateView()
 	return node
 end
-
+--将某些node转化为gamenode
+function M.changeGameNode( node )
+	return GameSceneMgr.createGameNode(node)
+end
 return M

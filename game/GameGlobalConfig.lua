@@ -29,9 +29,16 @@ TEXT_COLOR_QUALITY={
 
 
 --@ ui路径
-M.PanelTroopMain = "game.gameScenes.troop.PanelTroopMain"
-M.LAYER_WORLD = "game.gameScenes.world.LayerWorld"
-M.LAYER_CAPITAL = "game.gameScenes.capital.LayerCapital"
-M.PANEL_FUBEN ="game.gameScenes.fuben.PanelFuben"
-M.LAYER_CHOUKA ="game.gameScenes.chouka.LayerChouka"
+--path表示路径，condition表示开启条件
+--condition改为使用id查找条件，不用传参数
+M.HeroLayer = {path = "HeroLayer",condition = {path = "",funcName = "",params = {}}}
+M.PlayerLayer = {path = "HeroLayer",condition = {}}
+M.testLayer = {path = "HeroLayer",condition = {}}
+--[[一些数据模型
+{path = "",funcName = "",params = {}} --获取obj里面的方法返回值
+{dispatch}--消息传递模板（只用于界面沟通）
+{}--
+]]
+
+
 return M

@@ -3,12 +3,7 @@
 -- Date: 2016-06-17 22:32:31
 --
 local M = {}
-function M.test(  )
-	
-end
-for k,v in pairs(M) do
-	print(k,v)
-end
+print(type(trueassert))
 --[[
 1.副本
 2.部队
