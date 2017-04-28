@@ -25,14 +25,7 @@ end
 function M.getCacheData( params )
 	return GameObj.ObjArmy.getCacheData()
 end
---获取obj计算数据
-function M.getObjData( params )
-	if not params.path then	return nil end
-	local Obj = GameObj[params.objName]	
-	local data = Obj[params.funcName](params.params)
-	assert(type(condition)=='table')
-	return data
-end
+
 --其他数据类型
 function M.getOtherData( params )
 	return {}
@@ -44,7 +37,7 @@ function M.getClassByPath( params )
 	local newData = params.newData or {}
 	return M.updateClass(class,newData)
 end
---获取判断条件
+--获取obj判断条件
 function M.getObjCondition( params )
 	if not params.path then	return nil end
 	local Obj = require(params.path)
@@ -52,7 +45,14 @@ function M.getObjCondition( params )
 	assert(type(condition)=='boolean')
 	return condition
 end
-
+--获取obj计算数据
+function M.getObjData( params )
+	if not params.path then	return nil end
+	local Obj = require(params.path)	
+	local data = Obj[params.funcName](params.params)
+	assert(type(data)=='table')
+	return data
+end
 function M.updateClass( oldClass,newData )
 	--TODO
 	--对数据进行更新替换

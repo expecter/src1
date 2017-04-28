@@ -1,36 +1,106 @@
 --
 -- Author: Your Name
 -- Date: 2016-08-09 21:25:00
---
+--根据调用顺序写代码结构
+--[[
+viewlist
+viewmulptex
+]]
 local M = class(...,function (  )
 	return display.newNode()
 end)
+--ctor
 function M:ctor( params )
-	self:initData(params)
-	self:initView()
+	--TODOinitData
 end
---初始化数据
-function M:initData( params )
-	--TODO
-	self:setData(params)
+--外部调用方法
+function M:updateData(  )
+	
 end
---可多帧更新数据
-function M:setData( params )
-	--TODO initData or updateData
+
+--initView
+function M:getTlInitView(  )
+	return {
+		handler(self,self.initView),
+	}
 end
+
 function M:initView(  )
-	--TODO initView
-	--self.owner = display.newNode()
-	--self:addChild(self.owner)
+	self.owner = CCBReader.load("ccbi_bag_itemView.ccbi")
+	self:addChild(self.owner)
+	self.viewList = UICommon.createViewList(self.owner.ccNodeNewAttr, false, 'v',0)
+end
+--enterView
+function M:getTlOnEnter(  )
+	return {
+		handler(self,self.enterView),		
+	}
+end
+
+function M:enterView(  )
+	self:binding()
+end
+
+function M:binding(  )
+	local gameCache = GameCacheMgr.getGameCacheByName("CmdItem")
+	if gameCache then
+		gameCache:bind(self,{
+			onAdd = function ( cmdX )
+				self:setData(cmdX)
+				self:updateView()
+			end,
+			onUpdate = function ( cmdX )
+				self:updateView()
+			end,
+			onDelete = function ( cmdX )
+				self:updateView()
+			end
+			})
+	end
+	self:setData()
 	self:updateView()
 end
 
-function M:updateView( params )
-	if params then
-		self:setData(params)
+function M:setData( params )
+	
+end
+
+function M:updateView(  )
+	local tlNode = {}
+	for i,cmdX in ipairs(GameObj.ObjHero.getData()) do
+		table.insert(tlNode,self:createNode(cmdX))
 	end
-	--DO updateview
-	-- self.owner:updateView()
+	self.viewList:setTlCcNode(tlNode)
+end
+
+function M:createNode( cmdX )
+	local node = display.newNode()
+	return node
+end
+--exitView
+function M:getTlOnExit(  )
+	return {
+		handler(self,self.exitView),
+	}
+end
+
+function M:exitView(  )
+	self:unbind()
+end
+
+function M:unbind(  )
+	local gameCache = GameCacheMgr.getGameCacheByName("CmdItem")
+    gameCache:unbind(self)
+end
+--releaseView
+function M:getTlReleaseView(  )
+	return {
+		handler(self,self.releaseView),
+	}
+end
+
+function M:releaseView(  )
+	
 end
 
 return M
