@@ -120,7 +120,7 @@ function M.enterGame()
         name = "enterGame"
     }
     -- GameSceneMgr.replaceNormalLayer("game.gameScenes.login.loginLayer")
-    GameSceneMgr.replaceLayer(require("game.config.heroSelect"))
+    GameSceneMgr.replaceLayer(require("game.config.rpg"))
 end
 
 --退出游戏并切换到登录界面

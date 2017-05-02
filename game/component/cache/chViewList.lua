@@ -57,9 +57,9 @@ function M:onDelete( cmdX )
 		end)
 end
 function M:enterView(  )
-	self.target:bind(self,"ObjArmy")
+	self.target:bindCaches("ObjArmy",self)
 	self.target:setViewCallback(function ( cmdX,index )
-		-- print("AAAA",index)
+		GameObj.ObjArmy.updateNum(index)
 	end)
 end
 return M

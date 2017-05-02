@@ -10,7 +10,8 @@ local M = {
 			contentsize = {width = 1136,height = 640},
 			AnchPos = {x = 0,y = 0},
 			pos = {x =0,y = 0},
-		}
+		},
+		{ _type = "loadComponent"},
 	},
 	_children = {
 		
@@ -56,49 +57,41 @@ local M = {
 						_type = "cache",refName = "refarmy",tmKey = {}
 					}
 				},				
-				{
-					_type = "cache_bind",
-					caches = {
-						{
-							component = "cache_chViewList",
-						},
-					},
-				},
-				{
-					_type = "event", 
-				},
+				-- {
+				-- 	_type = "cache_bind",
+				-- 	caches = {
+				-- 		{
+				-- 			cacheName = "ObjArmy",
+				-- 			tlComponent = {"cache_chViewList",},
+				-- 		},
+				-- 	},
+				-- },
 			},
 		},
 		{
 			_super = "GameNode",
 			_component = {
+				{_name = "",_type = "cc_node",
+				contentsize = {width = 154,height = 56},
+				AnchPos = {x = 0,y = 0},
+				pos = {x =0,y = 0},
+				},
 				{
-					_type = "cc_node",
-					contentsize = {width = 1130,height = 240},
-					AnchPos = {x = 0,y = 0},
-					pos = {x =3,y = 400},
+					_type = "cc_sprite",spriteName = "img_btn_gray_2_n"
 				},
 				-- {
-				-- 	_type = "cc_label",text = "aaaa"
+				-- 	_type = "cc_label",
 				-- },
-				-- {
-				-- 	_type = "cache_chLabel",object = {
-				-- 		name = "ObjArmy",
-				-- 		key = 2,
-				-- 		field = "health",
-				-- 	},
-				-- },
-				-- {
-				-- 	_type = "dispatch_dpLabel"
-				-- },
-				-- {
-				-- 	_type = "cacheComponent",
-				-- 	caches = {
-				-- 		{
-				-- 			component = "cache_cachelabel",
-				-- 		},
-				-- 	},
-				-- },
+				{
+					_type = "ex_hightlightComponent",
+				},
+				{
+					_type = "cc_ClickComponent",
+					isScale = true,
+					--params可从clickcomponent里获取
+					func = {path = "",funcName = "requestDoSomeThing",params = {}},
+				},
+
 			}
 		},
 	},

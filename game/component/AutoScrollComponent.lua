@@ -11,7 +11,7 @@ function M:setData(params )
     self.dir = "v"
     self.vec = 20
 end
-function M:initView( target )
+function M:enterView( target )
 	self:startScroll(target)
 end
 function M:startScroll( target )
