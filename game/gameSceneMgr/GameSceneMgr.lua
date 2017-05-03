@@ -116,7 +116,6 @@ function M.loadingGameLayer(gameLayer,tlCmd)
     local tlFunc = {}
 
     for _, cmd in ipairs(tlCmd) do
-        print("cmd",cmd)
         local tlFunc_temp = gameLayer[cmd](gameLayer)
         if tlFunc_temp then
             for _, func in ipairs(tlFunc_temp) do

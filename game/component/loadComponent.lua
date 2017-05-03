@@ -5,6 +5,7 @@
 local M = class("loadComponent")
 function M:ctor( target ,params)
 	self.target = target
+	self:setData(params)
 end
 
 function M:getTlInitView()
