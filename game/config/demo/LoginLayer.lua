@@ -36,6 +36,7 @@ local M = {
 					isScale = true,
 					clickedEvent = {_type = "Message",name = "replaceLayer",params = {name = "MainLayer"}},
 					data = {_type = "cache",refName = "refarmy",tmKey = {}},
+					condition = {},
 				},
 			},
 		},
