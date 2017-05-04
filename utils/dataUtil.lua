@@ -21,7 +21,7 @@ function M.getCacheData( params )
 	return GameObj.ObjArmy.getCacheData()
 end
 --其他数据类型
-function M.getOtherData( params )
-	return {}
+function M.getObjData( params )
+	return GameObj.ObjArmy.getCacheData()
 end
 return M

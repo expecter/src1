@@ -4,4 +4,7 @@
 --游戏中所有的界面名和对应的配置
 local M = {
 	loginLayer = "game.config.demo.LoginLayer",
+	bagPanel = "game.config.demo.bagPanel",
+	MainLayer = "game.config.demo.MainLayer",
+	choukaLayer = "game.config.demo.choukaLayer",
 }

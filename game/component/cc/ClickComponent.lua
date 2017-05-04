@@ -17,7 +17,7 @@ function M:setData(params )
     self.onTouch_ = params.touch_ or handler(self, self.onTouch)
     if type(params.clickedEvent) == "table" then
         self.fClickeEvent = function (  )
-            if params.clickedEvent.event == "Message" then
+            if params.clickedEvent._type == "Message" then
                 GameMessage:dispatchEvent{
                     name = params.clickedEvent.name,
                     data = params.clickedEvent.params,

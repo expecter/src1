@@ -8,8 +8,9 @@ local M = {}
 
 M.MessageName =
 {
-    replaceLayer = "replaceLayer",
-    pushLayer = "pushLayer",
+    replaceLayer = "replaceLayer", --切换界面
+    pushLayer = "pushLayer", --弹出界面
+    showPanel = "showPanel", --窗口界面
 	Msg_ReceiveBall = "Msg_ReceiveBall",
     Msg_PassToMe = "Msg_PassToMe",
     Msg_SupportAttacker = "Msg_SupportAttacker",

@@ -34,7 +34,8 @@ local M = {
 				{
 					_type = "cc_ClickComponent",
 					isScale = true,
-					clickedEvent = {event = "Message",name = "replaceLayer",params = {name = "MainLayer"}},
+					clickedEvent = {_type = "Message",name = "replaceLayer",params = {name = "MainLayer"}},
+					data = {_type = "cache",refName = "refarmy",tmKey = {}},
 				},
 			},
 		},
