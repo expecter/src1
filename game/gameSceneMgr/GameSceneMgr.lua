@@ -552,11 +552,11 @@ function M.moveToWorldPos(r,c)
         helper()
     end
 end
-GameMessage:addEventListener("replaceLayer",function ( cmdX )
+GameMessage:addEventListener(GameMessage.MessageName.replaceLayer,function ( cmdX )
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.name]
     GameSceneMgr.replaceLayer(config)
 end)
-GameMessage:addEventListener("pushLayer",function ( cmdX )
+GameMessage:addEventListener(GameMessage.MessageName.pushLayer,function ( cmdX )
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.name]
     GameSceneMgr.pushLayer(config)
 end)

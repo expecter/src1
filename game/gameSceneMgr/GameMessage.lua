@@ -4,8 +4,12 @@
 --定义某些公用function
 -- local ModelName = ...
 --执行某些游戏消息事件
-local M = 
+local M = {}
+
+M.MessageName =
 {
+    replaceLayer = "replaceLayer",
+    pushLayer = "pushLayer",
 	Msg_ReceiveBall = "Msg_ReceiveBall",
     Msg_PassToMe = "Msg_PassToMe",
     Msg_SupportAttacker = "Msg_SupportAttacker",
