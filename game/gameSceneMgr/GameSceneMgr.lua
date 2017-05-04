@@ -553,13 +553,14 @@ function M.moveToWorldPos(r,c)
     end
 end
 GameMessage:addEventListener(GameMessage.MessageName.replaceLayer,function ( cmdX )
-    local path = (cmdX.name).path
-    local config = require("game.gameSceneMgr.GameLayerName")[path]
-    GameSceneMgr.replaceLayer(config)
+    dump(cmdX)
+    local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
+    dump(config)
+    GameSceneMgr.replaceLayer(require(config))
 end)
 GameMessage:addEventListener(GameMessage.MessageName.pushLayer,function ( cmdX )
     local path = (cmdX.name).path
-    local config = require("game.gameSceneMgr.GameLayerName")[path]
-    GameSceneMgr.pushLayer(config)
+    local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
+    GameSceneMgr.pushLayer(require(config))
 end)
 return M

@@ -8,3 +8,5 @@ local M = {
 	MainLayer = {path = "game.config.demo.MainLayer"},
 	choukaLayer = {path = "game.config.demo.choukaLayer"},
 }
+
+return M

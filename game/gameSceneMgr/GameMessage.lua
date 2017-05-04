@@ -23,7 +23,7 @@ M.MessageName =
 }
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 --打印分发的点击事件
-for k,eventName in pairs(MessageType) do
+for k,eventName in pairs(M.MessageName) do
     M:addEventListener(eventName,function ( cmdX )
         dump(cmdX.data,eventName)
     end)
