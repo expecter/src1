@@ -13,14 +13,10 @@ function M:setData(params )
 end
 
 function M:initView( target )
-
+	print("AAAAAAAAAAAAAAAA")
 end
 
 function M:enterView( target )
-	GameMessage:dispatchEvent{
-		name = "enterLogin",
-		data = {},
-	}
 end
 
 return M

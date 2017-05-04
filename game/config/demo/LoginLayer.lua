@@ -16,7 +16,29 @@ local M = {
 
 		},
 	},
-	_children = {},
+	_children = {
+		{
+			_super = "GameNode",
+			_component = {
+				{_name = "",_type = "cc_node",
+				contentsize = {width = 154,height = 56},
+				AnchPos = {x = 0,y = 0},
+				pos = {x = 300,y = 100},
+				},
+				{
+					_type = "cc_sprite",spriteName = "img_btn_gray_2_n"
+				},
+				{
+					_type = "ex_hightlightComponent",
+				},
+				{
+					_type = "cc_ClickComponent",
+					isScale = true,
+					clickedEvent = {event = "Message",name = "replaceLayer",params = {name = "MainLayer"}},
+				},
+			},
+		},
+	},
 
 }
 return M

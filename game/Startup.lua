@@ -26,13 +26,13 @@ end)
 component = require("game.component.component")
 ComponentFactory = component.ComponentFactory
 GameObj = require("game.gameObjects.GameObj")
-CmdData = require("gameCaches.CmdData")
-CmdCommon = require("gameCaches.caches.CmdCommon")
 GameStateManager = require("utils.GameStateManager").new()
+GameMessage = require("game.message.GameMessage")
 GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()
 GameCacheMgr = require("gameCaches.GameCacheMgr")
 GameNode = require("game.gameSceneMgr.GameNode")
 GameLayer = require("game.gameSceneMgr.GameLayer")
+
 -- GameNode = require("game.gameSceneMgr.GameNode")
 component = require("game.component.component")
 --游戏管理器

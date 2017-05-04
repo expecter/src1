@@ -165,7 +165,7 @@ end
 
 --gameNode配置
 function M.getViewConfigByPath( path )
-    return clone(require("game.refnode."..path)) --读取配置里面的
+    return clone(require("game.config."..path)) --读取配置里面的
 end
 function M.createGameNode( config )
     local localNode = { --预置基础节点
@@ -552,5 +552,12 @@ function M.moveToWorldPos(r,c)
         helper()
     end
 end
-
+GameMessage:addEventListener("replaceLayer",function ( cmdX )
+    local config = require("game.gameSceneMgr.GameLayerName")[cmdX.name]
+    GameSceneMgr.replaceLayer(config)
+end)
+GameMessage:addEventListener("pushLayer",function ( cmdX )
+    local config = require("game.gameSceneMgr.GameLayerName")[cmdX.name]
+    GameSceneMgr.pushLayer(config)
+end)
 return M

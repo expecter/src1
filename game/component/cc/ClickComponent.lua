@@ -15,6 +15,18 @@ function M:setData(params )
 	self.isSwallow = params.isSwallow==true
     self.isScale_ = params.isScale==true
     self.onTouch_ = params.touch_ or handler(self, self.onTouch)
+    if type(params.clickedEvent) == "table" then
+        self.fClickeEvent = function (  )
+            if params.clickedEvent.event == "Message" then
+                GameMessage:dispatchEvent{
+                    name = params.clickedEvent.name,
+                    data = params.clickedEvent.params,
+                }
+            end
+        end
+    elseif type(params.clickedEvent) == "function" then
+        self.fClickeEvent = params.clickedEvent
+    end
 end
 function M:initView(  )
 	--点击层
