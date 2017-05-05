@@ -563,4 +563,10 @@ GameMessage:addEventListener(GameMessage.MessageName.pushLayer,function ( cmdX )
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
     GameSceneMgr.pushLayer(require(config))
 end)
+GameMessage:addEventListener(GameMessage.MessageName.showPanel,function ( cmdX )
+    local path = (cmdX.name).path
+    local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
+    local panel = M.createGameNode(require(config))
+    panel:showPanel()
+end)
 return M
