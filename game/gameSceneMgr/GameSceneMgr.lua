@@ -554,9 +554,7 @@ function M.moveToWorldPos(r,c)
     end
 end
 GameMessage:addEventListener(GameMessage.MessageName.replaceLayer,function ( cmdX )
-    dump(cmdX)
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
-    dump(config)
     GameSceneMgr.replaceLayer(require(config))
 end)
 GameMessage:addEventListener(GameMessage.MessageName.pushLayer,function ( cmdX )

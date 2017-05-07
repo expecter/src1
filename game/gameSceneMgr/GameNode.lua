@@ -107,11 +107,11 @@ end
 function M:getAllChildren(  )
 	return self.TlChildren
 end
-
+--由于组件是在该节点上继续addChild的，需要给命名子节点加上zorder1才保证渲染顺序
 function M:createChildren( _children )
 	for k,child in pairs(_children) do
 		local node = GameSceneMgr.createGameNode(child)
-		self:addChild(node)
+		self:addChild(node,1) 
 		table.insert(self.TlChildren,node)
 	end
 end

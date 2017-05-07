@@ -12,11 +12,11 @@ local M = {
 			pos = {x =0,y = 0},
 		},
 		{
-			_type = "cc_sprite",spriteName = "img_btn_gray_2_n"
+			_type = "cc_sprite",spriteName = "img_picture_zhanyi_bg"
 		},
-		{
-			_type = "demo_ComTest",
-		},
+		-- {
+		-- 	_type = "demo_ComTest",
+		-- },
 
 	},
 	_children = {
