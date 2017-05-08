@@ -1,3 +1,5 @@
+local M = class(...,require("gameCaches.GameCache"))
+
 local dataModel = {
 	id = 0,
 	heroId = 0,

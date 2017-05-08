@@ -4,7 +4,8 @@
 --
 local M = {
 	_super = "GameLayer",
-	_component = {
+	_component = 
+	{
 		{
 			_type = "cc_node",
 			contentsize = {width = 1136,height = 640},
@@ -19,7 +20,8 @@ local M = {
 		-- },
 
 	},
-	_children = {
+	_children = 
+	{
 		{
 			_super = "GameNode",
 			_name = "back",
@@ -45,7 +47,7 @@ local M = {
 			},
 		},
 		{
-			_type = "GameNode",
+			_super = "GameNode",
 			_name = "switchNode",
 			_component = {
 				{
@@ -56,13 +58,15 @@ local M = {
 				},
 				-- {_type = "DrawComponent"},
 				{
-				_type = "ViewSwitchComponent",tlData = {
-					{path = "game.config.TabNode1",params = {}},
-					{path = "game.config.TabNode2",params = {}},
-					{path = "game.config.TabNode1",params = {}},
-					{path = "game.config.TabNode1",params = {}},
-				}},
-		}
+					_type = "ViewSwitchComponent",tlData = {
+						{path = "game.config.TabNode1",params = {}},
+						{path = "game.config.TabNode2",params = {}},
+						{path = "game.config.TabNode1",params = {}},
+						{path = "game.config.TabNode1",params = {}},
+					}
+				},
+			}
+		},
 	},
 
 }

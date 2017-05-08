@@ -4,6 +4,7 @@ local dataModel = {
 	level = 1,
 	exp = 2,
 }
+local M = class(...,require("gameCaches.GameCache"))
 function M:ctor(  )
 	local params = {
 		cacheName = "CmdHero",

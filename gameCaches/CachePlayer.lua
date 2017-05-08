@@ -2,7 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-05-24 23:40:37
 --
-local M = class(...,require("game.gameCaches.GameCache"))
+local M = class(...,require("gameCaches.GameCache"))
 local ModelData = {
 	playerId = 0,
 	name = "jean",

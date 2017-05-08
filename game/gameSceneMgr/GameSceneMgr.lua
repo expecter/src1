@@ -166,6 +166,7 @@ end
 
 --gameNode配置
 function M.getViewConfigByPath( path )
+    print("path........."..path)
     return clone(require("game.config."..path)) --读取配置里面的
 end
 function M.createGameNode( config )
@@ -180,6 +181,9 @@ function M.createGameNode( config )
         node:addAllComponents(config._component)        
         return node
     else
+        if not config._super then
+            
+        end
         local data = M.getViewConfigByPath(config._super)
         for k,v in pairs(config) do
             if k~="_super" then

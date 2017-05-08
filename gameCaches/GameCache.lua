@@ -21,7 +21,7 @@ function M:ctor( params )
         if not self.tmCmdX then
             self:firstInit(self.tmCmdX)
         end
-        self.id = #self.tmCmdX
+        -- self.id = #self.tmCmdX
         self:enterGame()
     end)
 

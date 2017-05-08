@@ -45,7 +45,7 @@ local M = {
 			},
 		},
 		{
-			_type = "GameNode",
+			_super = "GameNode",
 			_component = {
 				{
 				_type = "cc_node",
