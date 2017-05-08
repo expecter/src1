@@ -29,7 +29,7 @@ GameObj = require("game.gameObjects.GameObj")
 GameStateManager = require("utils.GameStateManager").new()
 GameMessage = require("game.gameSceneMgr.GameMessage")
 GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()
-GameCacheMgr = require("gameCaches.GameCacheMgr")
+-- GameCacheMgr = require("gameCaches.GameCacheMgr")
 GameNode = require("game.gameSceneMgr.GameNode")
 GameLayer = require("game.gameSceneMgr.GameLayer")
 

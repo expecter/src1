@@ -15,11 +15,14 @@ function M:ctor( params )
     --通过bind绑定在次GameCache上的View
     self.tmView_bind = {}
     GameMgr:addEventListener("enterGame",function()
-        for i,v in ipairs(GameStateManager:getDataByName(self.cacheName)) do
-            self.tmCmdX[v.id] = v
-        end
-        self.id = self.tmCmdX[#self.tmCmdX].id
-        self:init(cmdX)
+        -- for i,v in ipairs(GameStateManager:getDataByName(self.cacheName)) do
+        --     self.tmCmdX[v.id] = v
+        -- end
+        -- self.id = self.tmCmdX[#self.tmCmdX].id
+        self.tmCmdX = GameStateManager:getDataByName(self.cacheName)
+        if not self.tmCmdX then
+            self:init(self.tmCmdX)
+        end        
     end)
 
     GameMgr:addEventListener("exitGame",function()
@@ -77,6 +80,9 @@ function M:deleteOne( id )
         --分发删除删除事件
         self:dispatchDeleteEvent(cmdX, hash)
     end
+end
+function M:updateByProto( cmdX )
+    
 end
 function M:update( tlCmdX )
     if tlCmdX then

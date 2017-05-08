@@ -2,7 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-05-24 23:40:37
 --
-local M = class(...,require("game.gameObjects.ObjBase"))
+local M = class(...,require("game.gameCaches.GameCache"))
 local dataModel = {
 	id = 0,
 	heroId = 0,
@@ -19,11 +19,13 @@ function M:ctor(  )
 	
 end
 function M:init( cmdX )
-	if not cmdX then
-		self.cache = ref.getRef({refName = "refarmy"})
-		self:updateByProto(self.cache)
-	end
-	self.cache = cmdX
+	-- if not cmdX then
+	-- 	self.cache = ref.getRef({refName = "refarmy"})
+	-- 	self:updateByProto(self.cache)
+	-- end
+	-- self.cache = cmdX
+	self.cache = ref.getRef({refName = "refarmy"})
+	self:updateByProto(self.cache)
 end
 function M:cleanup(  )
 	self.cache = {}
@@ -32,9 +34,9 @@ end
 function M:updateNum( params )
 	local data = params
 	
-	self:updateByProto()
+	self:updateByProto(self.cache)
 end
 function M:deleteOne( params )
-	self:updateByProto()
+	self:updateByProto(self.cache)
 end
 return M

@@ -2,7 +2,7 @@
 -- Author: Your Name
 -- Date: 2016-05-24 23:40:37
 --
-local M = class(...,require("game.gameObjects.ObjBase"))
+local M = class(...,require("game.gameCaches.GameCache"))
 local ModelData = {
 	playerId = 0,
 	name = "jean",
@@ -31,11 +31,11 @@ function M:updateNum( params )
 	local data = params
 	--TODO
 	local num = self.caches.num
-	self:updateByProto(data)
+	self:updateByProto(self.cache)
 end
 
 function M:levelup(  )
-	self:updateByProto()
+	self:updateByProto(self.cache)
 end
 
 return M

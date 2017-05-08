@@ -12,16 +12,17 @@ M.eventName = {
     updateNum = {name = "updateNum",data = {}},
 }
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
+
 GameMgr:addEventListener("enterGame",function()
-    M.cache = GameStateManager:getDataByName("ObjArmy")
-    dump(M.cache)
+    M.cache = GameStateManager:getDataByName("CmdArmy")
+    -- dump(M.cache)
     if not M.cache then
         M.cache = ref.getRef({refName = "refarmy"})
     end
 end)
 
 GameMgr:addEventListener("exitGame",function()
-    GameStateManager:save({name = "ObjArmy",data = M.cache})
+    GameStateManager:save({name = "CmdArmy",data = M.cache})
     M.cache = {}
 end)
 function M.dispatchAddEvent( cmdX )
