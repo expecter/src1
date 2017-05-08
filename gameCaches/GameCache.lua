@@ -21,13 +21,15 @@ function M:ctor( params )
         if not self.tmCmdX then
             self:firstInit(self.tmCmdX)
         end
-        self.id = #self.tmCmdX  
+        self.id = #self.tmCmdX
+        self:enterGame()
     end)
 
     GameMgr:addEventListener("exitGame",function()
         GameStateManager:save({name = self.cacheName,data = M.cache})
         self:cleanup()
         self:clean()
+        self:exitGame()
     end)
 end
 function M:createDataModel( data )
@@ -37,6 +39,12 @@ function M:firstInit( cmdX )
     
 end
 function M:cleanup(  )
+    
+end
+function M:enterGame(  )
+    
+end
+function M:exitGame(  )
     
 end
 --清空缓存数据

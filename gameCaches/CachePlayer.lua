@@ -6,10 +6,12 @@ local M = class(...,require("game.gameCaches.GameCache"))
 local ModelData = {
 	playerId = 0,
 	name = "jean",
-	level = 1,
+	level = 1, --挂钩hero的cost
 	health = 100,
 	gold = 0,
 	energyTime = 0,--体力恢复倒计时
+	energy = 10,
+	cardNum = 10,--每日抽卡次数
 }
 function M:ctor(  )
 	local params = {
