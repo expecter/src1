@@ -1,17 +1,8 @@
---
--- Author: Your Name
--- Date: 2016-05-24 23:40:37
---
-local M = class(...,require("game.gameCaches.GameCache"))
 local dataModel = {
 	id = 0,
 	heroId = 0,
 	level = 1,
 	exp = 2,
-	li = 1,
-	zhi = 1,
-	su = 1,
-	refId = 0,
 }
 function M:ctor(  )
 	local params = {
@@ -41,21 +32,10 @@ function M:test( params )
 	
 	self:updateByProto(self.cache)
 end
-function M:deleteOne( params )
+--抽卡
+function M:chouka( params )
+	CacheHero:newHero()	
 	self:updateByProto(self.cache)
 end
---创建新的英雄
-function M:newHero(  )
-	local data = dataModel
-	self:updateByProto(data)
-end
---武将升级
---optional
-function M:levelup(  )
-	
-end
---分解
-function M:breakout(  )
-	
-end
+
 return M

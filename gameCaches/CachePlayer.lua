@@ -8,15 +8,17 @@ local ModelData = {
 	name = "jean",
 	level = 1,
 	health = 100,
+	gold = 0,
+	energyTime = 0,--体力恢复倒计时
 }
 function M:ctor(  )
 	local params = {
-		cacheName = "ObjPlayer"
+		cacheName = "CmdPlayer"
 	}
 	M.super.ctor(self,params)
 	
 end
-function M:init( cmdX )
+function M:firstInit( cmdX )
 	if not cmdX then
 		self.cache = ref.getRef({refName = "userinit",Once = true})
 		self:updateByProto(self.cache)

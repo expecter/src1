@@ -23,6 +23,12 @@ CCBReader.setDefaultCallback(function()
     -- require("game.gameScenes.sceneCommon.ViewAlertTips").show(G_W("提示"), G_W("功能暂未开启"))
     AlertTips.showTips("提示")
 end)
+--data
+CacheArmy = require("game.gameCaches.CacheArmy").new()
+CacheCard = require("game.gameCaches.CacheCard").new()
+CacheHero = require("game.gameCaches.CacheHero").new()
+CachePlayer = require("game.gameCaches.CachePlayer").new()
+--view
 component = require("game.component.component")
 ComponentFactory = component.ComponentFactory
 GameObj = require("game.gameObjects.GameObj")

@@ -1,13 +1,15 @@
 local M = {}
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
+--optional
+
 --给每个缓存增加个更新次数index，方便界面判断数据有无更新，需不需要重载数据
 function M:ctor( params )
     self.cacheName = params.cacheName
     self.isRepeat = params.isRepeat~=false --是否数组形式的缓存
-    self.dataModel = self:createDataModel(params.dataModel)
+    -- self.dataModel = self:createDataModel(params.dataModel)
     self.id = 0 --当前已创建的数据最大id
     --缓存数据
-    self.tmCmdX = {}
+    self.tmCmdX = nil
 
     --通过bindOne绑定在次GameCache上的View
     self.tmView_bindOne = {}
@@ -15,14 +17,11 @@ function M:ctor( params )
     --通过bind绑定在次GameCache上的View
     self.tmView_bind = {}
     GameMgr:addEventListener("enterGame",function()
-        -- for i,v in ipairs(GameStateManager:getDataByName(self.cacheName)) do
-        --     self.tmCmdX[v.id] = v
-        -- end
-        -- self.id = self.tmCmdX[#self.tmCmdX].id
         self.tmCmdX = GameStateManager:getDataByName(self.cacheName)
         if not self.tmCmdX then
-            self:init(self.tmCmdX)
-        end        
+            self:firstInit(self.tmCmdX)
+        end
+        self.id = #self.tmCmdX  
     end)
 
     GameMgr:addEventListener("exitGame",function()
@@ -34,7 +33,7 @@ end
 function M:createDataModel( data )
     return data
 end
-function M:init( cmdX )
+function M:firstInit( cmdX )
     
 end
 function M:cleanup(  )
