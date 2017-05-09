@@ -4,22 +4,26 @@
 --
 local M = {}
 local GameCache = import(".GameCache")
-local CmdCommon = require("gameCaches.caches.CmdCommon")
 local tmGameCache = {}
-
-for _,name in pairs(CmdCommon.CacheName) do
-	if GameStateManager:getDataByName(name) then
-		tmGameCache[name] = GameCache.new(GameStateManager:getDataByName(name))
-	else
-		tmGameCache[name] = GameCache.new({})
-	end
+local CacheName = {
+	"CacheCard",
+	"CacheFight",
+	"CacheHero",
+	"CachePlayer",
+}
+for _,name in pairs(CacheName) do
+	tmGameCache[name] = require("gameCaches."..name).new()
 end
+
 -- static_Listener:addEventListener("CmdAppend",function ( event )
 -- 	local data = event.data
 -- 	tmGameCache[event.className]:updateByCmdX(data)
 -- end)
 function M.getGameCacheByName(enumCacheName)
 	return tmGameCache[enumCacheName]
+end
+function M.getAllGameCache(  )
+	return tmGameCache
 end
 
 -- function M.saveLocalData(  )

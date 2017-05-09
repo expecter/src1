@@ -13,6 +13,12 @@ local ModelData = {
 	energy = 10,
 	cardNum = 10,--每日抽卡次数
 }
+M.requestName = {
+	{name = "breakSkill",params = {}},
+	{name = "newHero",params = {}},
+	{name = "tosprite",params = {}},
+	{name = "levelup",params = {}},
+}
 function M:ctor(  )
 	local params = {
 		cacheName = "CmdPlayer"

@@ -19,7 +19,7 @@ function M:ctor( params )
     GameMgr:addEventListener("enterGame",function()
         self.tmCmdX = GameStateManager:getDataByName(self.cacheName)
         if not self.tmCmdX then
-            self:firstInit(self.tmCmdX)
+            self:firstInit()
         end
         -- self.id = #self.tmCmdX
         self:enterGame()
@@ -37,6 +37,9 @@ function M:createDataModel( data )
 end
 function M:firstInit( cmdX )
     
+end
+function M:setCmdX( cmdX )
+    self.tmCmdX = cmdX
 end
 function M:cleanup(  )
     
@@ -89,7 +92,7 @@ function M:deleteOne( id )
     end
 end
 function M:updateByProto( cmdX )
-    
+    dump(cmdX,self.cacheName)
 end
 function M:update( tlCmdX )
     if tlCmdX then

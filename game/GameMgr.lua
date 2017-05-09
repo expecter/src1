@@ -148,4 +148,8 @@ function M.onSocketClose()
     end
 end
 
+function M.getCurTime(  )
+    return os.time()*1000
+end
+
 return M

@@ -25,8 +25,6 @@ CCBReader.setDefaultCallback(function()
 end)
 
 --view
-component = require("game.component.component")
-ComponentFactory = component.ComponentFactory
 GameObj = require("game.gameObjects.GameObj")
 GameStateManager = require("utils.GameStateManager").new()
 GameMessage = require("game.gameSceneMgr.GameMessage")
@@ -39,7 +37,6 @@ GameLayer = require("game.gameSceneMgr.GameLayer")
 component = require("game.component.component")
 --游戏管理器
 GameMgr = require("game.GameMgr")
-require("game.gameObjects.ObjArmy")
 ref = require("game.ref.json.ref")
 require("game.GameGlobalConfig")
 Helper = require("utils.Helper")
@@ -52,9 +49,10 @@ net.Socket = require("net.SocketTCP")
 --场景管理器
 
 --data
-CacheCard = require("gameCaches.CacheCard").new()
-CacheHero = require("gameCaches.CacheHero").new()
-CachePlayer = require("gameCaches.CachePlayer").new()
+GameCacheMgr = require("gameCaches.GameCacheMgr")
+-- CacheCard = require("gameCaches.CacheCard").new()
+-- CacheHero = require("gameCaches.CacheHero").new()
+-- CachePlayer = require("gameCaches.CachePlayer").new()
 display.replaceScene(GameSceneMgr)
 DEFAULT_TRUE = function ( a ) return a~= false end
 DEFAULT_FALSE = function ( a ) return a == true end

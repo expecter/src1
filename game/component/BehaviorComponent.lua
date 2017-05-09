@@ -47,7 +47,6 @@ function M:playAttack( target )
     local animation,time=FightAnimationMgr.getSoldiersAni(self.armyData_.ani,ANI_TYPE.att,self.isAtt)
     local action=cc.Animate:create(animation)
     self.soldiersSprite:runAction(action)
-    print("playAttAnimate")
     self:playStandbAnimate(time)
 end
 function M:playRun( target )

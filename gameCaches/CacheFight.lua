@@ -6,6 +6,12 @@ local dataModel = {
 	level = 1,
 	exp = 2,
 }
+M.requestName = {
+	{name = "breakSkill",params = {}},
+	{name = "newHero",params = {}},
+	{name = "tosprite",params = {}},
+	{name = "levelup",params = {}},
+}
 function M:ctor(  )
 	local params = {
 		cacheName = "CmdHero",

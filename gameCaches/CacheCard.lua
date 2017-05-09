@@ -5,6 +5,12 @@ local dataModel = {
 	exp = 2,
 }
 local M = class(...,require("gameCaches.GameCache"))
+M.requestName = {
+	{name = "breakSkill",params = {}},
+	{name = "newHero",params = {}},
+	{name = "tosprite",params = {}},
+	{name = "levelup",params = {}},
+}
 function M:ctor(  )
 	local params = {
 		cacheName = "CmdHero",
@@ -21,8 +27,8 @@ function M:firstInit( cmdX )
 	-- 	self:updateByProto(self.cache)
 	-- end
 	-- self.cache = cmdX
-	self.cache = ref.getRef({refName = "refarmy"})
-	self:updateByProto(self.cache)
+	local cache = ref.getRef({refName = "refarmy"})
+	self:updateByProto(cache)
 end
 function M:cleanup(  )
 	self.cache = {}

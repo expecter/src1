@@ -13,6 +13,12 @@ local dataModel = {
 	su = 1,
 	refId = 0,
 }
+M.requestName = {
+	{name = "breakSkill",params = {}},
+	{name = "newHero",params = {}},
+	{name = "tosprite",params = {}},
+	{name = "levelup",params = {}},
+}
 function M:ctor(  )
 	local params = {
 		cacheName = "CmdHero",
@@ -41,21 +47,20 @@ function M:test( params )
 	
 	self:updateByProto(self.cache)
 end
-function M:deleteOne( params )
-	self:updateByProto(self.cache)
+--分解成技能
+function M:breakSkill( params )
 end
---创建新的英雄
+--创建新的卡牌
 function M:newHero(  )
-	local data = dataModel
-	self:updateByProto(data)
 end
+--转化为技能经验
+function M:tosprite( params )
+	-- body
+end
+
 --武将升级
 --optional
 function M:levelup(  )
-	
-end
---分解
-function M:breakout(  )
 	
 end
 return M
