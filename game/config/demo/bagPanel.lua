@@ -34,6 +34,13 @@ local M = {
 						refName = "bagindex",
 					},
 				},
+				{
+					_type = "cache_binding",
+					caches = {
+						{name = "Cache1",component = {"ct_viewList"}},
+						{name = "Cache2",component = {"ct_viewList"}},
+					},
+				},
 			}
 		},
 		{
