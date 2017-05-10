@@ -5,6 +5,11 @@
 local M = class("ct_viewList")
 function M:ctor( target ,params)
 	self.target = target
+	
+	self:setData(params)
+end
+function M:setData( params )
+	self.tlData = CommonUtil.getData(params.tlData)
 	self.cellMode = params.cellMode or function ( params ,index)
 		local config = clone(require("game.config.gameCell"))
 		-- config._data = params
@@ -25,10 +30,15 @@ function M:ctor( target ,params)
 	self.isMovable = params.isMovable
 	self.isTapMenu = DEFAULT_TRUE(params.isTapMenu)
 	self.defaultIndex = params.defaultIndex or 1
-	self:setData(params)
-end
-function M:setData( params )
-	self.tlData = CommonUtil.getData(params.tlData)
+	if params.clickedEvent then
+		self.callback_ = function ( params,index )
+			if params.clickedEvent._type == "switch" then
+	            local switchNode = GameSceneMgr.getGameNode(params.clickedEvent.nodeName)
+	            switchNode:switchTo(index)
+	        end
+		end
+	end
+	
 end
 --exportFunc
 function M:initView(  )

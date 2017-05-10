@@ -12,9 +12,9 @@ local M = {
 			AnchPos = {x = 0,y = 0},
 			pos = {x =200,y = 300},
 		},
-		{
-			_type = "demo_bagPanelComponent",
-		},
+		-- {
+		-- 	_type = "demo_bagPanelComponent",
+		-- },
 	},
 	_children = {
 		{
@@ -32,6 +32,10 @@ local M = {
 					{
 						_type = "ref",
 						refName = "bagindex",
+						clickedEvent = {
+							_type = "switch",
+							nodeName = "switchNode",
+						},
 					},
 				},
 				{
