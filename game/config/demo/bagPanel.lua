@@ -30,6 +30,7 @@ local M = {
 				{
 					_type = "ct_viewList", tlData = 
 					{
+						_type = "ref",
 						refName = "bagindex",
 					},
 				},

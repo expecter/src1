@@ -13,18 +13,11 @@ function M:ctor( target ,params)
 	self.tlView = {}
 end
 function M:setData(params )
-	-- self.tlData = params.tlData or {}
-	if params.tlData.refName then
-		self.tlData = ref.getRef(params.tlData)
-	else
-		self.tlData = params.tlData
-	end
-	self.defaultIndex = params.defaultIndex or 1
+	self.tlData = CommonUtil.getData(params.tlData)
 end
 function M:initView( target )
 	for i,cmdX in ipairs(self.tlData) do
 		local view = GameSceneMgr.createGameNode(clone(require(cmdX.path)),false)
-		-- view:setAnchorPoint(cc.p(0,0))
 		view:setVisible(false)
 		table.insert(self.tlView,view)
 		target:addChild(view)

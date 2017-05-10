@@ -37,6 +37,7 @@ GameLayer = require("game.gameSceneMgr.GameLayer")
 component = require("game.component.component")
 --游戏管理器
 GameMgr = require("game.GameMgr")
+CommonUtil = require("utils.CommonUtil")
 ref = require("game.ref.json.ref")
 require("game.GameGlobalConfig")
 Helper = require("utils.Helper")

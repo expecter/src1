@@ -3,7 +3,7 @@
 -- Date: 2017-05-09 14:38:59
 --
 local M = {}
-
+--为调试接口用
 function M.getGameCaches(  )
 	for k,gameCache in pairs(tmGameCache) do
 		for _,request in ipairs(gameCache.requestName) do

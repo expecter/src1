@@ -4,7 +4,6 @@
 --
 local M = class("eventComponent")
 function M:ctor( target ,params)
-	dump("eventComponent")
 	self.target = target
 	self.cellMode = params.cellMode or function ( params )
 		return GameSceneMgr.createGameNode(require("game.config.gameCell"))
@@ -14,7 +13,7 @@ function M:ctor( target ,params)
 	self:setData(params)
 end
 function M:setData(params )
-	self.tlData = ref.getRef(params.tlData)
+	self.tlData = CommonUtil.getData(params.tlData)
 end
 -- function M:cellMode( cmdX )
 	

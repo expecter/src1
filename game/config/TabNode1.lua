@@ -4,7 +4,7 @@
 --
 local M = {
 	name = "tabNode1",
-	_type = "GameNode",
+	_super = "GameNode",
 	_component = {
 		{
 			_type = "cc_node",

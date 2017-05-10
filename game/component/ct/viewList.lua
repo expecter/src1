@@ -27,12 +27,8 @@ function M:ctor( target ,params)
 	self.defaultIndex = params.defaultIndex or 1
 	self:setData(params)
 end
-function M:setData( params )	
-	if params.tlData.refName then
-		self.tlData = ref.getRef(params.tlData)
-	else
-		self.tlData = params.tlData
-	end	
+function M:setData( params )
+	self.tlData = CommonUtil.getData(params.tlData)
 end
 --exportFunc
 function M:initView(  )
