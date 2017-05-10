@@ -30,10 +30,11 @@ function M:setData( params )
 	self.isMovable = params.isMovable
 	self.isTapMenu = DEFAULT_TRUE(params.isTapMenu)
 	self.defaultIndex = params.defaultIndex or 1
-	if params.clickedEvent then
+	local clickedEvent = params.clickedEvent
+	if clickedEvent then
 		self.callback_ = function ( params,index )
-			if params.clickedEvent._type == "switch" then
-	            local switchNode = GameSceneMgr.getGameNode(params.clickedEvent.nodeName)
+			if clickedEvent._type == "switch" then
+	            local switchNode = GameSceneMgr.getGameNode(clickedEvent.nodeName)
 	            switchNode:switchTo(index)
 	        end
 		end

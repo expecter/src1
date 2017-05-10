@@ -23,7 +23,7 @@ CCBReader.setDefaultCallback(function()
     -- require("game.gameScenes.sceneCommon.ViewAlertTips").show(G_W("提示"), G_W("功能暂未开启"))
     AlertTips.showTips("提示")
 end)
-
+Language = require("game.Language.Language")
 --view
 GameObj = require("game.gameObjects.GameObj")
 GameStateManager = require("utils.GameStateManager").new()
@@ -35,6 +35,7 @@ GameLayer = require("game.gameSceneMgr.GameLayer")
 
 -- GameNode = require("game.gameSceneMgr.GameNode")
 component = require("game.component.component")
+ComponentFactory = require("game.component.componentFactory")
 --游戏管理器
 GameMgr = require("game.GameMgr")
 CommonUtil = require("utils.CommonUtil")
@@ -43,7 +44,6 @@ require("game.GameGlobalConfig")
 Helper = require("utils.Helper")
 AlertTips = require("utils.AlertTips")
 view = require("game.view.view")
-dataUtil = require("utils.dataUtil")
 UICommon = require("game.view.UICommon")
 net = {}
 net.Socket = require("net.SocketTCP")

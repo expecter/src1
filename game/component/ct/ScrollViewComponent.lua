@@ -18,6 +18,8 @@ end
 --exportFunc
 function M:initView( target )
     self.viewNode = GameSceneMgr.createGameNode(self.viewConfig)
+    self.viewNode:initView()
+    self.viewNode:enterView()
 	self.ccScrollView = cc.ScrollView:create(self.viewsize,self.viewNode)
 	target:addChild(self.ccScrollView)
     -- self.ccScrollView:setAnchorPoint(cc.p(0.5, 0.5))

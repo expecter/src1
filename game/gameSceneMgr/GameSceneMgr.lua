@@ -585,7 +585,7 @@ GameMessage:addEventListener(GameMessage.MessageName.showPanel,function ( cmdX )
     local panel = M.createGameNode((config))
     panel:showPanel()
 end)
-GameMessage:addEventListener(GameMessage.MessageName.ExitNode,function ( cmdX )
+GameMessage:addEventListener(GameMessage.MessageName.releaseNode,function ( cmdX )
     local nodeName = cmdX.name
     tlGameNode[nodeName] = nil
 end)

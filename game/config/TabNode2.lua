@@ -8,14 +8,14 @@ local M = {
 	_component = {
 		{
 			_type = "cc_node",
-			contentsize = {width = 1136,height = 640},
+			contentsize = {width = 1136,height = 440},
 			AnchPos = {x = 0,y = 0},
 			pos = {x =0,y = 0},
 		},
 		{
-			_type = "ScrollViewComponent",
+			_type = "ct_ScrollViewComponent",
 			viewNode = {
-				_type = "GameNode",
+				_super = "GameNode",
 				_component = {
 					{
 						_type = "cc_node",

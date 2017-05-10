@@ -20,9 +20,9 @@ function M:initView( target )
 		local view = GameSceneMgr.createGameNode(clone(require(cmdX.path)),false)
 		view:setVisible(false)
 		table.insert(self.tlView,view)
-		target:addChild(view)
+		self.target:addChild(view)
 	end
-	target:switchTo(self.defaultIndex)
+	self.target:switchTo(self.defaultIndex)
 end
 
 function M:onUpdate( cmdX )
@@ -47,8 +47,9 @@ function M:switchTo( target,index,params )
 			break
 		end
 	end
+	print("index",index)
     --分发事件
-	if isInit == false then 
+	if isInit == false then		
 		table.insert(self.tlIndex,index)
 		--初始化。
 		if self.tlView[index].initView then

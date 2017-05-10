@@ -60,6 +60,7 @@ local M = {
 				{
 					_type = "ct_mutiViewComponent",tlData = 
 					{
+						_type = "ref",
 						refName = "bagindex",
 					},
 				},

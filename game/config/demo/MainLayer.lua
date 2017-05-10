@@ -11,9 +11,9 @@ local M = {
 			AnchPos = {x = 0,y = 0},
 			pos = {x =0,y = 0},
 		},
-		{
-			_type = "cc_sprite",spriteName = "img_picture_zhanyi_bg"
-		},
+		-- {
+		-- 	_type = "cc_sprite",spriteName = "img_picture_zhanyi_bg"
+		-- },
 		-- {
 		-- 	_type = "demo_ComTest",
 		-- },
@@ -53,15 +53,42 @@ local M = {
 				AnchPos = {x = 0,y = 0},
 				pos = {x =10,y = 580},
 				},
-				{_type = "ct_viewList", tlData = {
-				{name = "步兵",tag = 10001,node = 1},
-				{name = "弓兵",tag = 10101,node = 1},
-				{name = "骑兵",tag = 10201,node = 2},
-				{name = "器械",tag = 10302,node = 2}
-				}},
+				{
+					_type = "ct_viewList", 
+					tlData = {
+						{name = "步兵",tag = 10001,node = 1},
+						{name = "弓兵",tag = 10101,node = 1},
+						{name = "骑兵",tag = 10201,node = 2},
+						{name = "器械",tag = 10302,node = 2}
+					},
+					clickedEvent =
+					{
+						_type = "switch",
+						nodeName = "switchNode",
+					},
+				},
 				-- {_type = "modelComponent"}				
 				-- DrawComponent = {},
 			},
+		},
+		{
+			_super = "GameNode",
+			_name = "switchNode",
+			_component = {
+				{
+					_name = "",_type = "cc_node",
+					contentsize = {width = 300,height = 300},
+					AnchPos = {x = 0,y = 0},
+					pos = {x =0,y = 0},
+				},
+				{
+					_type = "ct_mutiViewComponent",tlData = 
+					{
+						_type = "ref",
+						refName = "bagindex",
+					},
+				},
+			}
 		},
 	},
 

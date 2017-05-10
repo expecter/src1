@@ -68,7 +68,7 @@ end
 function M:getFuncByCmdX( cmd )
 	for k,com in ipairs(self.components) do
 		if com[cmd] then
-			com[cmd](com)
+			com[cmd](com,self)
 		end		
 	end
 	for i,v in ipairs(self.TlChildren) do
