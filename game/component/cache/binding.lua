@@ -16,7 +16,7 @@ end
 function M:bindOne(  )
 	
 end
-
+--可添加缓存的要提供onAdd，onUpdate，onDelete接口
 function M:bind( cacheName,tlComponent )
 	local caches = GameCacheMgr.getGameCacheByName(cacheName)	
 	for i,componentName in ipairs(tlComponent) do
