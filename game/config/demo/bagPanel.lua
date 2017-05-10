@@ -13,7 +13,7 @@ local M = {
 			pos = {x =200,y = 300},
 		},
 		{
-			_type = "bagPanelComponent",
+			_type = "demo_bagPanelComponent",
 		},
 	},
 	_children = {
@@ -54,7 +54,7 @@ local M = {
 					pos = {x =0,y = 0},
 				},
 				{
-					_type = "mutiViewComponent",tlData = 
+					_type = "ct_mutiViewComponent",tlData = 
 					{
 						refName = "bagindex",
 					},
