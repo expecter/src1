@@ -13,7 +13,12 @@ function M:ctor( target ,params)
 	self.tlView = {}
 end
 function M:setData(params )
-	self.tlData = params.tlData or {}
+	-- self.tlData = params.tlData or {}
+	if params.tlData.refName then
+		self.tlData = ref.getRef(params.tlData)
+	else
+		self.tlData = params.tlData
+	end
 	self.defaultIndex = params.defaultIndex or 1
 end
 function M:initView( target )
