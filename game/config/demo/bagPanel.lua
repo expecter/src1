@@ -4,6 +4,7 @@
 --
 local M = {
 	_super = "GamePanel",
+	_name = "bagPanel",
 	_component = {
 		{
 			_type = "cc_node",
@@ -11,11 +12,14 @@ local M = {
 			AnchPos = {x = 0,y = 0},
 			pos = {x =200,y = 300},
 		},
+		{
+			_type = "bagPanelComponent",
+		},
 	},
 	_children = {
 		{
 			_super = "GameNode",
-			_name = "switchNode",
+			_name = "switchMenu",
 			_component = {
 				{
 					_name = "",_type = "cc_node",
@@ -55,6 +59,7 @@ local M = {
 				},
 			}
 		},
+
 	},
 
 }

@@ -40,6 +40,10 @@ end
 
 local instance = nil
 
+local tlGameNode = {} --当前界面所有运行着的节点 2017.05.10添加
+
+local curRunningLayer = nil --当前界面名
+
 --屏蔽
 M.MaskZOrdr = 1
 
@@ -93,16 +97,16 @@ function M:ctor()
     M.instance:addChild(topPanelMgr, M.TopZOrder)
     M.instance.topPanelMgr = topPanelMgr
     M.scheduler = require('framework.scheduler').scheduleUpdateGlobal(function ( dt )
-        M:dispatchEvent{
-            name = "update",
+        GameMessage:dispatchEvent{
+            name = GameMessage.MessageName.update,
             data = dt,
         }
     end)
     M.Timescheduler = require('framework.scheduler').scheduleGlobal(function ( dt )
-        M:dispatchEvent{
-            name = "time",
-            data = dt,
-        }
+        GameMessage:dispatchEvent{
+        name = GameMessage.MessageName.time,
+        data = dt,
+    }
     end,1)
     
 end
@@ -150,25 +154,21 @@ function M.coroutineCreate(f)
 
     end)()
 end
-function M.updateConfig( path,component )
-    local config = clone(require(path))
-    if config._component then
-        for i,comp in ipairs(config._component) do
-            if comp._type == component._type then
-                config._component[i] = component
-                return config
-            end
-        end
-    end
+-- function M.updateConfig( path,component )
+--     local config = clone(require(path))
+--     if config._component then
+--         for i,comp in ipairs(config._component) do
+--             if comp._type == component._type then
+--                 config._component[i] = component
+--                 return config
+--             end
+--         end
+--     end
     
-    return config
-end
+--     return config
+-- end
 
 --gameNode配置
-function M.getViewConfigByPath( path )
-    print("path........."..path)
-    return clone(require("game.config."..path)) --读取配置里面的
-end
 function M.createGameNode( config )
     local localNode = { --预置基础节点
         GameNode = 0,
@@ -178,13 +178,15 @@ function M.createGameNode( config )
     }
     if localNode[config._super] then
         local node = require("game.gameSceneMgr."..config._super).new(config)
-        node:addAllComponents(config._component)        
+        if node:getName()~="" then
+            tlGameNode[curRunningLayer][node:getName()] = node
+        end
         return node
     else
-        if not config._super then
+        -- if not config._super then
             
-        end
-        local data = M.getViewConfigByPath(config._super)
+        -- end
+        local data = clone(require("game.config."..config._super))
         for k,v in pairs(config) do
             if k~="_super" then
                 data[k] = v[k]
@@ -193,6 +195,14 @@ function M.createGameNode( config )
         return M.createGameNode(data)
     end
     return nil
+end
+
+function M.getGameNode( name )
+    return tlGameNode[curRunningLayer][name]
+end
+
+function M.getAllGameNode(  )
+    return tlGameNode
 end
 
 local index=1
@@ -205,7 +215,9 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         --创建新的
         -- local gameLayer = require(clsGameLayer).new(userdata)
         -- dump(clsGameLayer)
-        local gameLayer = M.createGameNode(clsGameLayer)
+        tlGameNode[clsGameLayer] = {}
+        curRunningLayer = clsGameLayer
+        local gameLayer = M.createGameNode(require(clsGameLayer))
 
         local gameLayerWrap = createGameLayerWrap(gameLayer)
         
@@ -423,6 +435,7 @@ function M.clearLayer()
     cc.Director:getInstance():getTextureCache():removeUnusedTextures()
     --lua回收
     collectgarbage("collect")
+    tlGameNode = {}
 end
 
 --获取当前的GameLayer
@@ -559,17 +572,21 @@ function M.moveToWorldPos(r,c)
 end
 GameMessage:addEventListener(GameMessage.MessageName.replaceLayer,function ( cmdX )
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
-    GameSceneMgr.replaceLayer(require(config))
+    GameSceneMgr.replaceLayer((config))
 end)
 GameMessage:addEventListener(GameMessage.MessageName.pushLayer,function ( cmdX )
     local path = (cmdX.name).path
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
-    GameSceneMgr.pushLayer(require(config))
+    GameSceneMgr.pushLayer((config))
 end)
 GameMessage:addEventListener(GameMessage.MessageName.showPanel,function ( cmdX )
     local path = (cmdX.name).path
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
-    local panel = M.createGameNode(require(config))
+    local panel = M.createGameNode((config))
     panel:showPanel()
+end)
+GameMessage:addEventListener(GameMessage.MessageName.ExitNode,function ( cmdX )
+    local nodeName = cmdX.name
+    tlGameNode[nodeName] = nil
 end)
 return M

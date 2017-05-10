@@ -17,7 +17,8 @@ function M:ctor( params )
 	end
 	if params._children then
 		self:createChildren(params._children)
-	end		
+	end
+	self:addAllComponents(params._component)
 end
 --设置节点携带的可变更数据
 -- function M:setData( data )
@@ -55,9 +56,14 @@ function M:enterView(  ) --对应onenter
 end
 function M:exitView(  ) --对应onexit
 	self:getFuncByCmdX("exitView")
+	
 end
 function M:releaseView(  )
 	self:getFuncByCmdX("releaseView")
+	GameMessage:dispatchEvent{
+        name = GameMessage.MessageName.releaseNode,
+        data = {name = self._name},
+    }
 end
 function M:getFuncByCmdX( cmd )
 	for k,com in ipairs(self.components) do

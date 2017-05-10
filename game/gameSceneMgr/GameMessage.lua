@@ -20,6 +20,9 @@ M.MessageName =
     enterGame = "enterGame",
     exitGame = "exitGame",
     saveGame = "saveGame",
+    releaseNode = "releaseNode",
+    update = "update",
+    time = "time",
 }
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 --打印分发的点击事件
