@@ -38,7 +38,10 @@ local M = {
 				{
 					_type = "cc_ClickComponent",
 					isScale = true,
-					clickedEvent = {_type = "Message",name = "replaceLayer",params = {name = "loginLayer"}},
+					clickedEvent = 
+					{
+						{_type = "Message",name = "replaceLayer",params = {name = "loginLayer"}}
+					},
 					data = {_type = "cache",refName = "refarmy",tmKey = {}},
 					condition = {},
 				},
@@ -55,16 +58,15 @@ local M = {
 				},
 				{
 					_type = "ct_viewList", 
-					tlData = {
-						{name = "步兵",tag = 10001,node = 1},
-						{name = "弓兵",tag = 10101,node = 1},
-						{name = "骑兵",tag = 10201,node = 2},
-						{name = "器械",tag = 10302,node = 2}
+					tlData = 
+					{
+						_type = "ref",
+						refName = "bagindex",
 					},
 					clickedEvent =
 					{
-						_type = "switch",
-						nodeName = "switchNode",
+						{_type = "switchto",
+						nodeName = "switchNode",}
 					},
 				},
 				-- {_type = "modelComponent"}				
@@ -82,7 +84,8 @@ local M = {
 					pos = {x =0,y = 0},
 				},
 				{
-					_type = "ct_mutiViewComponent",tlData = 
+					_type = "ct_mutiViewComponent",
+					tlData = 
 					{
 						_type = "ref",
 						refName = "bagindex",

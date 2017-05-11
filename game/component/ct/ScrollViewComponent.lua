@@ -18,8 +18,7 @@ end
 --exportFunc
 function M:initView( target )
     self.viewNode = GameSceneMgr.createGameNode(self.viewConfig)
-    self.viewNode:initView()
-    self.viewNode:enterView()
+    self.viewNode:initView()    
 	self.ccScrollView = cc.ScrollView:create(self.viewsize,self.viewNode)
 	target:addChild(self.ccScrollView)
     -- self.ccScrollView:setAnchorPoint(cc.p(0.5, 0.5))
@@ -47,36 +46,60 @@ function M:initView( target )
     -- self:onScroll(self.ccScrollView)
     self.ccScrollView:setMovable(self.movable)
 end
+
+function M:updateView( target )
+    self.viewNode:updateView()
+end
+
+function M:enterView(  )
+    self.viewNode:enterView()
+end
+
+function M:exitView(  )
+    self.viewNode:exitView()
+end
+
+function M:releaseView(  )
+    self.viewNode:releaseView()
+end
+
 function M:onScroll(  )
-	local point = self.ccScrollView:getContentOffset()
+    local point = self.ccScrollView:getContentOffset()
 end
-function M:updateView( target )	
-end
+
 function M:moveToPoints( x,y )
     self.ccScrollView:setContentOffset(cc.p(-x,-y))
 end
+
 function M:movebyPoints( target,x,y )
     local pos = self.ccScrollView:getContentOffset()
     self.ccScrollView:setContentOffset(cc.p(pos.x-x,pos.y-y))
 end
+
 function M:getContentOffset( target )
     return self.ccScrollView:getContentOffset()
 end
+
 function M:getViewNode(  )
     return self.viewNode
 end
+
 function M:getViewSize(  )
     return self.viewsize
 end
+
 function M:setScrollMovable( target,movable )
     self.ccScrollView:setMovable(movable)
 end
+
 function M:setScrollOffsetInDuration( target,pos,time )
     self.ccScrollView:setContentOffsetInDuration(pos, time)
 end
+
 function M:setViewCallback( target,callback )
 	self.callback_ = callback
 end
+
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setViewCallback")
     target:bindOnceMethod(self,"setScrollMovable")

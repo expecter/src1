@@ -16,12 +16,14 @@ function M:setData(params )
     self.isScale_ = params.isScale==true
     self.onTouch_ = params.touch_ or handler(self, self.onTouch)
     if type(params.clickedEvent) == "table" then
-        self.fClickeEvent = function (  )
-            if params.clickedEvent._type == "Message" then
-                GameMessage:dispatchEvent{
-                    name = params.clickedEvent.name,
-                    data = params.clickedEvent.params,
-                }
+        self.fClickeEvent = function (  )            
+            for k,v in pairs(params.clickedEvent) do
+                if v._type == "Message" then
+                    GameMessage:dispatchEvent{
+                        name = v.name,
+                        data = v.params,
+                    }
+                end
             end
         end
     elseif type(params.clickedEvent) == "function" then
