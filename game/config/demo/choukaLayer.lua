@@ -40,7 +40,7 @@ local M = {
 				{
 					_type = "cc_ClickComponent",
 					isScale = true,
-					clickedEvent = {_type = "Message",name = "replaceLayer",params = {name = "loginLayer"}},
+					clickedEvent = {{_type = "Message",name = "replaceLayer",params = {name = "loginLayer"}}},
 					data = {_type = "cache",refName = "refarmy",tmKey = {}},
 					condition = {},
 				},
