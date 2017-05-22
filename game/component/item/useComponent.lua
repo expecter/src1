@@ -8,8 +8,10 @@ function M:ctor( target ,params)
 	self:setData(params)
 end
 function M:setData(params )
+	self.getWay = params.getWay
 end
 function M:initView( target )
+	local node --界面显示节点
 end
 function M:updateView( target )
 end

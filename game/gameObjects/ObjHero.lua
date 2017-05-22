@@ -7,5 +7,11 @@ local M = {}
 function M.getIsOpenXXX(  )
 	
 end
+--拿获取途径
+function M.getFromPath( heroId )
+	local refId
+	local fromPath
+	return fromPath
+end
 
 return M
