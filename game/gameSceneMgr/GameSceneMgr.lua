@@ -546,30 +546,6 @@ function M.viewGoto(view,nId)
     end
 end
 
--- 跳到野外地图行列坐标(r,c)
-function M.moveToWorldPos(r,c)
-    local cur_layer = M.getRunningGameLayer()
-    
-    local function helper()
-        cur_layer = M.getRunningGameLayer()
-        cur_layer:moveToCenterByRC(r,c)
-
-        local gamePanelMgr = M.getRunningGamePanelMgr()
-        gamePanelMgr:removeAllPanels()
-    end 
-
-    if cur_layer.__cname ~= "game.gameScenes.world.LayerWorld" then 
-        M.replaceLayer("game.gameScenes.world.LayerWorld")
-        
-        GameSceneMgr:addEventListener("ready",function(event) 
-            if event.data.gameLayer.__cname == "game.gameScenes.world.LayerWorld" and event.data.action == "replace" then
-                helper()
-            end
-        end)
-    else
-        helper()
-    end
-end
 GameMessage:addEventListener(GameMessage.MessageName.replaceLayer,function ( cmdX )
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
     GameSceneMgr.replaceLayer((config))

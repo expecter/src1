@@ -46,27 +46,6 @@ local M = {
 				},
 			},
 		},
-		{
-			_super = "GameNode",
-			_name = "switchNode",
-			_component = {
-				{
-					_name = "",_type = "cc_node",
-					contentsize = {width = 300,height = 300},
-					AnchPos = {x = 0,y = 0},
-					pos = {x =0,y = 0},
-				},
-				-- {_type = "DrawComponent"},
-				{
-					_type = "ViewSwitchComponent",tlData = {
-						{path = "game.config.TabNode1",params = {}},
-						{path = "game.config.TabNode2",params = {}},
-						{path = "game.config.TabNode1",params = {}},
-						{path = "game.config.TabNode1",params = {}},
-					}
-				},
-			}
-		},
 	},
 
 }
