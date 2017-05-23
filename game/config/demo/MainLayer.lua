@@ -70,7 +70,7 @@ local M = {
 				{_name = "",_type = "cc_node",
 				contentsize = {width = 200,height = 100},
 				AnchPos = {x = 0,y = 0},
-				pos = {x = 300,y = 100},
+				pos = {x = 400,y = 100},
 				},
 				{
 					_type = "cc_sprite",spriteName = "img_btn_gray_2_n"
@@ -95,7 +95,7 @@ local M = {
 				{_name = "",_type = "cc_node",
 				contentsize = {width = 200,height = 100},
 				AnchPos = {x = 0,y = 0},
-				pos = {x = 300,y = 100},
+				pos = {x = 500,y = 100},
 				},
 				{
 					_type = "cc_sprite",spriteName = "img_btn_gray_2_n"

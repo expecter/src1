@@ -1,19 +1,16 @@
-local dataModel = {
-	id = 0,
-	heroId = 0,
-	level = 1,
-	exp = 2,
-}
+--
+-- Author: Your Name
+-- Date: 2016-05-24 23:40:37
+--
 local M = class(...,require("gameCaches.GameCache"))
-M.requestName = {
-	{name = "breakSkill",params = {}},
-	{name = "newHero",params = {}},
-	{name = "tosprite",params = {}},
-	{name = "levelup",params = {}},
+local dataModel = {
+	refId = 1,
+	id = 1,
+	num = 1,
 }
 function M:ctor(  )
 	local params = {
-		cacheName = "CmdHero",
+		cacheName = "CmdItem",
 		isRepeat = true,
 		dataModel = dataModel,
 	}
@@ -27,7 +24,8 @@ function M:firstInit( cmdX )
 	-- 	self:updateByProto(self.cache)
 	-- end
 	-- self.cache = cmdX
-	self:updateByProto(cache)
+	-- self.cache = ref.getRef({refName = "refarmy"})
+	self:updateByProto({})
 end
 function M:cleanup(  )
 	self.cache = {}
@@ -38,14 +36,8 @@ function M:test( params )
 	
 	self:updateByProto(self.cache)
 end
---抽卡
-function M:chouka( params )
-	CacheHero:newHero()	
-	self:updateByProto(self.cache)
-end
-
-function M:chouItem(  )
+--分解成技能
+function M:newItem( params )
 	
 end
-
 return M
