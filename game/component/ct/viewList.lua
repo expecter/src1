@@ -12,7 +12,6 @@ function M:setData( params )
 	self.tlData = CommonUtil.getData(params.tlData)
 	self.cellMode = params.cellMode or function ( params ,index)
 		local config = clone(require("game.config.gameCell"))
-		-- config._data = params
 		table.insert(config._component,{
 					_type = "cache_label",object = {
 						name = "ObjArmy",

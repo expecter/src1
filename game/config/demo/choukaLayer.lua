@@ -24,6 +24,52 @@ local M = {
 	{
 		{
 			_super = "GameNode",
+			_component = {
+				{
+				_type = "cc_node",
+				contentsize = {width = 600,height = 100},
+				AnchPos = {x = 0,y = 0},
+				pos = {x =10,y = 580},
+				},
+				{
+					_type = "ct_viewList", 
+					tlData = 
+					{
+						_type = "ref",
+						refName = "bagindex",
+					},
+					clickedEvent =
+					{
+						{_type = "switchto",
+						nodeName = "switchNode",}
+					},
+				},
+				-- {_type = "modelComponent"}				
+				-- DrawComponent = {},
+			},
+		},
+		{
+			_super = "GameNode",
+			_name = "switchNode",
+			_component = {
+				{
+					_name = "",_type = "cc_node",
+					contentsize = {width = 300,height = 300},
+					AnchPos = {x = 0,y = 0},
+					pos = {x =0,y = 0},
+				},
+				{
+					_type = "ct_mutiViewComponent",
+					tlData = 
+					{
+						_type = "ref",
+						refName = "bagindex",
+					},
+				},
+			}
+		},
+		{
+			_super = "GameNode",
 			_name = "back",
 			_component = {
 				{_name = "",_type = "cc_node",
