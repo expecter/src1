@@ -113,6 +113,21 @@ local M = {
 				},
 			},
 		},
+		{
+			_super = "GameNode",
+			_name = "label",
+			_component = {
+				{_name = "",_type = "cc_node",
+				contentsize = {width = 200,height = 100},
+				AnchPos = {x = 0,y = 0},
+				pos = {x = 300,y = 100},
+				},
+				{
+					_type = "cache_chLabel",
+					_text = "",
+				},
+			},
+		},
 	},
 
 }

@@ -104,9 +104,9 @@ function M:ctor()
     end)
     M.Timescheduler = require('framework.scheduler').scheduleGlobal(function ( dt )
         GameMessage:dispatchEvent{
-        name = GameMessage.MessageName.time,
-        data = dt,
-    }
+            name = GameMessage.MessageName.time,
+            data = dt,
+        }
     end,1)
     
 end

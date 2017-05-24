@@ -31,6 +31,13 @@ function M:ctor( params )
         self:clean()
         self:exitGame()
     end)
+    GameMgr:addEventListener("request",function(cmdX)
+        if cmdX.cacheName == self.cacheName then
+            if M[cmdX.funcName] then
+                M[cmdX.funcName](cmdX.params)
+            end
+        end
+    end)
 end
 function M:createDataModel( data )
     return data

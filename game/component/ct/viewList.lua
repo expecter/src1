@@ -32,6 +32,8 @@ function M:setData( params )
 	local clickedEvent = params.clickedEvent
 	if clickedEvent then
 		self.callback_ = function ( params,index )
+			--拼接params
+			--ClickEventScript.onEventHandler(params)
 			for k,v in pairs(clickedEvent) do
 				if v._type == "switchto" then
 		            local switchNode = GameSceneMgr.getGameNode(v.nodeName)

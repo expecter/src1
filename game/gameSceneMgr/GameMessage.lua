@@ -8,14 +8,9 @@ local M = {}
 
 M.MessageName =
 {
-    replaceLayer = "replaceLayer", --切换界面
-    pushLayer = "pushLayer", --弹出界面
-    showPanel = "showPanel", --窗口界面
-	Msg_ReceiveBall = "Msg_ReceiveBall",
-    Msg_PassToMe = "Msg_PassToMe",
-    Msg_SupportAttacker = "Msg_SupportAttacker",
-    Msg_GoHome = "Msg_GoHome",
-    Msg_Wait = "Msg_Wait",
+    replaceLayer = "replaceLayer", --切换界面 参数name = "loginLayer"
+    pushLayer = "pushLayer", --弹出界面 参数name = "loginLayer"
+    showPanel = "showPanel", --窗口界面 参数name = "loginLayer"
     switch = "switch", --切换标签页
     enterGame = "enterGame",
     exitGame = "exitGame",
@@ -23,6 +18,7 @@ M.MessageName =
     releaseNode = "releaseNode",
     update = "update",
     time = "time",
+    request = "request", --修改cache请求 参数cacheName = "CachesItem",funcName = "newItem",params = {}
 }
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 --打印分发的点击事件

@@ -38,6 +38,7 @@ function M:test( params )
 end
 --分解成技能
 function M:newItem( params )
-	
+	table.insert({id = 1,refId = 1})
+	self:updateByProto(self.cache)
 end
 return M
