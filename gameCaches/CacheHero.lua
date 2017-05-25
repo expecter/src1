@@ -63,4 +63,8 @@ end
 function M:levelup(  )
 	
 end
+--合成道具
+function M:composeItem( params )
+	self:updateByProto(self.cache)
+end
 return M

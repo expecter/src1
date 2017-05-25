@@ -12,6 +12,10 @@ function M.onEventHandler( params )
 	end
 end
 
+function M.callfunc( params )
+	
+end
+
 function M.switchto( params )
 
 end

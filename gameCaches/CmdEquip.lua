@@ -10,7 +10,7 @@ local dataModel = {
 }
 function M:ctor(  )
 	local params = {
-		cacheName = "CmdItem",
+		cacheName = "CmdEquip",
 		isRepeat = true,
 		dataModel = dataModel,
 	}

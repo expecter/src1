@@ -33,8 +33,12 @@ local M = {
 						_type = "ref",
 						refName = "bagindex",
 						clickedEvent = {
-							_type = "switch",
-							nodeName = "switchNode",
+							{
+								_type = "callfunc",
+								nodeName = "switchNode",
+								funcName = "switchto",
+								params = {},
+							}
 						},
 					},
 				},

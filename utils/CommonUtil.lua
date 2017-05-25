@@ -33,5 +33,25 @@ function M.getObjData( params )
 	assert(type(data)=='table')
 	return data
 end
+--缓存binding
+function M.bind( component,cacheName )
+    GameObj[cacheName].bind(component,{
+        onAdd = function ( cmdX )
+            if component.onAdd then
+                component:onAdd(cmdX)
+            end                 
+        end,
+        onUpdate = function ( cmdX )
+            if component.onUpdate then
+                component:onUpdate(cmdX)
+            end                 
+        end,
+        onDelete = function ( cmdX )                    
+        if component.onDelete then
+                component:onDelete(cmdX)
+            end
+        end
+    })
+end
 
 return M

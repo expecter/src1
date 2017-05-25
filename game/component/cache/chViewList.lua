@@ -29,9 +29,9 @@ function M:getDepends(  )
 				return GameSceneMgr.createGameNode(config)
 			end
 		},
-		{
-			_type = "cache_bind",
-		},		
+		-- {
+		-- 	_type = "cache_bind",
+		-- },		
 	}
 end
 
@@ -57,7 +57,8 @@ function M:onDelete( cmdX )
 		end)
 end
 function M:enterView(  )
-	self.target:bind(self,"ObjArmy")
+	CommonUtil.bind(self,"ObjArmy")
+	-- self.target:bind(self,"ObjArmy")
 	self.target:setViewCallback(function ( cmdX,index )
 		-- print("AAAA",index)
 	end)
