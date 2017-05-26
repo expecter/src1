@@ -547,15 +547,18 @@ function M.viewGoto(view,nId)
 end
 
 GameMessage:addEventListener(GameMessage.MessageName.replaceLayer,function ( cmdX )
+    --TODO判断是否能进入界面
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
     GameSceneMgr.replaceLayer((config))
 end)
 GameMessage:addEventListener(GameMessage.MessageName.pushLayer,function ( cmdX )
+    --TODO判断是否能进入界面
     local path = (cmdX.name).path
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
     GameSceneMgr.pushLayer((config))
 end)
 GameMessage:addEventListener(GameMessage.MessageName.showPanel,function ( cmdX )
+    --TODO判断是否能进入界面
     local path = (cmdX.name).path
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
     local panel = M.createGameNode((config))

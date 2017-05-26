@@ -35,8 +35,8 @@ function M:firstInit( cmdX )
 	-- 	self:updateByProto(self.cache)
 	-- end
 	-- self.cache = cmdX
-	self.cache = ref.getRef({refName = "refarmy"})
-	self:updateByProto(self.cache)
+	-- self.cache = ref.getRef({refName = "refarmy"})
+	self:updateByProto({})
 end
 function M:cleanup(  )
 	self.cache = {}
@@ -62,9 +62,5 @@ end
 --optional
 function M:levelup(  )
 	
-end
---合成道具
-function M:composeItem( params )
-	self:updateByProto(self.cache)
 end
 return M

@@ -10,6 +10,9 @@ local CacheName = {
 	"CacheFight",
 	"CacheHero",
 	"CachePlayer",
+	"CacheItem",
+	"CacheTask",
+	"CacheEquip",
 }
 for _,name in pairs(CacheName) do
 	tmGameCache[name] = require("gameCaches."..name).new()

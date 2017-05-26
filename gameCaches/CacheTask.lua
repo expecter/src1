@@ -4,9 +4,7 @@
 --
 local M = class(...,require("gameCaches.GameCache"))
 local dataModel = {
-	refId = 1,
-	id = 1,
-	num = 1,
+	taskId = 1,
 }
 function M:ctor(  )
 	local params = {
@@ -30,21 +28,9 @@ end
 function M:cleanup(  )
 	self.cache = {}
 end
---请求命令
-function M:test( params )
-	local data = params
-	
-	self:updateByProto(self.cache)
-end
---获取新道具
-function M:newItem( params )
-	--TODO判断是否足够需要的材料
-	--TODO新建道具
-	table.insert({id = 1,refId = 1})
-	self:updateByProto(self.cache)
-end
---合成道具
-function M:composeItem( params )
-	self:updateByProto(self.cache)
+--完成任务
+function M:activeTask( params )
+	--TODO
+	self:updateByProto({})
 end
 return M

@@ -19,7 +19,11 @@ function M:ctor( params )
     GameMgr:addEventListener("enterGame",function()
         self.tmCmdX = GameStateManager:getDataByName(self.cacheName)
         if not self.tmCmdX then
-            self:firstInit()
+            if not self.isRepeat and self.firstInit then
+                self:firstInit()
+            else
+                self.tmCmdX = {}
+            end            
         end
         -- self.id = #self.tmCmdX
         self:enterGame()

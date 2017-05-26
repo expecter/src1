@@ -28,49 +28,38 @@ local M = {
 					pos = {x =0,y = 0},
 				},
 				{
-					_type = "ct_viewList", tlData = 
+					_type = "ct_viewList", 
+					tlData = 
 					{
-						_type = "ref",
+						--道具背包数据
+						_type = "cache",
 						refName = "bagindex",
 						clickedEvent = {
-							{
-								_type = "callfunc",
-								nodeName = "switchNode",
-								funcName = "switchto",
-								params = {},
-							}
+							
 						},
-					},
-				},
-				{
-					_type = "cache_binding",
-					caches = {
-						{name = "Cache1",component = {"ct_viewList"}},
-						{name = "Cache2",component = {"ct_viewList"}},
 					},
 				},
 			}
 		},
 		{
+			--显示道具详情，并且会根据缓存更新
 			_super = "GameNode",
-			_name = "switchNode",
+			_name = "itemInfo",
 			_component = {
 				{
 					_name = "",_type = "cc_node",
-					contentsize = {width = 300,height = 300},
+					contentsize = {width = 300,height = 50},
 					AnchPos = {x = 0,y = 0},
 					pos = {x =0,y = 0},
 				},
 				{
-					_type = "ct_mutiViewComponent",tlData = 
-					{
-						_type = "ref",
-						refName = "bagindex",
-					},
+					_type = "show"
 				},
-			}
+				{
+					_type = "binding",
+				},
+			},
 		},
-
 	},
 
 }

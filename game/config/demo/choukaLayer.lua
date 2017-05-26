@@ -38,36 +38,36 @@ local M = {
 						_type = "ref",
 						refName = "bagindex",
 					},
-					clickedEvent =
-					{
-						{_type = "switchto",
-						nodeName = "switchNode",}
-					},
+					-- clickedEvent =
+					-- {
+					-- 	{_type = "switchto",
+					-- 	nodeName = "switchNode",}
+					-- },
 				},
 				-- {_type = "modelComponent"}				
 				-- DrawComponent = {},
 			},
 		},
-		{
-			_super = "GameNode",
-			_name = "switchNode",
-			_component = {
-				{
-					_name = "",_type = "cc_node",
-					contentsize = {width = 300,height = 300},
-					AnchPos = {x = 0,y = 0},
-					pos = {x =0,y = 0},
-				},
-				{
-					_type = "ct_mutiViewComponent",
-					tlData = 
-					{
-						_type = "ref",
-						refName = "bagindex",
-					},
-				},
-			}
-		},
+		-- {
+		-- 	_super = "GameNode",
+		-- 	_name = "switchNode",
+		-- 	_component = {
+		-- 		{
+		-- 			_name = "",_type = "cc_node",
+		-- 			contentsize = {width = 300,height = 300},
+		-- 			AnchPos = {x = 0,y = 0},
+		-- 			pos = {x =0,y = 0},
+		-- 		},
+		-- 		{
+		-- 			_type = "ct_mutiViewComponent",
+		-- 			tlData = 
+		-- 			{
+		-- 				_type = "ref",
+		-- 				refName = "bagindex",
+		-- 			},
+		-- 		},
+		-- 	}
+		-- },
 		{
 			_super = "GameNode",
 			_name = "back",
