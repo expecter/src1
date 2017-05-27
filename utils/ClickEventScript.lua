@@ -11,7 +11,9 @@ function M.onEventHandler( params )
 		end
 	end
 end
-
+--nodeName
+--funcName
+--params
 function M.callfunc( params )
 	
 end
