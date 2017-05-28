@@ -30,13 +30,16 @@ function M:ctor( params )
     end)
 
     GameMgr:addEventListener("exitGame",function()
-        GameStateManager:save({name = self.cacheName,data = M.cache})
+        dump(self.tmCmdX,self.cacheName)
+        GameStateManager:save({name = self.cacheName,data = self.tmCmdX})
         self:cleanup()
         self:clean()
         self:exitGame()
     end)
-    GameMgr:addEventListener("request",function(cmdX)
+    GameMessage:addEventListener("request",function(cmdX)
+        cmdX = cmdX.data
         if cmdX.cacheName == self.cacheName then
+            print("cmdX.funcName",cmdX.funcName,self[cmdX.funcName])
             if M[cmdX.funcName] then
                 M[cmdX.funcName](cmdX.params)
             end
@@ -103,7 +106,8 @@ function M:deleteOne( id )
     end
 end
 function M:updateByProto( cmdX )
-    dump(cmdX,self.cacheName)
+    dump(cmdX)
+    self.tmCmdX[cmdX.id] = cmdX
 end
 function M:update( tlCmdX )
     if tlCmdX then

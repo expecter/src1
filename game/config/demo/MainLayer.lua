@@ -33,7 +33,8 @@ local M = {
 					isScale = true,
 					clickedEvent = 
 					{
-						{_type = "Message",name = "replaceLayer",params = {name = "loginLayer"}}
+						-- {_type = "Message",name = "replaceLayer",params = {name = "loginLayer"}}
+						clickedEvent = {{_type = "Message",name = "request",params = {cacheName = "CachesItem",funcName = "newItem",params = {}}},{}},
 					},
 				},
 			},
@@ -58,7 +59,8 @@ local M = {
 					isScale = true,
 					clickedEvent = 
 					{
-						{_type = "Message",name = "replaceLayer",params = {name = "choukaLayer"}}
+						-- {_type = "Message",name = "replaceLayer",params = {name = "choukaLayer"}}
+						{_type = "Message",name = "exitGame",params = {name = "choukaLayer"}}
 					},
 				},
 			},

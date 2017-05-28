@@ -39,7 +39,8 @@ local M = {
 					isScale = true,
 					clickedEvent = 
 					{
-						{_type = "Message",name = "replaceLayer",params = {name = "MainLayer"}}
+						-- {_type = "Message",name = "replaceLayer",params = {name = "MainLayer"}}
+						{_type = "Message",name = "request",params = {cacheName = "CacheItem",funcName = "newItem",params = {}}}
 					},
 					data = {_type = "cache",refName = "refarmy",tmKey = {}},
 					condition = {},
@@ -63,7 +64,8 @@ local M = {
 				{
 					_type = "cc_ClickComponent",
 					isScale = true,
-					clickedEvent = {{_type = "Message",name = "replaceLayer",params = {name = "choukaLayer"}}},
+					-- clickedEvent = {{_type = "Message",name = "replaceLayer",params = {name = "choukaLayer"}}},
+					clickedEvent = {{_type = "Message",name = "exitGame",params = {name = "choukaLayer"}}},
 					data = {_type = "cache",refName = "refarmy",tmKey = {}},
 					condition = {},
 				},

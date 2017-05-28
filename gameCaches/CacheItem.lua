@@ -10,23 +10,22 @@ local dataModel = {
 }
 function M:ctor(  )
 	local params = {
-		cacheName = "CmdItem",
+		cacheName = "CacheItem",
 		isRepeat = true,
 		dataModel = dataModel,
 	}
 	M.super.ctor(self,params)
-	
 end
 --首次初始化
-function M:firstInit( cmdX )
-	-- if not cmdX then
-	-- 	self.cache = ref.getRef({refName = "refarmy"})
-	-- 	self:updateByProto(self.cache)
-	-- end
-	-- self.cache = cmdX
-	-- self.cache = ref.getRef({refName = "refarmy"})
-	self:updateByProto({})
-end
+-- function M:firstInit( cmdX )
+-- 	-- if not cmdX then
+-- 	-- 	self.cache = ref.getRef({refName = "refarmy"})
+-- 	-- 	self:updateByProto(self.cache)
+-- 	-- end
+-- 	-- self.cache = cmdX
+-- 	-- self.cache = ref.getRef({refName = "refarmy"})
+-- 	self:updateByProto({})
+-- end
 function M:cleanup(  )
 	self.cache = {}
 end
@@ -40,8 +39,10 @@ end
 function M:newItem( params )
 	--TODO判断是否足够需要的材料
 	--TODO新建道具
-	table.insert({id = 1,refId = 1})
-	self:updateByProto(self.cache)
+	-- local tlCmd = {}
+	-- table.insert(tlCmd,{id = 1,refId = 1})
+	print("aaaaaaaaaaaaaa")
+	self:updateByProto({id = 1,refId = 1})
 end
 --合成道具
 function M:composeItem( params )

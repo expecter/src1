@@ -12,12 +12,18 @@ local CacheName = {
 	"CachePlayer",
 	"CacheItem",
 	"CacheTask",
-	"CacheEquip",
+	-- "CacheEquip",
 }
 for _,name in pairs(CacheName) do
 	tmGameCache[name] = require("gameCaches."..name).new()
 end
-
+GameMessage:addEventListener("request",function(cmdX)
+    cmdX = cmdX.data
+    local class = tmGameCache[cmdX.cacheName]
+    if class and class[cmdX.funcName] then
+        class[cmdX.funcName](class,cmdX.params)
+    end
+end)
 -- static_Listener:addEventListener("CmdAppend",function ( event )
 -- 	local data = event.data
 -- 	tmGameCache[event.className]:updateByCmdX(data)

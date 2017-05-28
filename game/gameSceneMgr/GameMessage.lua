@@ -30,5 +30,8 @@ for k,eventName in pairs(M.MessageName) do
     end
     
 end
-
+M:addEventListener(M.MessageName.exitGame,function ( cmdX )
+    --TODO判断是否能进入界面
+    GameMgr.exitGame()
+end)
 return M

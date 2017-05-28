@@ -9,3 +9,4 @@
 4.简易主界面
 5.任务界面
 当前界面拼接的接口已完成，界面本身按钮通过另外的component联系到一起
+使用自己写的exitgame跟gamemgr里面的exitgame有何区别（）

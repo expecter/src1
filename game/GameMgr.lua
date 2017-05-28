@@ -133,10 +133,10 @@ function M.exitGame()
     }
 
     --清理缓存
-    GameCacheMgr:clean()
+    -- GameCacheMgr:clean()
 
     --登录游戏
-    M.loginGame()
+    -- M.loginGame()
 end
 
 --socket断开连接处理函数
