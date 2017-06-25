@@ -1,3 +1,2 @@
-local M = {}
-print(type(M))
-print(select(2,{}))
+local a = {1,2,3,4}
+print(a)

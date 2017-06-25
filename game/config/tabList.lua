@@ -5,7 +5,7 @@
 --以及每个标签页相关index，方便查找(后来想想其实也可以用ref配置文件就好了)
 local M = {}
 --武将界面标签页
-M.heroTag = {
+M.loginLayer = {
 	{tag = "",text = "A",},
 	{tag = "",text = "B",},
 	{tag = "",text = "C",},
