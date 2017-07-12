@@ -42,7 +42,7 @@ function M:newItem( params )
 	-- local tlCmd = {}
 	-- table.insert(tlCmd,{id = 1,refId = 1})
 	print("aaaaaaaaaaaaaa")
-	self:updateByProto({id = 1,refId = 1})
+	self:updateByProto({id = 2,refId = 2})
 end
 --合成道具
 function M:composeItem( params )
