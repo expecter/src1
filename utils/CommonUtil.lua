@@ -23,7 +23,7 @@ function M.getRefData( params )
 end
 --缓存数据类型
 function M.getCacheData( params )
-	return GameObj.ObjArmy.getCacheData()
+	return {}
 end
 --获取obj计算数据
 function M.getObjData( params )

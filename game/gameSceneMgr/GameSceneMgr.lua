@@ -183,9 +183,9 @@ function M.createGameNode( config )
         end
         return node
     else
-        -- if not config._super then
-            
-        -- end
+        if not config._super then
+            dump(config)  
+        end
         local data = clone(require("game.config."..config._super))
         for k,v in pairs(config) do
             if k~="_super" then
@@ -561,7 +561,7 @@ GameMessage:addEventListener(GameMessage.MessageName.showPanel,function ( cmdX )
     --TODO判断是否能进入界面
     local path = (cmdX.name).path
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
-    local panel = M.createGameNode((config))
+    local panel = M.createGameNode(require(config))
     panel:showPanel()
 end)
 GameMessage:addEventListener(GameMessage.MessageName.releaseNode,function ( cmdX )
