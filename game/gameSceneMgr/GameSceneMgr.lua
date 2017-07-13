@@ -184,7 +184,8 @@ function M.createGameNode( config )
         return node
     else
         if not config._super then
-            dump(config)  
+            dump(config) 
+            return nil 
         end
         local data = clone(require("game.config."..config._super))
         for k,v in pairs(config) do
