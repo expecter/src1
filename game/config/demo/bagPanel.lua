@@ -10,7 +10,10 @@ local M = {
 			_type = "cc_node",
 			contentsize = {width = 500,height = 300},
 			AnchPos = {x = 0,y = 0},
-			pos = {x =200,y = 300},
+			pos = {x =300,y = 300},
+		},
+		{
+			_type = "cc_sprite",spriteName = "img_scale9_panelbg"
 		},
 		-- {
 		-- 	_type = "demo_bagPanelComponent",
@@ -23,7 +26,7 @@ local M = {
 			_component = {
 				{
 					_name = "",_type = "cc_node",
-					contentsize = {width = 300,height = 50},
+					contentsize = {width = 300,height = 300},
 					AnchPos = {x = 0,y = 0},
 					pos = {x =0,y = 0},
 				},
@@ -32,7 +35,7 @@ local M = {
 					tlData = 
 					{
 						--道具背包数据
-						_type = "cache",
+						_type = "ref",
 						refName = "bagindex",
 						clickedEvent = {
 							
@@ -52,12 +55,12 @@ local M = {
 					AnchPos = {x = 0,y = 0},
 					pos = {x =0,y = 0},
 				},
-				{
-					_type = "show"
-				},
-				{
-					_type = "binding",
-				},
+				-- {
+				-- 	_type = "show"
+				-- },
+				-- {
+				-- 	_type = "binding",
+				-- },
 			},
 		},
 	},

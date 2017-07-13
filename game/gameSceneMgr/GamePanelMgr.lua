@@ -40,6 +40,9 @@ function M:addPanel(ccPanel, fCallback)
             for _, initview in ipairs(tlInitView) do
                 initview()
             end
+            for _, enterView in ipairs(ccPanel:getTlOnEnter()) do
+                enterView()
+            end
         -- end
 
         --分发事件

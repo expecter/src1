@@ -188,10 +188,23 @@ function M.createGameNode( config )
             return nil 
         end
         local data = clone(require("game.config."..config._super))
-        for k,v in pairs(config) do
-            if k~="_super" then
-                data[k] = v[k]
+        -- for k,v in pairs(config) do
+        --     if k~="_super" then
+        --         data[k] = v[k]
+        --     end
+        -- end
+        local newComponent = clone(config._component)
+        for index,com in ipairs(data._component) do--同类型组件覆盖
+            for i,v in ipairs(newComponent) do
+                if v._type == com._type then
+                    data._component[index] = v
+                    table.remove(newComponent,i)
+                    break
+                end
             end
+        end
+        for i,v in ipairs(newComponent) do--最后把剩余组件添加进去
+            table.insert(data._component,v)
         end
         return M.createGameNode(data)
     end
