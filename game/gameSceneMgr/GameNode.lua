@@ -94,7 +94,7 @@ function M:addComponent( params )
 	local component = ComponentFactory.createComponent(comName,self,params)
 	if component.getDepends then
 		for i,depends in ipairs(component:getDepends()) do
-			if not self:getComponent(depends._type) then
+			if not self:getComponentByName(depends._type) then
 				self:addComponent(depends)
 			end			
 		end

@@ -5,21 +5,24 @@
 local M = class("componentBase")
 function M:ctor( target ,params)
 	self.target = target
-	self:setData(params)
+	self.spriteName = params.spriteName
+	-- self.contentSize = params.contentsize or cc.size(0,0)
 end
 function M:setData(params )
 end
 function M:initView( target )
+	local sp = display.newScale9Sprite(string.format("%s.png",self.spriteName))
+	sp:setAnchorPoint(cc.p(0,0))
+	-- sp:setPosition(cc.p(self.width/2, self.height/2))
+	sp:setContentSize(self.target:getContentSize())
+	self.target:addChild(sp)
 end
 function M:updateView( target )
+	
 end
 --对应onenter
 function M:enterView(  )
-	local switchMenu = GameSceneMgr.getGameNode("switchMenu")
-	local switchNode = GameSceneMgr.getGameNode("switchNode")
-	switchMenu:setViewCallback(function ( params,index )
-		switchNode:handlerIndex(index)
-	end)
+	
 end
 --对应onexit
 function M:exitView(  )

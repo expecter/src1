@@ -9,15 +9,13 @@ function M:ctor( target ,params)
 	self:setData(params)
 end
 function M:setData( params )
+	dump(params)
 	self.tlData = CommonUtil.getData(params.tlData)
 	self.cellMode = params.cellMode or function ( params ,index)
 		local config = clone(require("game.config.gameCell"))
 		table.insert(config._component,{
-					_type = "cache_label",object = {
-						name = "ObjArmy",
-						key = index,
-						field = "health",
-					},
+					_type = "cc_label",
+					text = params.name,
 				})
 		return GameSceneMgr.createGameNode(config)
 	end
@@ -29,6 +27,8 @@ function M:setData( params )
 	self.isMovable = params.isMovable
 	self.isTapMenu = DEFAULT_TRUE(params.isTapMenu)
 	self.defaultIndex = params.defaultIndex or 1
+	self.dir = params.dir or "h"
+	self.unit = params.unit or 1
 	local clickedEvent = params.clickedEvent
 	if clickedEvent then
 		self.callback_ = function ( params,index )
@@ -46,7 +46,7 @@ function M:setData( params )
 end
 --exportFunc
 function M:initView(  )
-	self.viewlist = UICommon.createViewList(self.target,self.isMovable)
+	self.viewlist = UICommon.createViewList(self.target,self.isMovable,self.dir,2,self.unit,2,"up")
 	-- self:updateView()
 end
 

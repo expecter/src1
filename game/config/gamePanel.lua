@@ -12,6 +12,7 @@ local M = {
 			contentsize = {width = 300,height = 300},
 			AnchPos = {x = 0,y = 0},
 			pos = {x =300,y = 300},
+			scale = 2,
 		},
 		{
 			_type = "cc_ClickComponent",

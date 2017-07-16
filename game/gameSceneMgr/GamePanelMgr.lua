@@ -36,8 +36,7 @@ function M:addPanel(ccPanel, fCallback)
         
         --初始化
         -- local function initPanel()
-            local tlInitView = ccPanel:getTlInitView()
-            for _, initview in ipairs(tlInitView) do
+            for _, initview in ipairs(ccPanel:getTlInitView()) do
                 initview()
             end
             for _, enterView in ipairs(ccPanel:getTlOnEnter()) do
@@ -86,11 +85,12 @@ function M:removePanel(ccPanel)
         ccPanel.fCloseListener()
     end
 
-    local tlReleaseView = ccPanel:getTlReleaseView()
-    for _, releaseView in ipairs(tlReleaseView) do
+    for _, releaseView in ipairs(ccPanel:getTlReleaseView()) do
         releaseView()
     end
-
+    for _, exitView in ipairs(ccPanel:getTlOnExit()) do
+        exitView()
+    end
     self:_onPanelCleanup(ccPanel)
 
     self:removeChild(ccPanel)

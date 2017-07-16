@@ -9,6 +9,7 @@ function M:ctor( target ,params)
 	self.anchPos = params.AnchPos or cc.p(0,0)
 	self.pos = params.pos or cc.p(0,0)
 	self.visible = params.visible~=false
+	self.scale = params.scale or 1
 	self:setData(params)
 end
 function M:setData(params )
@@ -17,6 +18,7 @@ function M:initView(  )
 	self.target:setContentSize(self.contentSize)
 	self.target:setAnchorPoint(self.anchPos)
 	self.target:setPosition(self.pos)
+	self.target:setScale(self.scale)
 	self.target:setVisible(self.visible)
 end
 function M:updateView(  )

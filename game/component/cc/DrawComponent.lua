@@ -20,6 +20,7 @@ function M:setData( params )
 end
 
 function M:initView( )
+	print("AAAAAAAAAAAAAAAAA")
 	self.drawNode = display.newPolygon(self:initPoints(), {fillColor = cc.c4f(0,0,0,0), borderColor = self.borderColor, borderWidth = 0.5})
     self.target:addChild(self.drawNode)
 end

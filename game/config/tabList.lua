@@ -6,9 +6,11 @@
 local M = {}
 --武将界面标签页
 M.loginLayer = {
-	{tag = "",text = "A",},
-	{tag = "",text = "B",},
-	{tag = "",text = "C",},
+	--
+	hero = 1,
+	card = 2,
+	--
+	xxx = 1,
 }
 
 return M
