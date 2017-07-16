@@ -10,5 +10,7 @@ end
 --拿获取途径
 function M.getFromPath( heroId )
 end
-
+function M.getHeroById( id )
+	return ref.item.getTlRef{}
+end
 return M

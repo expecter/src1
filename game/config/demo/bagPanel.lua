@@ -61,12 +61,15 @@ local M = {
 				},
 				{
 					_type = "ct_viewList", 
-					unit = 2,
+					unit = 3,
+					dir = "v",
 					tlData = 
 					{
 						--道具背包数据
-						_type = "ref",
+						_type = "obj",
 						refName = "item",
+						path = "game.gameObjects.ObjHero",
+						funcName = "getHeroById",
 						-- params = "",
 					},
 				},

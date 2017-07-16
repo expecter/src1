@@ -11,7 +11,7 @@ function M.getData( params )
 	if params._type == "cache" then
 		return M.getCacheData(params)
 	end
-	if params._data == "obj" then
+	if params._type == "obj" then
 		return M.getObjData(params)
 	end
 	dump(Language.y1)
@@ -28,6 +28,7 @@ end
 --获取obj计算数据
 function M.getObjData( params )
 	if not params.path then	return nil end
+	dump(params)
 	local Obj = require(params.path)	
 	local data = Obj[params.funcName](params.params)
 	assert(type(data)=='table')
