@@ -27,10 +27,10 @@ function M.getCacheData( params )
 end
 --获取obj计算数据
 function M.getObjData( params )
-	if not params.path then	return nil end
-	dump(params)
-	local Obj = require(params.path)	
+	-- if not params.path then	return nil end
+	local Obj = GameObj[params.ObjName]	
 	local data = Obj[params.funcName](params.params)
+	-- dump(data)
 	assert(type(data)=='table')
 	return data
 end

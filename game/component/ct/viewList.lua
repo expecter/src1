@@ -46,12 +46,16 @@ function M:setData( params )
 end
 --exportFunc
 function M:initView(  )
-	self.viewlist = UICommon.createViewList(self.target,self.isMovable,self.dir,2,self.unit,2,"up")
+	self.viewlist = UICommon.createViewList(self.target,self.isMovable,self.dir,2,self.unit,2,"left")
 	-- self:updateView()
 end
 
 function M:enterView(  )
 	self:updateView()
+end
+
+function M:setTlData( target,tlData )
+	self.tlData = tlData
 end
 
 function M:updateView( target )
@@ -75,7 +79,9 @@ function M:updateView( target )
 	        if self.callback_ then
 	            self.callback_(self.tlData[index],index)
 	        end
-	        orgNode:updateView()
+	        if orgNode then
+	        	orgNode:updateView()
+	        end	        
 	    end
 	    self.viewlist:setClickedEvent(function ( node,index,x,y )
 	        switchEvent(index)
@@ -99,5 +105,7 @@ end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setViewCallback")
 	target:bindOnceMethod(self,"getViewList")
+	
+	target:bindOnceMethod(self,"setTlData")
 end
 return M

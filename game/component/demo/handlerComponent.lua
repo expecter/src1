@@ -10,7 +10,9 @@ end
 function M:setData(params )
 end
 function M:handlerIndex( target,index )
-	dump(index)
+	local tlData = ref.item.getTlRef{type = index}
+	self.target:setTlData(tlData)
+	self.target:updateView()
 end
 --对应onenter
 function M:enterView(  )

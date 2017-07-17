@@ -67,8 +67,7 @@ local M = {
 					{
 						--道具背包数据
 						_type = "obj",
-						refName = "item",
-						path = "game.gameObjects.ObjHero",
+						ObjName = "ObjHero",
 						funcName = "getHeroById",
 						-- params = "",
 					},
