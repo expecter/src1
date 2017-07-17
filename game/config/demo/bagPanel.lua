@@ -72,8 +72,14 @@ local M = {
 						-- params = "",
 					},
 				},
+				-- {
+				-- 	_type = "demo_handlerComponent"
+				-- },
+			},
+			_scripts = {
 				{
-					_type = "demo_handlerComponent"
+					_path = "game.config.script.bagPanel",
+					_func = "handlerIndex"
 				},
 			},
 		},

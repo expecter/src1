@@ -19,6 +19,7 @@ function M:ctor( params )
 		self:createChildren(params._children)
 	end
 	self:addAllComponents(params._component)
+	self:addNodeScript(params._scripts)
 end
 --设置节点携带的可变更数据
 -- function M:setData( data )
@@ -108,6 +109,15 @@ end
 --添加判断条件，方便组件复用
 function M:addContidion(  )
 	
+end
+
+function M:addNodeScript( _scripts )
+	if _scripts then
+		for i,params in ipairs(_scripts) do
+			local script = require(params._path)
+			self[params._func] = script[params._func]
+		end
+	end
 end
 
 function M:getAllChildren(  )
