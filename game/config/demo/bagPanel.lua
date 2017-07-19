@@ -21,6 +21,9 @@ local M = {
 		-- {
 		-- 	_type = "demo_bagPanelComponent",
 		-- },
+		{
+			_type = "demo_bagPanelComponent"
+		},
 	},
 	_children = {
 		{
@@ -41,11 +44,7 @@ local M = {
 						_type = "ref",
 						refName = "bagindex",
 					},
-				},
-				{
-					_type = "demo_bagPanelComponent"
-				},
-				
+				},				
 			}
 		},
 		{
@@ -76,14 +75,7 @@ local M = {
 				-- 	_type = "demo_handlerComponent"
 				-- },
 			},
-			_scripts = {
-				{
-					_path = "game.config.script.bagPanel",
-					_func = "handlerIndex"
-				},
-			},
 		},
 	},
-
 }
 return M

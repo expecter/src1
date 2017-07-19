@@ -1,34 +1,20 @@
 --
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
---
+--没什么问题是一个脚本搞不定的，如果有就再加一个
 local M = class("componentBase")
 function M:ctor( target ,params)
 	self.target = target
-	self:setData(params)
-end
-function M:setData(params )
-end
-function M:initView( target )
-end
-function M:updateView( target )
 end
 --对应onenter
 function M:enterView(  )
 	local switchMenu = GameSceneMgr.getGameNode("switchMenu")
 	local switchNode = GameSceneMgr.getGameNode("switchNode")
 	switchMenu:setViewCallback(function ( params,index )
-		switchNode:handlerIndex(index)
+		-- switchNode:handlerIndex(index)
+		local tlData = ref.item.getTlRef{type = index}
+		switchNode:setTlData(tlData)
+		switchNode:updateView()
 	end)
-end
---对应onexit
-function M:exitView(  )
-	
-end
---对应release
-function M:releaseView(  )
-	
-end
-function M:bindFunc( target )
 end
 return M
