@@ -8,28 +8,25 @@ local M = class(...,function (  )
 	return display.newNode()
 end)
 function M:ctor( params )
+	self.params = params
+end
+
+function M:init( )
 	self.components = {}
 	self.TlComName = {}
 	self.TlChildren = {}
-	self._name = params._name or ""
-	if params._data then
-		self:setData(params._data)
+	-- self._name = self.params._name or ""
+	if self.params._data then
+		self:setData(self.params._data)
 	end
-	if params._children then
-		self:createChildren(params._children)
+	if self.params._children then
+		self:createChildren(self.params._children)
 	end
-	self:addAllComponents(params._component)
-	self:addNodeScript(params._scripts)
+	self:addAllComponents(self.params._component)
 end
---设置节点携带的可变更数据
--- function M:setData( data )
--- 	self._data = data
--- end
--- function M:getData(  )
--- 	return self._data
--- end
+
 function M:getName(  )
-	return self._name
+	return self.params._name or ""
 end
 function M:onExit(  )
 	for k,com in ipairs(self.components) do
