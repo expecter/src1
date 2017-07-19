@@ -171,16 +171,35 @@ end
 --gameNode配置
 function M.createGameNode( config )
     local localNode = { --预置基础节点
-        GameNode = 0,
+        -- GameNode = 0,
         GameLayer = 1,
         GamePanel = 2,
         GamePanelFloat = 3,
     }
     if localNode[config._super] then
+        -- if config._super == "GameLayer" or config._super == "GamePanel" or config._super == "GamePanelFloat" then
+        --     curRunningLayer = config
+        -- end
+
         local node = require("game.gameSceneMgr."..config._super).new(config)
+        --界面索引作为界面key值存储该界面包含的节点名
+        curRunningLayer = node:getLayerIndex()
+
+        
+        if node:getName()~="" then
+            tlGameNode[curRunningLayer] = {}
+            tlGameNode[curRunningLayer][node:getName()] = node
+        end
+        node:init()
+        return node
+    elseif config._super == "GameNode" then
+        local node = require("game.gameSceneMgr."..config._super).new(config)
+        
+          
         if node:getName()~="" then
             tlGameNode[curRunningLayer][node:getName()] = node
         end
+        node:init()     
         return node
     else
         if not config._super then
@@ -214,6 +233,16 @@ end
 function M.getGameNode( name )
     return tlGameNode[curRunningLayer][name]
 end
+--根据某个节点的userdata地址获取所在界面的index
+function M.getIndexByUserData( target )
+    for index,layer in pairs(tlGameNode) do
+        for k,v in pairs(layer) do
+            if v == target then
+                return index
+            end
+        end
+    end
+end
 
 function M.getAllGameNode(  )
     return tlGameNode
@@ -229,8 +258,8 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         --创建新的
         -- local gameLayer = require(clsGameLayer).new(userdata)
         -- dump(clsGameLayer)
-        tlGameNode[clsGameLayer] = {}
-        curRunningLayer = clsGameLayer
+        -- tlGameNode[clsGameLayer] = {}
+        -- curRunningLayer = clsGameLayer
         local gameLayer = M.createGameNode(require(clsGameLayer))
 
         local gameLayerWrap = createGameLayerWrap(gameLayer)

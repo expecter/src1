@@ -7,7 +7,7 @@
 
 
 local M = class(...,GameNode)
-
+M.index = 1
 ---构建函数
 function M:ctor(params)
     if not params then params = {} end
@@ -20,6 +20,11 @@ function M:ctor(params)
     -- table.insert(params._component,{_type = "loadComponent"})
     self:setContentSize(display.width, display.height)
     M.super.ctor(self,params)
+    M.index = M.index+1
+end
+--每次创建界面index加1（包括layer，panel，floatpanel）
+function M:getLayerIndex(  )
+    return M.index
 end
 
 -------------------------------------------------------------------------------------  
