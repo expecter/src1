@@ -233,6 +233,11 @@ end
 function M.getGameNode( name )
     return tlGameNode[curRunningLayer][name]
 end
+
+function M.getGameNodeByIndex( index )
+    return tlGameNode[curRunningLayer]
+end
+
 --根据某个节点的userdata地址获取所在界面的index
 function M.getIndexByUserData( target )
     for index,layer in pairs(tlGameNode) do

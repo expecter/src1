@@ -5,6 +5,8 @@
 local M = class("componentBase")
 function M:ctor( target ,params)
 	self.target = target
+	local layerIndex = GameSceneMgr.getIndexByUserData(target)
+	local tlGameNode = GameSceneMgr.getGameNodeByIndex(layerIndex)
 	self:setData(params)
 end
 function M:setData(params )

@@ -8,8 +8,10 @@ function M:ctor( target ,params)
 end
 --对应onenter
 function M:enterView(  )
-	local switchMenu = GameSceneMgr.getGameNode("switchMenu")
-	local switchNode = GameSceneMgr.getGameNode("switchNode")
+	local layerIndex = GameSceneMgr.getIndexByUserData(target)
+	local tlGameNode = GameSceneMgr.getGameNodeByIndex(layerIndex)
+	local switchMenu = tlGameNode.switchMenu
+	local switchNode = tlGameNode.switchNode
 	switchMenu:setViewCallback(function ( params,index )
 		-- switchNode:handlerIndex(index)
 		local tlData = ref.item.getTlRef{type = index}
