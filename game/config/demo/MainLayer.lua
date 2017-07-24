@@ -34,7 +34,20 @@ local M = {
 					clickedEvent = 
 					{
 						-- {_type = "Message",name = "replaceLayer",params = {name = "loginLayer"}}
-						clickedEvent = {{_type = "Message",name = "request",params = {cacheName = "CachesItem",funcName = "newItem",params = {}}},{}},
+						clickedEvent = 
+						{
+							{
+								_type = "Message",
+								name = "request",
+								params = 
+								{
+									cacheName = "CachesItem",
+									funcName = "newItem",
+									params = {}
+								}
+							},
+							{},
+						},
 					},
 				},
 			},

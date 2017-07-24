@@ -15,7 +15,9 @@ function M:setData(params )
 	self.isSwallow = params.isSwallow==true
     self.isScale_ = params.isScale==true
     self.onTouch_ = params.touch_ or handler(self, self.onTouch)
-    if type(params.clickedEvent) == "table" then
+    if type(params.clickedEvent) == "function" then
+        self.fClickeEvent = params.clickedEvent
+    elseif type(params.clickedEvent) == "table" then
         self.fClickeEvent = function (  )
             --拼接params
             --ClickEventScript.onEventHandler(params)          
@@ -28,8 +30,6 @@ function M:setData(params )
                 end
             end
         end
-    elseif type(params.clickedEvent) == "function" then
-        self.fClickeEvent = params.clickedEvent
     end
 end
 function M:initView(  )
