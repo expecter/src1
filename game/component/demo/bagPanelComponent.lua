@@ -11,7 +11,7 @@ function M:enterView(  )
 	local layerIndex = GameSceneMgr.getIndexByUserData(target)
 	local tlGameNode = GameSceneMgr.getGameNodeByIndex(layerIndex)
 	local switchMenu = tlGameNode.switchMenu
-	local switchNode = tlGameNode.switchNode
+	local switchNode = tlGameNode.switchNode   
 	switchMenu:setViewCallback(function ( params,index )
 		-- switchNode:handlerIndex(index)
 		local tlData = ref.item.getTlRef{type = index}
