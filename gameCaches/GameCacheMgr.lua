@@ -12,6 +12,7 @@ local CacheName = {
 	"CachePlayer",
 	"CacheItem",
 	"CacheTask",
+	"CacheHeroUpgrade",
 	-- "CacheEquip",
 }
 for _,name in pairs(CacheName) do

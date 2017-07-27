@@ -19,11 +19,13 @@ M.requestName = {
 	{name = "tosprite",params = {}},
 	{name = "levelup",params = {}},
 }
+local tlKey = {"heroId"}
 function M:ctor(  )
 	local params = {
 		cacheName = "CmdHero",
 		isRepeat = true,
 		dataModel = dataModel,
+		tlKey = tlKey,
 	}
 	M.super.ctor(self,params)
 	

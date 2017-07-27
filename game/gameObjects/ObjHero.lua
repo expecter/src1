@@ -13,4 +13,14 @@ end
 function M.getHeroById( id )
 	return ref.item.getTlRef{}
 end
+
+function M.getTlHeroExp(  )
+end
+--获取当前的经验
+function M.getExpByHeroId( heroId )
+	local cmdX = CacheHero.get{id = heroId}
+	local cmdUpgrade = CacheHeroUpgrade.get{id = heroId}
+	local curTime = GameObj.ObjTime.getCurTime()
+	return cmdX.exp+(curTime-cmdUpgrade.upgradeTime)/100
+end
 return M

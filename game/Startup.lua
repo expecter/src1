@@ -54,6 +54,7 @@ GameCacheMgr = require("gameCaches.GameCacheMgr")
 ClickEventScript = require("utils.ClickEventScript")
 -- CacheCard = require("gameCaches.CacheCard").new()
 -- CacheHero = require("gameCaches.CacheHero").new()
+-- CacheHeroUpgrade = require("gameCaches.CacheHeroUpgrade").new()
 -- CachePlayer = require("gameCaches.CachePlayer").new()
 display.replaceScene(GameSceneMgr)
 DEFAULT_TRUE = function ( a ) return a~= false end

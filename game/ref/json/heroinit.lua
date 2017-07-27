@@ -4,6 +4,7 @@
 --
 local M = {
 	learnNum = 2,
+	expInterval = 100,--每100秒获得1点经验
 }
 
 return M
