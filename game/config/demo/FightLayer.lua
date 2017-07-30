@@ -11,7 +11,9 @@ local M = {
 			AnchPos = {x = 0,y = 0},
 			pos = {x =0,y = 0},
 		},
-
+		{
+			_type = "demo_FightComponent",
+		},
 	},
 }
 

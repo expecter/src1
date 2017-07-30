@@ -25,7 +25,7 @@ M.LOGINDATA=nil
 --登录游戏
 function M.loginGame()
     M.state = "login"
-    GameSceneMgr.replaceLayer("game.gameScenes.login.LayerLogin")
+    GameSceneMgr.replaceLayer("game.gameScenes.login.FightLayer")
 end
 
 --开始游戏, 加载完成后, 会执行enterGame
