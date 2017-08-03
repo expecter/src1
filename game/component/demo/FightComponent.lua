@@ -10,6 +10,11 @@ end
 function M:setData(params )
 end
 function M:initView( target )
+	--角色1
+	--角色2
+	--创建地图
+	local node = display.newNode()
+	node:setContentSize(960,640)
 end
 function M:updateView( target )
 end
