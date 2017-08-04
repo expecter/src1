@@ -44,6 +44,10 @@ function M:initView( params )
         print("initView")
     label:setPosition(display.cx,display.cy)
     self:addChild(label)
+    self.loader = cc.FNMapLoader:create("pd_tilemap.tmx")
+
+    self.loader:retain()
+    self:addChild(self.loader)
 end
 function M:createLayer( config,parent )
     local owner = M.createNode(config)

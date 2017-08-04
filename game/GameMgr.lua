@@ -119,6 +119,8 @@ function M.enterGame()
     M:dispatchEvent{
         name = "enterGame"
     }
+    
+    -- GameSceneMgr.replaceNormalLayer("game.gameScenes.world.LayerWorld")
     -- GameSceneMgr.replaceNormalLayer("game.gameScenes.login.loginLayer")
     GameSceneMgr.replaceLayer("game.config.demo.LoginLayer")
 end

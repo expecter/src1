@@ -4,7 +4,7 @@
 --
 local M = {
 	{text = "旗鼓相当的对手",},
-	{text = "bbbb",},
+	{text = "氪不改命 玄不救非",},
 	{text = "cccc",},
 	{text = "dddd",},
 	{text = "eeee",},
