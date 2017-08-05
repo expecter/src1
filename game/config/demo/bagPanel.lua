@@ -44,6 +44,9 @@ local M = {
 						_type = "ref",
 						refName = "bagindex",
 					},
+					{--首次进入界面时进行的操作
+						_type = "",
+					},
 				},				
 			}
 		},
@@ -71,6 +74,7 @@ local M = {
 						-- params = "",
 					},
 				},
+
 				-- {
 				-- 	_type = "demo_handlerComponent"
 				-- },
