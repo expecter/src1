@@ -12,7 +12,9 @@ end)
 GameMgr:addEventListener("exitGame",function()
     M.cleanUp()
 end)
-
+M.triggerEvent = {
+    LevelUp = "LevelUp"
+}
 M.tmCallback = {}
 
 function M.init(  )
@@ -36,6 +38,10 @@ end
 
 function M.addTimeCallback( time,eventName )
 	M.tmCallback[time] = eventName
+end
+
+function M.getTriggerTime( eventName )
+    
 end
 
 function M.getCurTime(  )
