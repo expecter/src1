@@ -25,3 +25,6 @@ enterview时再执行界面绑定事件和回调事件，exitview时取消事件
 抽卡界面
 世界界面（玩法待定，主要是让多数玩家参与并且获取奖励）
 
+component和config合成界面，
+cache代表数据，gameobj里面是各种数据的聚合和不存放在cache里面的数据
+
