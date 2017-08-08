@@ -14,6 +14,9 @@ local M = {
 		{
 			_type = "cc_sprite",spriteName = "img_picture_login_bg"
 		},
+		{
+			_type = "demo_test",
+		},
 	},
 	_children = {
 		{
