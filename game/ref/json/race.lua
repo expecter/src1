@@ -16,6 +16,7 @@ local M = {
 	{id = 10,name = "仙族",skillIds = {}},
 	{id = 11,name = "神族",skillIds = {}},
 	{id = 12,name = "星灵",skillIds = {}},
+	{id = 13,name = "龙族",skillIds = {}},
 }
 
 return M
