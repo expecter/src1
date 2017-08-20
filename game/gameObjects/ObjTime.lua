@@ -40,8 +40,7 @@ function M.init(  )
         -- dump(M.dailyEvent)
         time = time+1
         for k,v in pairs(M.dailyEvent) do
-            -- print(k==os.time())
-            print(time,k)
+            -- print(time,k)
             if (time%k)==0 then --只能判定到点发送广播
                 GameMessage:dispatchEvent{
                     name = v[1],
