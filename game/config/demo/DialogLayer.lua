@@ -16,8 +16,55 @@ local M = {
 		{
 			_type = "cc_sprite",spriteName = "img_picture_choukaBg1"
 		},
+		-- {
+		-- 	_type = "demo_Dialog",
+		-- },
 		{
-			_type = "demo_Dialog",
+			_type = "cc_spriteFrame",
+			tlFrame = {
+				"shoot_background",
+				"shoot",
+			},
+		}
+			
+	},
+	_children = {
+		{
+			_super = "GameNode",
+			_name = "hero",
+			_component = {
+				{
+					_type = "cc_node",
+					pos = {x =568,y = 0},
+					AnchPos = {x = 0,y = 0},
+				},
+				{
+					_type = "cc_sprite",
+					spriteFrameName = "hero1",
+					isEnough = true,
+				},
+			},
+		},
+		{
+			_super = "GameNode",
+			_name = "Joytick",
+			_component = {
+				{
+					_type = "cc_node",
+					contentsize = {width = 120,height = 120},
+					pos = {x =120,y = 120},
+					AnchPos = {x = 0,y = 0},
+				},
+				{
+					_type = "cc_sprite",
+					spriteFrameName = "Direction_bc",
+					isEnough = true,
+				},
+				
+				{
+					_type = "JoytickComponent"
+				},
+			},
 		},
 	},
 }

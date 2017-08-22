@@ -184,17 +184,16 @@ function M.createGameNode( config )
         local node = require("game.gameSceneMgr."..config._super).new(config)
         --界面索引作为界面key值存储该界面包含的节点名
         curRunningLayer = node:getLayerIndex()
-
-        
-        if node:getName()~="" then
+        if not tlGameNode[curRunningLayer] then
             tlGameNode[curRunningLayer] = {}
+        end
+        if node:getName()~="" then            
             tlGameNode[curRunningLayer][node:getName()] = node
         end
         node:init()
         return node
     elseif config._super == "GameNode" then
-        local node = require("game.gameSceneMgr."..config._super).new(config)
-        
+        local node = require("game.gameSceneMgr."..config._super).new(config)       
           
         if node:getName()~="" then
             tlGameNode[curRunningLayer][node:getName()] = node
