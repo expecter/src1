@@ -10,6 +10,7 @@ local M_ZORDER_EFF = 3
 local M_ZORDER_WORLD = 2
 local M_ZORDER_GESTURE = 1
 local _mapLoader = import(".MapLoader").getInstance()
+local ComponentJoytick = import(".ComponentJoytick")
 
 function M:ctor(params)
     display.addSpriteFrames("uimap/world/img/plist_world_map_groud1.plist", "uimap/world/img/plist_world_map_groud1.png")
@@ -47,6 +48,7 @@ function M:getTlInitView()
             -- 设置弹回false
             self.ccScrollView:setBounceable(true)
             self.ccScrollView:setDelegate()
+            self.ccScrollView:setMovable(false)
             -- 监听滚动事件
             self.ccScrollView:registerScriptHandler(
                 function(view)
@@ -71,6 +73,10 @@ function M:getTlInitView()
             self.viewWorldSearch:setPosition(display.cx*2-self.viewWorldSearch:getContentSize().width,
                                               display.cy*2-self.viewWorldSearch:getContentSize().height-50)
         end,
+        function (  )
+            self.Joytick = ComponentJoytick.new()
+            self:addChild(self.Joytick)
+        end
     }
     return ret
 end
