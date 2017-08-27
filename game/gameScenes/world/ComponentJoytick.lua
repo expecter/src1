@@ -5,7 +5,7 @@
 local M = class(...,function (  )
 	return display.newNode()
 end)
-
+local scheduler = require('framework.scheduler')
 function M:ctor(  )
 	self:initView()
 end
@@ -25,7 +25,24 @@ function M:initView(  )
 	self.ditectSpr:setPosition(self:getCenterPosition())
 	self:addChild(self.ditectSpr)
 	self:setVisible(false)
+	self.scheduler = scheduler.scheduleUpdateGlobal(function ( dt )		
+		if self == nil or tolua.isnull(self) then
+			scheduler.unscheduleGlobal(self.scheduler)
+			return
+		end
+		if not self:isVisible() then
+			return
+		end
+		if self.callback then
+			self.callback(self.vec)
+		end		
+	end)
 end
+
+function M:MovedCallBack( callback )
+	self.callback = callback
+end
+
 function M:onTouch( event,x,y )
 	if event == "began" then
 		local pos = cc.p(x,y)

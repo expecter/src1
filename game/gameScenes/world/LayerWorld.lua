@@ -76,6 +76,11 @@ function M:getTlInitView()
         function (  )
             self.Joytick = ComponentJoytick.new()
             self:addChild(self.Joytick)
+            self.Joytick:MovedCallBack(function ( vec )
+                local speed = 2 --视角移动速度和屏幕速度一样
+                local offset = self.ccScrollView:getContentOffset()
+                self.ccScrollView:setContentOffset(cc.p(offset.x-vec.x*speed,offset.y-vec.y*speed))
+            end)
         end
     }
     return ret
