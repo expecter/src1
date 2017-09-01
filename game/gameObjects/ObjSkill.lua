@@ -13,10 +13,21 @@ function M.isCanUsed( cmdX )
 		M.isActive(cmdX) 
 	end    
 	local refSkill = ref.RefSkill{id = cmdX.id}
-	ref.RefSkill 
 	local cd =refSkill.cd     
 	if cd>cmdX.cd then         
-		return false end
+		return false 
 	end
+end
+--获取某个范围内的单位
+function M.getInRangeUnit( ... )
+	return {}
+end
+--获取某个技能是否处于cd中
+function M.getSkillInCd( skillId )
+	return 0
+end
+
+function M.get( ... )
+	-- body
 end
 return M
