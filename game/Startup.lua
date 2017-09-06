@@ -52,7 +52,7 @@ net.Socket = require("net.SocketTCP")
 --data
 GameCacheMgr = require("gameCaches.GameCacheMgr")
 ClickEventScript = require("utils.ClickEventScript")
-ObjTime = require("game.gameObjects.ObjTime")
+ObjScheduler = require("game.gameObjects.ObjScheduler")
 -- CacheCard = require("gameCaches.CacheCard").new()
 -- CacheHero = require("gameCaches.CacheHero").new()
 -- CacheHeroUpgrade = require("gameCaches.CacheHeroUpgrade").new()
