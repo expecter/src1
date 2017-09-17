@@ -12,6 +12,7 @@ local M = {
 	{id = 7,name = "刺客",short = "assassin",},
 	{id = 8,name = "裁决者",short = "ruler",},
 	{id = 9,name = "修女",short = "sister",},
+	{id = 10,name = "未知",short = "unknown",},
 }
 
 return M
