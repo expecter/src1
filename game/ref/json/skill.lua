@@ -1,5 +1,5 @@
 local M = {
-	{id = 1,range = 1,name = "饕餮盛宴",icon = "",hurt = 1,cd = 1,contidion = "xxx"},
+	{id = 1,range = 1,name = "饕餮盛宴",icon = "",hurt = 1,cd = 1,contidion = "xxx",script = ""},
 	{id = 2,range = 1,name = "燕返",icon = "",hurt = 1,cd = 1},
 	{id = 3,range = 1,name = "反击",icon = "",hurt = 1,cd = 1},
 	{id = 4,range = 1,name = "敬神",icon = "",hurt = 1,cd = 1},
