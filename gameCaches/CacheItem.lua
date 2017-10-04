@@ -8,6 +8,9 @@ local dataModel = {
 	id = 1,
 	num = 1,
 }
+
+local num = 1
+
 function M:ctor(  )
 	local params = {
 		cacheName = "CacheItem",
@@ -41,8 +44,9 @@ function M:newItem( params )
 	--TODO新建道具
 	-- local tlCmd = {}
 	-- table.insert(tlCmd,{id = 1,refId = 1})
-	print("aaaaaaaaaaaaaa")
-	self:updateByProto({id = 2,refId = 2})
+	-- print("aaaaaaaaaaaaaa")
+	num = num+1
+	self:updateByProto({id = 2,refId = 2,num = num})
 end
 --合成道具
 function M:composeItem( params )

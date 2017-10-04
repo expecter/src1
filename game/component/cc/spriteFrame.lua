@@ -23,8 +23,8 @@ function M:addSpriteFrame( target,frameName )
 	end
 	
 end
-function M:updateView( target )
-end
+-- function M:updateView( target )
+-- end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"addSpriteFrame")
 end

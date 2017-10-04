@@ -19,6 +19,7 @@ M.dailyEvent = {
 --已分发过的时间点
 M.DispatchEvent = {}
 M.tmCallback = {}
+local tmNodeEvents = {}
 
 function M.init(  )
 	-- M.scheduler = require('framework.scheduler').scheduleUpdateGlobal(function ( dt )

@@ -17,13 +17,14 @@ function M:bindOne(  )
 end
 --绑定参数为component
 function M:bind( target,component,cacheName )
-	GameObj[cacheName].bind(component,{
+	GameCacheMgr.getGameCacheByName(cacheName):bind(component,{
 		onAdd = function ( cmdX )
 			if component.onAdd then
 				component:onAdd(cmdX)
 			end					
 		end,
 		onUpdate = function ( cmdX )
+			print("AAAAAAAAAAAA")
 			if component.onUpdate then
 				component:onUpdate(cmdX)
 			end					

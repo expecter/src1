@@ -18,7 +18,8 @@ function M:initView( target )
 end
 function M:setText( target,text )
 	self.text = text
-	self:updateView()
+	-- self:updateView()
+	self.label:setString(self.text)
 end
 function M:updateView( )
 	self.label:setString(self.text)

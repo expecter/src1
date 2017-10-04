@@ -10,6 +10,21 @@ function M:ctor( target ,params)
 	self.isEnough = DEFAULT_FALSE(params.isEnough) 
 	self:setData(params)
 end
+function M:getDepends(  )
+	-- return {
+	-- 	{
+	-- 		_type = "cc_node",
+	-- 	},
+	-- }
+	local func = {}
+	if self.spriteFrameName then
+		--TODO需要添加查找plist配置添加
+		func = {
+			_type = "cc_spriteFrame",
+		}
+	end
+	return func
+end
 function M:setData(params )
 end
 function M:initView( target )
@@ -26,9 +41,9 @@ function M:initView( target )
 	-- self.viewSprite:setAnchorPoint(cc.p(0,0))
 	self.target:addChild(self.viewSprite)
 end
-function M:updateView( target )
+-- function M:updateView( target )
 	
-end
+-- end
 function M:getSprite(  )
 	return self.viewSprite
 end

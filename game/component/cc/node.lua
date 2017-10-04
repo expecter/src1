@@ -21,8 +21,8 @@ function M:initView(  )
 	self.target:setScale(self.scale)
 	self.target:setVisible(self.visible)
 end
-function M:updateView(  )
-end
+-- function M:updateView(  )
+-- end
 --对应onenter
 function M:enterView(  )
 	

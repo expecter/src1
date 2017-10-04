@@ -6,13 +6,13 @@ local M = class("cache_chLabel")
 function M:ctor( target ,params)
 	self.target = target
 	self.object = params.object
-	self.cacheName = "CacheItem"
+	self.cacheName = ""
 	self:setData(params)
 end
 function M:getDepends(  )
 	return {
 		{
-			_type = "cc_label",
+			_type = "cc_sprite",
 		},
 		{
 			_type = "cache_bind",
@@ -22,10 +22,8 @@ end
 function M:setData(params )
 end
 function M:getCacheText( )
-	-- if not self.object then return nil end
-	local cache = GameCacheMgr.getGameCacheByName("CacheItem"):get{id = 2}
-	dump(cache)
-	return cache.num
+	if not self.object then return nil end
+	return GameObj.ObjArmy.getCacheData()[self.object.key][self.object.field]
 end
 function M:initView( target )
 end
@@ -33,7 +31,7 @@ function M:updateView( )
 	self.target:setText(self:getCacheText())
 end
 function M:onUpdate( cmdX )
-	self:updateView()
+	self.target:setText(self:getCacheText())
 end
 --对应onenter
 function M:enterView(  )

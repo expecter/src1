@@ -17,9 +17,9 @@ function M:initView( target )
 	sp:setContentSize(self.target:getContentSize())
 	self.target:addChild(sp)
 end
-function M:updateView( target )
+-- function M:updateView( target )
 	
-end
+-- end
 --对应onenter
 function M:enterView(  )
 	

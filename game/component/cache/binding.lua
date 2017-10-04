@@ -51,6 +51,7 @@ end
 
 function M:onExit(  )
 	local caches = GameCacheMgr.getGameCacheByName(self.cacheName)
+	-- self:unbind()
 end
 
 return M

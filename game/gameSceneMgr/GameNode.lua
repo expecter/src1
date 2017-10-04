@@ -46,6 +46,7 @@ end
 function M:initView(  )
 	self:getFuncByCmdX("initView")
 end
+--各个component自己调用
 function M:updateView( )
 	self:getFuncByCmdX("updateView")
 end

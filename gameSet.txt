@@ -28,3 +28,5 @@ enterview时再执行界面绑定事件和回调事件，exitview时取消事件
 component和config合成界面，
 cache代表数据，gameobj里面是各种数据的聚合和不存放在cache里面的数据
 
+添加debug模式，监听layer和panel的添加事件，监听每个layer里面的点击事件并遍历调用，如果出现bug就停止，后续添加每个界面的截图功能，方便查找问题
+

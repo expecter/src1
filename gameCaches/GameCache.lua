@@ -52,17 +52,17 @@ end
 function M:firstInit( cmdX )
     
 end
-function M:setCmdX( cmdX )
-    self.tmCmdX = cmdX
-end
-function M:cleanup(  )
-    
-end
+
 function M:enterGame(  )
     
 end
+
 function M:exitGame(  )
     
+end
+
+function M:setCmdX( cmdX )
+    self.tmCmdX = cmdX
 end
 --清空缓存数据
 function M:clean()
@@ -108,6 +108,24 @@ end
 function M:updateByProto( cmdX )
     dump(cmdX)
     self.tmCmdX[cmdX.id] = cmdX
+    -- self:dispatchUpdateEvent(cmdX_old, hash)
+    -- if self.tmCmdX[cmdX.id] then
+    --     self:dispatchUpdateEvent(cmdX_old, hash)
+    -- else
+
+    -- end
+    for view, tmCallback in pairs(self.tmView_bind) do
+        local onUpdate = tmCallback.onUpdate
+        if onUpdate then
+            onUpdate(cmdX)
+        end
+    end
+    self:dispatchEvent({
+        name = M.EVENT_CACHE_UPDATE,
+        data =  { cacheName = self.cacheName,
+                  gameCache = self,
+                  cmdX = cmdX }
+    })
 end
 function M:update( tlCmdX )
     if tlCmdX then
