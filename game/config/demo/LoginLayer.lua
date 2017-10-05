@@ -68,8 +68,21 @@ local M = {
 				pos = {x = 300,y = 100},
 				},
 				{
-					_type = "cache_chLabel",
-					cacheName = "",
+					_type = "cache_bind",
+					tlCacheName = 
+					{
+						"CacheItem"
+					},
+
+				},
+				{
+					_type = "cc_label",
+					object = {
+						_data = "cache",
+						cacheName = "CacheItem",
+						key = {id = 2},
+						field = "num",
+					},
 				},
 			},
 		},

@@ -6,6 +6,7 @@ local M = class("componentBase")
 function M:ctor( target ,params)
 	self.target = target
 	self.text = params.text or "text"
+	self.object = params.object
 	self:setData(params)
 end
 function M:setData(params )
@@ -24,6 +25,14 @@ end
 function M:updateView( )
 	self.label:setString(self.text)
 end
+--cache更新调用
+function M:onUpdate( )
+	if self.object then
+		local text = ComponentUtil.getData(self.object)
+		self.label:setString(text)
+	end	
+end
+
 --对应onenter
 function M:enterView(  )
 	self:updateView()

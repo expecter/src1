@@ -51,6 +51,11 @@ function M:updateSpriteName( target,spriteName )
 	self.spriteName=spriteName
 	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
 end
+
+--cache更新调用
+function M:onUpdate( object )
+	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",object)))
+end
 --对应onenter
 function M:enterView(  )
 	

@@ -5,9 +5,10 @@
 local M = class("cache_chLabel")
 function M:ctor( target ,params)
 	self.target = target
-	self.object = params.object
-	self.cacheName = ""
-	self:setData(params)
+	self.tlCacheName = params.tlCacheName or {}
+	self.key = params.key
+	self.field = params.field
+	-- self:setData(params)
 end
 function M:getDepends(  )
 	return {
@@ -16,27 +17,25 @@ function M:getDepends(  )
 		},
 		{
 			_type = "cache_bind",
+			tlCacheName = self.tlCacheName,
 		},			
 	}
 end
 function M:setData(params )
 end
-function M:getCacheText( )
-	if not self.object then return nil end
-	return GameObj.ObjArmy.getCacheData()[self.object.key][self.object.field]
-end
 function M:initView( target )
 end
 function M:updateView( )
-	self.target:setText(self:getCacheText())
+	local cache = GameCacheMgr.getGameCacheByName(self.cacheName):get(self.key)
+	self.target:updateSpriteName(cache[self.field])
 end
 function M:onUpdate( cmdX )
-	self.target:setText(self:getCacheText())
+	self:updateView()
 end
 --对应onenter
 function M:enterView(  )
 	-- self.target:setText(self:getCacheText())
-	self.target:bind(self,self.cacheName)
+	self.target:bind(self)
 end
 --对应onexit
 function M:exitView(  )

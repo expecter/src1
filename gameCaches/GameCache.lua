@@ -39,7 +39,6 @@ function M:ctor( params )
     GameMessage:addEventListener("request",function(cmdX)
         cmdX = cmdX.data
         if cmdX.cacheName == self.cacheName then
-            print("cmdX.funcName",cmdX.funcName,self[cmdX.funcName])
             if M[cmdX.funcName] then
                 M[cmdX.funcName](cmdX.params)
             end
@@ -106,7 +105,7 @@ function M:deleteOne( id )
     end
 end
 function M:updateByProto( cmdX )
-    dump(cmdX)
+    -- dump(cmdX)
     self.tmCmdX[cmdX.id] = cmdX
     -- self:dispatchUpdateEvent(cmdX_old, hash)
     -- if self.tmCmdX[cmdX.id] then

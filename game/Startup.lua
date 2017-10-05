@@ -39,6 +39,7 @@ ComponentFactory = require("game.component.componentFactory")
 --游戏管理器
 GameMgr = require("game.GameMgr")
 CommonUtil = require("utils.CommonUtil")
+ComponentUtil = require("utils.ComponentUtil")
 ref = require("game.ref.json.ref")
 require("game.GameGlobalConfig")
 Helper = require("utils.Helper")

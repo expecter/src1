@@ -25,7 +25,7 @@ cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 for k,eventName in pairs(M.MessageName) do
     if eventName~="update" and eventName~="time" then
         M:addEventListener(eventName,function ( cmdX )
-            dump(cmdX.data,eventName)
+            -- dump(cmdX.data,eventName)
         end)
     end
     

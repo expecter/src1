@@ -23,7 +23,11 @@ function M.getRefData( params )
 end
 --缓存数据类型
 function M.getCacheData( params )
-	return GameObj.ObjArmy.getCacheData()
+	local cache = GameCacheMgr.getGameCacheByName(params.cacheName):get(params.key)
+	if cache then
+		return cache[params.field]
+	end
+	return nil
 end
 
 --其他数据类型
