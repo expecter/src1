@@ -72,5 +72,32 @@ function M.updateClass( oldClass,newData )
 	--对数据进行更新替换
 	return oldClass
 end
+--根据参数拼接调用方法
+function M.getCallFunc( params )
+	if type(params) == "function" then
+        return params
+    elseif type(params) == "table" then
+    	if params._type == "Message" then
+    		return function (  )
+    			GameMessage:dispatchEvent{
+                    name = params.name,
+                    data = params.params,
+                }
+    		end
+    	else
+    		return function (  )
+    			for k,v in pairs(params) do
+	                if v.name then
+	                    GameMessage:dispatchEvent{
+	                        name = v.name,
+	                        data = v.params,
+	                    }
+	                end
+	            end
+    		end
+    	end
+    end
+    return nil
+end
 
 return M

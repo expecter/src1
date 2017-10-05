@@ -15,22 +15,7 @@ function M:setData(params )
 	self.isSwallow = params.isSwallow==true
     self.isScale_ = params.isScale==true
     self.onTouch_ = params.touch_ or handler(self, self.onTouch)
-    if type(params.clickedEvent) == "function" then
-        self.fClickeEvent = params.clickedEvent
-    elseif type(params.clickedEvent) == "table" then
-        self.fClickeEvent = function (  )
-            --拼接params
-            --ClickEventScript.onEventHandler(params)          
-            for k,v in pairs(params.clickedEvent) do
-                if v.name then
-                    GameMessage:dispatchEvent{
-                        name = v.name,
-                        data = v.params,
-                    }
-                end
-            end
-        end
-    end
+    self.fClickeEvent = ComponentUtil.getCallFunc(params.clickedEvent)
 end
 function M:initView(  )
 	--点击层

@@ -33,20 +33,20 @@ function M:setData( params )
 	if self.object then
 		self.tlData = ComponentUtil.getData(self.object)
 	end	
-	local clickedEvent = params.clickedEvent
-	if clickedEvent then
-		self.callback_ = function ( params,index )
-			--拼接params
-			--ClickEventScript.onEventHandler(params)
-			for k,v in pairs(clickedEvent) do
-				if v._type == "switchto" then
-		            local switchNode = GameSceneMgr.getGameNode(v.nodeName)
-		            switchNode:switchTo(index)
-		        end
-			end			
-		end
-	end
-	
+	-- local clickedEvent = params.clickedEvent
+	-- if clickedEvent then
+	-- 	self.callback_ = function ( params,index )
+	-- 		--拼接params
+	-- 		--ClickEventScript.onEventHandler(params)
+	-- 		for k,v in pairs(clickedEvent) do
+	-- 			if v._type == "switchto" then
+	-- 	            local switchNode = GameSceneMgr.getGameNode(v.nodeName)
+	-- 	            switchNode:switchTo(index)
+	-- 	        end
+	-- 		end			
+	-- 	end
+	-- end
+	self.callback_ = ComponentUtil.getCallFunc(params.clickedEvent)
 end
 --exportFunc
 function M:initView(  )

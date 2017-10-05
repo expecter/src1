@@ -46,7 +46,10 @@ local M = {
 				},
 				{
 					_type = "cc_ClickComponent",
-					clickedEvent = {{_type = "Message",name = "exitGame",params = {name = "choukaLayer"}}},
+					clickedEvent = 
+					{
+						{_type = "Message",name = "replaceLayer",params = {name = "choukaLayer"}}
+					},
 				},
 			},
 		},
@@ -55,7 +58,10 @@ local M = {
 			_component = {
 				{
 					_type = "cc_ClickComponent",
-					clickedEvent = {{_type = "Message",name = "showPanel",params = {name = "bagPanel"}}},
+					clickedEvent = 
+					{
+						{_type = "Message",name = "showPanel",params = {name = "bagPanel"}}
+					},
 				},
 			},
 		},
