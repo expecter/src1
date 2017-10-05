@@ -84,6 +84,16 @@ local M = {
 						field = "num",
 					},
 				},
+				-- {
+				-- 	_type = "cc_sprite",
+				-- 	spriteName = "s_1",
+				-- 	object = {
+				-- 		_data = "cache",
+				-- 		cacheName = "CacheItem",
+				-- 		key = {id = 2},
+				-- 		field = "num",
+				-- 	},
+				-- },
 			},
 		},
 	},

@@ -26,7 +26,7 @@ function M:bind( target,cacheName )
 				local components = self.target:getAllComponent()
 				for i,com in ipairs(components) do
 					if com.onAdd then
-						com:onAdd()
+						com:onAdd(cmdX)
 					end
 					
 				end			
@@ -38,7 +38,7 @@ function M:bind( target,cacheName )
 				local components = self.target:getAllComponent()
 				for i,com in ipairs(components) do
 					if com.onUpdate then
-						com:onUpdate()
+						com:onUpdate(cmdX)
 					end
 				end					
 			end,
@@ -50,7 +50,7 @@ function M:bind( target,cacheName )
 				local components = self.target:getAllComponent()
 				for i,com in ipairs(components) do
 					if com.onDelete then
-						com:onDelete()
+						com:onDelete(cmdX)
 					end
 				end
 			end
@@ -62,20 +62,14 @@ function M:unbind( target,cacheName )
 end
 
 function M:enterView(  )
-	for _,cache in ipairs(self.tlCacheName) do		
-		-- for i,v in ipairs(cache) do
-		-- 	self.target:bind(v.name)
-		-- end
-		self.target:bind(cache)
+	for _,cacheName in ipairs(self.tlCacheName) do
+		self.target:bind(cacheName)
 	end
 end
 
 function M:exitView(  )
-	for _,cache in ipairs(self.tlCacheName) do		
-		-- for i,v in ipairs(cache) do
-		-- 	self.target:unbind(v.name)
-		-- end
-		self.target:bind(cache)
+	for _,cacheName in ipairs(self.tlCacheName) do
+		self.target:unbind(cacheName)
 	end
 end
 

@@ -14,7 +14,8 @@ function M:ctor( target ,params)
 	self:setData(params)
 end
 function M:setData(params )
-	self.tlData = CommonUtil.getData(params.tlData)
+    self.object = params.object
+	self.tlData = ComponentUtil.getData(params.object)
 end
 -- function M:cellMode( cmdX )
 	
@@ -94,17 +95,29 @@ end
 --缓存使用方法
 function M:onAdd( cmdX )
 	-- local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
-	self.viewtable:setTlUnitData(self.tlData)
+    if self.object then
+        local data = ComponentUtil.getData(self.object)
+    	self.viewtable:setTlUnitData(data)
+    end
 end
 
 function M:onUpdate( cmdX )
-	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
-	self.viewtable:updateUnitData(index,self.tlData)
+	-- local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
+	-- self.viewtable:updateUnitData(index,self.tlData)
+    if self.object then
+        local data = ComponentUtil.getData(self.object)
+        -- self.viewtable:updateUnitData(index,data)
+        self.viewtable:setTlUnitData(data)
+    end
 end
 
 function M:onDelete( cmdX )
-	local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
-	self.viewtable:removelUnitData(index)
+	-- local index = GameObj.ObjArmy.getIndex(self.tlData,cmdX)
+	-- self.viewtable:removelUnitData(index)
+    if self.object then
+        local data = ComponentUtil.getData(self.object)
+        self.viewtable:setTlUnitData(data)
+    end
 end
 
 function M:onClick( node,cmdX )

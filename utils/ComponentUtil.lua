@@ -23,10 +23,20 @@ function M.getRefData( params )
 end
 --缓存数据类型
 function M.getCacheData( params )
-	local cache = GameCacheMgr.getGameCacheByName(params.cacheName):get(params.key)
-	if cache then
-		return cache[params.field]
+	if params.key then
+		local cache = GameCacheMgr.getGameCacheByName(params.cacheName):get(params.key)
+		if cache then
+			if params.field then
+				return cache[params.field]
+			else
+				return cache
+			end
+			
+		end
+	else
+		return GameCacheMgr.getGameCacheByName(params.cacheName):getAll()
 	end
+	
 	return nil
 end
 

@@ -8,7 +8,8 @@ function M:ctor( target ,params)
 	self.spriteName = params.spriteName
 	self.spriteFrameName = params.spriteFrameName
 	self.isEnough = DEFAULT_FALSE(params.isEnough) 
-	self:setData(params)
+	self.object = params.object
+	-- self:setData(params)
 end
 function M:getDepends(  )
 	-- return {
@@ -25,8 +26,8 @@ function M:getDepends(  )
 	end
 	return func
 end
-function M:setData(params )
-end
+-- function M:setData(params )
+-- end
 function M:initView( target )
 	if self.spriteName then
 		self.viewSprite = display.newSprite(string.format("%s.png",self.spriteName))
@@ -53,8 +54,12 @@ function M:updateSpriteName( target,spriteName )
 end
 
 --cache更新调用
-function M:onUpdate( object )
-	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",object)))
+function M:onUpdate( )
+	if self.object then
+		local spr = ComponentUtil.getData(self.object)
+		-- local text = string.format("s_%s",spr)
+		self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",spr)))
+	end	
 end
 --对应onenter
 function M:enterView(  )

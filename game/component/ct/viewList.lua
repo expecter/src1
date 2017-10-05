@@ -9,8 +9,7 @@ function M:ctor( target ,params)
 	self:setData(params)
 end
 function M:setData( params )
-	dump(params)
-	self.tlData = CommonUtil.getData(params.tlData)
+	-- self.tlData = CommonUtil.getData(params.tlData)
 	self.cellMode = params.cellMode or function ( params ,index)
 		local config = clone(require("game.config.gameCell"))
 		table.insert(config._component,{
@@ -29,6 +28,11 @@ function M:setData( params )
 	self.defaultIndex = params.defaultIndex or 1
 	self.dir = params.dir or "h"
 	self.unit = params.unit or 1
+	self.object = params.object
+	self.tlData = params.tlData or {}
+	if self.object then
+		self.tlData = ComponentUtil.getData(self.object)
+	end	
 	local clickedEvent = params.clickedEvent
 	if clickedEvent then
 		self.callback_ = function ( params,index )
@@ -102,6 +106,28 @@ function M:setViewCallback( target,callback,isFirst )
 		self.callback_(self.tlData[self.defaultIndex],self.defaultIndex)
 	end	
 end
+--cache更新调用
+function M:onUpdate( )
+	if self.object then
+		self.tlData = ComponentUtil.getData(self.object)
+		self:updateView()
+	end	
+end
+
+function M:onAdd( )
+	if self.object then
+		self.tlData = ComponentUtil.getData(self.object)
+		self:updateView()
+	end
+end
+
+function M:onDelete(  )
+	if self.object then
+		self.tlData = ComponentUtil.getData(self.object)
+		self:updateView()
+	end
+end
+
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setViewCallback")
 	target:bindOnceMethod(self,"getViewList")
