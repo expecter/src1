@@ -7,13 +7,13 @@ local M = {
 	_component = 
 	{
 		{
-			_type = "cc_node",
+			_type = "ui_node",
 			contentsize = {width = 1136,height = 640},
 			AnchPos = {x = 0,y = 0},
 			pos = {x =0,y = 0},
 		},
 		{
-			_type = "cc_sprite",spriteName = "img_picture_choukaBg1"
+			_type = "ui_sprite",spriteName = "img_picture_choukaBg1"
 		},
 		-- {
 		-- 	_type = "demo_ComTest",
@@ -26,7 +26,7 @@ local M = {
 			_super = "GameNode",
 			_component = {
 				{
-				_type = "cc_node",
+				_type = "ui_node",
 				contentsize = {width = 600,height = 100},
 				AnchPos = {x = 0,y = 0},
 				pos = {x =10,y = 580},
@@ -72,13 +72,13 @@ local M = {
 			_super = "GameNode",
 			_name = "back",
 			_component = {
-				{_name = "",_type = "cc_node",
+				{_name = "",_type = "ui_node",
 				contentsize = {width = 154,height = 56},
 				AnchPos = {x = 0,y = 0},
 				pos = {x = 300,y = 100},
 				},
 				{
-					_type = "cc_sprite",spriteName = "img_btn_gray_2_n"
+					_type = "ui_sprite",spriteName = "img_btn_gray_2_n"
 				},
 				{
 					_type = "ex_hightlightComponent",
@@ -94,13 +94,13 @@ local M = {
 			_super = "GameNode",
 			_name = "back",
 			_component = {
-				{_name = "",_type = "cc_node",
+				{_name = "",_type = "ui_node",
 				contentsize = {width = 154,height = 56},
 				AnchPos = {x = 0,y = 0},
 				pos = {x = 100,y = 100},
 				},
 				{
-					_type = "cc_sprite",spriteName = "img_btn_gray_2_n"
+					_type = "ui_sprite",spriteName = "img_btn_gray_2_n"
 				},
 				{
 					_type = "ex_hightlightComponent",

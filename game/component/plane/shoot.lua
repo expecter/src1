@@ -3,8 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class("componentBase")
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	self.time_ = 0
 	self.lastSecond_ = 0
 	self:setData(params)

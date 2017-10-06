@@ -3,8 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class("ParkourComponent")
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	self.vec = cc.p(0,0)
 end
 function M:getDepends(  )

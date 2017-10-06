@@ -39,6 +39,9 @@ function M:test( params )
 	self:updateByProto(self.cache)
 end
 --获取新道具
+--[[
+	
+]]
 function M:newItem( params )
 	--TODO判断是否足够需要的材料
 	--TODO新建道具

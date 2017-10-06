@@ -2,9 +2,9 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("componentBase")
-function M:ctor( target ,params)
-	self.target = target
+local M = class(...,componentBase)
+function M:ctor(params)
+	M.super.ctor(self,params)
 	self:setData(params)
 end
 function M:setData(params )
@@ -23,36 +23,38 @@ function M:bind( target,cacheName )
 				-- if self.target.onAdd then
 				-- 	self.target:onAdd(cmdX)
 				-- end		
-				local components = self.target:getAllComponent()
-				for i,com in ipairs(components) do
-					if com.onAdd then
-						com:onAdd(cmdX)
-					end
-					
-				end			
+				-- local components = self.target:getAllComponent()
+				-- for i,com in ipairs(components) do
+				-- 	if com.onAdd then
+				-- 		com:onAdd(cmdX)
+				-- 	end					
+				-- end
+				self.target:updateView()			
 			end,
 			onUpdate = function ( cmdX )
 				-- if self.target.onUpdate then
 				-- 	self.target:onUpdate(cmdX)
 				-- end
-				local components = self.target:getAllComponent()
-				for i,com in ipairs(components) do
-					if com.onUpdate then
-						com:onUpdate(cmdX)
-					end
-				end					
+				-- local components = self.target:getAllComponent()
+				-- for i,com in ipairs(components) do
+				-- 	if com.onUpdate then
+				-- 		com:onUpdate(cmdX)
+				-- 	end
+				-- end
+				self.target:updateView()					
 			end,
 			onDelete = function ( cmdX )					
 			-- if self.target.onDelete then
 			-- 		self.target:onDelete(cmdX)
 			-- 	end
 			-- end
-				local components = self.target:getAllComponent()
-				for i,com in ipairs(components) do
-					if com.onDelete then
-						com:onDelete(cmdX)
-					end
-				end
+				-- local components = self.target:getAllComponent()
+				-- for i,com in ipairs(components) do
+				-- 	if com.onDelete then
+				-- 		com:onDelete(cmdX)
+				-- 	end
+				-- end
+				self.target:updateView()
 			end
 		})
 end

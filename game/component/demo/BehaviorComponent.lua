@@ -11,8 +11,7 @@ local ANI_TYPE={
     hit="hit",
     stanby="stanby",
 }
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	self:setData(params)
 	FightMgr.initFightNpcPlist(self.armyData_.ani)
 end

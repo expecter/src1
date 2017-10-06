@@ -3,8 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --后期可单独为一个界面脚本文件
 local M = class("handlerComponent")
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	self:setData(params)
 end
 function M:setData(params )

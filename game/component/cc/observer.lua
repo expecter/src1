@@ -3,7 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class("cc_observer")
-function M:ctor( target )
+function M:ctor(  )
 	self.isTargetVisible = true
 	self.listeners_ = {}
 end

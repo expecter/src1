@@ -3,7 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class("componentBase")
-function M:ctor( target ,params)
+function M:ctor( params)
 	self.width = 300
 	self.tlObject = {}
 	self:setData(params)

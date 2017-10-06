@@ -3,8 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class("spriteFrame")
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor(params)
 	self.tlFrame = params.tlFrame or {}
 	self.isCcz = DEFAULT_FALSE(params.isCcz)
 end

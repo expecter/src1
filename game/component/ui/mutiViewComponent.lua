@@ -3,9 +3,8 @@
 -- Date: 2016-08-29 23:32:42
 --
 --运用于可切换的页面和节点
-local M = class(...,componentBase)
-function M:ctor(params)
-	M.super.ctor(self,params)
+local M = class("eventComponent")
+function M:ctor( params)
 	self.defaultIndex = params.defaultIndex or 1
 	self:setData(params)
 	self.lastView = nil

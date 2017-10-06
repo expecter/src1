@@ -2,26 +2,27 @@
 -- Author: Your Name
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("CCbComponent")
-function M:ctor( params)
+local M = class(...,componentBase)
+function M:ctor(params)
+	M.super.ctor(self,params)
 	self:setData(params)
 end
 function M:setData(params )
-	self.ccbName = params.ccbName or "ccbi_capital.ccbi"
+	self.ccbName = params.ccbName or "ccbi_capital"
 end
 -- function M:cellMode( cmdX )
 	
 -- end
 --exportFunc
-function M:initView( target )
+function M:initView( )
 	self.owner = CCBReader.load(string.format("%s.ccbi",self.ccbName))
-	target:addChild(self.owner)
-	target:setContentSize(self.owner:getContentSize())
+	self.target:addChild(self.owner)
+	self.target:setContentSize(self.owner:getContentSize())
 end
-function M:getCCBOwner(  )
+function M:getOwner(  )
 	return self.owner
 end
-function M:updateView( target )
+function M:updateView( )
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"getCCBOwner")

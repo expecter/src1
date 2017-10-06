@@ -2,9 +2,9 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("componentBase")
-function M:ctor( target ,params)
-	self.target = target
+local M = class(...,componentBase)
+function M:ctor(params)
+	M.super.ctor(self,params)
 	self.spriteName = params.spriteName
 	self.spriteFrameName = params.spriteFrameName
 	self.isEnough = DEFAULT_FALSE(params.isEnough) 
@@ -42,25 +42,22 @@ function M:initView( target )
 	-- self.viewSprite:setAnchorPoint(cc.p(0,0))
 	self.target:addChild(self.viewSprite)
 end
--- function M:updateView( target )
-	
+-- function M:getSprite(  )
+-- 	return self.viewSprite
 -- end
-function M:getSprite(  )
-	return self.viewSprite
-end
 function M:updateSpriteName( target,spriteName )
+	if self.spriteName == spriteName then return end
 	self.spriteName=spriteName
 	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
 end
 
---cache更新调用
-function M:onUpdate( )
+function M:updateView(  )
 	if self.object then
 		local spr = ComponentUtil.getData(self.object)
-		-- local text = string.format("s_%s",spr)
-		self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",spr)))
-	end	
+		self.target:updateSpriteName(spr)
+	end
 end
+
 --对应onenter
 function M:enterView(  )
 	

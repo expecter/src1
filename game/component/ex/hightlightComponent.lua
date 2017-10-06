@@ -2,9 +2,9 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("hightlightComponent")
-function M:ctor( target ,params)
-	self.target = target
+local M = class(...,componentBase)
+function M:ctor(params)
+	M.super.ctor(self,params)
 end
 function M:initView( target )
 end

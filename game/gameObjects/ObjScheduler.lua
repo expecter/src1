@@ -3,7 +3,7 @@
 -- Date: 2017-07-27 20:37:47
 --
 local M = {}
-cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
+-- cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 
 GameMgr:addEventListener("enterGame",function()
     M.init()
@@ -82,6 +82,7 @@ function M.helperEvents(  )
             M.tmCallback[time] = nil
         end
     end
+    GameObj.ObjMessage:dispatchEvent{name = GameObj.ObjMessage.EVENT_UPDATE}
 end
 --回调计时器
 function M.addEvent(key,callback)

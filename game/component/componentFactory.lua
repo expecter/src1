@@ -13,8 +13,8 @@ function M.createComponent(componentName,target,params)
     	return nil
     end
     assert(class ~= nil, string.format("ComponentFactory.createComponent() - Invalid behavior name \"%s\"", tostring(componentName)))
-    local com = class.new(target,params)
-    com.target = target
+    local com = class.new(params)
+    com:setTarget(target)
     com.name = componentName
     return com
 end

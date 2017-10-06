@@ -3,7 +3,7 @@
 -- Date: 2017-05-09 14:38:59
 --
 local M = {}
-cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
+-- cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 function M.getIsOpenXXX(  )
 	
 end

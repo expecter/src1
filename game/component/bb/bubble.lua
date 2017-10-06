@@ -10,8 +10,7 @@ local speed = 0.2
 local vec = {
 	-speed,0,speed
 }
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor(params)
 	self:setData()
 end
 

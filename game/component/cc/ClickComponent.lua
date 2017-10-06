@@ -2,12 +2,10 @@
 -- Author: Your Name
 -- Date: 2016-08-20 00:01:02
 --
-local M = class("ClickComponent")
+local M = class(...,componentBase)
 M.CLickOrder = 0
---baseFunc
-function M:ctor( target ,params)
-	self.target = target
-	self.fClickeEvent = nil
+function M:ctor(params)
+    M.super.ctor(self,params)
     self:setData(params)    
 end
 
@@ -83,7 +81,7 @@ function M:isInRect( x,y )
 end
 --exportFunc
 function M:setClickedEvent(target, fClickedEvent )
-	self.fClickeEvent = fClickedEvent
+	self.fClickeEvent = ComponentUtil.getCallFunc(fClickedEvent)
 end
 function M:getClickedEvent(  )
     return self.fClickeEvent

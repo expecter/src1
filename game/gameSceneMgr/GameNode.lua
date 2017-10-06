@@ -7,6 +7,7 @@
 local M = class(...,function (  )
 	return display.newNode()
 end)
+-- local M = class("GameNode")
 function M:ctor( params )
 	self.params = params
 end

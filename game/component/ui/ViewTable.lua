@@ -2,9 +2,8 @@
 -- Author: Your Name
 -- Date: 2016-08-29 23:32:42
 --
-local M = class(...,componentBase)
-function M:ctor(params)
-    M.super.ctor(self,params)
+local M = class("eventComponent")
+function M:ctor( params)
 	self.cellMode = params.cellMode or function ( params )
 		return GameSceneMgr.createGameNode(require("game.config.gameCell"))
 	end

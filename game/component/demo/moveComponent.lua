@@ -3,8 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class("planeComponent")
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	self.velotiy = 10
 	self:setData(params)
 end

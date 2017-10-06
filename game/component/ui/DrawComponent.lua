@@ -2,9 +2,9 @@
 -- Author: Your Name
 -- Date: 2016-08-19 23:58:16
 --
-local M = class(...)
-
-function M:ctor( params)
+local M = class(...,componentBase)
+function M:ctor(params)
+	M.super.ctor(self,params)
 	self:setData(params)
 end
 function M:getDepends(  )

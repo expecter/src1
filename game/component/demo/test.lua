@@ -3,8 +3,7 @@
 -- Date: 2017-05-03 23:28:17
 --
 local M = class("componentBase")
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	self:setData(params)
 end
 

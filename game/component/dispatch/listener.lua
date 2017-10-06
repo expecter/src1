@@ -2,18 +2,40 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("componentBase")
-function M:ctor( target ,params)
-	self.target = target
+local M = class(...,componentBase)
+function M:ctor(params)
+	M.super.ctor(self,params)
+	self.tlEventName = params.tlEventName
+	self.tlListener = {}
 end
-function M:addEventListener( target,listenName,callback )
-	ObjMessage:addEventListener(listenName,function(cmdX)
-		if callback then
-			callback(cmdX)
-		end
-	end)
+
+function M:addListener( target,messageName,func )
+	self.tlListener[messageName] = cc.EventProxy.new(GameObj.ObjMessage, self.target):addEventListener(
+			messageName,func)
 end
+
+function M:removeListener( target,messageName )
+	local listener = self.tlListener[messageName]
+	GameObj.ObjMessage:removeEventListener(listener)
+end
+
+function M:enterView(  )
+	for _,eventName in ipairs(self.tlEventName) do
+		self.target:addListener(eventName,function (  )
+			self.target:updateView()
+		end)
+	end
+end
+
+function M:exitView(  )
+	for messageName,listener in pairs(self.tlListener) do
+		GameObj.ObjMessage:removeEventListener(listener)
+	end
+	self.tlListener = {} --置空
+end
+
 function M:bindFunc( target )
-	target:bindOnceMethod(self,"addEventListener")
+	target:bindOnceMethod(self,"addListener")
+	target:bindOnceMethod(self,"removeListener")
 end
 return M

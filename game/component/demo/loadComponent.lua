@@ -3,8 +3,7 @@
 -- Date: 2017-04-07 18:01:47
 --GameLayer加载项
 local M = class("loadComponent")
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	-- self:setData(params)
 end
 

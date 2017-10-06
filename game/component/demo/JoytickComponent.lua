@@ -4,8 +4,7 @@
 --
 local M = class("JoytickComponent")
 M.joytickScheduler = "joytickScheduler"
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	self.vec = cc.p(0,0)
 end
 function M:getDepends(  )

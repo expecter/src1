@@ -3,8 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class("cameraComponent")
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor( params)
 	self:setData(params)
 end
 function M:setData(params )

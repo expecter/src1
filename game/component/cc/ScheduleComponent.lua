@@ -4,8 +4,7 @@
 --
 local M = class("ScheduleComponent")
 local scheduler = require('framework.scheduler')
-function M:ctor( target ,params)
-	self.target = target
+function M:ctor(params)
 	self:setData(params)
 end
 function M:setData(params )

@@ -43,7 +43,7 @@ local instance = nil
 local tlGameNode = {} --当前界面所有运行着的节点 2017.05.10添加
 
 local curRunningLayer = nil --当前界面名
-
+M.AllGameLayer = {}
 --屏蔽
 M.MaskZOrdr = 1
 
@@ -108,7 +108,9 @@ function M:ctor()
             data = dt,
         }
     end,1)
-    
+    for i,v in ipairs(M.AllGameLayer) do
+        --TODO添加所有的界面节点，每个layer的m_ui根据情况创建
+    end
 end
 
 function M.getScene()
@@ -167,7 +169,13 @@ end
     
 --     return config
 -- end
-
+function M.createGameNode( config )    
+    if config._super~="GameNode" then
+    end
+    local node = require("game.gameSceneMgr."..config._super).new(config)
+    -- node:createView()
+    return node
+end
 --gameNode配置
 function M.createGameNode( config )
     local localNode = { --预置基础节点
@@ -485,6 +493,15 @@ function M.clearLayer()
     tlGameNode = {}
 end
 
+function M.onFrontUI( ... )
+    -- body
+end
+
+function M.onUIShowHide(  )
+    
+end
+
+
 --获取当前的GameLayer
 function M.getRunningGameLayer()
     local gameLayerWrap = M.getRunningGameLayerWrap()
@@ -610,6 +627,11 @@ GameMessage:addEventListener(GameMessage.MessageName.showPanel,function ( cmdX )
     local config = require("game.gameSceneMgr.GameLayerName")[cmdX.data.name].path
     local panel = M.createGameNode(require(config))
     panel:showPanel()
+end)
+GameMessage:addEventListener(GameMessage.MessageName.guideScript,function ( cmdX )
+    local config = require("game.gameSceneMgr.GuideScript")
+    -- local panel = M.createGameNode(require(config))
+    -- panel:showPanel()
 end)
 GameMessage:addEventListener(GameMessage.MessageName.releaseNode,function ( cmdX )
     local nodeName = cmdX.name
