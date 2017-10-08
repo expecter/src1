@@ -14,30 +14,6 @@ local event = require("framework.cc.components.behavior.EventProtocol").new()
 event:bind_(cc(M))
 event:exportMethods() 
 
-
-
---创建GameLayerWrap， 一个wrap由一个GameLayer 和 一个gameUI,一个GamePanelMgr 及 topPanelMgr 构成 
-local function createGameLayerWrap(gameLayer)
-    
-    local gameLayerWrap = display.newNode()
-
-    --加入gameLayer
-    gameLayerWrap:addChild(gameLayer)
-    gameLayerWrap.gameLayer = gameLayer
-
-    --gameView
-    local gameUI = display.newNode()
-    gameLayerWrap:addChild(gameUI)
-    gameLayerWrap.gameUI = gameUI
-
-    --创建一个PanelMgr并加入
-    local gamePanelMgr = GamePanelMgr.new()
-    gameLayerWrap:addChild(gamePanelMgr)
-    gameLayerWrap.gamePanelMgr = gamePanelMgr
-
-    return gameLayerWrap
-end
-
 local instance = nil
 
 local tlGameNode = {} --当前界面所有运行着的节点 2017.05.10添加
@@ -61,41 +37,8 @@ M.TopZOrder = 9
 
 function M:ctor()
     M.instance = self
-    
-    --layer 存储
-    local tlGameLayer = {}
-    function tlGameLayer:push(layer)
-        layer:retain()
-        tlGameLayer[#tlGameLayer+1] = layer
-    end
-    
-    function tlGameLayer:pop()
-        local layer = tlGameLayer[#tlGameLayer]
-        layer:release()
-        tlGameLayer[#tlGameLayer] = nil
-        return tlGameLayer[#tlGameLayer]
-    end
 
-    function tlGameLayer:top()
-        return tlGameLayer[#tlGameLayer]
-    end
-
-    function tlGameLayer:clear(layer)
-        for _, gameLayer in ipairs(tlGameLayer) do
-            gameLayer:release()
-        end
-        local count = #tlGameLayer
-        for i=1,count do
-            tlGameLayer[i] = nil
-        end
-    end
-
-    M.instance.tlGameLayerWrap = tlGameLayer
-
-    --一个顶部的Panel管理器, 升级, 退出游戏, 充值到账, 等Panel的容器
-    local topPanelMgr = GamePanelMgr.new()
-    M.instance:addChild(topPanelMgr, M.TopZOrder)
-    M.instance.topPanelMgr = topPanelMgr
+    M.instance.tlGameLayerWrap = {}
     M.scheduler = require('framework.scheduler').scheduleUpdateGlobal(function ( dt )
         GameMessage:dispatchEvent{
             name = GameMessage.MessageName.update,
@@ -108,9 +51,6 @@ function M:ctor()
             data = dt,
         }
     end,1)
-    for i,v in ipairs(M.AllGameLayer) do
-        --TODO添加所有的界面节点，每个layer的m_ui根据情况创建
-    end
 end
 
 function M.getScene()
@@ -210,7 +150,6 @@ function M.createGameNode( config )
         return node
     else
         if not config._super then
-            dump(config) 
             return nil 
         end
         local data = clone(require("game.config."..config._super))
@@ -266,18 +205,21 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
     
     local function helper()
         --清除全部layer
-        M.clearLayer()
+        for k,v in pairs(M.instance.tlGameLayerWrap) do
+            v:removeView()
+        end
+        M.instance.tlGameLayerWrap = {}
         --创建新的
         -- local gameLayer = require(clsGameLayer).new(userdata)
         -- dump(clsGameLayer)
         -- tlGameNode[clsGameLayer] = {}
-        -- curRunningLayer = clsGameLayer
+        curRunningLayer = clsGameLayer
         local gameLayer = M.createGameNode(require(clsGameLayer))
 
         -- local gameLayerWrap = createGameLayerWrap(gameLayer)
         
         --缓存
-        -- M.instance.tlGameLayerWrap:push(gameLayerWrap)
+        table.insert(M.instance.tlGameLayerWrap,gameLayer)
         -- print("replaceLayer")
         -- --加入
         -- M.instance:addChild(gameLayerWrap)
@@ -317,18 +259,18 @@ end
 function M.replaceNormalLayer( clsGameLayer, userdata, fCallback )
    local function helper()
         --清除全部layer
-        M.clearLayer()
+        -- M.clearLayer()
 
         --创建新的
         local gameLayer = require(clsGameLayer).new(userdata)
         -- local gameLayer,tlNode = M.createGameNode(clsGameLayer,false)
-        local gameLayerWrap = createGameLayerWrap(gameLayer)
+        -- local gameLayerWrap = createGameLayerWrap(gameLayer)
         
-        --缓存
-        M.instance.tlGameLayerWrap:push(gameLayerWrap)
+        -- --缓存
+        -- M.instance.tlGameLayerWrap:push(gameLayerWrap)
         print("replaceLayer")
         --加入
-        M.instance:addChild(gameLayerWrap)
+        M.instance:addChild(gameLayer)
 
         --分发事件
         M:dispatchEvent{

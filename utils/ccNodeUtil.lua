@@ -39,8 +39,21 @@ function M.sprite( params )
 end
 
 function M.ccreader( params )
-	local owner = CCBReader.load(string.format("%s.ccbi",params.ccbName),params.tlCallback)
+	local tlCallback = {}
+	for k,v in pairs(params.tlCallback or {}) do
+		tlCallback[k] = ComponentUtil.getCallFunc(v)
+	end
+	local owner = CCBReader.load(string.format("%s.ccbi",params.ccbName),tlCallback)
 	return owner
+end
+
+function M.scrollview( params )
+	local gameNode = GameSceneMgr.createGameNode(params.viewNode)
+	gameNode:initView()
+	gameNode:enterView()
+	local ccScrollView = cc.ScrollView:create(params.viewsize,gameNode:getView())
+	ccScrollView.gameNode = gameNode
+	return ccScrollView
 end
 
 return M

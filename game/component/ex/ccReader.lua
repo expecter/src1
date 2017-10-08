@@ -26,7 +26,11 @@ function M:initView( parent )
 		local node = GameSceneMgr.createGameNode(v)
 		node:initView(self.target:getView())
 		node:enterView()
-	end	
+	end
+	for k,v in pairs(self.tlCallback) do
+		self.owner.events[k] = v
+	end
+
 end
 
 function M:getOwner(  )

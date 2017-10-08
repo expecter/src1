@@ -11,71 +11,63 @@ local M = {
 		pos = {x =0,y = 0},
 	},
 	_component = {
-		-- {
-		-- 	_type = "ui_node",
-		-- 	contentsize = {width = 1136,height = 640},
-		-- 	AnchPos = {x = 0,y = 0},
-		-- 	pos = {x =0,y = 0},
-		-- },
 		{
-			_type = "cc_spriteFrame",tlFrame = {"login/plist_ui_plist_login"}
+			_type = "cc_spriteFrame",tlFrame = {"login/plist_ui_plist_login","capital/plist_ui_plist_capital","camp/plist_ui_plist_camp"}
 		},
 	},
 	_children = {
+			-- {
+			-- 	_super = "GameNode",
+			-- 	_view = {
+			-- 		_type = "sprite",
+			-- 		spriteName = "img_picture_login_bg"
+			-- 	},
+			-- },
 			{
 				_super = "GameNode",
 				_view = {
-					_type = "sprite",
-					spriteName = "img_picture_login_bg"
-				},
-			},
-			{
-				_super = "GameNode",
-				_view = {
-					_type = "ccreader",
-					ccbName = "ccbi_login",
-					tlCallback = {
-						onBtnAccountClicked = {_type = "Message",name = "replaceLayer",params = {name = "HeroLayer"}}
+					_type = "scrollview",
+					viewNode = {
+						_super = "GameNode",
+						_view = {
+							_type = "ccreader",
+							ccbName = "ccbi_capital",
+						},									
 					},
-					
+					viewsize = {width = 1136,height = 640},
 				},
 				_component = {
-						{
-							_type = "ex_ccReader",
-							tlNode = {
-								ccLabelServer = {
-									_super = "GameNode",
-									_component = 
-										{
-											{_type = "ex_label",text = "服务器"}
-										},
-								},
-							},
-						},
-					-- {
-					-- 	_type = "ui_node",
-					-- 	contentsize = {width = 1136,height = 640},
-					-- 	AnchPos = {x = 0,y = 0},
-					-- 	pos = {x =0,y = 0},
-					-- },
-					-- {
-					-- 	_type = "ui_sprite",spriteName = "img_picture_login_bg"
-					-- },
-					-- {
-					-- 	_type = "ui_ccbComponent",
-					-- 	ccbName = "ccbi_login",
-					-- 	tlCallback = {
-					-- 		onBtnAccountClicked = {_type = "Message",name = "replaceLayer",params = {name = "HeroLayer"}}
-					-- 	},
-					-- 	tlNode = {
-					-- 		ccLabelServer = {_super = "GameNode",_component = 
-					-- 			{{_type = "ui_label",text = "服务器"}}
-					-- 		},
-					-- 	},
-					-- },
-				}
-				
+					{
+						_type = "ui_ScrollViewComponent",
+					},
+				},
 			},
+			-- {
+			-- 	_super = "GameNode",
+			-- 	_view = {
+			-- 		_type = "ccreader",
+			-- 		ccbName = "ccbi_capital",
+			-- 		tlCallback = {
+			-- 			-- onBtnAccountClicked = {_type = "Message",name = "replaceLayer",params = {name = "HeroLayer"}}
+			-- 		},
+					
+			-- 	},
+			-- 	_component = {
+			-- 			{
+			-- 				_type = "ex_ccReader",
+			-- 				-- tlNode = {
+			-- 				-- 	ccLabelServer = {
+			-- 				-- 		_super = "GameNode",
+			-- 				-- 		_component = 
+			-- 				-- 			{
+			-- 				-- 				{_type = "ex_label",text = "服务器"}
+			-- 				-- 			},
+			-- 				-- 	},
+			-- 				-- },
+			-- 			},
+			-- 	}
+				
+			-- },
 		-- {
 		-- 	_super = "GameNode",
 		-- 	_component = {

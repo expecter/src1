@@ -14,13 +14,6 @@ function M:init( params )
 	self.TlComName = {}
 	self.TlChildren = {}
 	self._name = params._name or ""	
-	-- self.isNeedAdd = false
-	-- if type(params._view) == "table" then
-	-- 	self._view = ccNodeUtil.initNode(params._view)
-	-- 	self.isNeedAdd = true
-	-- else
-	-- 	self._view = params._view
-	-- end
 	self._view = params._view	
 	self:addAllComponents(params._component)
 	if params._children then
@@ -49,7 +42,9 @@ end
 function M:initView( parent )
 	if type(self._view) == "table" then
 		self._view = ccNodeUtil.initNode(self._view)
-		parent:addChild(self._view)
+		if parent then
+			parent:addChild(self._view)
+		end		
 	end
 	for k,com in ipairs(self.components) do
 		if com.initView then
@@ -76,6 +71,14 @@ function M:exitView(  ) --对应onexit
 	self:getFuncByCmdX("exitView")
 	
 end
+
+function M:removeView(  )	
+	self:releaseView()
+	self:exitView()
+	self._view:removeFromParent(true)
+	self._view = nil
+end
+
 function M:releaseView(  )
 	self:getFuncByCmdX("releaseView")
 	GameMessage:dispatchEvent{

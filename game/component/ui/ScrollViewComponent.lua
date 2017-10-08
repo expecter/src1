@@ -16,11 +16,9 @@ end
 	
 -- end
 --exportFunc
-function M:initView( target )
-    self.viewNode = GameSceneMgr.createGameNode(self.viewConfig)
-    self.viewNode:initView()    
-	self.ccScrollView = cc.ScrollView:create(self.viewsize,self.viewNode)
-	self.target:addChild(self.ccScrollView)
+function M:initView( parent )
+    self.ccScrollView = self.target:getView()
+    self.viewNode = self.ccScrollView.gameNode
     -- self.ccScrollView:setAnchorPoint(cc.p(0.5, 0.5))
     -- self.ccScrollView:setPosition(cc.p(target:getCenterPosition()))
     -- self.ccScrollView:setScale(1)
@@ -28,7 +26,7 @@ function M:initView( target )
     -- self.ccScrollView:setMinScale(0.7)
     -- self.ccScrollView:setZoomScaleInDuration(0.7,0.5)
     -- -- 设置弹回false
-    self.ccScrollView:setBounceable(false)
+    -- self.ccScrollView:setBounceable(false)
     self.ccScrollView:setDelegate()
     -- -- self.ccScrollView:setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)
     -- -- 监听滚动事件

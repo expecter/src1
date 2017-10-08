@@ -100,4 +100,12 @@ function M.getCallFunc( params )
     return nil
 end
 
+function M.createNode( params )
+	if type(params) == "userdata" then
+		return params
+	end
+	local node = ccNodeUtil.initNode(params)
+	return node
+end
+
 return M

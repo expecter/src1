@@ -1,4 +1,6 @@
-local M = class(..., GameLayer)
+local M = class(..., function (  )
+    return display.newNode()
+end)    
 local ANI_TYPE={
     att="att",
     run="run",
@@ -9,7 +11,7 @@ function M:ctor()
     
     -- local tbview = {}
     -- self:setData(tbview)
-    M.super.ctor(self)
+    -- M.super.ctor(self)
 end
 function M:setData( params )
     if params then
@@ -30,24 +32,8 @@ function M:getTlOnEnter(  )
     }
 end
 function M:initView( params )
-    self.owner = {}
-    -- self:createLayer(map,self)
-    -- self.owner.child1:setViewCallback(function ( data )
-    --     self.owner.login:switchTo(data.node)
-    -- end)
-    
-    -- self:createGameNode(map)
-    local label = display.newTTFLabel{
-            text = "loading...",
-            size = 30,
-        }
-        print("initView")
-    label:setPosition(display.cx,display.cy)
-    self:addChild(label)
-    self.loader = cc.TMXTiledMap:create("pd_tilemap.tmx")
-
-    -- self.loader:retain()
-    self:addChild(self.loader)
+    self.owner = CCBReader.load("ccbi_login.ccbi")
+    self:addChild(self.owner)
 end
 function M:createLayer( config,parent )
     local owner = M.createNode(config)
