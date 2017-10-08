@@ -2,8 +2,9 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("spriteFrame")
+local M = class(...,componentBase)
 function M:ctor(params)
+	M.super.ctor(self,params)
 	self.tlFrame = params.tlFrame or {}
 	self.isCcz = DEFAULT_FALSE(params.isCcz)
 end

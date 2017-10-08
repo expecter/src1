@@ -28,23 +28,28 @@ function M:getDepends(  )
 end
 -- function M:setData(params )
 -- end
-function M:initView( target )
+function M:initView( parent )
 	if self.spriteName then
 		self.viewSprite = display.newSprite(string.format("%s.png",self.spriteName))
 	end
 	if self.spriteFrameName then
 		self.viewSprite = display.newSprite(string.format("#%s.png",self.spriteFrameName))
 	end	
-	if self.isEnough then
-		self.target:setContentSize(self.viewSprite:getContentSize())
-	end
-	self.viewSprite:setPosition(cc.p(self.target:getCenterPosition()))
+	-- if self.isEnough then
+	-- 	self.viewSprite:setContentSize(self.viewSprite:getContentSize())
+	-- end
+	self.viewSprite:setPosition(cc.p(parent:getCenterPosition()))
 	-- self.viewSprite:setAnchorPoint(cc.p(0,0))
-	self.target:addChild(self.viewSprite)
+	parent:addChild(self.viewSprite)
+	self.target:setView(self.viewSprite)
 end
--- function M:getSprite(  )
--- 	return self.viewSprite
--- end
+function M:getSprite(  )
+	return self.viewSprite
+end
+function M:initByNode( target,viewSprite )
+	self.viewSprite = viewSprite
+	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
+end
 function M:updateSpriteName( target,spriteName )
 	if self.spriteName == spriteName then return end
 	self.spriteName=spriteName
@@ -73,5 +78,6 @@ end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"updateSpriteName")
 	target:bindOnceMethod(self,"getSprite")
+	target:bindOnceMethod(self,"initByNode")
 end
 return M

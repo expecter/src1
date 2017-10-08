@@ -32,6 +32,7 @@ GameMessage = require("game.gameSceneMgr.GameMessage")
 GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()
 -- GameLayerSystem = require("game.gameSceneMgr.GameLayerSystem")
 -- GameCacheMgr = require("gameCaches.GameCacheMgr")
+ccNodeUtil = require("utils.ccNodeUtil")
 GameNode = require("game.gameSceneMgr.GameNode")
 GameLayer = require("game.gameSceneMgr.GameLayer")
 

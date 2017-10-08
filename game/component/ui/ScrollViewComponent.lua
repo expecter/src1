@@ -2,8 +2,9 @@
 -- Author: Your Name
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("ScrollViewComponent")
+local M = class(...,componentBase)
 function M:ctor( params)
+    M.super.ctor(self,params)
 	self:setData(params)
 end
 function M:setData(params )
@@ -19,7 +20,7 @@ function M:initView( target )
     self.viewNode = GameSceneMgr.createGameNode(self.viewConfig)
     self.viewNode:initView()    
 	self.ccScrollView = cc.ScrollView:create(self.viewsize,self.viewNode)
-	target:addChild(self.ccScrollView)
+	self.target:addChild(self.ccScrollView)
     -- self.ccScrollView:setAnchorPoint(cc.p(0.5, 0.5))
     -- self.ccScrollView:setPosition(cc.p(target:getCenterPosition()))
     -- self.ccScrollView:setScale(1)

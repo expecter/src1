@@ -14,26 +14,15 @@ function M:ctor(params)
 end
 function M:setData(params )
 end
-function M:initView(  )
-	self.target:setContentSize(self.contentSize)
-	self.target:setAnchorPoint(self.anchPos)
-	self.target:setPosition(self.pos)
-	self.target:setScale(self.scale)
-	self.target:setVisible(self.visible)
+function M:initView( parent )
+	local node = self.target:getView()
+	node:setContentSize(self.contentSize)
+	node:setAnchorPoint(self.anchPos)
+	node:setPosition(self.pos)
+	node:setScale(self.scale)
+	node:setVisible(self.visible)
 end
--- function M:updateView(  )
--- end
---对应onenter
-function M:enterView(  )
-	
-end
---对应onexit
-function M:exitView(  )
-	
-end
---对应release
-function M:releaseView(  )
-	
+function M:updateView(  )
 end
 function M:bindFunc( target )
 end

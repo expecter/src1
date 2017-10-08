@@ -11,11 +11,17 @@ function M:setData(params )
 	self.text = params.text or "text"
 	self.object = params.object
 end
-function M:initView( target )
+function M:initView( parent )
 	self.label = display.newTTFLabel{text=self.text,size=30}
-    self.target:addChild(self.label)
-    self.label:setPosition(self.target:getCenterPosition())
+    parent:addChild(self.label)
+    self.label:setPosition(parent:getCenterPosition())
     -- self.label:setAnchorPoint(cc.p(0,0))
+    self.label:setString(self.text)
+    self.target:setView(self.label)
+end
+function M:initByNode( target,label )
+	self.label = label
+	self.label:setString(self.text)
 end
 function M:setText( target,text )
 	if text == self.text then return end
@@ -24,6 +30,7 @@ function M:setText( target,text )
 end
 function M:updateView( )
 	local text = self.text
+	print("self.text",self.text)
 	if self.object then
 		text = ComponentUtil.getData(self.object)		
 	end
@@ -44,5 +51,6 @@ function M:releaseView(  )
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setText")
+	target:bindOnceMethod(self,"initByNode")
 end
 return M

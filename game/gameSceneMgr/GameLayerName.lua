@@ -7,6 +7,7 @@ local M = {
 	bagPanel = {path = "game.config.demo.bagPanel",condition = {}},
 	MainLayer = {path = "game.config.demo.MainLayer",condition = {}},
 	choukaLayer = {path = "game.config.demo.choukaLayer",condition = {}},
+	HeroLayer = {path = "game.config.demo.HeroLayer",condition = {}},
 }
 
 return M

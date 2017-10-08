@@ -134,7 +134,7 @@ function M.loadingGameLayer(gameLayer,tlCmd)
         -- local GameLoading = require("game.gameSceneMgr.GameLoading")
         -- GameLoading.start()
         for index, func in ipairs(tlFunc) do
-            func()
+            func(M.instance)
             -- GameLoading:setPercentage(index, #tlFunc)
         end
         -- GameLoading.stop()
@@ -198,7 +198,7 @@ function M.createGameNode( config )
         if node:getName()~="" then            
             tlGameNode[curRunningLayer][node:getName()] = node
         end
-        node:init()
+        -- node:init()
         return node
     elseif config._super == "GameNode" then
         local node = require("game.gameSceneMgr."..config._super).new(config)       
@@ -206,7 +206,7 @@ function M.createGameNode( config )
         if node:getName()~="" then
             tlGameNode[curRunningLayer][node:getName()] = node
         end
-        node:init()     
+        -- node:init()     
         return node
     else
         if not config._super then
@@ -274,14 +274,15 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         -- curRunningLayer = clsGameLayer
         local gameLayer = M.createGameNode(require(clsGameLayer))
 
-        local gameLayerWrap = createGameLayerWrap(gameLayer)
+        -- local gameLayerWrap = createGameLayerWrap(gameLayer)
         
         --缓存
-        M.instance.tlGameLayerWrap:push(gameLayerWrap)
-        print("replaceLayer")
-        --加入
-        M.instance:addChild(gameLayerWrap)
-
+        -- M.instance.tlGameLayerWrap:push(gameLayerWrap)
+        -- print("replaceLayer")
+        -- --加入
+        -- M.instance:addChild(gameLayerWrap)
+        gameLayer:initView(M.instance)
+        gameLayer:enterView()
         --分发事件
         M:dispatchEvent{
             name = "prepare",
@@ -292,8 +293,8 @@ function M.replaceLayer(clsGameLayer, userdata, fCallback)
         }
 
         -- 处理加载
-        local tlCmd = {"getTlInitView", "getTlOnEnter"}
-        M.loadingGameLayer(gameLayer, tlCmd)
+        -- local tlCmd = {"getTlInitView", "getTlOnEnter"}
+        -- M.loadingGameLayer(gameLayer, tlCmd)
         -- for i,node in ipairs(tlNode) do
         --     GameSceneMgr.loadGameNode(node)
         -- end

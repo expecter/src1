@@ -7,7 +7,7 @@ local M = {
 	_name = "bagPanel",
 	_component = {
 		{
-			_type = "cc_node",
+			_type = "ui_node",
 			contentsize = {width = 700,height = 500},
 			AnchPos = {x = 0.5,y = 0.5},
 			pos = {x =568,y = 320},
@@ -16,7 +16,7 @@ local M = {
 		-- 	_type = "cc_DrawComponent"
 		-- },
 		{
-			_type = "cc_scale9Sprite",spriteName = "img_scale9_panelbg"
+			_type = "ui_scale9Sprite",spriteName = "img_scale9_panelbg"
 		},
 		-- {
 		-- 	_type = "demo_bagPanelComponent",
@@ -31,13 +31,13 @@ local M = {
 			_name = "switchMenu",
 			_component = {
 				{
-					_name = "",_type = "cc_node",
+					_name = "",_type = "ui_node",
 					contentsize = {width = 700,height = 500},
 					AnchPos = {x = 1,y = 0},
 					pos = {x =700,y = 500},
 				},
 				{
-					_type = "ct_viewList", 
+					_type = "ui_viewList", 
 					tlData = 
 					{
 						--道具背包数据
@@ -59,13 +59,13 @@ local M = {
 			_name = "switchNode",
 			_component = {
 				{
-					_name = "",_type = "cc_node",
+					_name = "",_type = "ui_node",
 					contentsize = {width = 550,height = 350},
 					AnchPos = {x = 0,y = 0},
 					pos = {x =0,y = 0},
 				},
 				{
-					_type = "ct_viewList", 
+					_type = "ui_viewList", 
 					unit = 3,
 					dir = "v",
 					tlData = 

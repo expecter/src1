@@ -9,8 +9,8 @@ end
 function M:setTarget( target )
 	self.target = target
 end
-function M:setData(params )
-end
+-- function M:setData(params )
+-- end
 function M:getDepends(  )
 	return {}
 end

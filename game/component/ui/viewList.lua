@@ -2,9 +2,9 @@
 -- Author: Your Name
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("ct_viewList")
+local M = class(...,componentBase)
 function M:ctor( params)
-	
+	M.super.ctor(self,params)
 	self:setData(params)
 end
 function M:setData( params )
@@ -12,7 +12,7 @@ function M:setData( params )
 	self.cellMode = params.cellMode or function ( params ,index)
 		local config = clone(require("game.config.gameCell"))
 		table.insert(config._component,{
-					_type = "cc_label",
+					_type = "ui_label",
 					text = params.name,
 				})
 		return GameSceneMgr.createGameNode(config)
@@ -50,9 +50,10 @@ end
 --exportFunc
 function M:initView(  )
 	self.viewlist = UICommon.createViewList(self.target,self.isMovable,self.dir,2,self.unit,2,"left")
-	-- self:updateView()
 end
-
+function M:initByNode( target,node )
+	self.viewlist = UICommon.createViewList(node,self.isMovable,self.dir,2,self.unit,2,"left")
+end
 function M:enterView(  )
 	self:updateView()
 end
@@ -136,7 +137,7 @@ end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setViewCallback")
 	target:bindOnceMethod(self,"getViewList")
-	
+	target:bindOnceMethod(self,"initByNode")
 	target:bindOnceMethod(self,"setTlData")
 end
 return M

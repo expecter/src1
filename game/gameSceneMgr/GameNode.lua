@@ -4,30 +4,32 @@
 --
 
 
-local M = class(...,function (  )
-	return display.newNode()
-end)
--- local M = class("GameNode")
+local M = class("GameNode")
 function M:ctor( params )
-	self.params = params
+	self:init(params)
 end
 
-function M:init( )
+function M:init( params )
 	self.components = {}
 	self.TlComName = {}
 	self.TlChildren = {}
-	-- self._name = self.params._name or ""
-	if self.params._data then
-		self:setData(self.params._data)
+	self._name = params._name or ""	
+	-- self.isNeedAdd = false
+	-- if type(params._view) == "table" then
+	-- 	self._view = ccNodeUtil.initNode(params._view)
+	-- 	self.isNeedAdd = true
+	-- else
+	-- 	self._view = params._view
+	-- end
+	self._view = params._view	
+	self:addAllComponents(params._component)
+	if params._children then
+		self:createChildren(params._children)
 	end
-	if self.params._children then
-		self:createChildren(self.params._children)
-	end
-	self:addAllComponents(self.params._component)
 end
 
 function M:getName(  )
-	return self.params._name or ""
+	return self._name
 end
 function M:onExit(  )
 	for k,com in ipairs(self.components) do
@@ -44,9 +46,25 @@ function M:update( dt )
 		v:update()
 	end
 end
-function M:initView(  )
-	self:getFuncByCmdX("initView")
+function M:initView( parent )
+	if type(self._view) == "table" then
+		self._view = ccNodeUtil.initNode(self._view)
+		parent:addChild(self._view)
+	end
+	for k,com in ipairs(self.components) do
+		if com.initView then
+			com:initView(parent)
+		end		
+	end
+	for i,v in ipairs(self.TlChildren) do
+		v:initView(self:getView())
+	end
 end
+
+function M:getView(  )
+	return self._view
+end
+
 --各个component自己调用
 function M:updateView( )
 	self:getFuncByCmdX("updateView")
@@ -83,6 +101,27 @@ function M:addAllComponents( _components )
 			end
 		end
 	end
+	if (type(self._view) == "table" and self._view._type == "node") or tolua.type(self._view) == "cc.Node" then
+		if not self.TlComName["ex_node"] then
+			self:addComponent({_type = "ex_node"})
+		end
+	end
+	if (type(self._view) == "table" and self._view._type == "label") or tolua.type(self._view) == "cc.label" then
+		if not self.TlComName["ex_label"] then
+			self:addComponent({_type = "ex_label"})
+		end
+	end
+	if (type(self._view) == "table" and self._view._type == "sprite") or tolua.type(self._view) == "cc.Sprite" then
+		if not self.TlComName["ex_sprite"] then
+			self:addComponent({_type = "ex_sprite"})
+		end
+	end
+	if (type(self._view) == "table" and self._view._type == "ccreader") or tolua.type(self._view) == "cc.BReader" then
+		
+		if not self.TlComName["ex_ccReader"] then
+			self:addComponent({_type = "ex_ccReader"})
+		end
+	end
 end
 
 function M:addComponent( params )
@@ -107,6 +146,11 @@ function M:addComponent( params )
 		self.TlComName[comName]:bindFunc(self)
 	end	
 end
+
+function M:removeComponent( _type )
+	
+end
+
 --添加判断条件，方便组件复用
 function M:addContidion(  )
 	
@@ -128,9 +172,13 @@ end
 function M:createChildren( _children )
 	for k,child in pairs(_children) do
 		local node = GameSceneMgr.createGameNode(child)
-		self:addChild(node,1) 
+		-- self:addChild(node,1) 
 		table.insert(self.TlChildren,node)
 	end
+end
+
+function M:addGameChild( child )
+	table.insert(self.TlChildren,child)
 end
 
 function M:getComponentByName( componentName )

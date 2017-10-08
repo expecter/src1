@@ -2,8 +2,9 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --没什么问题是一个脚本搞不定的，如果有就再加一个
-local M = class("componentBase")
+local M = class(...,componentBase)
 function M:ctor( params)
+	M.super.ctor(self,params)
 end
 --对应onenter
 function M:enterView(  )
