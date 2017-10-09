@@ -19,6 +19,7 @@ M.MessageName =
     update = "update",
     time = "time",
     request = "request", --修改cache请求 参数cacheName = "CachesItem",funcName = "newItem",params = {}
+    dispatch = "dispatch", --界面点击分发事件
     guideScript = "guideScript",--指定引导步骤
     registerTimeEvent = "registerTimeEvent",--注册各种时间事件
 }

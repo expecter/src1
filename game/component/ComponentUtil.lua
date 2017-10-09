@@ -78,19 +78,22 @@ function M.getCallFunc( params )
         return params
     elseif type(params) == "table" then
     	if params._type == "Message" then
-    		return function (  )
+    		return function ( msg )
+    			local newParams = M.mergeTable(params.params,msg)
+
     			GameMessage:dispatchEvent{
                     name = params.name,
-                    data = params.params,
+                    data = newParams,
                 }
     		end
     	else
-    		return function (  )
+    		return function ( msg )
     			for k,v in pairs(params) do
 	                if v.name then
+	                	local newParams = M.mergeTable(v.params,msg)
 	                    GameMessage:dispatchEvent{
 	                        name = v.name,
-	                        data = v.params,
+	                        data = newParams,
 	                    }
 	                end
 	            end
@@ -98,6 +101,14 @@ function M.getCallFunc( params )
     	end
     end
     return nil
+end
+
+function M.mergeTable( orgtable,newtable )
+	local ntable = clone(newtable)
+	for k,v in pairs(newtable) do
+		orgtable[k] = v
+	end
+	return orgtable
 end
 
 function M.createNode( params )

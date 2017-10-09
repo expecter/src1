@@ -72,7 +72,7 @@ function M:updateView( target )
 	            orgNode:hightlight()
 	        end
 	        if self.callback_ then
-	            self.callback_(self.tlData[index],index)
+	            self.callback_({cmdX = self.tlData[index],index = index})
 	        end
 	        if orgNode then
 	        	orgNode:updateView()
@@ -94,7 +94,7 @@ end
 function M:setViewCallback( target,callback,isFirst )
 	self.callback_ = callback
 	if isFirst then
-		self.callback_(self.tlData[self.defaultIndex],self.defaultIndex)
+		self.callback_({cmdX = self.tlData[self.defaultIndex],index = self.defaultIndex})
 	end	
 end
 --cache更新调用
