@@ -33,6 +33,7 @@ end
 
 function M.sprite( params )
 	local sprite = display.newSprite(string.format("%s.png",params.spriteName))
+	-- sprite:setContentSize(params.contentsize or cc.size(0,0))
 	sprite:setPosition(params.pos or cc.p(0,0))
 	sprite:setAnchorPoint(params.AnchPos or cc.p(0,0))
 	return sprite

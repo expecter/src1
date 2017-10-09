@@ -26,7 +26,6 @@ end)
 Language = require("game.Language.Language")
 --view
 GameObj = require("game.gameObjects.GameObj")
-ObjMessage = require("game.gameObjects.ObjMessage")
 GameStateManager = require("utils.GameStateManager").new()
 GameMessage = require("game.events.GameMessage")
 GameSceneMgr = require("game.gameSceneMgr.GameSceneMgr").new()

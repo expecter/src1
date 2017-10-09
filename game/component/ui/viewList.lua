@@ -11,10 +11,10 @@ function M:setData( params )
 	-- self.tlData = CommonUtil.getData(params.tlData)
 	self.cellMode = params.cellMode or function ( params ,index)
 		local config = clone(require("game.config.gameCell"))
-		table.insert(config._component,{
-					_type = "cc_label",
-					text = params.name,
-				})
+		-- table.insert(config._component,{
+		-- 			_type = "ui_label",
+		-- 			text = params.name,
+		-- 		})
 		return GameSceneMgr.createGameNode(config)
 	end
 	if type(params.cellMode) == "table" then

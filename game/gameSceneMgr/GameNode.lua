@@ -105,24 +105,24 @@ function M:addAllComponents( _components )
 		end
 	end
 	if (type(self._view) == "table" and self._view._type == "node") or tolua.type(self._view) == "cc.Node" then
-		if not self.TlComName["ex_node"] then
-			self:addComponent({_type = "ex_node"})
+		if not self.TlComName["ui_node"] then
+			self:addComponent({_type = "ui_node"})
 		end
 	end
 	if (type(self._view) == "table" and self._view._type == "label") or tolua.type(self._view) == "cc.label" then
-		if not self.TlComName["ex_label"] then
-			self:addComponent({_type = "ex_label"})
+		if not self.TlComName["ui_label"] then
+			self:addComponent({_type = "ui_label"})
 		end
 	end
 	if (type(self._view) == "table" and self._view._type == "sprite") or tolua.type(self._view) == "cc.Sprite" then
-		if not self.TlComName["ex_sprite"] then
-			self:addComponent({_type = "ex_sprite"})
+		if not self.TlComName["ui_sprite"] then
+			self:addComponent({_type = "ui_sprite"})
 		end
 	end
 	if (type(self._view) == "table" and self._view._type == "ccreader") or tolua.type(self._view) == "cc.BReader" then
 		
-		if not self.TlComName["ex_ccReader"] then
-			self:addComponent({_type = "ex_ccReader"})
+		if not self.TlComName["ui_ccReader"] then
+			self:addComponent({_type = "ui_ccReader"})
 		end
 	end
 end

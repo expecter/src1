@@ -10,17 +10,17 @@ function M:ctor(params)
 end
 
 function M:addListener( target,messageName,func )
-	self.tlListener[messageName] = cc.EventProxy.new(GameObj.ObjMessage, self.target):addEventListener(
+	self.tlListener[messageName] = cc.EventProxy.new(GameMessage, self.target:getView()):addEventListener(
 			messageName,func)
 end
 
 function M:removeListener( target,messageName )
 	local listener = self.tlListener[messageName]
-	GameObj.ObjMessage:removeEventListener(listener)
+	GameMessage:removeEventListener(listener)
 end
 
 function M:enterView(  )
-	for _,eventName in ipairs(self.tlEventName) do
+	for _,eventName in ipairs(self.tlEventName or {}) do
 		self.target:addListener(eventName,function (  )
 			self.target:updateView()
 		end)
@@ -29,7 +29,7 @@ end
 
 function M:exitView(  )
 	for messageName,listener in pairs(self.tlListener) do
-		GameObj.ObjMessage:removeEventListener(listener)
+		GameMessage:removeEventListener(listener)
 	end
 	self.tlListener = {} --置空
 end

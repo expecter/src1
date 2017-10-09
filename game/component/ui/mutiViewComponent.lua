@@ -13,7 +13,7 @@ function M:ctor(params)
 	self.tlView = {}
 end
 function M:setData(params )
-	self.tlData = CommonUtil.getData(params.tlData)
+	self.tlData = ComponentUtil.getData(params.tlData)
 end
 function M:initView( target )
 	for i,cmdX in ipairs(self.tlData) do
@@ -37,6 +37,10 @@ function M:getTlView()
 end
 
 function M:switchTo( target,index,params )
+	if not self.tlView[index] then
+		print("没有该序号")
+		return
+	end
 	local isInit = false
 	for _,_index in ipairs(self.tlIndex) do
 		if _index == index then 
@@ -44,7 +48,6 @@ function M:switchTo( target,index,params )
 			break
 		end
 	end
-	print("index",index)
     --分发事件
 	if isInit == false then		
 		table.insert(self.tlIndex,index)

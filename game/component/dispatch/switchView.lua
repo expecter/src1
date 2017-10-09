@@ -31,7 +31,7 @@ function M:enterView(  )
 			return
 		end
 		local index = cmdX.data.index
-		self.target:switchto(index)
+		self.target:switchTo(index)
 	end)
 end
 

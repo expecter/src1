@@ -14,8 +14,8 @@ function M.getData( params )
 	if params._data == "obj" then
 		return M.getObjData(params)
 	end
-	dump(Language.y1)
-	return nil
+	-- dump(Language.y1)
+	return params
 end
 --配置数据类型
 function M.getRefData( params )

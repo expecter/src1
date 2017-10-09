@@ -12,10 +12,61 @@ local M = {
 	},
 	_component = {
 		{
-			_type = "cc_spriteFrame",tlFrame = {"login/plist_ui_plist_login","capital/plist_ui_plist_capital","camp/plist_ui_plist_camp"}
+			_type = "ui_spriteFrame",tlFrame = {"login/plist_ui_plist_login","capital/plist_ui_plist_capital","camp/plist_ui_plist_camp"}
 		},
 	},
-	_children = {
+	_children = {			
+			{
+				_super = "GameNode",
+				_view = {
+					_type = "node",
+					contentsize = {width = 1136,height = 640},
+					AnchPos = {x = 0,y = 0},
+					pos = {x =0,y = 0},
+					-- 		_type = "sprite",
+					-- spriteName = "img_picture_login_bg"
+				},
+				_component = {
+				{
+					_type = "ui_mutiViewComponent",
+					tlData = {
+						{path = "game.config.TabNode2",params = {}},
+						{path = "game.config.TabNode3",params = {}},
+					},
+				},
+				{
+					_type = "dispatch_switchView",
+					btnName = "switchNode",
+					eventName = "switchto",
+				},
+				},
+			},
+			{
+				_name ="switchNode",
+				_super = "GameNode",
+				_view = {
+					_type = "node",
+					contentsize = {width = 1136,height = 140},
+					AnchPos = {x = 0,y = 0},
+					pos = {x =0,y = 600},
+					-- 		_type = "sprite",
+					-- spriteName = "img_picture_login_bg"
+				},
+				_component = {
+				{
+					_type = "ui_viewList",
+					object = 
+					{
+						--道具背包数据
+						_data = "ref",
+						refName = "bagindex",
+					},
+					clickedEvent = {
+						{_type = "Message",name = "switchto",params = {name = "switchNode"}}
+					},
+				}
+				},
+			},
 			-- {
 			-- 	_super = "GameNode",
 			-- 	_view = {
