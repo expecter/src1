@@ -49,8 +49,8 @@ function M.init(  )
     --         end
     --     end
     -- end)
-    local scheduler = require('framework.scheduler')
-    scheduler.scheduleGlobal(M.helperEvents,1)
+    -- local scheduler = require('framework.scheduler')
+    -- scheduler.scheduleGlobal(M.helperEvents,1)
 end
 
 function M.cleanUp(  )

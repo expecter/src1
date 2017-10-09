@@ -56,4 +56,32 @@ function M.scrollview( params )
 	return ccScrollView
 end
 
+function M.polygon( params )
+	local width = params.contentsize.width or 100
+	local height = params.contentsize.height or 100
+	local anX = params.AnchPos.x or 0
+	local anY = params.AnchPos.y or 0
+	x = 0
+	y = 0
+	local points = {
+        {x,y},
+        {x + width, y},
+        {x + width, y + height},
+        {x, y + height}
+    }
+	return display.newPolygon(points, {fillColor = cc.c4f(0,0,0,0), borderColor = params.borderColor or cc.c4f(1,1,1,1), borderWidth = 0.5})
+end
+
+function M.scale9( params )
+	local sp = display.newScale9Sprite(string.format("%s.png",params.spriteName))
+	sp:setAnchorPoint(cc.p(0,0))
+	sp:setContentSize(params.contentsize or cc.size(0,0))
+	return sp
+end
+
+function M.tmx( params )
+	local loader = cc.TMXTiledMap:create(string.format("%s.tmx",params.tmxName))
+	return loader
+end
+
 return M

@@ -21,7 +21,7 @@ function M:initView(  )
     self.touchlayer:addTouchEventListener( self.onTouch_, false, self.isSwallow)
     self.touchlayer:setTouchEnabled(true)
     self.touchlayer:setVisible(false)
-    self.target:addChild(self.touchlayer)
+    self.target:getView():addChild(self.touchlayer)
 end
 
 function M:enterView(  )

@@ -2,9 +2,10 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("ScheduleComponent")
+local M = class(...,componentBase)
 local scheduler = require('framework.scheduler')
 function M:ctor(params)
+	M.super.ctor(self,params)
 	self:setData(params)
 end
 function M:setData(params )

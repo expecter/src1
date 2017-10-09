@@ -3,7 +3,7 @@
 -- Date: 2016-08-29 23:32:42
 --
 local M = class(...,componentBase)
-function M:ctor( params)
+function M:ctor(params)
     M.super.ctor(self,params)
 	self.cellMode = params.cellMode or function ( params )
 		return GameSceneMgr.createGameNode(require("game.config.gameCell"))
@@ -20,10 +20,11 @@ end
 -- function M:cellMode( cmdX )
 	
 -- end
-function M:initViewTable( node )
-    self.viewtable = UICommon.initTableTabMenu(node,"h",160,1,handler(self,self.onClick),self.cellMode,true)
-    self.viewtable = view.ViewTable.new{
-        size = parent:getContentSize(),
+--exportFunc
+function M:initView( target )
+	self.viewtable = UICommon.initTableTabMenu(self.target,"h",160,1,handler(self,self.onClick),self.cellMode,true)
+	self.viewtable = view.ViewTable.new{
+		size = parent:getContentSize(),
         dir = self.dir,
         unit = self.unit,
         unitLength = self.unitLength,
@@ -45,9 +46,9 @@ function M:initViewTable( node )
                         if viewTableUnit.ccNode and viewTableUnit.ccNode.hightlight then
                             viewTableUnit.ccNode:hightlight(unitData)
                         end
-                        if orgindexEvent then
-                            orgindexEvent(viewTableUnit, unitData, unitIndex)
-                        end
+						if orgindexEvent then
+							orgindexEvent(viewTableUnit, unitData, unitIndex)
+						end
                     else
                         if viewTableUnit.ccNode and viewTableUnit.ccNode.normal then
                             viewTableUnit.ccNode:normal(unitData)
@@ -75,17 +76,10 @@ function M:initViewTable( node )
                 end               
             end            
         end,
-    }
-    self.viewtable:setAnchorPoint(cc.p(0,0))
+	}
+	self.viewtable:setAnchorPoint(cc.p(0,0))
     self.target:addChild(self.viewtable)
-end
---exportFunc
-function M:initView( target )
-	self:initViewTable(self.target)
-end
-
-function M:initByNode( target,node )
-    self:initViewTable(node)
+	self:updateView()	
 end
 
 function M:switchToIndex( index )	
@@ -142,6 +136,5 @@ function M:setViewCallback( target,callback )
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setViewCallback")
-    target:bindOnceMethod(self,"initByNode")
 end
 return M

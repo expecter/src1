@@ -2,8 +2,9 @@
 -- Author: yjxin
 -- Date: 2016-08-29 23:32:42
 --
-local M = class("cc_animation")
+local M = class(...,componentBase)
 function M:ctor( params)
+	M.super.ctor(self,params)
 	self:setData(params)
 end
 function M:setData(params )
@@ -18,7 +19,7 @@ function M:initView(  )
 	end
 	local animation = display.newAnimation(tlSpriteFrame, 0.1)
 	local action=cc.RepeatForever:create(cc.Animate:create(animation))
-	self.target:getSprite():runAction(action)
+	self.target:getView():runAction(action)
 	-- target:getSprite():playAnimationOnce(animation)
 end
 function M:updateView( target )

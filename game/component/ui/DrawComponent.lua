@@ -3,25 +3,17 @@
 -- Date: 2016-08-19 23:58:16
 --
 local M = class(...,componentBase)
-function M:ctor(params)
+
+function M:ctor( params)
 	M.super.ctor(self,params)
 	self:setData(params)
-end
-function M:getDepends(  )
-	return {
-		{
-			_type = "cc_node",
-		},
-	}
 end
 function M:setData( params )
 	self.borderColor = params.borderColor or cc.c4f(1,1,1,1)
 end
 
 function M:initView( )
-	print("AAAAAAAAAAAAAAAAA")
-	self.drawNode = display.newPolygon(self:initPoints(), {fillColor = cc.c4f(0,0,0,0), borderColor = self.borderColor, borderWidth = 0.5})
-    self.target:addChild(self.drawNode)
+	self.drawNode = self.target:getView()
 end
 
 function M:updateView(  )
