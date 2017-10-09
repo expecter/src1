@@ -17,10 +17,7 @@ function M:setData(params )
 end
 function M:initView( target )
 	for i,cmdX in ipairs(self.tlData) do
-		local view = GameSceneMgr.createGameNode(clone(require(cmdX.path)),false)
-		view:setVisible(false)
-		table.insert(self.tlView,view)
-		self.target:addChild(view)
+		table.insert(self.tlView,GameSceneMgr.createGameNode(clone(require(cmdX.path))))
 	end
 	self.target:switchTo(self.defaultIndex)
 end
@@ -53,13 +50,13 @@ function M:switchTo( target,index,params )
 		table.insert(self.tlIndex,index)
 		--初始化。
 		if self.tlView[index].initView then
-            self.tlView[index]:initView()
+            self.tlView[index]:initView(self.target:getView())
         end
 	end
 
 	if self.lastView then 
 		--隐藏上一标签页显示
-		self.lastView:setVisible(false)
+		self.lastView:getView():setVisible(false)
 		if self.lastView.exitView then
         	self.lastView:exitView(params)
     	end
@@ -68,7 +65,7 @@ function M:switchTo( target,index,params )
 	if self.tlView[index].enterView then
         self.tlView[index]:enterView(params)
     end
-    self.lastView:setVisible(true)
+    self.lastView:getView():setVisible(true)
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self, "switchTo")

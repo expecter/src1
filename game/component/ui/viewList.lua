@@ -31,25 +31,12 @@ function M:setData( params )
 	self.tlData = params.tlData or {}
 	if self.object then
 		self.tlData = ComponentUtil.getData(self.object)
-	end	
-	-- local clickedEvent = params.clickedEvent
-	-- if clickedEvent then
-	-- 	self.callback_ = function ( params,index )
-	-- 		--拼接params
-	-- 		--ClickEventScript.onEventHandler(params)
-	-- 		for k,v in pairs(clickedEvent) do
-	-- 			if v._type == "switchto" then
-	-- 	            local switchNode = GameSceneMgr.getGameNode(v.nodeName)
-	-- 	            switchNode:switchTo(index)
-	-- 	        end
-	-- 		end			
-	-- 	end
-	-- end
+	end
 	self.callback_ = ComponentUtil.getCallFunc(params.clickedEvent)
 end
 --exportFunc
 function M:initView(  )
-	self.viewlist = UICommon.createViewList(self.target,self.isMovable,self.dir,2,self.unit,2,"left")
+	self.viewlist = UICommon.createViewList(self.target:getView(),self.isMovable,self.dir,2,self.unit,2,"left")
 	-- self:updateView()
 end
 
@@ -66,10 +53,12 @@ function M:updateView( target )
 		self.tlData = ComponentUtil.getData(self.object)
 	end
 	local tlNode = {}
+	local tlGameNode = {}
 	for k,v in ipairs(self.tlData) do
 		local node = self.cellMode(v,k)
 		node:initView()
-        table.insert(tlNode,node)
+        table.insert(tlNode,node:getView())
+        table.insert(tlGameNode,node)
     end
 	self.viewlist:setTlCcNode(tlNode)
 	if self.isTapMenu then --切换标签，有高亮和正常显示
@@ -78,7 +67,7 @@ function M:updateView( target )
 	        if orgNode and orgNode.normal then
 	            orgNode:normal()
 	        end
-	        orgNode = tlNode[index]
+	        orgNode = tlGameNode[index]
 	        if orgNode and orgNode.hightlight then
 	            orgNode:hightlight()
 	        end
