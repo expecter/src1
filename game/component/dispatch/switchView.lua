@@ -10,8 +10,8 @@ end
 
 function M:setData( params )
 	self.object = params.object
-	self.eventName = params.eventName or ""
-	self.btnName = params.btnName or ""
+	self.tlEventName = params.tlEventName or {}
+	-- self.btnName = params.btnName or ""
 end
 
 function M:getDepends(  )
@@ -26,13 +26,15 @@ function M:getDepends(  )
 end
 
 function M:enterView(  )
-	self.target:addListener(self.eventName,function ( cmdX )
-		if cmdX.data.name ~= self.btnName then
-			return
-		end
-		local index = cmdX.data.index
-		self.target:switchTo(index)
-	end)
+	for i,v in ipairs(self.tlEventName) do
+		self.target:addListener(v,function ( cmdX )
+			-- if cmdX.data.name ~= self.btnName then
+			-- 	return
+			-- end
+			local index = cmdX.data.index
+			self.target:switchTo(index)
+		end)
+	end	
 end
 
 function M:exitView(  )

@@ -90,7 +90,10 @@ function M.getCallFunc( params )
     		return function ( msg )
     			for k,v in pairs(params) do
 	                if v.name then
-	                	local newParams = M.mergeTable(v.params,msg)
+	                	local newParams = msg
+	                	if v.params then
+	                		newParams = M.mergeTable(msg,v.params)
+	                	end
 	                    GameMessage:dispatchEvent{
 	                        name = v.name,
 	                        data = newParams,

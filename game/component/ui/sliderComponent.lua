@@ -11,9 +11,15 @@ function M:setData(params )
 	self.selectNum = 0
 	self.totalNum = 100
 end
-function M:initView( target )
-	self.slider = UICommon.createCCControlSlider(owner.nodeSlider,owner.ccImgSliderBg,owner.ccImgSliderFr,owner.ccImgSliderBtn)
-    slider:setChangedEvent(function(value)
+function M:initView( parent )
+    local ccImgSliderFr = ccNodeUtil.sprite({spriteName = "img_scale9_blood"})
+    parent:addChild(ccImgSliderFr)
+    local ccImgSliderBg = ccNodeUtil.sprite({spriteName = "img_scale9_blood_bg"})
+    parent:addChild(ccImgSliderBg)
+    local ccImgSliderBtn = ccNodeUtil.sprite({spriteName = "img_scale9_black"})
+    parent:addChild(ccImgSliderBtn)
+	self.slider = UICommon.createCCControlSlider(parent,ccImgSliderBg,ccImgSliderFr,ccImgSliderBtn)
+    self.slider:setChangedEvent(function(value)
         self:onSliderChanged()
     end)	
 end
@@ -28,7 +34,7 @@ function M:onSliderChanged(  )
         return r1 + r2
     end
     local ro = 100/self.totalNum
-    self.selectNum = getRounding(self.ccSlider:getValue()/ro)
+    self.selectNum = getRounding(self.slider:getValue()/ro)
 end
 function M:updateView( target )
 end
