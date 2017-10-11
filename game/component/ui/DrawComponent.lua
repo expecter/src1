@@ -13,10 +13,12 @@ function M:setData( params )
 end
 
 function M:initView( )
+	print("BBBBBBBBBB")
 	self.drawNode = self.target:getView()
 end
 
 function M:updateView(  )
+	print("AAAAAAAAAAAAAA")
 	self.drawNode:clear()
 	display.newPolygon(self:initPoints(), {fillColor = cc.c4f(0,0,0,0), borderColor = self.borderColor, borderWidth = 0.5},self.drawNode)
 end

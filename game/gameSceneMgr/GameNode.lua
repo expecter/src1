@@ -44,7 +44,7 @@ function M:initView( parent )
 		self._view = ccNodeUtil.initNode(self._view)
 		if parent then
 			parent:addChild(self._view)
-		end		
+		end	
 	end
 	for k,com in ipairs(self.components) do
 		if com.initView then

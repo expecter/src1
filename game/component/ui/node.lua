@@ -15,12 +15,12 @@ end
 function M:setData(params )
 end
 function M:initView( parent )
-	local node = self.target:getView()
-	node:setContentSize(self.contentSize)
-	node:setAnchorPoint(self.anchPos)
-	node:setPosition(self.pos)
-	node:setScale(self.scale)
-	node:setVisible(self.visible)
+	-- local node = self.target:getView()
+	-- node:setContentSize(self.contentSize)
+	-- node:setAnchorPoint(self.anchPos)
+	-- node:setPosition(self.pos)
+	-- node:setScale(self.scale)
+	-- node:setVisible(self.visible)
 end
 function M:updateView(  )
 end

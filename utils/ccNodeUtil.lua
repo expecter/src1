@@ -62,8 +62,8 @@ function M.polygon( params )
 	local height = params.contentsize.height or 100
 	local anX = params.AnchPos.x or 0
 	local anY = params.AnchPos.y or 0
-	x = 0
-	y = 0
+	x = params.pos.x or 0
+	y = params.pos.y or 0
 	local points = {
         {x,y},
         {x + width, y},

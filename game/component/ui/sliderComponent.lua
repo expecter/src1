@@ -10,6 +10,7 @@ end
 function M:setData(params )
 	self.selectNum = 0
 	self.totalNum = 100
+    self.callback_ = ComponentUtil.getCallFunc(params.clickedEvent)
 end
 function M:initView( parent )
     local ccImgSliderFr = ccNodeUtil.sprite({spriteName = "img_scale9_blood"})
@@ -35,9 +36,19 @@ function M:onSliderChanged(  )
     end
     local ro = 100/self.totalNum
     self.selectNum = getRounding(self.slider:getValue()/ro)
+    if self.callback_ then
+        self.callback_({selectNum = self.selectNum})
+    end
+end
+function M:setViewCallback( target,callback,isFirst )
+    self.callback_ = callback
+    if isFirst then
+        self.callback_({selectNum = self.selectNum})
+    end 
 end
 function M:updateView( target )
 end
 function M:bindFunc( target )
+    target:bindOnceMethod(self,"setViewCallback")
 end
 return M

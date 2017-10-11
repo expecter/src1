@@ -136,7 +136,7 @@ function M.createSprite(node)
         return sprite
     end
 end
-function M.createCCProgressTimer(  )
+function M.createCCProgressTimer( parent, ccForeNode )
     ccForeNode = M.createSprite(ccForeNode)
 
     local ccProgressTimer = cc.ProgressTimer:create(ccForeNode)
