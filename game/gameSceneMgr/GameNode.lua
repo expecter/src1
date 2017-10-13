@@ -29,16 +29,16 @@ function M:onExit(  )
 		com = nil
 	end
 end
-function M:update( dt )
-	for k,com in ipairs(self.components) do
-		if com.update then
-			com:update(dt)
-		end		
-	end
-	for i,v in ipairs(self.TlChildren) do
-		v:update()
-	end
-end
+-- function M:update( dt )
+-- 	for k,com in ipairs(self.components) do
+-- 		if com.update then
+-- 			com:update(dt)
+-- 		end		
+-- 	end
+-- 	for i,v in ipairs(self.TlChildren) do
+-- 		v:update()
+-- 	end
+-- end
 function M:initView( parent )
 	if type(self._view) == "table" then
 		self._view = ccNodeUtil.initNode(self._view)
