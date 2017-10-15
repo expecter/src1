@@ -43,24 +43,6 @@ function M:initView()
     local width,height = self.mapLoader:getContentSize()
     self:setContentSize(width,height)
 end
-function M:isUpdateMap()
-    local center_pos = self:convertToNodeSpace(cc.p(display.width*0.5,display.height*0.5))
-
-    -- 地图坐标系(0,0)
-    local or_pos = self:convertToNodeSpace(cc.p(0,0))
-
-    local half_width = math.abs(center_pos.x - or_pos.x)
-    local half_height = math.abs(center_pos.y - or_pos.y)
-
-    if self.viewWorldMap.curCenterPos then
-        local distance = cc.pGetDistance(center_pos,self.viewWorldMap.curCenterPos)
-        local move_x = math.abs(self.viewWorldMap.curCenterPos.x - center_pos.x)
-        local move_y = math.abs(self.viewWorldMap.curCenterPos.y - center_pos.y)
-        -- 划动过半屏才刷新
-        if move_x < half_width and move_y < half_height then return false end
-    end
-    return true
-end
 
 function M:updateWorld()
     self.viewWorldMap:updateMap()

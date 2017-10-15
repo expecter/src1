@@ -13,16 +13,20 @@ local _mapLoader = import(".MapLoader").getInstance()
 local ComponentJoytick = import(".ComponentJoytick")
 
 function M:ctor(params)
-    display.addSpriteFrames("uimap/world/img/plist_world_map_groud1.plist", "uimap/world/img/plist_world_map_groud1.png")
-    display.addSpriteFrames("uimap/world/img/plist_world_map_groud2.plist", "uimap/world/img/plist_world_map_groud2.png")
-    display.addSpriteFrames("uimap/world/img/plist_world_map_surface.plist", "uimap/world/img/plist_world_map_surface.png")
-    -- display.addSpriteFrames("uimap/world/img/plist_world_map_title.plist", "uimap/world/img/plist_world_map_title.png")
-    display.addSpriteFrames("uimap/world/img/plist_world_map_edge.plist", "uimap/world/img/plist_world_map_edge.png")
+    -- display.addSpriteFrames("uires/public/world/plist_world_map_groud1.plist", "uires/public/world/plist_world_map_groud1.png")
+    -- display.addSpriteFrames("uires/public/world/plist_world_map_groud2.plist", "uires/public/world/plist_world_map_groud2.png")
+    display.addSpriteFrames("uires/public/world/plist_world_map_surface.plist", "uires/public/world/plist_world_map_surface.png")
+    display.addSpriteFrames("uires/public/world/plist_world_map_resource.plist", "uires/public/world/plist_world_map_resource.png")
+    display.addSpriteFrames("uires/public/world/plist_world_map_edge.plist", "uires/public/world/plist_world_map_edge.png")
     display.addSpriteFrames("uires/effect/ui/worldTree/plist_ui_effect_worldTree.plist", "uires/effect/ui/worldTree/plist_ui_effect_worldTree.png")
     display.addSpriteFrames("uires/effect/ui/worldTree2/plist_ui_effect_worldTree2.plist", "uires/effect/ui/worldTree2/plist_ui_effect_worldTree2.png")
+    -- display.addSpriteFrames("uires/effect/ui/worldTree2/plist_ui_effect_worldTree3.plist", "uires/effect/ui/worldTree2/plist_ui_effect_worldTree3.png")
+    -- display.addSpriteFrames("uires/effect/ui/worldTree2/plist_ui_effect_worldTree4.plist", "uires/effect/ui/worldTree2/plist_ui_effect_worldTree4.png")
+    -- display.addSpriteFrames("uires/effect/ui/worldTree2/plist_ui_effect_worldTree5.plist", "uires/effect/ui/worldTree2/plist_ui_effect_worldTree5.png")
     display.addSpriteFrames("uires/effect/ui/clouds/plist_ui_effect_clouds.plist","uires/effect/ui/clouds/plist_ui_effect_clouds.png")
-    M.super.ctor(self)
-    self:initData(params)
+    display.addSpriteFrames("uires/public/world/plist_ui_plist_world.plist", "uires/public/world/plist_ui_plist_world.png")
+    -- M.super.ctor(self)
+    -- self:initData(params)
 end
 
 function M:initData(params)
@@ -33,9 +37,6 @@ end
 function M:getTlInitView()
     local ret={
         function()
-            self.cameraLayer = display.newLayer()
-            self.cameraLayer:setContentSize(cc.size(display.cx*2,display.cy*2))
-            self:addChild(self.cameraLayer)
             -- 世界地图
             self.viewWorld = require("game.gameScenes.world.ViewWorld").new()
             self.ccScrollView = cc.ScrollView:create(display.size,self.viewWorld )
@@ -43,12 +44,12 @@ function M:getTlInitView()
             self.ccScrollView:setScale(1)
             self.ccScrollView:setMaxScale(1)
             self.ccScrollView:setMinScale(0.7)
-            self.cameraLayer:addChild(self.ccScrollView,M_ZORDER_WORLD)
+            self:addChild(self.ccScrollView,M_ZORDER_WORLD)
             self.ccScrollView:setZoomScaleInDuration(0.7,0.5)
             -- 设置弹回false
             self.ccScrollView:setBounceable(true)
             self.ccScrollView:setDelegate()
-            self.ccScrollView:setMovable(false)
+            -- self.ccScrollView:setMovable(false)
             -- 监听滚动事件
             self.ccScrollView:registerScriptHandler(
                 function(view)
@@ -61,62 +62,37 @@ function M:getTlInitView()
                     -- self.viewWorld:reqGridCity()
                 end,
                 cc.Handler.CALLFUNC)
-            self:onScroll(self.ccScrollView)
+            -- self:onScroll(self.ccScrollView)
         end,
-        function ()
-            --界面初始化
-            self.viewWorldSearch = require("game.gameScenes.world.ViewWorldSearch").new({
-                moveToCenterByRC=handler(self,self.moveToCenterByRC)    
-
-                })
-            self:addChild(self.viewWorldSearch,M_ZORDER_MENU)
-            self.viewWorldSearch:setPosition(display.cx*2-self.viewWorldSearch:getContentSize().width,
-                                              display.cy*2-self.viewWorldSearch:getContentSize().height-50)
-        end,
-        function (  )
-            self.Joytick = ComponentJoytick.new()
-            self:addChild(self.Joytick)
-            self.Joytick:MovedCallBack(function ( vec )
-                local speed = 2 --视角移动速度和屏幕速度一样
-                local offset = self.ccScrollView:getContentOffset()
-                self.ccScrollView:setContentOffset(cc.p(offset.x-vec.x*speed,offset.y-vec.y*speed))
-            end)
-        end
     }
     return ret
 end
 function M:getTlOnEnter(  )
     return {
     function (  )
-        self:moveToCenterByRC(340,600)
+        self:moveToCenterByRC(340,300)
     end
 }
     
 end
-function M:test()
-    -- if self._camera == nil then
-    --     self._camera = cc.Camera:createPerspective(80, display.cx/display.cy,1, 1000)
-    --     self._camera:setCameraFlag(cc.CameraFlag.USER1)
-    --     self._camera:setPosition3D(cc.vec3(display.cx, 0,350))
-    --     self._camera:lookAt(cc.vec3(display.cx,150,0),cc.vec3(0,1,200))
-
-    --     self.cameraLayer:addChild(self._camera)
-    -- end
-    -- self.cameraLayer:setCameraMask(2)
-
--- self.cameraLayer:setRotationSkewX(20)
-end
-
-function M:cmdTestBattleEVENT(event)
-    GameSceneMgr.replaceLayer("game.gameScenes.fight.LayerFight",{fight=event.data.CmdTestBattle})
-end
 
 function M:onScroll(view)
-    local point = self.ccScrollView:getContentOffset()
-    -- self.viewWorldSearch:updateOnScorll(point.x,point.y)
     self.viewWorld:updateWorld()
-    -- self.viewDistanceMark:updateView()
-    -- self:test()
+    
+    local center_pos = self.viewWorld:convertToNodeSpace(cc.p(display.width*0.5,display.height*0.5))
+    local r,c = _mapLoader:pointToRC(center_pos.x,center_pos.y)
+
+    if _mapLoader:isOutside(r,c) then
+        r = math.max(r,0)
+        r = math.min(r,_mapLoader.mw-1)
+        c = math.max(c,0)
+        c = math.min(c,_mapLoader.mh-1)
+        self:moveToCenterByRC(r,c,false,0.3)
+        self.ccScrollView:setMovable(false)
+        self:performWithDelay(function()
+            self.ccScrollView:setMovable(true)
+        end,0.3)
+    end
 end
 
 -- 移动到grid行，列锚点为中心点

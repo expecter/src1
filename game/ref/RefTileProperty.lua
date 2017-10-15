@@ -12,7 +12,8 @@ end)
 --成员函数
 ---------------------
 function RefTileProperty:getImage()
-	return self.image
+	local path = string.split(self.image,'/')
+	return path[2]
 end
 
 function RefTileProperty:getGridLandForm()

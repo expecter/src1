@@ -6,25 +6,15 @@
 --------------------------------------------------------------------------------------------
 
 
-local M = class(...,GameNode)
-M.index = 1
+local M = class(...,function()
+    return display.newLayer()
+end)
+
 ---构建函数
 function M:ctor(params)
-    if not params then params = {} end
-    -- local InitComponent = {
-    --     ClickComponent = {isSwallow = true,touch_ = handler(self,self.onTouch)},
-    --     viewComponent = {},
-    --     loadComponent = {},
-    -- }
-    -- table.merge(InitComponent,params)
-    -- table.insert(params._component,{_type = "loadComponent"})
-    self:setContentSize(display.width, display.height)
-    M.super.ctor(self,params)
-    M.index = M.index+1
-end
---每次创建界面index加1（包括layer，panel，floatpanel）
-function M:getLayerIndex(  )
-    return M.index
+    self:setNodeEventEnabled(true)
+    self:addTouchEventListener(handler(self, self.onTouch), false, true)
+    self:setTouchEnabled(true)
 end
 
 -------------------------------------------------------------------------------------  
@@ -37,55 +27,24 @@ end
 --     --function(self, fCallback) end,
 -- }
 function M:getTlInitView()
-    local tlFunc = {}
-    self:getFuncByCmd(tlFunc,"initView")
-    return tlFunc
+    return {}
 end
 
 --销毁函数队列
 function M:getTlReleaseView()
-    local tlFunc = {}
-    self:getFuncByCmd(tlFunc,"releaseView")
-    
-    return tlFunc
+    return {}
 end
 
 -- -- onEnter函数队列
 function M:getTlOnEnter()
-    local tlFunc = {}
-    self:getFuncByCmd(tlFunc,"enterView")
-    return tlFunc
+    return {}
 end
 
 -- -- onExit函数队列
 function M:getTlOnExit()
-    local tlFunc = {}
-    self:getFuncByCmd(tlFunc,"exitView")
-    return tlFunc
+    return {}
 end
-function M:getFuncByCmd( tlFunc,cmd )
-    for k,com in pairs(self:getAllComponent()) do
-        if com[cmd] then
-            table.insert(tlFunc,handler(com,com[cmd]))
-        end
-    end
-    self:getChildFunc(tlFunc,self,cmd)
-    -- return tlFunc
-end
-function M:getChildFunc( tlFunc,node,cmd )
-    for _,child in ipairs(node:getAllChildren()) do
-        for k,com in pairs(child:getAllComponent()) do
-            if com[cmd] then
-                table.insert(tlFunc,handler(com,com[cmd]))
-            end
-        end
-        self:getChildFunc(tlFunc,child,cmd)        
-    end
-end
---在gamelayermgr里面对当前层的所有节点进行控制和获取
-function M:setAllGameNode(  )
-    
-end
+
 --- 子类调用setTouchEnabled(true) 并重写onTouch方法实现触摸事件分发
 function M:onTouch(event, x, y)
     if event == "began" then

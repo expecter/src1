@@ -91,13 +91,13 @@ function M:updateMap()
     end
 end
 
-function M:reqGridCity()
-    if self.isRequstCity then
-        local centerRC = self:getCenterPos()
-        GameObjectMgr.ObjWorld.reqCmdQueryWorldObjInSight(centerRC.x,centerRC.y)
-        self.isRequstCity =false  
-    end 
-end
+-- function M:reqGridCity()
+--     if self.isRequstCity then
+--         local centerRC = self:getCenterPos()
+--         GameObjectMgr.ObjWorld.reqCmdQueryWorldObjInSight(centerRC.x,centerRC.y)
+--         self.isRequstCity =false  
+--     end 
+-- end
 
 -- 获取中心点坐标
 function M:getCenterPos()
@@ -112,13 +112,11 @@ function M:pixelToRC(x,y)
 end
 
 function M:onUpdate()
-    if self.curtmPos then
-        for k,v in pairs(self.curtmPos) do
-            if self.tmPos[k] == nil then
-                if self.tmTile[k] then
-                    self.tmTile[k]:removeFromParent() 
-                    self.tmTile[k] = nil
-                end
+    for k,v in pairs(self.curtmPos) do
+        if self.tmPos[k] == nil then
+            if self.tmTile[k] then
+                self.tmTile[k]:removeFromParent() 
+                self.tmTile[k] = nil
             end
         end
     end
@@ -135,12 +133,12 @@ function M:onUpdate()
     --保留上次刷新的中心点
     self.curCenterPos = self:convertToNodeSpace(cc.p(display.width*0.5,display.height*0.5))
 end
-M.Gid = {
-    surface = 1,
-    stamps = 2,
-    -- jianzhu=3,
-    -- resource = 3,
-}
+-- M.Gid = {
+--     surface = 1,
+--     stamps = 2,
+--     -- jianzhu=3,
+--     -- resource = 3,
+-- }
 --添加格子
 function M:addTile(r,c,idx)
     -- print("addTile")
@@ -158,44 +156,12 @@ function M:addTile(r,c,idx)
     self.tmTile[idx] = viewWorldMapTile
     self:addChild(viewWorldMapTile,idx)
 end
---添加格子
-function M:addGrid(r,c,x,y,index)
-    local tmGid = {}
-    for k,v in pairs(M.Gid) do
-        local gid = self.mapLoader:getGIDAt(k,cc.p(r,c))
-        if gid ~= 0 then
-            tmGid[k] = gid
-        end
-    end
-    local viewWorldGrid = ViewWorldGrid.new{
-        tmGid = tmGid,
-        bShow = self.bShowTile,
-        r = r,
-        c = c
-    }
-
-    local pos_x,pos_y = self.mapLoader:RCToCenterPoint(x,y)
-    local idx = self.mapLoader:getIndexByRC(r,c)
-
-    viewWorldGrid:setAnchorPoint(cc.p(0.5,0.5))
-    viewWorldGrid:setPosition(cc.p(pos_x,pos_y))
-    self.tmGrid[idx] = viewWorldGrid
-    self:addChild(viewWorldGrid,idx)
-end
-
-function M:onClick(r,c)
-    local idx = self.mapLoader:getIndexByRC(r,c)
-    local viewWorldGrid = self.tmGrid[idx]
-    return viewWorldGrid.viewWorldObjResource
-end
 
 function M:cleanAllTile()
-    if self.curtmPos then
-        for k,v in pairs(self.curtmPos) do
-            if self.tmGrid[k] then 
-                self.tmGrid[k]:removeFromParent() 
-                self.tmGrid[k] = nil
-            end
+    for k,v in pairs(self.curtmPos) do
+        if self.tmTile[k] then 
+            self.tmTile[k]:removeFromParent() 
+            self.tmTile[k] = nil
         end
     end
     self.curtmPos = {}

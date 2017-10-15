@@ -120,9 +120,14 @@ function M:getTileSprite(refTileProperty)
 	if not refTileProperty then return end
 
 	local path = refTileProperty:getImage()	
- 	local sprite = display.newSprite("#"..path)
- 	sprite:getTexture():setAliasTexParameters()
-	sprite:setPosition(cc.p(0,0))
+ 	local frame = display.newSpriteFrame(path)
+ 	local sprite
+ 	if frame then
+    	-- sprite = cc.FNSpriteTiled:createWithSpriteFrame(frame)
+	    sprite = cc.Sprite:createWithSpriteFrame(frame)
+	    sprite:getTexture():setAliasTexParameters()
+	    sprite:setPosition(cc.p(0,0))
+    end
 	return sprite
 end
 

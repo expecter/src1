@@ -35,8 +35,8 @@ function M:load()
     local tileSize = self.loader:getTileSize()
 
     self.factor = mapSize.height / (mapSize.height + mapSize.width)
-    self.tw = tileSize.width - 2
-    self.th = tileSize.height - 2
+    self.tw = tileSize.width 
+    self.th = tileSize.height 
 
     self.mw = mapSize.width 
     self.mh = mapSize.height
