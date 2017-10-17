@@ -22,6 +22,7 @@ M.MessageName =
     dispatch = "dispatch", --界面点击分发事件
     guideScript = "guideScript",--指定引导步骤
     registerTimeEvent = "registerTimeEvent",--注册各种时间事件
+    updateData = "updateData",
 }
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 --打印分发的点击事件

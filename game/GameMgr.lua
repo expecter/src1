@@ -120,9 +120,9 @@ function M.enterGame()
         name = "enterGame"
     }
     
-    GameSceneMgr.replaceNormalLayer("game.gameScenes.world.LayerWorld")
+    -- GameSceneMgr.replaceNormalLayer("game.gameScenes.world.LayerWorld")
     -- GameSceneMgr.replaceNormalLayer("game.gameScenes.login.loginLayer")
-    -- GameSceneMgr.replaceLayer("game.config.demo.LoginLayer")
+    GameSceneMgr.replaceLayer("game.config.demo.LoginLayer")
 end
 
 --退出游戏并切换到登录界面
