@@ -23,6 +23,36 @@ local M = {
 					{
 						_type = "ex_CCbComponent",
 						ccbName = "ccbi_capital",
+						tlOwner = {
+							{								
+								_view = {
+									_type = "ui_node",
+									_ccNode = "",
+									x,
+									y,
+									_TlNode = {
+
+									},
+									_func = {
+
+									},
+								},
+								_component = {
+									{
+										_type = "ui_ClickComponent",
+										clickedEvent = {
+
+										},
+									},
+								},
+							},
+						},
+						events = {
+							{
+								_name = "",
+
+							},
+						},
 					},
 				},			
 			},

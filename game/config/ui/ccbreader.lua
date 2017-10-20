@@ -15,5 +15,12 @@ local M = {
 		},
 		viewsize = {width = 1136,height = 640},
 	},
+	_view = {
+		_type = "ui_ccb",
+		_params = {
+			_name = "",
+			
+		},
+	},
 }
 return M

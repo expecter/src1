@@ -10,13 +10,16 @@ function M:ctor(params)
 	self.pos = params.pos or cc.p(0,0)
 	self.visible = params.visible~=false
 	self.scale = params.scale or 1
-	self._view = params._view
+	self._node = params._ccNode
 	self:setData(params)
 end
 function M:setData(params )
 end
 function M:initView( parent )
-	local node = self.target:getView()
+	if not self._node then
+		self._node = display.newNode()
+		parent:addChild(self._node)
+	end
 	node:setContentSize(self.contentSize)
 	node:setAnchorPoint(self.anchPos)
 	node:setPosition(self.pos)

@@ -12,9 +12,10 @@ end
 function M:init( params )
 	self.components = {}
 	self.TlComName = {}
-	self.TlChildren = {}
+	self.TlChildren = {} --子节点
 	self._name = params._name or ""	
-	self._view = params._view	
+	-- self._view = params._view
+	self:addComponent(self._view)
 	self:addAllComponents(params._component)
 	if params._children then
 		self:createChildren(params._children)
@@ -40,12 +41,12 @@ end
 -- 	end
 -- end
 function M:initView( parent )
-	if type(self._view) == "table" then
-		self._view = ccNodeUtil.initNode(self._view)
-		if parent then
-			parent:addChild(self._view)
-		end	
-	end
+	-- if type(self._view) == "table" then
+	-- 	self._view = ccNodeUtil.initNode(self._view)
+	-- 	if parent then
+	-- 		parent:addChild(self._view)
+	-- 	end	
+	-- end
 	for k,com in ipairs(self.components) do
 		if com.initView then
 			com:initView(parent)
@@ -57,7 +58,7 @@ function M:initView( parent )
 end
 
 function M:getView(  )
-	return self._view
+	return nil
 end
 
 --各个component自己调用
@@ -75,8 +76,8 @@ end
 function M:removeView(  )	
 	self:releaseView()
 	self:exitView()
-	self._view:removeFromParent(true)
-	self._view = nil
+	-- self._view:removeFromParent(true)
+	-- self._view = nil
 end
 
 function M:releaseView(  )
@@ -104,27 +105,27 @@ function M:addAllComponents( _components )
 			end
 		end
 	end
-	if (type(self._view) == "table" and self._view._type == "node") or tolua.type(self._view) == "cc.Node" then
-		if not self.TlComName["ui_node"] then
-			self:addComponent({_type = "ui_node"})
-		end
-	end
-	if (type(self._view) == "table" and self._view._type == "label") or tolua.type(self._view) == "cc.label" then
-		if not self.TlComName["ui_label"] then
-			self:addComponent({_type = "ui_label"})
-		end
-	end
-	if (type(self._view) == "table" and self._view._type == "sprite") or tolua.type(self._view) == "cc.Sprite" then
-		if not self.TlComName["ui_sprite"] then
-			self:addComponent({_type = "ui_sprite"})
-		end
-	end
-	if (type(self._view) == "table" and self._view._type == "ccreader") or tolua.type(self._view) == "cc.BReader" then
+	-- if (type(self._view) == "table" and self._view._type == "node") or tolua.type(self._view) == "cc.Node" then
+	-- 	if not self.TlComName["ui_node"] then
+	-- 		self:addComponent({_type = "ui_node"})
+	-- 	end
+	-- end
+	-- if (type(self._view) == "table" and self._view._type == "label") or tolua.type(self._view) == "cc.label" then
+	-- 	if not self.TlComName["ui_label"] then
+	-- 		self:addComponent({_type = "ui_label"})
+	-- 	end
+	-- end
+	-- if (type(self._view) == "table" and self._view._type == "sprite") or tolua.type(self._view) == "cc.Sprite" then
+	-- 	if not self.TlComName["ui_sprite"] then
+	-- 		self:addComponent({_type = "ui_sprite"})
+	-- 	end
+	-- end
+	-- if (type(self._view) == "table" and self._view._type == "ccreader") or tolua.type(self._view) == "cc.BReader" then
 		
-		if not self.TlComName["ui_ccReader"] then
-			self:addComponent({_type = "ui_ccReader"})
-		end
-	end
+	-- 	if not self.TlComName["ui_ccReader"] then
+	-- 		self:addComponent({_type = "ui_ccReader"})
+	-- 	end
+	-- end
 end
 
 function M:addComponent( params )
@@ -173,15 +174,17 @@ function M:getAllChildren(  )
 end
 --由于组件是在该节点上继续addChild的，需要给命名子节点加上zorder1才保证渲染顺序
 function M:createChildren( _children )
-	for k,child in pairs(_children) do
-		local node = GameSceneMgr.createGameNode(child)
-		-- self:addChild(node,1) 
-		table.insert(self.TlChildren,node)
+	for i,child in ipairs(_children) do
+		-- local node = GameSceneMgr.createGameNode(child)
+		-- -- self:addChild(node,1) 
+		-- table.insert(self.TlChildren,node)
+		self:addGameChild(child)
 	end
 end
 
 function M:addGameChild( child )
-	table.insert(self.TlChildren,child)
+	local node = GameSceneMgr.createGameNode(child)
+	table.insert(self.TlChildren,node)
 end
 
 function M:getComponentByName( componentName )
@@ -200,7 +203,7 @@ function M:bindOnceMethod( component,methodName )
 	end
 	self:bindMethod(component,methodName)
 end
-function M:bindMethod( component,methodName )
+function M:bindMethod( component,methodName ) --可覆盖
 	local originMethod = self[methodName]
     if not originMethod then
         self[methodName] = function ( ... )

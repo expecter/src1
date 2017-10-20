@@ -9,13 +9,15 @@ function M:ctor(params)
 end
 function M:setData(params )
 	self.text = params.text or "text"
+	self.label = params._ccNode
 	self.object = params.object
 end
 function M:initView( parent )
-    self.label = self.target:getView()
-    if tolua.type(self.label)~="cc.Label" then
-    	return
-    end
+	if not self.label then
+		self.label = display.newTTFLabel{
+
+    	}
+	end
     self.label:setString(self.text)
 end
 function M:setText( target,text )
@@ -30,7 +32,9 @@ function M:updateView( )
 	end
 	self.target:setText(text)
 end
-
+function M:getView(  )
+	return self._ccNode
+end
 --对应onenter
 function M:enterView(  )
 	self:updateView()
@@ -45,6 +49,6 @@ function M:releaseView(  )
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"setText")
-	target:bindOnceMethod(self,"initByNode")
+	target:bindMethod(self,"getView")
 end
 return M
