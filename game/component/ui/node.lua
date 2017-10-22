@@ -27,6 +27,11 @@ function M:initView( parent )
 	node:setScale(self.scale)
 	node:setVisible(self.visible)
 end
+
+function M:getView(  )
+	return self._node
+end
+
 function M:updateView(  )
 end
 function M:getView(  )

@@ -30,23 +30,7 @@ function M:onExit(  )
 		com = nil
 	end
 end
--- function M:update( dt )
--- 	for k,com in ipairs(self.components) do
--- 		if com.update then
--- 			com:update(dt)
--- 		end		
--- 	end
--- 	for i,v in ipairs(self.TlChildren) do
--- 		v:update()
--- 	end
--- end
 function M:initView( parent )
-	-- if type(self._view) == "table" then
-	-- 	self._view = ccNodeUtil.initNode(self._view)
-	-- 	if parent then
-	-- 		parent:addChild(self._view)
-	-- 	end	
-	-- end
 	for k,com in ipairs(self.components) do
 		if com.initView then
 			com:initView(parent)
@@ -76,16 +60,10 @@ end
 function M:removeView(  )	
 	self:releaseView()
 	self:exitView()
-	-- self._view:removeFromParent(true)
-	-- self._view = nil
 end
 
 function M:releaseView(  )
 	self:getFuncByCmdX("releaseView")
-	GameMessage:dispatchEvent{
-        name = GameMessage.MessageName.releaseNode,
-        data = {name = self._name},
-    }
 end
 function M:getFuncByCmdX( cmd )
 	for k,com in ipairs(self.components) do
@@ -105,27 +83,6 @@ function M:addAllComponents( _components )
 			end
 		end
 	end
-	-- if (type(self._view) == "table" and self._view._type == "node") or tolua.type(self._view) == "cc.Node" then
-	-- 	if not self.TlComName["ui_node"] then
-	-- 		self:addComponent({_type = "ui_node"})
-	-- 	end
-	-- end
-	-- if (type(self._view) == "table" and self._view._type == "label") or tolua.type(self._view) == "cc.label" then
-	-- 	if not self.TlComName["ui_label"] then
-	-- 		self:addComponent({_type = "ui_label"})
-	-- 	end
-	-- end
-	-- if (type(self._view) == "table" and self._view._type == "sprite") or tolua.type(self._view) == "cc.Sprite" then
-	-- 	if not self.TlComName["ui_sprite"] then
-	-- 		self:addComponent({_type = "ui_sprite"})
-	-- 	end
-	-- end
-	-- if (type(self._view) == "table" and self._view._type == "ccreader") or tolua.type(self._view) == "cc.BReader" then
-		
-	-- 	if not self.TlComName["ui_ccReader"] then
-	-- 		self:addComponent({_type = "ui_ccReader"})
-	-- 	end
-	-- end
 end
 
 function M:addComponent( params )
@@ -145,7 +102,7 @@ function M:addComponent( params )
 		end
 	end
 	table.insert(self.components,component)
-	self.TlComName[comName] = self.components[#self.components]
+	self.TlComName[comName] = component
 	if self.TlComName[comName].bindFunc then
 		self.TlComName[comName]:bindFunc(self)
 	end	
@@ -175,9 +132,6 @@ end
 --由于组件是在该节点上继续addChild的，需要给命名子节点加上zorder1才保证渲染顺序
 function M:createChildren( _children )
 	for i,child in ipairs(_children) do
-		-- local node = GameSceneMgr.createGameNode(child)
-		-- -- self:addChild(node,1) 
-		-- table.insert(self.TlChildren,node)
 		self:addGameChild(child)
 	end
 end
