@@ -9,6 +9,7 @@ function M:ctor(params)
 	self.spriteFrameName = params.spriteFrameName
 	self.isEnough = DEFAULT_FALSE(params.isEnough) 
 	self.object = params.object
+	self.viewSprite = params._ccNode
 	-- self:setData(params)
 end
 function M:getDepends(  )
@@ -29,9 +30,10 @@ end
 -- function M:setData(params )
 -- end
 function M:initView( parent )
-		
-	self.viewSprite = self.target:getView()
-	-- self.viewSprite:setPosition(cc.p(parent:getCenterPosition()))
+	if not self.viewSprite then
+		self.viewSprite = display.newSprite()
+		parent:addChild(self.viewSprite)
+	end
 	if self.spriteName then
 		self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
 	end

@@ -82,10 +82,10 @@ end
 
 function M:releaseView(  )
 	self:getFuncByCmdX("releaseView")
-	GameMessage:dispatchEvent{
-        name = GameMessage.MessageName.releaseNode,
-        data = {name = self._name},
-    }
+	-- GameMessage:dispatchEvent{
+ --        name = GameMessage.MessageName.releaseNode,
+ --        data = {name = self._name},
+ --    }
 end
 function M:getFuncByCmdX( cmd )
 	for k,com in ipairs(self.components) do
@@ -145,7 +145,7 @@ function M:addComponent( params )
 		end
 	end
 	table.insert(self.components,component)
-	self.TlComName[comName] = self.components[#self.components]
+	self.TlComName[comName] = component
 	if self.TlComName[comName].bindFunc then
 		self.TlComName[comName]:bindFunc(self)
 	end	
