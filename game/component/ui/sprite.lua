@@ -31,15 +31,18 @@ end
 -- end
 function M:initView( parent )
 	if not self.viewSprite then
-		self.viewSprite = display.newSprite()
-		parent:addChild(self.viewSprite)
+		self.viewSprite = display.newSprite(string.format("%s.png",self.spriteName))
+		self.viewSprite:setAnchorPoint(cc.p(0,0))
+		if parent then
+			parent:addChild(self.viewSprite)
+		end		
 	end
-	if self.spriteName then
-		self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
-	end
-	if self.spriteFrameName then
-		self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("#%s.png",self.spriteFrameName)))
-	end
+	-- if self.spriteName then
+	-- 	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
+	-- end
+	-- if self.spriteFrameName then
+	-- 	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("#%s.png",self.spriteFrameName)))
+	-- end
 end
 function M:updateSpriteName( target,spriteName )
 	if self.spriteName == spriteName then return end

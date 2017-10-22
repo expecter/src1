@@ -97,7 +97,7 @@ function M:addComponent( params )
 			if not self:getComponentByName(depends._type) then
 				self:addComponent(depends)
 			else
-				print("已有该组件")
+				print("已有该组件",depends._type)
 			end			
 		end
 	end
