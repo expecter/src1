@@ -12,8 +12,8 @@ function M:setData(params )
 	self.tlCallback = {}
 	self.tlNode = params.tlNode or {}
 	self.owner = params._ccNode
-	for k,v in ipairs(params.tlCallback or {}) do
-		self.tlCallback[v._name] = ComponentUtil.getCallFunc(v)
+	for k,v in pairs(params.tlCallback or {}) do
+		self.tlCallback[k] = ComponentUtil.getCallFunc(v)
 	end
 end
 -- function M:cellMode( cmdX )
@@ -28,14 +28,14 @@ function M:initView( parent )
 			parent:addChild(self.owner)
 		end
 	end
-	for i,v in ipairs(self.tlNode) do
-		if v._viewName then
-			v._view = self.owner[v._name]
-		end
+	for k,v in pairs(self.tlNode) do
+		v._view._ccNode = self.owner[k]
+		v._super = "GameNode"
 		-- local node = GameSceneMgr.createGameNode(v)
 		-- node:initView(self.target:getView())
 		-- node:enterView()
-		self.target:addGameChild(V)
+		self.target:addGameChild(v)
+		print("AAAAAAAAAA")
 	end
 	for k,v in pairs(self.tlCallback) do
 		self.owner.events[k] = v

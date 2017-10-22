@@ -5,7 +5,7 @@
 local M = {
 	_super = "GameNode",
 	_view = {
-		_type = "node",
+		_type = "ui_node",
 		contentsize = {width = 1136,height = 640},
 		AnchPos = {x = 0,y = 0},
 		pos = {x =0,y = 0},
@@ -14,7 +14,7 @@ local M = {
 			{
 				_super = "GameNode",
 				_view = {
-					_type = "node",
+					_type = "ui_node",
 					contentsize = {width = 1136,height = 640},
 					AnchPos = {x = 0,y = 0},
 					pos = {x =0,y = 0},
@@ -41,10 +41,10 @@ local M = {
 				_name ="switchNode",
 				_super = "GameNode",
 				_view = {
-					_type = "node",
+					_type = "ui_node",
 					contentsize = {width = 1136,height = 140},
 					AnchPos = {x = 0,y = 0},
-					pos = {x =0,y = 600},
+					pos = {x =0,y = 0},
 				},
 				_component = {
 				{

@@ -11,6 +11,8 @@ function M:setData(params )
 	self.text = params.text or "text"
 	self.label = params._ccNode
 	self.object = params.object
+	self.visible = params.visible~=false
+	print("CCCCCCCCC")
 end
 function M:initView( parent )
 	if not self.label then
@@ -22,11 +24,13 @@ function M:initView( parent )
     	end    	
 	end
     self.label:setString(self.text)
+    self.label:setVisible(self.visible)
+    print("BBBBBBBBBB")
 end
 function M:setText( target,text )
 	if text == self.text then return end
 	self.text = text
-	self.label:setString(self.text)
+	self.label:setString(self.text)	
 end
 function M:updateView( )
 	local text = self.text
