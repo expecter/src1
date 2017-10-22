@@ -11,7 +11,7 @@ function M:setData(params )
 	self.ccbName = params.ccbName or "ccbi_capital"
 	self.tlCallback = {}
 	self.tlNode = params.tlNode or {}
-	self._ccNode = params._ccNode
+	self.owner = params._ccNode
 	for k,v in ipairs(params.tlCallback or {}) do
 		self.tlCallback[v._name] = ComponentUtil.getCallFunc(v)
 	end
@@ -22,8 +22,8 @@ end
 --exportFunc
 function M:initView( parent )
 	-- self.owner = self.target:getView()
-	if not self._ccNode then
-		self._ccNode = CCBReader.load(string.format("%s.ccbi",self.ccbName),self.tlCallback)
+	if not self.owner then
+		self.owner = CCBReader.load(string.format("%s.ccbi",self.ccbName),self.tlCallback)
 	end
 	for i,v in ipairs(self.tlNode) do
 		if v._viewName then
@@ -40,13 +40,13 @@ function M:initView( parent )
 
 end
 
-function M:getOwner(  )
+function M:getView(  )
 	return self.owner
 end
 function M:updateView( )
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"getOwner")
-	-- target:bindOnceMethod(self,"getView")
+	target:bindMethod(self,"getView")
 end
 return M

@@ -53,7 +53,9 @@ function M:updateView(  )
 		self.target:updateSpriteName(spr)
 	end
 end
-
+function M:getView(  )
+	return self.viewSprite
+end
 --对应onenter
 function M:enterView(  )
 	
@@ -68,6 +70,6 @@ function M:releaseView(  )
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"updateSpriteName")
-	target:bindOnceMethod(self,"getSprite")
+	target:bindMethod(self,"getView")
 end
 return M
