@@ -17,7 +17,9 @@ function M:initView( parent )
 		self.label = display.newTTFLabel{
 
     	}
-    	parent:addChild(self.label)
+    	if parent then
+    		parent:addChild(self.label)
+    	end    	
 	end
     self.label:setString(self.text)
 end

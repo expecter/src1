@@ -18,7 +18,9 @@ end
 function M:initView( parent )
 	if not self._node then
 		self._node = display.newNode()
-		parent:addChild(self._node)
+		if parent then
+			parent:addChild(self._node)
+		end		
 	end
 	local node = self._node
 	node:setContentSize(self.contentSize)

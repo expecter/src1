@@ -24,6 +24,9 @@ function M:initView( parent )
 	-- self.owner = self.target:getView()
 	if not self.owner then
 		self.owner = CCBReader.load(string.format("%s.ccbi",self.ccbName),self.tlCallback)
+		if parent then
+			parent:addChild(self.owner)
+		end
 	end
 	for i,v in ipairs(self.tlNode) do
 		if v._viewName then
