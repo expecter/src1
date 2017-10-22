@@ -6,7 +6,7 @@ local M = {
 	name = "tabNode3",
 	_super = "GameNode",
 	_view = {
-		_type = "sprite",
+		_type = "ui_sprite",
 		spriteName = "img_picture_login_bg"
 	},
 }

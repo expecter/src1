@@ -7,7 +7,7 @@ local M = {
 	_super = "GameNode",
 	_component = {
 		{
-			_type = "cc_node",
+			_type = "ui_node",
 			contentsize = {width = 1136,height = 440},
 			AnchPos = {x = 0,y = 0},
 			pos = {x =0,y = 0},

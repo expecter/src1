@@ -20,6 +20,7 @@ function M:initView( parent )
 		self._node = display.newNode()
 		parent:addChild(self._node)
 	end
+	local node = self._node
 	node:setContentSize(self.contentSize)
 	node:setAnchorPoint(self.anchPos)
 	node:setPosition(self.pos)
@@ -28,6 +29,10 @@ function M:initView( parent )
 end
 function M:updateView(  )
 end
+function M:getView(  )
+	return self._node
+end
 function M:bindFunc( target )
+	target:bindMethod(self,"getView")
 end
 return M

@@ -15,7 +15,7 @@ function M:init( params )
 	self.TlChildren = {} --子节点
 	self._name = params._name or ""	
 	-- self._view = params._view
-	self:addComponent(self._view)
+	self:addComponent(params._view)
 	self:addAllComponents(params._component)
 	if params._children then
 		self:createChildren(params._children)
