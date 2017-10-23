@@ -11,9 +11,10 @@ local M = {}
 
 -- setmetatable(M, mt)
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
-local tlListener = {}
+local tlGameNode = {}
 function M.new(params)
 	local _t = params.data
+	local _name = params.name
 	local mt = {
 		__index = function (t,k)
 			print(k,_t[k])
@@ -33,9 +34,17 @@ function M.new(params)
                 name = GameMessage.MessageName.updateData,
                 data = {old = old,new = _t[k]},
             }
+            for i,node in ipairs(tlGameNode) do
+            	node:updateView()
+            end
 		end
 	}
     local self = setmetatable({}, mt)
     return self
 end
+
+function M:addGameNode( node )
+	table.insert(tlGameNode,node)
+end
+
 return M

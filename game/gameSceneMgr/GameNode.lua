@@ -13,8 +13,10 @@ function M:init( params )
 	self.components = {}
 	self.TlComName = {}
 	self.TlChildren = {} --子节点
+	self.TlDataCom = {} --数据绑定的组件
 	self._name = params._name or ""	
 	self:addComponent(params._view)
+	self:addComponent({_type = "dispatch_listener"})
 	self:addAllComponents(params._component)
 	if params._children then
 		self:createChildren(params._children)
@@ -49,6 +51,13 @@ function M:updateView( )
 	self:getFuncByCmdX("updateView")
 end
 function M:enterView(  ) --对应onenter
+	self:addListener(GameMessage.MessageName.updateData,function ( cmdX )
+		if self.TlDataCom[cmdX] then
+			for i,com in ipairs(self.TlDataCom[cmdX]) do
+				com:updateView()
+			end
+		end
+	end)
 	self:getFuncByCmdX("enterView")
 end
 function M:exitView(  ) --对应onexit
@@ -83,7 +92,7 @@ function M:addAllComponents( _components )
 		end
 	end
 end
-
+--params可作为object对象传入，拼接上type类型
 function M:addComponent( params )
 	local comName = params._type or ""
 	local contidion = DEFAULT_TRUE(params.contidion)
@@ -101,6 +110,10 @@ function M:addComponent( params )
 		end
 	end
 	table.insert(self.components,component)
+	if not self.TlDataCom[params] then
+		self.TlDataCom[params] = {}
+	end
+	table.insert(self.TlDataCom,component)
 	self.TlComName[comName] = component
 	if self.TlComName[comName].bindFunc then
 		self.TlComName[comName]:bindFunc(self)

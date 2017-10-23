@@ -6,6 +6,15 @@ local M = class("componentBase")
 function M:ctor( target ,params)
 	-- self:setData(params)
 	self.object = params
+	-- if conditions then
+	-- 	--todo
+	-- end
+	-- cc.EventProxy.new(GameMessage, self.target:getView()):addEventListener(
+	-- 		GameMessage.MessageName.updateData,function ( cmdX )
+	-- 	if self.object == cmdX then --句柄相同
+	-- 		self:updateView()
+	-- 	end
+	-- end)
 end
 function M:setTarget( target )
 	self.target = target
