@@ -12,6 +12,7 @@ function M:setData(params )
 	self.tlCallback = {}
 	self.tlNode = params.tlNode or {}
 	self.owner = params._ccNode
+	self.sequenceIndex = 1
 	for k,v in pairs(params.tlCallback or {}) do
 		self.tlCallback[k] = ComponentUtil.getCallFunc(v)
 	end
@@ -29,13 +30,15 @@ function M:initView( parent )
 		end
 	end
 	for k,v in pairs(self.tlNode) do
-		v._view._ccNode = self.owner[k]
-		v._super = "GameNode"
+		
 		-- local node = GameSceneMgr.createGameNode(v)
 		-- node:initView(self.target:getView())
 		-- node:enterView()
-		self.target:addGameChild(v)
-		print("AAAAAAAAAA")
+		if v._view then
+			v._view._ccNode = self.owner[k]
+			v._super = "GameNode"
+			self.target:addGameChild(v)
+		end		
 	end
 	for k,v in pairs(self.tlCallback) do
 		self.owner.events[k] = v
@@ -47,6 +50,7 @@ function M:getView(  )
 	return self.owner
 end
 function M:updateView( )
+	self.owner.animationManager:runAnimationsForSequenceNamed(self.sequenceIndex)
 end
 function M:bindFunc( target )
 	target:bindOnceMethod(self,"getOwner")

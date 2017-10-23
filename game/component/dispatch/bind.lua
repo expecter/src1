@@ -9,7 +9,7 @@ function M:ctor(params)
 end
 function M:setData(params )
 	-- self.cacheName = params.cacheName or ""
-	self.tlCacheName = params.tlCacheName --同时监听多个
+	self.tlCacheName = params.tlCacheName or {} --同时监听多个
 	-- self.bindComponent = params.bindComponent
 end
 

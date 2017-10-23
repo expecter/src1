@@ -6,7 +6,7 @@ local M = {
 	_super = "GameNode",
 	_view = {
 		_type = "ui_ccReader",
-		ccbName = "ccbi_troop_simple_cell",
+		ccbName = "ccbi_newTroop_operation_panel",
 		viewsize = {width = 1136,height = 640},
 		tlCallback = {
 			onBtnReviveClick = {_type = "Message",name = "LoginLayer_switchto"}
@@ -25,9 +25,9 @@ local M = {
 					},
 				},			
 			},
-			ccLabelName = {
+			-- ccLabelName = {
 
-			},
+			-- },
 		},
 	},
 }
