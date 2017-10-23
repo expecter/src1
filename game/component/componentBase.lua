@@ -23,6 +23,10 @@ function M:getObject(  )
 	return ComponentUtil.getData(self.object)
 end
 
+function M:getObject(  )
+	return self.object
+end
+
 function M:initView(  )
 end
 
