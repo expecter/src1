@@ -5,6 +5,7 @@
 local M = class("componentBase")
 function M:ctor( target ,params)
 	-- self:setData(params)
+	self.object = params
 end
 function M:setTarget( target )
 	self.target = target
@@ -14,9 +15,9 @@ end
 function M:getDepends(  )
 	return {}
 end
-function M:setObject( object )
-	self.object = object
-end
+-- function M:setObject( object )
+-- 	self.object = object
+-- end
 
 function M:getObject(  )
 	return ComponentUtil.getData(self.object)

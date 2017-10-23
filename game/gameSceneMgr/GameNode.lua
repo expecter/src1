@@ -14,7 +14,6 @@ function M:init( params )
 	self.TlComName = {}
 	self.TlChildren = {} --子节点
 	self._name = params._name or ""	
-	-- self._view = params._view
 	self:addComponent(params._view)
 	self:addAllComponents(params._component)
 	if params._children then
@@ -108,23 +107,23 @@ function M:addComponent( params )
 	end	
 end
 
-function M:removeComponent( _type )
+-- function M:removeComponent( _type )
 	
-end
+-- end
 
 --添加判断条件，方便组件复用
-function M:addContidion(  )
+-- function M:addContidion(  )
 	
-end
+-- end
 
-function M:addNodeScript( _scripts )
-	if _scripts then
-		for i,params in ipairs(_scripts) do
-			local script = require(params._path)
-			self[params._func] = script[params._func]
-		end
-	end
-end
+-- function M:addNodeScript( _scripts )
+-- 	if _scripts then
+-- 		for i,params in ipairs(_scripts) do
+-- 			local script = require(params._path)
+-- 			self[params._func] = script[params._func]
+-- 		end
+-- 	end
+-- end
 
 function M:getAllChildren(  )
 	return self.TlChildren

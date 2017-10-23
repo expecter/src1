@@ -5,21 +5,20 @@
 local M = {
 	_super = "GameNode",
 	_view = {
-		_type = "scrollview",
-		viewNode = {
-			_super = "GameNode",
-			_view = {
-				_type = "ccreader",
-				ccbName = "ccbi_capital",
-			},									
-		},
+		_type = "ui_ccReader",
+		ccbName = "ccbi_troop_simple_cell",
 		viewsize = {width = 1136,height = 640},
-	},
-	_view = {
-		_type = "ui_ccb",
-		_params = {
-			_name = "",
-			
+		tlCallback = {
+			onBtnReviveClick = {_type = "Message",name = "LoginLayer_switchto"}
+		},
+		tlNode = {
+			ccLabelHeroName = {
+				_view = {
+					_type = "ui_label",
+					text = "aaaaaaa",
+					visible = true,
+				},				
+			},
 		},
 	},
 }

@@ -1,4 +1,75 @@
 --
--- Author: Your Name
--- Date: 2017-10-20 16:09:54
+-- Author: yjxin
+-- Date: 2016-08-29 23:32:42
 --
+local M = class(...,require("game.component.cc.node"))
+--继承，重写initView和getView
+function M:ctor(params)
+	M.super.ctor(self,params)
+	self.spriteName = params.spriteName
+	self.spriteFrameName = params.spriteFrameName
+	self.isEnough = DEFAULT_FALSE(params.isEnough) 
+	self.object = params.object
+	self.viewSprite = params._ccNode
+	-- self:setData(params)
+end
+function M:getDepends(  )
+	-- return {
+	-- 	{
+	-- 		_type = "cc_node",
+	-- 	},
+	-- }
+	local func = {}
+	-- if self.spriteFrameName then
+	-- 	--TODO需要添加查找plist配置添加
+	-- 	func = {
+	-- 		_type = "cc_spriteFrame",
+	-- 	}
+	-- end
+	return func
+end
+-- function M:setData(params )
+-- end
+function M:initView( parent )
+	if not self.viewSprite then
+		self.viewSprite = display.newSprite(string.format("%s.png",self.spriteName))
+		self.viewSprite:setAnchorPoint(cc.p(0,0))
+		if parent then
+			parent:addChild(self.viewSprite)
+		end		
+	end
+end
+function M:updateSpriteName( target,spriteName )
+	if self.spriteName == spriteName then return end
+	self.spriteName=spriteName
+	self.viewSprite:setSpriteFrame(display.newSpriteFrame(string.format("%s.png",self.spriteName)))
+end
+
+function M:updateView(  )
+	M.super.updateView(self)
+	if self.object then
+		local spr = ComponentUtil.getData(self.object)
+		self:updateSpriteName(target,spr)
+	end
+end
+function M:getView(  )
+	return self.viewSprite
+end
+--对应onenter
+function M:enterView(  )
+	
+end
+--对应onexit
+function M:exitView(  )
+	
+end
+--对应release
+function M:releaseView(  )
+	
+end
+function M:bindFunc( target )
+	M.super.bindFunc(self,target)
+	target:bindOnceMethod(self,"updateSpriteName")
+	target:bindMethod(self,"getView")
+end
+return M

@@ -13,11 +13,20 @@ local M = {
 		},
 		tlNode = {
 			ccLabelHeroName = {
+				_super = "GameNode",
 				_view = {
 					_type = "ui_label",
 					text = "aaaaaaa",
 					visible = true,
-				},				
+				},
+				_component = {
+					{
+						_type = "dispatch_bind",
+					},
+				},			
+			},
+			ccLabelName = {
+
 			},
 		},
 	},
