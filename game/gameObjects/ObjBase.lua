@@ -1,7 +1,36 @@
+local M = class(...)
+cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
+local MessageName = GameMessage.MessageName
+function M:ctor(  )
+	
+end
 --
--- Author: Your Name
--- Date: 2017-05-09 14:38:59
---
-local M = {}
+function M.DefaultData(  )
+	return {}
+end
+
+function M:hash(  )
+	
+end
+
+function M:bind(  )
+	
+end
+
+function M:bindOne(  )
+	
+end
+
+function M:dispatchAddEvent(  )
+	
+end
+
+function M:dispatchUpdateEvent(  )
+	
+end
+
+function M:dispatchDeleteEvent(  )
+	
+end
 
 return M

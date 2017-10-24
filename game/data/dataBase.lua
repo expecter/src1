@@ -12,6 +12,9 @@ local M = {}
 -- setmetatable(M, mt)
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 local tlGameNode = {}
+M.EVENT_CACHE_ADD = "event_cache_add" --用于数组添加
+M.EVENT_CACHE_UPDATE = "event_cache_update"
+M.EVENT_CACHE_DELETE = "event_cache_delete" --用于数组删除
 function M.new(params)
 	local _t = params.data
 	local _name = params.name
@@ -45,6 +48,18 @@ end
 
 function M:addGameNode( node )
 	table.insert(tlGameNode,node)
+end
+--用于索引
+function M:hash(  )
+	local key = 0
+	return key
+end
+
+function M.test(  )
+	local a = M.new({})
+	a.update({id = 0,label = 1})
+	a.update({id = 1,label = 2})
+	a.update({id = 1})
 end
 
 return M

@@ -23,6 +23,9 @@ M.MessageName =
     guideScript = "guideScript",--指定引导步骤
     registerTimeEvent = "registerTimeEvent",--注册各种时间事件
     updateData = "updateData",
+    EVENT_CACHE_ADD = "event_cache_add",
+    EVENT_CACHE_UPDATE = "event_cache_update",
+    EVENT_CACHE_DELETE = "event_cache_delete",
 }
 cc(M):addComponent("components.behavior.EventProtocol"):exportMethods()
 --打印分发的点击事件
