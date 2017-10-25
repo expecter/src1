@@ -16,7 +16,15 @@ function M:ctor()
 
     	},
     	})
-    node:initView(self)
+    node:initView(self) --不一定需要调用，以及添加过得直接过了
+end
+
+function M:A(  )
+	
+end
+
+function M:B(  )
+	
 end
 
 return M
