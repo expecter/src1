@@ -16,6 +16,7 @@ function M:ctor()
 
     	},
     	})
+    node:addComponent({})
     node:initView(self) --不一定需要调用，以及添加过得直接过了
 end
 
