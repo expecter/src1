@@ -62,4 +62,9 @@ function M.test(  )
 	a.update({id = 1})
 end
 
+--[[
+table里面修改值是不会监听到的，
+value变化能拿到事件
+]]
+
 return M
