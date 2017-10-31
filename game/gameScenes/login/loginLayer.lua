@@ -25,5 +25,9 @@ end
 function M:B(  )
 	
 end
+--提供给测试接口用
+function M:debug(  )
+    
+end
 
 return M
